@@ -60,7 +60,10 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ebuild
+          path: |
+            ebuild
+            !ebuild/CMakeFiles
+            !embuild/CMakeCache.txt
 
   deploy:
     environment:
