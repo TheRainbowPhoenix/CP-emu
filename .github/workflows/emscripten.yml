@@ -52,7 +52,7 @@ jobs:
           . ./emsdk/emsdk_env.sh
           mkdir -p ebuild
           cd ebuild
-          emmake cmake ..
+          emmake cmake .. -DUSE_SDL_GUI=ON -DEMSCRIPTEN=ON
           emmake make -j$(nproc)
       - name: Setup Pages
         id: pages
