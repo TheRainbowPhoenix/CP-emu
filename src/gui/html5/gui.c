@@ -12,8 +12,8 @@
 
 typedef uint16_t color_t;
 
-#define LCD_WIDTH_PX 396
-#define LCD_HEIGHT_PX 224
+#define LCD_WIDTH_PX 320 // 396
+#define LCD_HEIGHT_PX 528 // 224
 
 int main(int argc, char* argv[]) {
   int i = 0;
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
   emscripten_set_canvas_size(LCD_WIDTH_PX, LCD_HEIGHT_PX);
   EM_ASM_({
     window.canvasContext = Module['canvas'].getContext('2d');
-    window.canvasImageData = canvasContext.getImageData(0, 0, 396, 224);
+    window.canvasImageData = canvasContext.getImageData(0, 0, 320, 528);
   });
 
   startInterpreter("Addin.g3a");
@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
 
 void Copy_ToCanvas(uint32_t* ptr) {
   EM_ASM_({
-    let data = Module.HEAPU8.slice($0, $0 + 396 * 224 * 4);
+    let data = Module.HEAPU8.slice($0, $0 + 320 * 528 * 4);
     canvasImageData.data.set(data);
     canvasContext.putImageData(canvasImageData, 0, 0);
   }, ptr);

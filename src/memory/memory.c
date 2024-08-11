@@ -131,7 +131,7 @@ void initMemory(const char* filename) {
   // PRAM0
   allocMemArea(0xfe200000, 0xfe200000 + (160 * 1024));
   // XRAM0
-  allocMemArea(0xfe240000, 0xfe240000 + (224 * 1024));
+  allocMemArea(0xfe240000, 0xfe240000 + (528 * 1024));
   // TODO: The rest
 }
 

@@ -59,7 +59,7 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Remove CMake Cache
         run: |
-          rm -rf ebuild/CMakeFiles embuild/CMakeCache.txt
+          rm -rf ebuild/CMakeFiles ebuild/CMakeCache.txt ebuild/Makefile ebuild/cmake_install.cmake
           ls -la ebuild
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

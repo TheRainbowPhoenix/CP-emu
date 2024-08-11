@@ -113,5 +113,12 @@ a.out
 calc-emu-test
 build
 build-em
+ebuild/*.txt
+ebuild/CMakeFiles
+ebuild/*.js
+ebuild/*.html
+ebuild/*.wasm
+ebuild/*.cmake
+ebuild/Makefile
 
 compile_commands.json

@@ -70,7 +70,7 @@ KeyboardEventFilter* filter = Q_NULLPTR;
 class ButtonContainer : public QWidget {
 public:
     ButtonContainer(QWidget* parent = nullptr) : QWidget(parent) {
-        setFixedSize(396, 560);
+        setFixedSize(320, 560);
         // Create buttons from the array
         for (const skinButton& button : buttons) {
             QPushButton* btn = new QPushButton(button.name, this);
@@ -120,7 +120,7 @@ public:
         scene = new QGraphicsScene(this);
         setScene(scene);
 
-        canvas = new QPixmap(396, 224);
+        canvas = new QPixmap(320, 528);
         canvas->fill(Qt::black);
 
         canvasItem = scene->addPixmap(*canvas);
@@ -133,8 +133,8 @@ public:
     }
 
     void updateCanvas(uint16_t* rgb565Data) {
-        const int width = 396;
-        const int height = 224;
+        const int width = 320;
+        const int height = 528;
 
         // Update the canvas here with the RGB565 data
         QImage image(reinterpret_cast<uchar*>(rgb565Data), width, height, width * sizeof(uint16_t), QImage::Format_RGB16);
@@ -181,7 +181,7 @@ int main(int argc, char* argv[]) {
 
     // Create the canvas view
     canvasView = new CanvasView();
-    canvasView->setFixedSize(396, 224);
+    canvasView->setFixedSize(320, 528);
     canvasView->installEventFilter(filter);
     layout->addWidget(canvasView, 0, Qt::AlignTop);
 

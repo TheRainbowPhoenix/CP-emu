@@ -31,7 +31,7 @@ u16 vertical_ram_end = 215; // 0x213
 u8 brightness = 255; // 0x5a1
 
 // 2D array of pixels
-u16 pixels[224][396] = {{0xffff}};
+u16 pixels[528][320] = {{0xffff}};
 
 // Set when the display is in the mode where it is receiving pixel data
 // TODO: See if the fast path actually helps
@@ -207,7 +207,7 @@ void dispInterfaceWrite(u32 addr, u32 value, u32 size) {
 }
 
 void initDisplay(void) {
-  memset(pixels, 0xff, 224 * 396 * 2);
+  memset(pixels, 0xff, 320 * 528 * 2);
 
   defineReg("Port R data", PRDR, 0xa405013c);
   // TODO: Do 1 byte writes work? Here they will

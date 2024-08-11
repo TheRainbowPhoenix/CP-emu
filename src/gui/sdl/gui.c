@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
   }
 
   // Create a window and renderer
-  SDL_Window* window = SDL_CreateWindow("Emulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 396, 224, 0);
+  SDL_Window* window = SDL_CreateWindow("Emulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 320, 528, 0);
   if (!window) {
     SDL_Log("Failed to create window: %s", SDL_GetError());
     exit(1);
@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
   }
 
   // Create a texture to use as a framebuffer
-  framebuffer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_STREAMING, 396, 224);
+  framebuffer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_STREAMING, 320, 528);
   if (!framebuffer) {
     SDL_Log("Failed to create framebuffer: %s", SDL_GetError());
     exit(1);
@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
 // Uint32 lastUpdateTime = 0;
 void updateDisplay(u16* vram) {
   // printf("updateDisplay called\n");
-  SDL_UpdateTexture(framebuffer, NULL, vram, 396 * sizeof(uint16_t));
+  SDL_UpdateTexture(framebuffer, NULL, vram, 320 * sizeof(uint16_t));
   SDL_RenderClear(renderer);
   SDL_RenderCopy(renderer, framebuffer, NULL, NULL);
   SDL_RenderPresent(renderer);
