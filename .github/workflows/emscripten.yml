@@ -47,7 +47,7 @@ jobs:
           ./emsdk/emsdk install latest
           ./emsdk/emsdk activate latest
 
-      - name: Build blink
+      - name: Build emu
         run: |
           . ./emsdk/emsdk_env.sh
           mkdir -p ebuild
@@ -57,13 +57,13 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Remove CMake Cache
+        run: rm -rf ebuild/CMakeFiles embuild/CMakeCache.txt
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: |
             ebuild
-            !ebuild/CMakeFiles
-            !embuild/CMakeCache.txt
 
   deploy:
     environment:
