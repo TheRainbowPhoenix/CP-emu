@@ -50,10 +50,10 @@ jobs:
       - name: Build blink
         run: |
           . ./emsdk/emsdk_env.sh
-          mkdir ebuild
+          mkdir -p ebuild
           cd ebuild
-          emmake cmake -j$(nproc) ..
-          emmake make
+          emmake cmake ..
+          emmake make -j$(nproc)
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5

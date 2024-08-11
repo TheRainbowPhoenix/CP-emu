@@ -108,7 +108,7 @@ a.out
 
 # Compiled binary files
 *.elf
-*.bin
+# *.bin
 
 calc-emu-test
 build
