@@ -1,6 +1,8 @@
 # casio-emu
 
-A work-in-porgress emulator for the Casio CG50 calculator. It currently runs many add-ins created with [gint](https://gitea.planet-casio.com/Lephenixnoir/gint) quite well.
+A work-in-progress emulator for the ClassPad. It is based on [casio-emu](https://github.com/Heath123/casio-emu) and will bring some of the [RuK](https://github.com/TheRainbowPhoenix/RuK) features.
+
+It currently runs many add-ins created with [gint](https://gitea.planet-casio.com/Lephenixnoir/gint) quite well.
 
 ## Limitations
 - This does not attempt to emulate syscalls or the OS yet, so PrizmSDK add-ins will not work
