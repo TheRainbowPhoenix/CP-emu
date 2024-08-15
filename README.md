@@ -9,6 +9,22 @@ A work-in-porgress emulator for the Casio CG50 calculator. It currently runs man
 
 ## Building
 
+### For the web
+
+```
+C:\Path\To\EMScripten\emsdk\emsdk.bat activate latest
+C:\Path\To\EMScripten\emsdk\emsdk_env.bat
+mkdir -p ebuild  
+cd ebuild
+echo "copy the ebuild.zip content in the ebuild folder"
+emcmake cmake .. -DUSE_SDL_GUI=ON -DEMSCRIPTEN=ON
+emmake make -j4
+```
+
+### Locally 
+
+This is not tested, but :
+
 ```
 mkdir build
 # If you want to build the SDL GUI rather than Qt one, add -DUSE_SDL_GUI=ON
