@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
+
 #include "../../int.h"
 #include "../../gui/gui.h"
 #include "../hwRegisters.h"
@@ -216,6 +220,9 @@ void initDisplay(void) {
   defineRegCBUnsized("Display Interface", dispInterfaceRead, dispInterfaceWrite, 0xb4000000);
 }
 
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
 void updateDisplayFromFramebuffer(void) {
   updateDisplay(&pixels[0][0]);
 }

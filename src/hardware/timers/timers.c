@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
+
 #include "../../int.h"
 #include "../hwRegisters.h"
 #include "timers.h"
@@ -223,6 +227,9 @@ interruptData tmu_interrupt[9] = {
 
 u32 prescaler[8] = {4, 16, 64, 256, 0, 0, 0, 0};
 
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
 void updateTimers(void) {
   for (int i = 0; i < 9; i++) {
     bool isEtmu = i >= 3;

@@ -3,6 +3,10 @@
 #include <stdlib.h>
 // #include <unistd.h>
 
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
+
 #include "cpu.h"
 #include "gui/gui.h"
 #include "instructions.h"
@@ -28,8 +32,6 @@ CpuState cpu = {0};
 
 void test(void);
 
-// bool trace = false;
-
 #define SPEED_FACTOR ((u64) 2048 * 1)
 
 // TODO: I think this is too many CPU cycles? Or maybe not enough...
@@ -39,6 +41,9 @@ void test(void);
 
 void runFrame(void);
 
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
 int startInterpreter(const char* filename) {
   initMemory(filename);
   initCpuRegisters();
@@ -80,6 +85,9 @@ u64 iterations = 0;
 u64 iterationsSleeping = 0;
 // u64 iterationsThisFrame = 0;
 
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
 void runIterationsCPU(int interationsToRun) {
   // while (iterations < (ITERATIONS_PER_SEC * 1)) {
   for (int i = 0; i < interationsToRun; i++) {
@@ -135,8 +143,29 @@ void runIterationsCPU(int interationsToRun) {
       // }
     }
 
+    // TODO: IF PC is known API symbols
+    // LCD_ClearScreen, LCD_Refresh, LCD_SetPixel ...
+    if (cpu.reg.PC == 0x800394C0 || cpu.reg.PC == 0x8003733E || cpu.reg.PC == 0x80039302) {
+      printf("SDK CALL: %04x\n", cpu.reg.r0);
+      // TODO: simulate the function only if not mapped to memory ? Then return back 
+    }
+
     // TODO: Check alignment
     u16 instr = readMemory2Quick(cpu.reg.PC);
+
+    // TODO: only if debug mode
+    #ifdef EMSCRIPTEN
+    // if (trace) {
+    //  EM_ASM_({
+    //     let event = new CustomEvent('cpu:instr', {
+    //         detail: { instruction: $0, pc: $1 }
+    //     });
+    //     document.dispatchEvent(event);
+    //   }, instr, cpu.reg.PC);
+    // }
+    #endif
+
+   
     #ifdef PRINT_INSTRUCTIONS
     printf("%x: ", cpu.reg.PC);
     #endif
@@ -173,6 +202,12 @@ void runIterationsCPU(int interationsToRun) {
     //   cpu.reg.PC = cpu.reg.PR;
     // }
 
+    #ifdef EMSCRIPTEN
+    // if (trace) {
+    //  // send registers ?
+    // }
+    #endif
+
     #ifdef PRINT_INSTRUCTIONS
     printf("r0: %08X, r1: %08X, r2: %08X, r3: %08X, r4: %08X, r5: %08X, r6: %08X, r7: %08X, r8: %08X,\n", cpu.reg.r0, cpu.reg.r1, cpu.reg.r2, cpu.reg.r3, cpu.reg.r4, cpu.reg.r5, cpu.reg.r6, cpu.reg.r7, cpu.reg.r8);
     printf("r9: %08X, r10: %08X, r11: %08X, r12: %08X, r13: %08X, r14: %08X, r15: %08X, PR: %08X, T: %d, SR: %08X\n", cpu.reg.r9, cpu.reg.r10, cpu.reg.r11, cpu.reg.r12, cpu.reg.r13, cpu.reg.r14, cpu.reg.r15, cpu.reg.PR, cpu.reg.SR_parts.T, cpu.reg.SR);
@@ -194,6 +229,50 @@ void runIterationsCPU(int interationsToRun) {
 }
 
 u64 iterationsSinceRTCTick = 0;
+
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
+void runOneFrame(int speed_factor) {
+  runIterationsCPU(speed_factor);
+  updateTimers();
+
+  iterationsSinceRTCTick += speed_factor;
+  if (iterationsSinceRTCTick >= (ITERATIONS_PER_SEC / 128)) {
+    updateRtc();
+    iterationsSinceRTCTick = 0;
+  }
+  updateDisplayFromFramebuffer();
+}
+
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
+void dumpOneFrame() {
+  u16 instr = readMemory2Quick(cpu.reg.PC);
+  printf("%x: \n", cpu.reg.PC);
+
+  #ifdef EMSCRIPTEN
+  EM_ASM_({
+    let regArray = [];
+    for (let i = 0; i < 16 + 8 + 27; i++) {
+        regArray.push(HEAP32[($2 >> 2) + i]);
+    }
+    let event = new CustomEvent('cpu:dump', {
+        detail: { instr: $0, pc: $1, regs: regArray }
+    });
+    document.dispatchEvent(event);
+  }, instr, cpu.reg.PC, cpu.reg.regArray);
+  #endif
+
+  printf("r0: %08X, r1: %08X, r2: %08X, r3: %08X, r4: %08X, r5: %08X, r6: %08X, r7: %08X, r8: %08X,\n", cpu.reg.r0, cpu.reg.r1, cpu.reg.r2, cpu.reg.r3, cpu.reg.r4, cpu.reg.r5, cpu.reg.r6, cpu.reg.r7, cpu.reg.r8);
+  printf("r9: %08X, r10: %08X, r11: %08X, r12: %08X, r13: %08X, r14: %08X, r15: %08X, PR: %08X, T: %d, SR: %08X\n", cpu.reg.r9, cpu.reg.r10, cpu.reg.r11, cpu.reg.r12, cpu.reg.r13, cpu.reg.r14, cpu.reg.r15, cpu.reg.PR, cpu.reg.SR_parts.T, cpu.reg.SR);
+    
+}
+
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
 void runFrame(void) {
   for (int i = 0; i < (ITERATIONS_PER_FRAME / SPEED_FACTOR); i++) {
     runIterationsCPU(SPEED_FACTOR);

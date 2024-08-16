@@ -15,6 +15,21 @@ typedef uint16_t color_t;
 #define LCD_WIDTH_PX 320 // 396
 #define LCD_HEIGHT_PX 528 // 224
 
+
+int trace = 0;
+
+EMSCRIPTEN_KEEPALIVE
+void setTrace(int mode) {
+  trace = mode;
+  printf("Mode trace changed to %d \n", mode);
+}
+
+EM_JS(void, setupEventListener, (), {
+  document.addEventListener('cpu::setTrace', function(event) {
+    Module.setTrace(event.detail.mode);
+  });
+});
+
 int main(int argc, char* argv[]) {
   int i = 0;
   while (buttons[i].id != 0) {
@@ -41,7 +56,16 @@ int main(int argc, char* argv[]) {
     window.canvasImageData = canvasContext.getImageData(0, 0, 320, 528);
   });
 
-  startInterpreter("Addin.g3a");
+ 
+  EM_ASM_({
+    let event = new CustomEvent('emu:main', {
+        detail: { state: "ready" }
+    });
+    document.dispatchEvent(event);
+  });
+
+
+  // startInterpreter("Addin.g3a");
 }
 
 void Copy_ToCanvas(uint32_t* ptr) {
@@ -81,5 +105,15 @@ void handleEvents(void) {
 // #define MS_PER_FRAME (1000 / FPS)
 
 void runMainLoop(void (*callback)(void)) {
-  emscripten_set_main_loop(callback, FPS, false);
+  EM_ASM_({
+    console.log("runMainLoop");
+  });
+
+  if (trace) {
+    // TODO: if called in "step" mode, manually step
+
+  } else {
+    // if called in "run" :
+    emscripten_set_main_loop(callback, FPS, false);
+  }
 }
