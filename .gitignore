@@ -115,7 +115,7 @@ build
 build-em
 ebuild/*.txt
 ebuild/CMakeFiles
-ebuild/*.js
+ebuild/calcemu.js
 ebuild/*.html
 ebuild/*.wasm
 ebuild/*.cmake
