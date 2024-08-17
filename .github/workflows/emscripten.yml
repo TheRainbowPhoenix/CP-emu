@@ -32,12 +32,6 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
       - name: Install cached emscripten
         id: cache
         uses: actions/cache@v3
@@ -60,16 +54,28 @@ jobs:
           cd ebuild
           emmake cmake .. -DUSE_SDL_GUI=ON -DEMSCRIPTEN=ON
           emmake make -j$(nproc)
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
       
       - name: Install UI dependencies
         run: |
           cd ruk-ui
-          npm install
+          pnpm install
       
       - name: build
         run: |
           cd ruk-ui
-          npm run build
+          pnpm run build
 
       - name: Setup Pages
         id: pages
