@@ -8,14 +8,84 @@
   import Calculator from './lib/emu/calculator.svelte';
   import Emscripten from './lib/emu/emscripten.svelte';
   import Toolbar from './lib/ui/toolbar.svelte';
-  import { loadedFilename, state } from './lib/stores/app';
+  import { autorun, copyScreenFeedback, debugging, loadedFilename, state, traceback } from './lib/stores/app';
   import { loadFileIntoFSPromise } from './lib/emu/fetchers';
   import { get } from 'svelte/store';
   import CalculatorSkin from './assets/calculatorSkin.svelte';
+  import { setupListeners } from './lib/emu/listeners';
 
   onMount(async () => {
+    setupListeners();
+
+    state.subscribe((s) => {
+      console.log(s)
+    })
+
     dropEmulator();
   })
+
+  const doFullscreen = (e: CustomEvent) => {
+    window.Module.requestFullscreen(true, false);
+  }
+
+  const doCopyScreen = (e: CustomEvent) => {
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+    if (canvas) {
+      canvas.toBlob(function(blob: any) {
+        const item = new ClipboardItem({ 'image/png': blob });
+        navigator.clipboard.write([item]).then(() => {
+          copyScreenFeedback.set("Copied to clipboard !");
+
+          setTimeout(() => {
+            copyScreenFeedback.set(null);
+          }, 4000);
+          
+        }).catch(() => {
+
+        })
+      });
+    }
+  }
+
+  const doSaveScreen = (e: CustomEvent) => {
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+    if (canvas) {
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'ClassPad_Screen.png';
+      link.click();
+    }
+  }
+
+  const doDump = (e: CustomEvent) => {
+    // TODO 
+  }
+
+  const doDebug = (e: CustomEvent) => {
+    debugging.set(true);
+
+    // TODO 
+  }
+  
+
+  const doRun = async (e: CustomEvent) => {
+    let fileName = get(loadedFilename);
+    if (fileName) {
+      state.set("running");
+      try {
+        window.Module.ccall('startInterpreter', null, ["string"], [fileName]);
+      } catch (error) {
+        traceback.set(error)
+        state.set("crashed")
+      }
+    } else {
+      state.set("crashed");
+      traceback.set({
+        name: "INVALID_FILE_NAME",
+        message: `fileName is empty`
+      })
+    }
+  }
 
   const doRomLoad = async (e: CustomEvent) => {
     console.log(e.detail);
@@ -28,10 +98,10 @@
             console.log(file.name)
             loadedFilename.set(file.name);
 
-            // loaded_filename = file.name;
-            let fileName = get(loadedFilename);
-            if (fileName) {
-              window.Module.ccall('startInterpreter', null, ["string"], [fileName]);
+            if ($autorun) {
+              doRun(e);
+            } else {
+              state.set("loaded");
             }
             // runNow();
         })
@@ -62,7 +132,15 @@
       <Buttons />
     </div>
   
-    <Toolbar on:romChanged={doRomLoad} />
+    <Toolbar
+      on:romChanged={doRomLoad}
+      on:doRun={doRun}
+      on:doDump={doDump}
+      on:doDebug={doDebug}
+      on:doFullscreen={doFullscreen}
+      on:doCopyScreen={doCopyScreen}
+      on:doSaveScreen={doSaveScreen}
+    />
     <div style="display: none;">
       <Emscripten />
     </div>

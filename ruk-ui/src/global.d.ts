@@ -8,6 +8,7 @@ declare interface Window {
             },
             unlink:  (fileName: String) => boolean,
             createDataFile: (parent: string, fileName: string, data: any, canRead?: boolean, canWrite?: boolean, canOwn?: boolean) => void
-        }
+        },
+        requestFullscreen: (a: boolean, b: boolean) => void
     };
 }

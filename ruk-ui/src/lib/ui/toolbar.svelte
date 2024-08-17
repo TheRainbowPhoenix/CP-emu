@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { state } from "../stores/app";
+  import { copyScreenFeedback, debugging, state } from "../stores/app";
 
   import PickFile from "../../assets/icons/pickFile.svelte";
   import CopyScreen from "../../assets/icons/copyScreen.svelte";
@@ -9,10 +9,15 @@
   import Dump from "../../assets/icons/dump.svelte";
   import FullScreen from "../../assets/icons/fullScreen.svelte";
   import Run from "../../assets/icons/run.svelte";
+  import Popover from "../components/popover.svelte";
 
   const pickFile = () => {
     fileInput.click();
   };
+
+  $: loadHint = $state === "empty" 
+  $: loaded = $state === "loaded"
+  $: crashed = $state === "crashed"
 
   let fileInput: HTMLInputElement;
 
@@ -20,6 +25,30 @@
 
   const handleFile = (e: Event) => {
     dispatch('romChanged', e);
+  }
+
+  const doCopyScreen = (e: Event) => {
+    dispatch('doCopyScreen', e);
+  }
+
+  const doSaveScreen = (e: Event) => {
+    dispatch('doSaveScreen', e);
+}
+
+  const doRun = (e: Event) => {
+    dispatch('doRun', e);
+  }
+
+  const doFullscreen = (e: Event) => {
+    dispatch('doFullscreen', e);
+  }
+
+  const doDump = (e: Event) => {
+    dispatch('doDump', e);
+  }
+
+  const doDebug = (e: Event) => {
+    dispatch('doDebug', e);
   }
 
   let ready = false;
@@ -35,6 +64,11 @@
       on:click={pickFile}
       id="btn_pickFile"
     >
+
+    <Popover visible={loadHint}>
+        Start by picking a BIN program
+    </Popover>
+      
       <PickFile />
       <input
         bind:this={fileInput}
@@ -52,10 +86,14 @@
       aria-orientation="horizontal"
     ></div>
 
-    <button class="toolbar-tool" type="button" tabindex="0" id="btn_copyScreen">
+    <button class="toolbar-tool" type="button" tabindex="0" on:click={doCopyScreen} id="btn_copyScreen">
+      <Popover visible={$copyScreenFeedback !== null}>
+        {$copyScreenFeedback}
+      </Popover>
+
       <CopyScreen />
     </button>
-    <button class="toolbar-tool" type="button" tabindex="0" id="btn_saveScreen">
+    <button class="toolbar-tool" type="button" tabindex="0" on:click={doSaveScreen} id="btn_saveScreen">
       <SaveScreen />
     </button>
     <div
@@ -65,14 +103,23 @@
       aria-orientation="horizontal"
     ></div>
 
-    <button class="toolbar-tool" type="button" tabindex="0" id="btn_debug">
-      <Debug />
+    <button class="toolbar-tool" type="button" tabindex="0" id="btn_debug" on:click={doDebug} disabled={!loaded}>
+      <Debug active={$debugging} />
     </button>
-    <button class="toolbar-tool" type="button" tabindex="0" id="btn_dump">
+    <button class="toolbar-tool" type="button" tabindex="0" id="btn_dump" on:click={doDump} disabled={!loaded && !crashed}>
+      <Popover visible={crashed}>
+        Check why it crashed here
+      </Popover>
+
       <Dump />
     </button>
-    <button class="toolbar-tool" type="button" tabindex="0" id="btn_run">
-      <Run />
+    <button class="toolbar-tool" type="button" tabindex="0" id="btn_run" on:click={doRun} disabled={!loaded}>
+        <Popover visible={loaded}>
+            Now let's start the program
+        </Popover>
+
+        <Run />
+        
     </button>
 
     <div
@@ -82,7 +129,7 @@
       aria-orientation="horizontal"
     ></div>
 
-    <button class="toolbar-tool" type="button" tabindex="0" id="btn_fullscreen">
+    <button class="toolbar-tool" type="button" tabindex="0" on:click={doFullscreen} id="btn_fullscreen">
       <FullScreen />
     </button>
   </div>
@@ -147,7 +194,18 @@
     border: none;
   }
 
-  .toolbar-tool:hover {
+  .toolbar-tool:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .toolbar-tool:not(:disabled) {
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  .toolbar-tool:not(:disabled):hover {
     background-color: #1c1c20;
   }
 

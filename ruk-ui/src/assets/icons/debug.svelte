@@ -1,4 +1,9 @@
+<script lang="ts">
+    export let active: boolean = false;
+</script>
+
 <svg
+    class:active
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
     height="1em"
@@ -23,3 +28,9 @@
         clip-rule="evenodd"
     ></path></svg
     >
+
+<style>
+    .active {
+        color: var(--cp-accent);
+    }
+</style>

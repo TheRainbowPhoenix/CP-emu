@@ -14,7 +14,7 @@ export function loadFileIntoFS(file, fileName, callback) {
                 window.Module.FS.unlink(fileName);
             }
             window.Module.FS.createDataFile("/", fileName, data, true, true);
-            console.log(`${fileName} loaded_filename into the Emscripten filesystem.`);
+            console.log(`${fileName} loaded into the Emscripten filesystem.`);
 
             callback(null);
         } else {
