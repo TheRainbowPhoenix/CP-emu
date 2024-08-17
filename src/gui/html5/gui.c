@@ -118,5 +118,9 @@ void runMainLoop(void (*callback)(void)) {
   } else {
     // if called in "run" :
     emscripten_set_main_loop(callback, FPS, false);
+
+    // fall off main: either keep running or exit with code.
+    // emscripten_exit_with_live_runtime();
+    // emscripten_force_exit(0);
   }
 }

@@ -5,6 +5,10 @@
 #include <string.h>
 #include <endian.h>
 
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
+
 #include "../int.h"
 #include "memory.h"
 #include "specialAddrs.h"
@@ -70,9 +74,32 @@ void initMemory(const char* filename) {
   // Allocate a memory area at 0x80000000 (ROM)
   int romSize = (1024 * 1024 * (32 + 2));
   int g3aOffset = (1024 * 1024 * 32);
+  int binOffset = 0x8CFF0000;
+  // hhk system is 0x80000000 to 0x81500000
   void* rom = allocMemArea(0x80000000, 0x80000000 + romSize);
-  // Load g3a
-  loadFile(filename, rom + g3aOffset, 0x7000);
+  // hhk bin are often loaded at 0x8CFF0000 but doom is at 0x8CFE2000
+  void* hhk_ram = allocMemArea(0x8CFE2000, 0x8D000000);
+
+
+  const char *ext = strrchr(filename, '.');
+  if (ext && strcmp(ext, ".bin") == 0) {
+    // Load .bin file
+    printf("Loading bin file ...\n");
+
+    // TODO: dynamic entry point
+    long entry_point = 0x8cfe6000;
+    loadFile(filename, hhk_ram + (entry_point - 0x8CFE2000), 0);
+    // EntryPoint entryPoint = RunApp(g_numApps - 1);
+    // if (entryPoint) {
+    //     entryPoint();
+    // }
+  } else {
+    // Load other file types, such as g3a
+    loadFile(filename, rom + g3aOffset, 0x7000);
+  }
+
+  
+  
   // Alias at 0xa0000000 (P2)
   createAlias(0x80000000, 0x80000000 + romSize, 0xa0000000);
   // Set up an alias at 0x00300000 in virtual memory to the file
@@ -148,6 +175,17 @@ u32 readMemory(u32 address, u32 size) {
   if (address % size != 0) {
     printf("Unaligned memory read at %08x, PC = %08x\n", address, cpu.reg.PC);
     // *((volatile u32* ) 1);
+    
+    #ifdef EMSCRIPTEN
+    EM_ASM_({
+      let event = new CustomEvent('cpu:crash', {
+          detail: { name: 'UNALIGNED_MEMORY_READ', address: $0, pc: $1 }
+      });
+      document.dispatchEvent(event);
+    }, address, cpu.reg.PC);
+    emscripten_cancel_main_loop(); 
+    #endif
+
     exit(1);
   }
 

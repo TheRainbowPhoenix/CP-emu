@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 // #include <unistd.h>
 
 #ifdef EMSCRIPTEN
@@ -64,7 +65,12 @@ int startInterpreter(const char* filename) {
   cpu.branchDelayDone = false;
   cpu.branchTarget = 0;
 
-  cpu.reg.PC = 0x00300000;
+  const char *ext = strrchr(filename, '.');
+  if (ext && strcmp(ext, ".bin") == 0) {
+    cpu.reg.PC = 0x8CFE6000;
+  } else {
+    cpu.reg.PC = 0x00300000;
+  }
   // cpu.reg.PC = 0xA0000000;
 
   // Return address
