@@ -66,16 +66,15 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
+          cache-dependency-path: './ruk-ui/pnpm-lock.yaml'
       
       - name: Install UI dependencies
-        run: |
-          cd ruk-ui
-          pnpm install
+        working-directory: ruk-ui
+        run: pnpm install
       
       - name: build
-        run: |
-          cd ruk-ui
-          pnpm run build
+        working-directory: ruk-ui
+        run: pnpm run build
 
       - name: Setup Pages
         id: pages
