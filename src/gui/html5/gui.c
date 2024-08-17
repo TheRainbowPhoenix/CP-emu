@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
     let event = new CustomEvent('emu:main', {
         detail: { state: "ready" }
     });
-    document.dispatchEvent(event);
+    document.dispatchEvent(event); 
   });
 
 
@@ -108,6 +108,9 @@ void runMainLoop(void (*callback)(void)) {
   EM_ASM_({
     console.log("runMainLoop");
   });
+
+  // Cancel any existing main loop
+  emscripten_cancel_main_loop(); 
 
   if (trace) {
     // TODO: if called in "step" mode, manually step
