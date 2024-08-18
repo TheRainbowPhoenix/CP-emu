@@ -1,4 +1,5 @@
 import './app.css'
+import './lunar-ui.css'
 import App from './App.svelte'
 
 window.Module = window.Module || {};

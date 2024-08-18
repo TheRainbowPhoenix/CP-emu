@@ -66,6 +66,7 @@
         overflow: visible;
         opacity: 1 !important;
         display: none;
+        z-index: 800;
     }
 
     .popover.visible {

@@ -1,4 +1,4 @@
-import { state, traceback } from "../stores/app";
+import { lastDump, state, traceback } from "../stores/app";
 
 
 const emu_main = (e: any) => {
@@ -19,9 +19,19 @@ const cpu_crash = (e: any) => {
 }
 
 const cpu_dump = (e: any) => {
-    console.error('cpu_dump recv:', e.detail);
-    console.log(`cpu:dump: INSTR ${e.detail.instr.toString(16).padStart(4, '0')} \t - PC: 0x${(e.detail.pc >>> 0).toString(16).padStart(8, '0')}`);
-    console.log(e.detail.regs.map((r: number) => (r >>> 0).toString(16).toUpperCase()))
+    let registers = e.detail.regs.map((r: number) => (r >>> 0))
+    const pc = (e.detail.pc >>> 0);
+    const instr = (e.detail.instr >>> 0);
+    
+    console.debug('cpu_dump recv:', e.detail);
+    console.debug(`cpu:dump: INSTR ${instr.toString(16).padStart(4, '0')} \t - PC: 0x${pc.toString(16).padStart(8, '0')}`);
+    console.debug(registers.map((r: number) => r.toString(16).toUpperCase()))
+    
+    lastDump.set({
+        instr,
+        pc,
+        registers
+    })
 }
 
 

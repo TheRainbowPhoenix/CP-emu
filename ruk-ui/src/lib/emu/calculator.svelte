@@ -90,6 +90,7 @@
     justify-content: center;
     background: #aaaaaa;
     color: #0000a0;
+    padding: 0 .5rem;
   }
 
   .bsod .message {

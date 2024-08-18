@@ -7,8 +7,9 @@
   import Buttons from './lib/emu/buttons.svelte';
   import Calculator from './lib/emu/calculator.svelte';
   import Emscripten from './lib/emu/emscripten.svelte';
-  import Toolbar from './lib/ui/toolbar.svelte';
-  import { autorun, copyScreenFeedback, debugging, loadedFilename, state, traceback } from './lib/stores/app';
+  import Toolbar from './lib/elements/toolbar.svelte';
+  import Tracing from './lib/elements/tracing.svelte';
+  import { autorun, copyScreenFeedback, debugging, lastDump, loadedFilename, state, traceback, tracing } from './lib/stores/app';
   import { loadFileIntoFSPromise } from './lib/emu/fetchers';
   import { get } from 'svelte/store';
   import CalculatorSkin from './assets/calculatorSkin.svelte';
@@ -39,7 +40,7 @@
           setTimeout(() => {
             copyScreenFeedback.set(null);
           }, 4000);
-          
+
         }).catch(() => {
 
         })
@@ -58,8 +59,26 @@
   }
 
   const doDump = (e: CustomEvent) => {
+    if (!$tracing) {
+      // Show the UI
+      tracing.set(true);
+      // Call a one-time dump to show registers state
+      lastDump.set(null);
+      window.Module.ccall('dumpOneFrame', null, [], [])
+    }
     // TODO 
   }
+
+  const doRefresh = (e: CustomEvent) => {
+    console.log("doRefresh !!");
+    if (!$tracing) {
+      // Show the UI
+      tracing.set(true);
+    }
+    
+    lastDump.set(null);
+    window.Module.ccall('dumpOneFrame', null, [], []);
+  };
 
   const doDebug = (e: CustomEvent) => {
     debugging.set(true);
@@ -132,15 +151,21 @@
       <Buttons />
     </div>
   
-    <Toolbar
-      on:romChanged={doRomLoad}
-      on:doRun={doRun}
-      on:doDump={doDump}
-      on:doDebug={doDebug}
-      on:doFullscreen={doFullscreen}
-      on:doCopyScreen={doCopyScreen}
-      on:doSaveScreen={doSaveScreen}
-    />
+    <div class="tools-container">
+      <Toolbar
+        on:romChanged={doRomLoad}
+        on:doRun={doRun}
+        on:doDump={doDump}
+        on:doDebug={doDebug}
+        on:doFullscreen={doFullscreen}
+        on:doCopyScreen={doCopyScreen}
+        on:doSaveScreen={doSaveScreen}
+      />
+
+      <Tracing
+        on:doRefresh={doRefresh}
+      />
+    </div>
     <div style="display: none;">
       <Emscripten />
     </div>
@@ -189,6 +214,25 @@
 
   #classpad {
     width: 432px;
+  }
+
+  .tools-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    min-height: 960px;
+    gap: .75rem;
+    padding-left: 1.5rem;
+    flex-shrink: 1;
+   
+    visibility: visible;
+    position: relative;
+    overflow: hidden;
+    font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
+      Consolas, "DejaVu Sans Mono", monospace;
+    font-weight: normal;
+    color: var(--cp-text);
+    min-height: 960px;
   }
  
 </style>
