@@ -9,11 +9,12 @@
   import Emscripten from './lib/emu/emscripten.svelte';
   import Toolbar from './lib/elements/toolbar.svelte';
   import Tracing from './lib/elements/tracing.svelte';
-  import { autorun, copyScreenFeedback, debugging, lastDump, loadedFilename, state, traceback, tracing } from './lib/stores/app';
+  import { autorun, copyScreenFeedback, debugging, debugPane, lastDump, loadedFilename, state, traceback, tracing } from './lib/stores/app';
   import { loadFileIntoFSPromise } from './lib/emu/fetchers';
   import { get } from 'svelte/store';
   import CalculatorSkin from './assets/calculatorSkin.svelte';
   import { setupListeners } from './lib/emu/listeners';
+  import Debug from './lib/elements/debug.svelte';
 
   onMount(async () => {
     setupListeners();
@@ -81,9 +82,13 @@
   };
 
   const doDebug = (e: CustomEvent) => {
-    debugging.set(true);
+    if ($state === "loaded" || $state === "ready") {
+      debugging.set(true);
+    }
 
-    // TODO 
+    if (!$debugPane) {
+      debugPane.set(true);
+    }
   }
   
 
@@ -138,7 +143,7 @@
 
   <div class="container">
 
-    <div class="logo">
+    <div class="logo" class:compact={$debugPane}>
       <img src={RuKLogo} alt="RuK Logo" />
       <span>RuK UI</span>
     </div>
@@ -151,7 +156,7 @@
       <Buttons />
     </div>
   
-    <div class="tools-container">
+    <!-- <div class="tools-container"> -->
       <Toolbar
         on:romChanged={doRomLoad}
         on:doRun={doRun}
@@ -162,10 +167,12 @@
         on:doSaveScreen={doSaveScreen}
       />
 
+      <Debug />
+
       <Tracing
         on:doRefresh={doRefresh}
       />
-    </div>
+    <!-- </div> -->
     <div style="display: none;">
       <Emscripten />
     </div>
@@ -182,9 +189,24 @@
   .container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: .5rem;
+
+    flex-direction: row;
+    align-items: flex-start;
+    min-height: 960px;
+    gap: .75rem;
+    flex-shrink: 1;
+    visibility: visible;
     position: relative;
+    overflow: hidden;
+    font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    font-weight: normal;
+    color: var(--cp-text);
+    min-height: 960px;
   }
 
   .logo {
@@ -193,22 +215,46 @@
     top: 2rem;
     left: 2rem;
     align-items: center;
+    z-index: 120;
+  }
+
+  .logo.compact {
+    top: .5rem;
+    left: .5rem;
+    align-items: center;
   }
 
   .logo img {
     height: 4em;
     margin-right: 1rem;
     will-change: filter;
-    transition: filter 300ms;
+    transition: filter 300ms, height .25s ease-in;
+  }
+
+  .logo.compact img {
+    height: 3em;
+    margin-right: 0rem;
+    transition: height .25s ease-in;
   }
 
   .logo span {
+    opacity: 1;
     display: block;
     font-size: 2em;
     font-weight: bold;
+    clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
+    transition: clip-path .25s ease-in, opacity .3s ease-in;
+  }
+
+  .logo.compact span {
+    opacity: 0;
+    clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%);
+    transition: clip-path .25s ease-in, opacity .3s ease-in;
+
   }
 
   .calc-container {
+    flex: 0 0 440px;
     position: relative;
   }
 

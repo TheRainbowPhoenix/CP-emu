@@ -5,11 +5,6 @@
   import { lastDump, tracing, type Dump } from "../stores/app";
   import Filter from "../../assets/icons/filter.svelte";
 
-  let elements = Array.from({ length: 23 }, (_, i) => ({
-    label: `Label are very long now ${i + 1}`,
-    value: `${i.toString(16).padStart(8, "0")}`,
-  }));
-
   const registers_names: string[] = [
     "r0",
     "r1",
@@ -114,7 +109,7 @@
   };
 </script>
 
-<div class="tracing-panel" class:visible={$tracing}>
+<div class="tracing-panel view-panel" class:visible={$tracing}>
   <div class="titlebar">
     <h4 class="header">Registers</h4>
 
@@ -148,7 +143,7 @@
       <Close />
     </button>
   </div>
-  <div class="content-panel">
+  <div class="contents">
     <div class="registers">
       {#if dump}
         {#key filtered}
@@ -175,63 +170,21 @@
 </div>
 
 <style>
-  .tracing-panel.visible {
-    max-width: 95vw;
-    max-height: 95vh;
-    visibility: visible;
-    transition:
-      max-width 0.5s ease-in,
-      max-height 0.5s ease-in;
-  }
-
-  .tracing-panel .registers {
-    opacity: 0;
-    clip-path: polygon(0% 0%, 0% 10%, 0% 0%, 50% 0%);
-    transition:
-      clip-path 0.25s ease-in 0.125s,
-      opacity 0.25s ease-in 0.125s;
-  }
-
-  .tracing-panel.visible .registers {
-    opacity: 1;
-    clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
-  }
-
+  
   .tracing-panel {
     max-width: 0px;
     max-height: 70px;
     visibility: hidden;
-
-    background: #0d0d0d;
-    border: 2px solid #2f2f2f;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    gap: 8px;
-    -webkit-user-select: none;
-    user-select: none;
-    padding: 0;
-    border-radius: 0.6rem;
-    color: #a1a1aa;
-    min-width: 48px;
-    width: 350px;
   }
 
-  .header {
-    margin: 0;
-    font-size: 1.125rem;
-    flex-grow: 1;
-
-    opacity: 0;
-    transition: opacity 0.25s ease-in;
+  .tracing-panel.visible {
+    min-width: 350px;
+    max-width: 95vw;
+    max-height: 95vh;
+    visibility: visible;
   }
 
-  .tracing-panel.visible .header {
-    opacity: 1;
-  }
-
-  .tracing-panel.visible .content-panel {
+  .tracing-panel.visible .contents {
     overflow: auto;
     opacity: 1;
     animation: hide-scroll 0.5s backwards;
@@ -244,12 +197,14 @@
     }
   }
 
-  .content-panel {
+  .tracing-panel .contents {
     overflow: hidden;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.25s ease-in;
   }
+
+  .tracing-panel.visible .contents {
+    overflow: auto;
+    opacity: 1;
+    }
 
   .registers {
     display: grid;

@@ -14,6 +14,7 @@ export const traceback = writable<any>("");
 export const count = writable(0);
 
 export const debugging = writable(false);
+export const debugPane = writable(false);
 
 export const tracing = writable(false);
 export const lastDump = writable<Dump | null>(null);

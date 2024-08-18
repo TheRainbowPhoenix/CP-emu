@@ -114,7 +114,7 @@
   <button class="toolbar-action" type="button" tabindex="0" id="btn_debug" on:click={doDebug} disabled={!loaded}>
     <Debug active={$debugging} />
   </button>
-  <button class="toolbar-action" type="button" tabindex="0" id="btn_dump" on:click={doDump} disabled={false && !loaded && !crashed}>
+  <button class="toolbar-action" type="button" tabindex="0" id="btn_dump" on:click={doDump} disabled={!loaded && !crashed}>
     <Popover visible={crashedHint && !$tracing}>
       Check why it crashed here
     </Popover>
