@@ -84,6 +84,8 @@
   const doDebug = (e: CustomEvent) => {
     if ($state === "loaded" || $state === "ready") {
       debugging.set(true);
+      window.Module.ccall('setTrace', null, ['number'], [1]);
+      doRun(e);  
     }
 
     if (!$debugPane) {

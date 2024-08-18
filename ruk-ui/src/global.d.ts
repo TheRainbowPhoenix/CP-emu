@@ -1,6 +1,7 @@
 declare interface Window {
     Module: {
-        ccall: (method: String, unk0: any, types: String[], args: String[]) => void,
+        ccall: (method: String, returns: any, types: String[], args: any[]) => void,
+        cwrap: (method: String, returns: any, args: any[]) => (any?) => any,
         canvas: HTMLCanvasElement,
         FS: {
             analyzePath: (fileName: String) => {

@@ -243,6 +243,9 @@ u32 readMemory(u32 address, u32 size) {
   return value;
 }
 
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
 u32 readMemory2Quick(u32 address) {
   // Get the relevant page
   void* page = pageTable[address / 0x1000];
@@ -254,6 +257,9 @@ u32 readMemory2Quick(u32 address) {
   return *(u16*)(page + ((address ^ 0x2) % 0x1000));
 }
 
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
 void writeMemory(u32 address, u32 size, u32 value) {
   // if (address >= 0x00300000 && address < 0x00500000) {
   //   printf("Write to ROM at %08x\n", cpu.reg.PC - 4);

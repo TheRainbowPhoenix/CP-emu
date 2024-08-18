@@ -18,6 +18,7 @@
   $: loadHint = $state === "empty" 
   $: loaded = $state === "loaded"
   $: crashed = $state === "crashed"
+  $: running = $state === "running"
 
   let crashedHint = false;
   $: if (crashed) {
@@ -61,6 +62,7 @@
 
   let ready = false;
   $: ready = $state === "ready";
+  $: isDebug = $debugging;
 </script>
 
 
@@ -111,10 +113,10 @@
     aria-orientation="horizontal"
   ></div>
 
-  <button class="toolbar-action" type="button" tabindex="0" id="btn_debug" on:click={doDebug} disabled={!loaded}>
+  <button class="toolbar-action" type="button" tabindex="0" id="btn_debug" on:click={doDebug} disabled={!loaded && (running && !isDebug)}>
     <Debug active={$debugging} />
   </button>
-  <button class="toolbar-action" type="button" tabindex="0" id="btn_dump" on:click={doDump} disabled={!loaded && !crashed}>
+  <button class="toolbar-action" type="button" tabindex="0" id="btn_dump" on:click={doDump} disabled={!loaded && !crashed && !running}>
     <Popover visible={crashedHint && !$tracing}>
       Check why it crashed here
     </Popover>
@@ -122,7 +124,7 @@
     <Dump />
   </button>
   <button class="toolbar-action" type="button" tabindex="0" id="btn_run" on:click={doRun} disabled={!loaded}>
-      <Popover visible={loaded}>
+      <Popover visible={loaded && !$debugging}>
           Now let's start the program
       </Popover>
 

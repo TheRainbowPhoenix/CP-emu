@@ -93,6 +93,13 @@ u64 iterationsSleeping = 0;
 
 #ifdef EMSCRIPTEN
 EMSCRIPTEN_KEEPALIVE
+int getPC() {
+  return cpu.reg.PC;
+}
+#endif
+
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
 #endif
 void runIterationsCPU(int interationsToRun) {
   // while (iterations < (ITERATIONS_PER_SEC * 1)) {

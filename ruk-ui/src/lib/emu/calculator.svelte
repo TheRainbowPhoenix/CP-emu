@@ -40,6 +40,9 @@
     <pre>
             <code class="name">{$traceback.name}</code>
             <code class="message">{$traceback.message}</code>
+            {#if $traceback.hint}
+                <a href={$traceback.hint} target="_blank">Hint</a>
+            {/if}
         </pre>
   </div>
 {/if}

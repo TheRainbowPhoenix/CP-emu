@@ -79,6 +79,7 @@
     "PR",
     "T",
     "SR",
+    "PC"
   ];
 
   let dump: Dump | null = null;

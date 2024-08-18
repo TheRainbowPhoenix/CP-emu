@@ -1,9 +1,13 @@
-import { lastDump, state, traceback } from "../stores/app";
+import { getPC, lastDump, readMemory2Quick, state, traceback } from "../stores/app";
 
 
 const emu_main = (e: any) => {
     console.log('emu:main recv:', e.detail.state);
+
+    getPC.set(window.Module.cwrap('getPC', 'number', []));
+    readMemory2Quick.set(window.Module.cwrap('readMemory2Quick', 'number', ['number']));
 }
+
 const cpu_crash = (e: any) => {
     console.error('cpu_crash recv:', e.detail);
     state.set("crashed");
@@ -14,7 +18,8 @@ const cpu_crash = (e: any) => {
 
     traceback.set({
         name: name,
-        message: `@ 0x${address} \t\n PC:${pc}\n`
+        message: `@ 0x${address} \t\n PC:${pc}\n`,
+        hint: `https://github.com/search?q=repo%3AClasspadDev%2Fhollyhock-3%20${pc.substring(0, 6)}&type=code`
     })
 }
 
