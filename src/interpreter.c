@@ -156,10 +156,32 @@ void runIterationsCPU(int interationsToRun) {
       // }
     }
 
+    /*
+        How to implement the HHK SDK ? 
+        I checked and the calls to open, that is 0x80057854, seems to be 0x80057858.
+        I think it's because delay slot, so maybe a jump-table binary should be used.   
+    */
     // TODO: IF PC is known API symbols
     // LCD_ClearScreen, LCD_Refresh, LCD_SetPixel ...
-    if (cpu.reg.PC == 0x800394C0 || cpu.reg.PC == 0x8003733E || cpu.reg.PC == 0x80039302) {
-      printf("SDK CALL: %04x\n", cpu.reg.r0);
+    if (
+      (
+        cpu.reg.PC >= 0x80057814 && // MKDIR
+        cpu.reg.PC <= 0x800D57FF // GUIDialog_ctor + 10
+      ) || cpu.reg.PC == 0x800394C0 || cpu.reg.PC == 0x8003733E || cpu.reg.PC == 0x80039302) {
+        printf("SDK CALL: %04x\n", cpu.reg.r0);
+
+        #ifdef EMSCRIPTEN
+        cpu.reg.PC = EM_ASM_INT({
+          let regArray = [];
+          for (let i = 0; i < 16 + 8 + 27; i++) {
+              regArray.push(HEAP32[($1 >> 2) + i]);
+          }
+
+          return window.sdk_call($0, regArray);
+        }, cpu.reg.PC, cpu.reg.regArray);
+
+        #endif
+
       // TODO: simulate the function only if not mapped to memory ? Then return back 
     }
 

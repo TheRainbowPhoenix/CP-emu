@@ -11,5 +11,6 @@ declare interface Window {
             createDataFile: (parent: string, fileName: string, data: any, canRead?: boolean, canWrite?: boolean, canOwn?: boolean) => void
         },
         requestFullscreen: (a: boolean, b: boolean) => void
-    };
+    },
+    sdk_call: (pc: number, regArray: number[]) => number
 }

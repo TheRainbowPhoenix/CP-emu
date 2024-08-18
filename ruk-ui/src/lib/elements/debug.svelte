@@ -34,7 +34,23 @@
         dispatch("doStepOver", e);
     }
     
-    const doStepIn = (e: Event) => { dispatch("doStepIn", e) }
+    const doStepIn = (e: Event) => {
+        
+        const instr = prefetchInstr()
+        try {
+            if ($tracing) {
+                window.Module.ccall('dumpOneFrame', null, [], [])
+            }
+            
+            window.Module.ccall('runOneFrame', null, ['number'], [1])
+            console.debug("runOneFrame OK - ", instr);
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+
+        dispatch("doStepIn", e);
+     }
     const doFastForwards = (e: Event) => { 
         window.Module.ccall('runFrame', null, [], []);
 
