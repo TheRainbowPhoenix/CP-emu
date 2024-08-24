@@ -68,6 +68,50 @@ void loadFile(const char* filename, void* mem, int fileOffset) {
   fclose(f);
 }
 
+uint32_t swap_endian(uint32_t value) {
+    return ((value >> 24) & 0x000000FF) |
+           ((value >> 8)  & 0x0000FF00) |
+           ((value << 8)  & 0x00FF0000) |
+           ((value << 24) & 0xFF000000);
+}
+
+void loadBinFile(const char *filename, void * hhk_ram) {
+    FILE *file = fopen(filename, "rb");
+    if (!file) {
+        perror("Failed to open file");
+        return;
+    }
+
+    // Default entry point
+    long entry_point = 0x8cfe6000;
+
+    // Seek to offset 0x0C to read the load address
+    if (fseek(file, 0x0C, SEEK_SET) == 0) {
+        uint32_t load_address;
+        if (fread(&load_address, sizeof(uint32_t), 1, file) == 1) {
+            // Check if the load address is within the valid range
+            load_address = swap_endian(load_address);
+            printf("Load address : %4x ...\n", load_address);
+
+            if (load_address >= 0x8CFE2000 && load_address < 0x8CFFFFFF) {
+                entry_point = load_address;
+                printf("Entry point set to load address from file: 0x%08lx\n", entry_point);
+            } else {
+                printf("Load address out of valid range, using default entry point: 0x%08lx\n", entry_point);
+            }
+        } else {
+            printf("Failed to read load address, using default entry point: 0x%08lx\n", entry_point);
+        }
+    } else {
+        printf("Failed to seek in file, using default entry point: 0x%08lx\n", entry_point);
+    }
+    fclose(file);
+
+    cpu.reg.PC = entry_point;
+
+    loadFile(filename, hhk_ram + (entry_point - 0x8CFE2000), 0);
+}
+
 void initMemory(const char* filename) {
   // memory = calloc(0xffffffff, sizeof(u8));
 
@@ -84,11 +128,12 @@ void initMemory(const char* filename) {
   const char *ext = strrchr(filename, '.');
   if (ext && strcmp(ext, ".bin") == 0) {
     // Load .bin file
-    printf("Loading bin file ...\n");
+    printf("Loading bin file %s ...\n", filename);
 
+    loadBinFile(filename, hhk_ram);
     // TODO: dynamic entry point
-    long entry_point = 0x8cfe6000;
-    loadFile(filename, hhk_ram + (entry_point - 0x8CFE2000), 0);
+    // long entry_point = 0x8cfe6000;
+    // loadFile(filename, hhk_ram + (entry_point - 0x8CFE2000), 0);
     // EntryPoint entryPoint = RunApp(g_numApps - 1);
     // if (entryPoint) {
     //     entryPoint();

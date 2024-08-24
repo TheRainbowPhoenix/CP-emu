@@ -9,12 +9,13 @@
   import Emscripten from './lib/emu/emscripten.svelte';
   import Toolbar from './lib/elements/toolbar.svelte';
   import Tracing from './lib/elements/tracing.svelte';
-  import { autorun, copyScreenFeedback, debugging, debugPane, lastDump, loadedFilename, state, traceback, tracing } from './lib/stores/app';
+  import { autorun, copyScreenFeedback, debugging, debugPane, filesPane, lastDump, loadedFilename, state, traceback, tracing } from './lib/stores/app';
   import { loadFileIntoFSPromise } from './lib/emu/fetchers';
   import { get } from 'svelte/store';
   import CalculatorSkin from './assets/calculatorSkin.svelte';
   import { setupListeners } from './lib/emu/listeners';
   import Debug from './lib/elements/debug.svelte';
+  import Files from './lib/elements/files.svelte';
 
   onMount(async () => {
     setupListeners();
@@ -25,6 +26,10 @@
 
     dropEmulator();
   })
+
+  const doBrowseFiles = (e: CustomEvent) => {
+    filesPane.set(!$filesPane);
+  }
 
   const doFullscreen = (e: CustomEvent) => {
     window.Module.requestFullscreen(true, false);
@@ -119,10 +124,14 @@
 
     var file = e.detail.target.files[0];
     if (file) {
+      // window.Module.FS.mkdir('/fls0');
+      // window.Module.FS.mount(MEMFS, { root: '/fls0' }, '/fls0');
+      let fileName = `/fls0/${file.name}`
+
         // loaded_filename = null;
-        loadFileIntoFSPromise(file, file.name).then(() => {
-            console.log(file.name)
-            loadedFilename.set(file.name);
+        loadFileIntoFSPromise(file, fileName).then(() => {
+            console.log(fileName)
+            loadedFilename.set(fileName);
 
             if ($autorun) {
               doRun(e);
@@ -161,6 +170,7 @@
     <!-- <div class="tools-container"> -->
       <Toolbar
         on:romChanged={doRomLoad}
+        on:doBrowseFiles={doBrowseFiles}
         on:doRun={doRun}
         on:doDump={doDump}
         on:doDebug={doDebug}
@@ -171,9 +181,15 @@
 
       <Debug />
 
-      <Tracing
-        on:doRefresh={doRefresh}
-      />
+      <div class="small-widgets">
+        <Tracing
+          on:doRefresh={doRefresh}
+        />
+        <Files
+          on:doSendFile={() => {}}
+          on:doNewFolder={() => {}}
+        />
+      </div>
     <!-- </div> -->
     <div style="display: none;">
       <Emscripten />
@@ -281,6 +297,18 @@
     font-weight: normal;
     color: var(--cp-text);
     min-height: 960px;
+  }
+
+  .small-widgets {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 960px;
+    gap: .75rem;
+    flex-shrink: 1;
+    overflow: hidden;
+    justify-content: flex-start;
   }
  
 </style>

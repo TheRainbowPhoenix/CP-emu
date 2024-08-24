@@ -10,6 +10,7 @@
   import FullScreen from "../../assets/icons/fullScreen.svelte";
   import Run from "../../assets/icons/run.svelte";
   import Popover from "../components/popover.svelte";
+  import Folder from "../../assets/icons/folder.svelte";
 
   const pickFile = () => {
     fileInput.click();
@@ -34,6 +35,10 @@
 
   const handleFile = (e: Event) => {
     dispatch('romChanged', e);
+  }
+
+  const doBrowseFiles = (e: Event) => {
+    dispatch('doBrowseFiles', e);
   }
 
   const doCopyScreen = (e: Event) => {
@@ -88,6 +93,18 @@
       on:change={handleFile}
     />
   </button>
+
+  <button
+    class="toolbar-action"
+    type="button"
+    tabindex="0"
+    on:click={doBrowseFiles}
+    id="btn_browseFiles"
+
+  > 
+    <Folder />
+  </button>
+
 
   <div
     class="separator"

@@ -56,6 +56,13 @@ int main(int argc, char* argv[]) {
     window.canvasImageData = canvasContext.getImageData(0, 0, 320, 528);
   });
 
+  EM_ASM(
+    FS.mkdir('/fls0');
+  );
+  EM_ASM(
+    FS.mount(MEMFS, { root: '/fls0' }, '/fls0');
+  );
+
  
   EM_ASM_({
     let event = new CustomEvent('emu:main', {

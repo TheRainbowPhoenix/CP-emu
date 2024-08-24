@@ -29,10 +29,14 @@ export function loadFileIntoFS(file, fileName, callback) {
 
 /**
  * @param {any} file
- * @param {any} fileName
+ * @param {string} fileName
  */
 export function loadFileIntoFSPromise(file, fileName) {
     return new Promise((resolve, reject) => {
+        if (!fileName.startsWith("/fls0")) {
+            fileName = `/fls0/${fileName}`
+        }
+        
         loadFileIntoFS(file, fileName, (/** @type {any} */ error) => {
             if (error) {
                 reject(error);

@@ -9,6 +9,7 @@
 #endif
 
 #include "cpu.h"
+#include "sdk.h"
 #include "gui/gui.h"
 #include "instructions.h"
 #include "./memory/memory.h"
@@ -67,7 +68,7 @@ int startInterpreter(const char* filename) {
 
   const char *ext = strrchr(filename, '.');
   if (ext && strcmp(ext, ".bin") == 0) {
-    cpu.reg.PC = 0x8CFE6000;
+    // cpu.reg.PC = 0x8CFE6000;
   } else {
     cpu.reg.PC = 0x00300000;
   }
@@ -168,24 +169,45 @@ void runIterationsCPU(int interationsToRun) {
         cpu.reg.PC >= 0x80057814 && // MKDIR
         cpu.reg.PC <= 0x800D57FF // GUIDialog_ctor + 10
       ) || cpu.reg.PC == 0x800394C0 || cpu.reg.PC == 0x8003733E || cpu.reg.PC == 0x80039302) {
-        printf("SDK CALL: %04x\n", cpu.reg.r0);
+        printf("SDK CALL: %04x\n", cpu.reg.PC);
 
-        #ifdef EMSCRIPTEN
-        cpu.reg.PC = EM_ASM_INT({
-          let regArray = [];
-          for (let i = 0; i < 16 + 8 + 27; i++) {
-              regArray.push(HEAP32[($1 >> 2) + i]);
-          }
+        const unsigned int open_syscall_addr = 0x80057854;
+        if (cpu.reg.PC == open_syscall_addr || cpu.reg.PC == 0x80057858) {
+          // Fetch arguments for the `open` syscall
+          char *path = (char *)cpu.reg.r0; // r0 contains the path ptr - but it's wrong on my tests
+          printf("path: %4x\n", path);
+          int flags = cpu.reg.r1;          // r1 contains the flags
 
-          return window.sdk_call($0, regArray);
-        }, cpu.reg.PC, cpu.reg.regArray);
+          int fd = sdk_open(path, flags);
 
-        #endif
+          cpu.reg.r0 = fd; // move the fd to r0
+
+          cpu.reg.PC = cpu.reg.PR; // simulate function return
+        } else {
+            printf("TODO: handle SDK call - PC:%4x\n", cpu.reg.PC);
+            
+            // Handle other syscalls or continue normal execution
+            // ...
+
+            #ifdef EMSCRIPTEN
+            cpu.reg.PC = EM_ASM_INT({
+              let regArray = [];
+              for (let i = 0; i < 16 + 8 + 27; i++) {
+                  regArray.push(HEAP32[($2 >> 2) + i]);
+              }
+
+              return window.sdk_call($0, $1, regArray);
+            }, cpu.reg.PC, cpu.reg.PR, cpu.reg.regArray);
+            #endif
+        }
+        printf("SDK CALL DONE: %04x\n", cpu.reg.PC);
+        
 
       // TODO: simulate the function only if not mapped to memory ? Then return back 
     }
 
     // TODO: Check alignment
+    printf("readMemory2Quick(%04x\n", cpu.reg.PC);
     u16 instr = readMemory2Quick(cpu.reg.PC);
 
     // TODO: only if debug mode

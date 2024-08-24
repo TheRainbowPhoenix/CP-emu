@@ -6,8 +6,7 @@
     import StepIn from "../../assets/icons/stepIn.svelte";
     import Ffowards from "../../assets/icons/ffowards.svelte";
     import Halt from "../../assets/icons/halt.svelte";
-    import { get } from "svelte/store";
-    import { default_theme } from "../disasm/theme";
+    import Disassembler from "../components/disassembler.svelte";
 
     const dispatch = createEventDispatcher();
 
@@ -26,6 +25,8 @@
             
             window.Module.ccall('runOneFrame', null, ['number'], [1])
             console.debug("runOneFrame OK - ", instr);
+            // temporary fix till reconciliate with dump
+            local_pc += 2;
         } catch (error) {
             console.error(error);
             return false;
@@ -44,6 +45,8 @@
             
             window.Module.ccall('runOneFrame', null, ['number'], [1])
             console.debug("runOneFrame OK - ", instr);
+            // temporary fix till reconciliate with dump
+            local_pc += 2;
         } catch (error) {
             console.error(error);
             return false;
@@ -126,11 +129,7 @@
         }
     }
 
-    const styles = Object.entries(default_theme).map(
-        (k) => `--${k[0].replaceAll(" ", '-').replaceAll(/[^a-zA-Z-]/g, '')}: ${k[1]}`
-    ).join('; ')
-
-
+ 
     onMount(() => {
         // const pc = ($getPC() >>> 0);
         // console.log("Got PC : ", pc)
@@ -211,18 +210,7 @@
             <p class="skeleton">Fetching data ...</p>
         {:else if debugger_state === 10}
             <div>Current PC: {(local_pc >>> 0).toString(16).padStart(8, '0')}</div>
-            <div class="disassembly" style={styles}>
-                {#each instructions as instr, i (instr.pc)}
-                    <div class="line" class:current={(local_pc >>> 0) == (instr.pc >>> 0)}>
-                        <!-- /* breakpoint/gutter, pc, instr, values, raw instr */ -->
-                        <div>-</div>
-                        <div>{instr.pc.toString(16).padStart(8, '0')}</div>
-                        <div>{"OP_" + instr.value}</div>
-                        <div> - </div>
-                        <div>; {instr.value.toString(16).padStart(4, '0')}</div>
-                    </div>
-                {/each}
-            </div>
+            <Disassembler {instructions} {local_pc} />
         {:else}
             <p class="skeleton">Debugger state KO</p>
         {/if}
@@ -230,6 +218,7 @@
 </div>
 
 <style>
+
     .debugging-panel {
         max-width: 0px;
         max-height: 70px;
@@ -247,36 +236,5 @@
     .skeleton {
         padding: .5rem .75rem;
         text-align: center;
-    }
-
-    .disassembly .line {
-        /* breakpoint/gutter, pc, instr, values, raw instr */ 
-        grid-template-columns: .5fr 1.5fr 1fr 2fr 1fr;
-        display: grid;
-        gap: .5rem;
-    }
-
-    .disassembly .line div {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .disassembly .line.current {
-        background-color: var(--highlightPC);
-    }
-
-    .disassembly .line div:nth-child(2) {
-        color: var(--ec-offset);
-    }
-    
-    .disassembly .line div:nth-child(4) {
-        color: var(--ec-num);
-    }
-    
-    .disassembly .line div:nth-child(5) {
-        color: var(--ec-comment);
-    }
-    
+    }  
 </style>

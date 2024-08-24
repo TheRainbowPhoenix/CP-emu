@@ -7,6 +7,7 @@ set(SOURCES
   src/interpreter.c
   src/instructions.c
   src/interrupts.c
+  src/sdk.c
   src/hardware/cpuRegisters/cpuRegisters.c
   src/hardware/display/display.c
   src/hardware/dma/dma.c

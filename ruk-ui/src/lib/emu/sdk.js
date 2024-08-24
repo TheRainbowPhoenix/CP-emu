@@ -1,6 +1,7 @@
-window.sdk_call = (pc, regArray) => {
+window.sdk_call = (pc, pr, regArray) => {
     let pc_str = (pc >>> 0).toString(16).padStart(8, '0');
-    console.log(`[SDK.JS] - (slow SysCall emulator) - GOT PC: ${pc_str}. Check it here: https://github.com/search?q=repo%3AClasspadDev%2Fhollyhock-3+${pc_str}&type=code`)
+    let pr_str = (pr >>> 0).toString(16).padStart(8, '0');
+    console.log(`[SDK.JS] - (slow SysCall emulator) - GOT PC: ${pc_str} - To PR ${pr_str}. Check it here: https://github.com/search?q=repo%3AClasspadDev%2Fhollyhock-3+${pc_str}&type=code`)
     console.debug("-- Registers : ")
     console.debug(regArray.map((r) => (r >>> 0).toString(16).toUpperCase()))
 
@@ -14,7 +15,7 @@ window.sdk_call = (pc, regArray) => {
         debugger;
     }
 
-    return (pc >>> 0);
+    return (pr >>> 0);
 }
 
 /**

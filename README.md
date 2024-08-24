@@ -18,11 +18,12 @@ Grab an addin, like [MyAddin.g3a](ebuild/MyAddin.g3a), and select it from the fi
 - The code is quite messy and inaccurate sometimes.
 
 ## To be done
-- Read offset from bin file and dynamically allocate it. For now it's hard-coded ([0x8CFE6000 in interpreter.c](src/interpreter.c) and [entry_point in memory.c](src/memory/memory.c)).
 - Support for SDK functions, maybe by building a "stub" os that only provides mocked-up functions and jump tables at given SDK offsets.
+  - Support for "open" is ongoing - but issues with filename pointer
+  - Add file browser on /fls0 to view addins and run them easily. Also good for debug
 
 ### Later
-- Disassemble opcodes on debugger
+- Disassemble opcodes on debugger - First version done
 - Stack view
 - Write to memory / "hot patching"
 - Add "detours" support on debugger
@@ -57,7 +58,7 @@ make -C build
 ## Screenshots
 
 ![image](docs/simple.png)
-![image](docs/full_beta.png)
+![image](docs/opcodes_file_explorer.png)
 
 (Older version)
 ![image](https://github.com/user-attachments/assets/e7284885-cf0b-4e70-a952-61d248b514a7)

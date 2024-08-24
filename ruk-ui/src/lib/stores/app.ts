@@ -19,6 +19,8 @@ export const currentPC = writable<number>(0); // Used when debugging to know whe
 export const getPC = writable<GetPC>();
 export const readMemory2Quick = writable<(n: number) => number>();
 
+export const filesPane = writable(false);
+
 export const debugging = writable(false);
 export const debugPane = writable(false);
 

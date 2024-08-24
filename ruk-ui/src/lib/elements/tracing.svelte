@@ -176,6 +176,8 @@
     max-width: 0px;
     max-height: 70px;
     visibility: hidden;
+    height: 0;
+    margin-top: -1rem;
   }
 
   .tracing-panel.visible {
@@ -183,6 +185,8 @@
     max-width: 95vw;
     max-height: 95vh;
     visibility: visible;
+    height: inherit;
+    margin-top: 0;
   }
 
   .tracing-panel.visible .contents {

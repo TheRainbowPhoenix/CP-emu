@@ -1,364 +1,367 @@
-var wi = Object.defineProperty;
-var ki = (i, t, r) => t in i ? wi(i, t, { enumerable: !0, configurable: !0, writable: !0, value: r }) : i[t] = r;
-var F2 = (i, t, r) => ki(i, typeof t != "symbol" ? t + "" : t, r);
+var zi = Object.defineProperty;
+var Oi = (l, t, n) => t in l ? zi(l, t, { enumerable: !0, configurable: !0, writable: !0, value: n }) : l[t] = n;
+var D2 = (l, t, n) => Oi(l, typeof t != "symbol" ? t + "" : t, n);
 (function() {
   const t = document.createElement("link").relList;
   if (t && t.supports && t.supports("modulepreload"))
     return;
-  for (const o of document.querySelectorAll('link[rel="modulepreload"]'))
-    a(o);
-  new MutationObserver((o) => {
-    for (const s of o)
-      if (s.type === "childList")
-        for (const d of s.addedNodes)
+  for (const s of document.querySelectorAll('link[rel="modulepreload"]'))
+    a(s);
+  new MutationObserver((s) => {
+    for (const o of s)
+      if (o.type === "childList")
+        for (const d of o.addedNodes)
           d.tagName === "LINK" && d.rel === "modulepreload" && a(d);
   }).observe(document, { childList: !0, subtree: !0 });
-  function r(o) {
-    const s = {};
-    return o.integrity && (s.integrity = o.integrity), o.referrerPolicy && (s.referrerPolicy = o.referrerPolicy), o.crossOrigin === "use-credentials" ? s.credentials = "include" : o.crossOrigin === "anonymous" ? s.credentials = "omit" : s.credentials = "same-origin", s;
+  function n(s) {
+    const o = {};
+    return s.integrity && (o.integrity = s.integrity), s.referrerPolicy && (o.referrerPolicy = s.referrerPolicy), s.crossOrigin === "use-credentials" ? o.credentials = "include" : s.crossOrigin === "anonymous" ? o.credentials = "omit" : o.credentials = "same-origin", o;
   }
-  function a(o) {
-    if (o.ep)
+  function a(s) {
+    if (s.ep)
       return;
-    o.ep = !0;
-    const s = r(o);
-    fetch(o.href, s);
+    s.ep = !0;
+    const o = n(s);
+    fetch(s.href, o);
   }
 })();
-function _() {
+function y() {
 }
-function pt(i, t) {
-  for (const r in t) i[r] = t[r];
+function N(l, t) {
+  for (const n in t) l[n] = t[n];
   return (
     /** @type {T & S} */
-    i
+    l
   );
 }
-function pi(i) {
-  return i();
+function Ri(l) {
+  return l();
 }
-function J2() {
+function li() {
   return /* @__PURE__ */ Object.create(null);
 }
-function Zr(i) {
-  i.forEach(pi);
+function xt(l) {
+  l.forEach(Ri);
 }
-function hi(i) {
-  return typeof i == "function";
+function ki(l) {
+  return typeof l == "function";
 }
-function A(i, t) {
-  return i != i ? t == t : i !== t || i && typeof i == "object" || typeof i == "function";
+function I(l, t) {
+  return l != l ? t == t : l !== t || l && typeof l == "object" || typeof l == "function";
 }
-function qi(i) {
-  return Object.keys(i).length === 0;
+function Ei(l) {
+  return Object.keys(l).length === 0;
 }
-function ui(i, ...t) {
-  if (i == null) {
+function _i(l, ...t) {
+  if (l == null) {
     for (const a of t)
       a(void 0);
-    return _;
+    return y;
   }
-  const r = i.subscribe(...t);
-  return r.unsubscribe ? () => r.unsubscribe() : r;
+  const n = l.subscribe(...t);
+  return n.unsubscribe ? () => n.unsubscribe() : n;
 }
-function _i(i) {
+function Bi(l) {
   let t;
-  return ui(i, (r) => t = r)(), t;
+  return _i(l, (n) => t = n)(), t;
 }
-function te(i, t, r) {
-  i.$$.on_destroy.push(ui(t, r));
+function re(l, t, n) {
+  l.$$.on_destroy.push(_i(t, n));
 }
-function Gi(i, t, r, a) {
-  if (i) {
-    const o = gi(i, t, r, a);
-    return i[0](o);
+function Hi(l, t, n, a) {
+  if (l) {
+    const s = qi(l, t, n, a);
+    return l[0](s);
   }
 }
-function gi(i, t, r, a) {
-  return i[1] && a ? pt(r.ctx.slice(), i[1](a(t))) : r.ctx;
+function qi(l, t, n, a) {
+  return l[1] && a ? N(n.ctx.slice(), l[1](a(t))) : n.ctx;
 }
-function Ui(i, t, r, a) {
-  if (i[2] && a) {
-    const o = i[2](a(r));
+function Pi(l, t, n, a) {
+  if (l[2] && a) {
+    const s = l[2](a(n));
     if (t.dirty === void 0)
-      return o;
-    if (typeof o == "object") {
-      const s = [], d = Math.max(t.dirty.length, o.length);
-      for (let c = 0; c < d; c += 1)
-        s[c] = t.dirty[c] | o[c];
       return s;
+    if (typeof s == "object") {
+      const o = [], d = Math.max(t.dirty.length, s.length);
+      for (let c = 0; c < d; c += 1)
+        o[c] = t.dirty[c] | s[c];
+      return o;
     }
-    return t.dirty | o;
+    return t.dirty | s;
   }
   return t.dirty;
 }
-function zi(i, t, r, a, o, s) {
-  if (o) {
-    const d = gi(t, r, a, s);
-    i.p(d, o);
+function ji(l, t, n, a, s, o) {
+  if (s) {
+    const d = qi(t, n, a, o);
+    l.p(d, s);
   }
 }
-function Si(i) {
-  if (i.ctx.length > 32) {
-    const t = [], r = i.ctx.length / 32;
-    for (let a = 0; a < r; a++)
+function Ti(l) {
+  if (l.ctx.length > 32) {
+    const t = [], n = l.ctx.length / 32;
+    for (let a = 0; a < n; a++)
       t[a] = -1;
     return t;
   }
   return -1;
 }
-function Nl(i) {
+function ie(l) {
   const t = {};
-  for (const r in i) r[0] !== "$" && (t[r] = i[r]);
+  for (const n in l) n[0] !== "$" && (t[n] = l[n]);
   return t;
 }
-function n(i, t) {
-  i.appendChild(t);
+function ii(l) {
+  return l ?? "";
 }
-function S(i, t, r) {
-  i.insertBefore(t, r || null);
+function r(l, t) {
+  l.appendChild(t);
 }
-function U(i) {
-  i.parentNode && i.parentNode.removeChild(i);
+function z(l, t, n) {
+  l.insertBefore(t, n || null);
 }
-function $i(i, t) {
-  for (let r = 0; r < i.length; r += 1)
-    i[r] && i[r].d(t);
+function $(l) {
+  l.parentNode && l.parentNode.removeChild(l);
 }
-function k(i) {
-  return document.createElement(i);
+function Si(l, t) {
+  for (let n = 0; n < l.length; n += 1)
+    l[n] && l[n].d(t);
 }
-function l(i) {
-  return document.createElementNS("http://www.w3.org/2000/svg", i);
+function _(l) {
+  return document.createElement(l);
 }
-function Z(i) {
-  return document.createTextNode(i);
+function i(l) {
+  return document.createElementNS("http://www.w3.org/2000/svg", l);
 }
-function E() {
-  return Z(" ");
+function Y(l) {
+  return document.createTextNode(l);
 }
-function Q2() {
-  return Z("");
+function B() {
+  return Y(" ");
 }
-function ee(i, t, r, a) {
-  return i.addEventListener(t, r, a), () => i.removeEventListener(t, r, a);
+function l2() {
+  return Y("");
 }
-function Mi(i) {
+function ee(l, t, n, a) {
+  return l.addEventListener(t, n, a), () => l.removeEventListener(t, n, a);
+}
+function Di(l) {
   return function(t) {
-    return t.preventDefault(), i.call(this, t);
+    return t.preventDefault(), l.call(this, t);
   };
 }
-function e(i, t, r) {
-  r == null ? i.removeAttribute(t) : i.getAttribute(t) !== r && i.setAttribute(t, r);
+function e(l, t, n) {
+  n == null ? l.removeAttribute(t) : l.getAttribute(t) !== n && l.setAttribute(t, n);
 }
-function Zl(i, t) {
-  for (const r in t)
-    e(i, r, t[r]);
+function ae(l, t) {
+  for (const n in t)
+    e(l, n, t[n]);
 }
-function u(i, t, r) {
-  i.setAttributeNS("http://www.w3.org/1999/xlink", t, r);
+function m(l, t, n) {
+  l.setAttributeNS("http://www.w3.org/1999/xlink", t, n);
 }
-function Oi(i) {
-  return Array.from(i.childNodes);
+function Fi(l) {
+  return Array.from(l.childNodes);
 }
-function N0(i, t) {
-  t = "" + t, i.data !== t && (i.data = /** @type {string} */
+function t0(l, t) {
+  t = "" + t, l.data !== t && (l.data = /** @type {string} */
   t);
 }
-function G(i, t, r, a) {
-  r == null ? i.style.removeProperty(t) : i.style.setProperty(t, r, "");
+function E(l, t, n, a) {
+  n == null ? l.style.removeProperty(t) : l.style.setProperty(t, n, "");
 }
-function ht(i, t, r) {
-  i.classList.toggle(t, !!r);
+function Je(l, t, n) {
+  l.classList.toggle(t, !!n);
 }
-function Ci(i, t, { bubbles: r = !1, cancelable: a = !1 } = {}) {
-  return new CustomEvent(i, { detail: t, bubbles: r, cancelable: a });
+function Ai(l, t, { bubbles: n = !1, cancelable: a = !1 } = {}) {
+  return new CustomEvent(l, { detail: t, bubbles: n, cancelable: a });
 }
-let Z0;
-function I0(i) {
-  Z0 = i;
+let n2;
+function e2(l) {
+  n2 = l;
 }
-function T2() {
-  if (!Z0) throw new Error("Function called outside component initialization");
-  return Z0;
+function J2() {
+  if (!n2) throw new Error("Function called outside component initialization");
+  return n2;
 }
-function P2(i) {
-  T2().$$.on_mount.push(i);
+function rl(l) {
+  J2().$$.on_mount.push(l);
 }
-function Ei(i) {
-  T2().$$.on_destroy.push(i);
+function Li(l) {
+  J2().$$.on_destroy.push(l);
 }
-function I2() {
-  const i = T2();
-  return (t, r, { cancelable: a = !1 } = {}) => {
-    const o = i.$$.callbacks[t];
-    if (o) {
-      const s = Ci(
+function V2() {
+  const l = J2();
+  return (t, n, { cancelable: a = !1 } = {}) => {
+    const s = l.$$.callbacks[t];
+    if (s) {
+      const o = Ai(
         /** @type {string} */
         t,
-        r,
+        n,
         { cancelable: a }
       );
-      return o.slice().forEach((d) => {
-        d.call(i, s);
-      }), !s.defaultPrevented;
+      return s.slice().forEach((d) => {
+        d.call(l, o);
+      }), !o.defaultPrevented;
     }
     return !0;
   };
 }
-function ji(i, t) {
-  const r = i.$$.callbacks[t.type];
-  r && r.slice().forEach((a) => a.call(this, t));
+function Qi(l, t) {
+  const n = l.$$.callbacks[t.type];
+  n && n.slice().forEach((a) => a.call(this, t));
 }
-const Tl = [], X0 = [];
-let Il = [];
-const ei = [], Hi = /* @__PURE__ */ Promise.resolve();
-let A2 = !1;
-function Di() {
-  A2 || (A2 = !0, Hi.then(vi));
+const el = [], r2 = [];
+let tl = [];
+const ai = [], Ii = /* @__PURE__ */ Promise.resolve();
+let Y2 = !1;
+function Vi() {
+  Y2 || (Y2 = !0, Ii.then(Gi));
 }
-function Y2(i) {
-  Il.push(i);
+function W2(l) {
+  tl.push(l);
 }
-const K2 = /* @__PURE__ */ new Set();
-let Yl = 0;
-function vi() {
-  if (Yl !== 0)
+const N2 = /* @__PURE__ */ new Set();
+let Xr = 0;
+function Gi() {
+  if (Xr !== 0)
     return;
-  const i = Z0;
+  const l = n2;
   do {
     try {
-      for (; Yl < Tl.length; ) {
-        const t = Tl[Yl];
-        Yl++, I0(t), Ri(t.$$);
+      for (; Xr < el.length; ) {
+        const t = el[Xr];
+        Xr++, e2(t), Ki(t.$$);
       }
     } catch (t) {
-      throw Tl.length = 0, Yl = 0, t;
+      throw el.length = 0, Xr = 0, t;
     }
-    for (I0(null), Tl.length = 0, Yl = 0; X0.length; ) X0.pop()();
-    for (let t = 0; t < Il.length; t += 1) {
-      const r = Il[t];
-      K2.has(r) || (K2.add(r), r());
+    for (e2(null), el.length = 0, Xr = 0; r2.length; ) r2.pop()();
+    for (let t = 0; t < tl.length; t += 1) {
+      const n = tl[t];
+      N2.has(n) || (N2.add(n), n());
     }
-    Il.length = 0;
-  } while (Tl.length);
-  for (; ei.length; )
-    ei.pop()();
-  A2 = !1, K2.clear(), I0(i);
+    tl.length = 0;
+  } while (el.length);
+  for (; ai.length; )
+    ai.pop()();
+  Y2 = !1, N2.clear(), e2(l);
 }
-function Ri(i) {
-  if (i.fragment !== null) {
-    i.update(), Zr(i.before_update);
-    const t = i.dirty;
-    i.dirty = [-1], i.fragment && i.fragment.p(i.ctx, t), i.after_update.forEach(Y2);
+function Ki(l) {
+  if (l.fragment !== null) {
+    l.update(), xt(l.before_update);
+    const t = l.dirty;
+    l.dirty = [-1], l.fragment && l.fragment.p(l.ctx, t), l.after_update.forEach(W2);
   }
 }
-function Bi(i) {
-  const t = [], r = [];
-  Il.forEach((a) => i.indexOf(a) === -1 ? t.push(a) : r.push(a)), r.forEach((a) => a()), Il = t;
+function Ni(l) {
+  const t = [], n = [];
+  tl.forEach((a) => l.indexOf(a) === -1 ? t.push(a) : n.push(a)), n.forEach((a) => a()), tl = t;
 }
-const j2 = /* @__PURE__ */ new Set();
-let sl;
-function Qi() {
-  sl = {
+const A2 = /* @__PURE__ */ new Set();
+let mr;
+function i2() {
+  mr = {
     r: 0,
     c: [],
-    p: sl
+    p: mr
     // parent group
   };
 }
-function Pi() {
-  sl.r || Zr(sl.c), sl = sl.p;
+function a2() {
+  mr.r || xt(mr.c), mr = mr.p;
 }
-function B(i, t) {
-  i && i.i && (j2.delete(i), i.i(t));
+function P(l, t) {
+  l && l.i && (A2.delete(l), l.i(t));
 }
-function Q(i, t, r, a) {
-  if (i && i.o) {
-    if (j2.has(i)) return;
-    j2.add(i), sl.c.push(() => {
-      j2.delete(i), a && (r && i.d(1), a());
-    }), i.o(t);
+function j(l, t, n, a) {
+  if (l && l.o) {
+    if (A2.has(l)) return;
+    A2.add(l), mr.c.push(() => {
+      A2.delete(l), a && (n && l.d(1), a());
+    }), l.o(t);
   } else a && a();
 }
-function H2(i) {
-  return (i == null ? void 0 : i.length) !== void 0 ? i : Array.from(i);
+function nl(l) {
+  return (l == null ? void 0 : l.length) !== void 0 ? l : Array.from(l);
 }
-function Li(i, t) {
-  i.d(1), t.delete(i.key);
+function Yi(l, t) {
+  l.d(1), t.delete(l.key);
 }
-function Fi(i, t, r, a, o, s, d, c, f, p, b, g) {
-  let w = i.length, x = s.length, z = w;
-  const q = {};
-  for (; z--; ) q[i[z].key] = z;
-  const m = [], y = /* @__PURE__ */ new Map(), H = /* @__PURE__ */ new Map(), C = [];
-  for (z = x; z--; ) {
-    const M = g(o, s, z), h = r(M);
-    let j = d.get(h);
-    j ? C.push(() => j.p(M, t)) : (j = p(h, M), j.c()), y.set(h, m[z] = j), h in q && H.set(h, Math.abs(z - q[h]));
+function Wi(l, t, n, a, s, o, d, c, f, h, p, g) {
+  let w = l.length, G = o.length, k = w;
+  const v = {};
+  for (; k--; ) v[l[k].key] = k;
+  const S = [], R = /* @__PURE__ */ new Map(), O = /* @__PURE__ */ new Map(), U = [];
+  for (k = G; k--; ) {
+    const u = g(s, o, k), C = n(u);
+    let M = d.get(C);
+    M ? U.push(() => M.p(u, t)) : (M = h(C, u), M.c()), R.set(C, S[k] = M), C in v && O.set(C, Math.abs(k - v[C]));
   }
-  const P = /* @__PURE__ */ new Set(), D = /* @__PURE__ */ new Set();
-  function $(M) {
-    B(M, 1), M.m(c, b), d.set(M.key, M), b = M.first, x--;
+  const q = /* @__PURE__ */ new Set(), T = /* @__PURE__ */ new Set();
+  function x(u) {
+    P(u, 1), u.m(c, p), d.set(u.key, u), p = u.first, G--;
   }
-  for (; w && x; ) {
-    const M = m[x - 1], h = i[w - 1], j = M.key, T = h.key;
-    M === h ? (b = M.first, w--, x--) : y.has(T) ? !d.has(j) || P.has(j) ? $(M) : D.has(T) ? w-- : H.get(j) > H.get(T) ? (D.add(j), $(M)) : (P.add(T), w--) : (f(h, d), w--);
+  for (; w && G; ) {
+    const u = S[G - 1], C = l[w - 1], M = u.key, W = C.key;
+    u === C ? (p = u.first, w--, G--) : R.has(W) ? !d.has(M) || q.has(M) ? x(u) : T.has(W) ? w-- : O.get(M) > O.get(W) ? (T.add(M), x(u)) : (q.add(W), w--) : (f(C, d), w--);
   }
   for (; w--; ) {
-    const M = i[w];
-    y.has(M.key) || f(M, d);
+    const u = l[w];
+    R.has(u.key) || f(u, d);
   }
-  for (; x; ) $(m[x - 1]);
-  return Zr(C), m;
+  for (; G; ) x(S[G - 1]);
+  return xt(U), S;
 }
-function N2(i, t) {
-  const r = {}, a = {}, o = { $$scope: 1 };
-  let s = i.length;
-  for (; s--; ) {
-    const d = i[s], c = t[s];
+function n0(l, t) {
+  const n = {}, a = {}, s = { $$scope: 1 };
+  let o = l.length;
+  for (; o--; ) {
+    const d = l[o], c = t[o];
     if (c) {
       for (const f in d)
         f in c || (a[f] = 1);
       for (const f in c)
-        o[f] || (r[f] = c[f], o[f] = 1);
-      i[s] = c;
+        s[f] || (n[f] = c[f], s[f] = 1);
+      l[o] = c;
     } else
       for (const f in d)
-        o[f] = 1;
+        s[f] = 1;
   }
   for (const d in a)
-    d in r || (r[d] = void 0);
-  return r;
+    d in n || (n[d] = void 0);
+  return n;
 }
-function K(i) {
-  i && i.c();
+function L(l) {
+  l && l.c();
 }
-function L(i, t, r) {
-  const { fragment: a, after_update: o } = i.$$;
-  a && a.m(t, r), Y2(() => {
-    const s = i.$$.on_mount.map(pi).filter(hi);
-    i.$$.on_destroy ? i.$$.on_destroy.push(...s) : Zr(s), i.$$.on_mount = [];
-  }), o.forEach(Y2);
+function F(l, t, n) {
+  const { fragment: a, after_update: s } = l.$$;
+  a && a.m(t, n), W2(() => {
+    const o = l.$$.on_mount.map(Ri).filter(ki);
+    l.$$.on_destroy ? l.$$.on_destroy.push(...o) : xt(o), l.$$.on_mount = [];
+  }), s.forEach(W2);
 }
-function F(i, t) {
-  const r = i.$$;
-  r.fragment !== null && (Bi(r.after_update), Zr(r.on_destroy), r.fragment && r.fragment.d(t), r.on_destroy = r.fragment = null, r.ctx = []);
+function A(l, t) {
+  const n = l.$$;
+  n.fragment !== null && (Ni(n.after_update), xt(n.on_destroy), n.fragment && n.fragment.d(t), n.on_destroy = n.fragment = null, n.ctx = []);
 }
-function Ki(i, t) {
-  i.$$.dirty[0] === -1 && (Tl.push(i), Di(), i.$$.dirty.fill(0)), i.$$.dirty[t / 31 | 0] |= 1 << t % 31;
+function Zi(l, t) {
+  l.$$.dirty[0] === -1 && (el.push(l), Vi(), l.$$.dirty.fill(0)), l.$$.dirty[t / 31 | 0] |= 1 << t % 31;
 }
-function Y(i, t, r, a, o, s, d = null, c = [-1]) {
-  const f = Z0;
-  I0(i);
-  const p = i.$$ = {
+function V(l, t, n, a, s, o, d = null, c = [-1]) {
+  const f = n2;
+  e2(l);
+  const h = l.$$ = {
     fragment: null,
     ctx: [],
     // state
-    props: s,
-    update: _,
-    not_equal: o,
-    bound: J2(),
+    props: o,
+    update: y,
+    not_equal: s,
+    bound: li(),
     // lifecycle
     on_mount: [],
     on_destroy: [],
@@ -367,27 +370,27 @@ function Y(i, t, r, a, o, s, d = null, c = [-1]) {
     after_update: [],
     context: new Map(t.context || (f ? f.$$.context : [])),
     // everything else
-    callbacks: J2(),
+    callbacks: li(),
     dirty: c,
     skip_bound: !1,
     root: t.target || f.$$.root
   };
-  d && d(p.root);
-  let b = !1;
-  if (p.ctx = r ? r(i, t.props || {}, (g, w, ...x) => {
-    const z = x.length ? x[0] : w;
-    return p.ctx && o(p.ctx[g], p.ctx[g] = z) && (!p.skip_bound && p.bound[g] && p.bound[g](z), b && Ki(i, g)), w;
-  }) : [], p.update(), b = !0, Zr(p.before_update), p.fragment = a ? a(p.ctx) : !1, t.target) {
+  d && d(h.root);
+  let p = !1;
+  if (h.ctx = n ? n(l, t.props || {}, (g, w, ...G) => {
+    const k = G.length ? G[0] : w;
+    return h.ctx && s(h.ctx[g], h.ctx[g] = k) && (!h.skip_bound && h.bound[g] && h.bound[g](k), p && Zi(l, g)), w;
+  }) : [], h.update(), p = !0, xt(h.before_update), h.fragment = a ? a(h.ctx) : !1, t.target) {
     if (t.hydrate) {
-      const g = Oi(t.target);
-      p.fragment && p.fragment.l(g), g.forEach(U);
+      const g = Fi(t.target);
+      h.fragment && h.fragment.l(g), g.forEach($);
     } else
-      p.fragment && p.fragment.c();
-    t.intro && B(i.$$.fragment), L(i, t.target, t.anchor), vi();
+      h.fragment && h.fragment.c();
+    t.intro && P(l.$$.fragment), F(l, t.target, t.anchor), Gi();
   }
-  I0(f);
+  e2(f);
 }
-class V {
+class K {
   constructor() {
     /**
      * ### PRIVATE API
@@ -396,7 +399,7 @@ class V {
      *
      * @type {any}
      */
-    F2(this, "$$");
+    D2(this, "$$");
     /**
      * ### PRIVATE API
      *
@@ -404,11 +407,11 @@ class V {
      *
      * @type {any}
      */
-    F2(this, "$$set");
+    D2(this, "$$set");
   }
   /** @returns {void} */
   $destroy() {
-    F(this, 1), this.$destroy = _;
+    A(this, 1), this.$destroy = y;
   }
   /**
    * @template {Extract<keyof Events, string>} K
@@ -416,13 +419,13 @@ class V {
    * @param {((e: Events[K]) => void) | null | undefined} callback
    * @returns {() => void}
    */
-  $on(t, r) {
-    if (!hi(r))
-      return _;
+  $on(t, n) {
+    if (!ki(n))
+      return y;
     const a = this.$$.callbacks[t] || (this.$$.callbacks[t] = []);
-    return a.push(r), () => {
-      const o = a.indexOf(r);
-      o !== -1 && a.splice(o, 1);
+    return a.push(n), () => {
+      const s = a.indexOf(n);
+      s !== -1 && a.splice(s, 1);
     };
   }
   /**
@@ -430,937 +433,992 @@ class V {
    * @returns {void}
    */
   $set(t) {
-    this.$$set && !qi(t) && (this.$$.skip_bound = !0, this.$$set(t), this.$$.skip_bound = !1);
+    this.$$set && !Ei(t) && (this.$$.skip_bound = !0, this.$$set(t), this.$$.skip_bound = !1);
   }
 }
-const Ai = "4";
-typeof window < "u" && (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(Ai);
-const Yi = "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20viewBox='0%200%2024%2024'%3e%3cdefs%3e%3clinearGradient%20id='g'%3e%3cstop%20offset='0'%20stop-color='%23ffecc8'%20stop-opacity='.1'/%3e%3cstop%20offset='.3'%20stop-color='%23ffecc8'%20stop-opacity='0'/%3e%3cstop%20offset='1'%20stop-color='%23ffecc8'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='h'%3e%3cstop%20offset='0'%20stop-color='%23eb5e06'/%3e%3cstop%20offset='1'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='f'%3e%3cstop%20offset='0'%20stop-color='%23ffecc8'%20stop-opacity='.3'/%3e%3cstop%20offset='.3'%20stop-color='%23ffecc8'%20stop-opacity='.2'/%3e%3cstop%20offset='1'%20stop-color='%23ffecc8'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='e'%3e%3cstop%20offset='0'%20stop-color='%23ffd100'/%3e%3cstop%20offset='.3'%20stop-color='%23ffb501'/%3e%3cstop%20offset='1'%20stop-color='%23fe9e01'/%3e%3c/linearGradient%3e%3clinearGradient%20id='d'%3e%3cstop%20offset='0'%20stop-color='%23eb8403'/%3e%3cstop%20offset='1'%20stop-color='%23eb8403'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='a'%3e%3cstop%20offset='0'%20stop-color='%23ffd100'/%3e%3cstop%20offset='.5'%20stop-color='%23ffb501'/%3e%3cstop%20offset='1'%20stop-color='%23fe9e01'/%3e%3c/linearGradient%3e%3clinearGradient%20id='b'%3e%3cstop%20offset='0'%20stop-color='%23ffd100'/%3e%3cstop%20offset='.5'%20stop-color='%23ffb501'/%3e%3cstop%20offset='1'%20stop-color='%23fe9e01'/%3e%3c/linearGradient%3e%3clinearGradient%20id='c'%3e%3cstop%20offset='0'%20stop-color='%23ffd100'/%3e%3cstop%20offset='.5'%20stop-color='%23ffb501'/%3e%3cstop%20offset='1'%20stop-color='%23fe9e01'/%3e%3c/linearGradient%3e%3clinearGradient%20xlink:href='%23a'%20id='i'%20x1='12'%20x2='18.8'%20y1='4'%20y2='15.8'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23b'%20id='j'%20x1='20.6'%20x2='14'%20y1='12.3'%20y2='16'%20gradientTransform='rotate(180%2012%20526.2)'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23c'%20id='l'%20x1='7'%20x2='11.3'%20y1='1038'%20y2='1042.2'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23d'%20id='k'%20x1='18'%20x2='14.8'%20y1='1039.3'%20y2='1039.3'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23e'%20id='n'%20x1='6'%20x2='10.2'%20y1='1038'%20y2='1042.1'%20gradientTransform='rotate(180%2012%201040.4)'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23f'%20id='m'%20x1='7.5'%20x2='18.2'%20y1='8.8'%20y2='11.7'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23g'%20id='o'%20x1='7.5'%20x2='21.2'%20y1='8.8'%20y2='12.5'%20gradientTransform='translate(0%201028.4)'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23h'%20id='p'%20x1='6.6'%20x2='15.9'%20y1='1038.8'%20y2='1044.5'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23e'%20id='q'%20x1='31.4'%20x2='59.3'%20y1='1037.7'%20y2='1037.7'%20gradientUnits='userSpaceOnUse'/%3e%3c/defs%3e%3cpath%20fill='%23fe9e01'%20d='M2%2012c0-1.4%203.8-8%205-8.7a24%2024%200%200%201%2010%200c1.2.7%205%207.3%205%208.7%200%201.4-3.8%208-5%208.7a24%2024%200%200%201-10%200C5.8%2020%202%2013.4%202%2012z'/%3e%3cpath%20fill='none'%20d='M18%2012a15%2015%200%200%201-3%205.2c-.7.4-5.3.4-6%200A15%2015%200%200%201%206%2012a15%2015%200%200%201%203-5.2c.7-.4%205.3-.4%206%200%20.7.4%203%204.4%203%205.2z'/%3e%3cpath%20fill='url(%23i)'%20fill-rule='evenodd'%20d='M12%202.8a19.6%2019.6%200%200%200-3.7.3c1.7.1%204.3%201%205.5%202A30.3%2030.3%200%200%201%2018%2012c0%201-2.2%204.8-3%205.3l2%203.4a24%2024%200%200%200%205-8.6c0-1.4-3.8-8-5-8.7-.6-.3-2.8-.5-5-.5z'/%3e%3cpath%20fill='url(%23j)'%20fill-rule='evenodd'%20d='M12%201049.6a19.6%2019.6%200%200%200%203.7-.4c-1.7%200-4.3-1-5.5-2a30.3%2030.3%200%200%201-4.2-6.8c0-.9%202.2-4.7%203-5.2l-2-3.5a24%2024%200%200%200-5%208.7c0%201.4%203.8%208%205%208.6.6.4%202.8.6%205%20.6z'%20transform='translate(0%20-1028.4)'/%3e%3cpath%20fill='url(%23k)'%20d='M18%201040.4a16%2016%200%200%201-3%205.2c-.7.4-5.3.4-6%200a16%2016%200%200%201-3-5.2c0-.9%202.3-4.8%203-5.2.7-.5%205.3-.5%206%200%20.7.4%203%204.3%203%205.2z'%20transform='translate(0%20-1028.4)'/%3e%3cpath%20fill='url(%23l)'%20d='M9%201035.2c-.7.4-3%204.3-3%205.2a16%2016%200%200%200%203%205.2c.7-.5%203-4.4%203-5.2%200-.9-2.3-4.8-3-5.2z'%20transform='translate(0%20-1028.4)'/%3e%3cpath%20fill='url(%23m)'%20d='M9%206.8c-.8.5-3%204.4-3%205.2a30.3%2030.3%200%200%200%202.2%204.3c.7%201.1%201.4%202%202%202.5%201.2%201.1%203.8%202%205.5%202h1l.3-.1c1.2-.7%205-7.3%205-8.7l-4-.1v.1a15%2015%200%200%201-3%205.2%2015%2015%200%200%201-3-5.2%2015%2015%200%200%200-3-5.2z'/%3e%3cpath%20fill='url(%23n)'%20d='M15%201045.6c.7-.5%203-4.4%203-5.2%200-.9-2.3-4.8-3-5.2-.7.4-3%204.3-3%205.2a16%2016%200%200%200%203%205.2z'%20transform='translate(0%20-1028.4)'/%3e%3cpath%20fill='url(%23o)'%20stroke='url(%23p)'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-opacity='.3'%20stroke-width='.1'%20d='M18%201040.2h0v.2a16%2016%200%200%201-3%205.2%2016%2016%200%200%201-3-5.2c0-.9-2.3-4.8-3-5.2h0s0%200%200%200c-.8.5-3%204.3-3%205.2a30.3%2030.3%200%200%200%202.2%204.3s0%200%200%200%200%200%200%200c.7%201%201.4%202%202%202.5%201.2%201%203.8%202%205.5%202h1l.3-.2'%20transform='translate(0%20-1028.4)'/%3e%3cg%20style='line-height:125%25'%20word-spacing='0'%3e%3cpath%20fill='%23252127'%20d='M38.5%201038.7q0%20.7-.4%201.3l-.5.7-.7.5-.6.4%202.7%205.4h-2.6l-2.4-5.3h-2.6v5.3H29v-13.4h6.3q1%200%201.6.5l.7.6.5.6q.4.6.4%201.4v2zm-2.3%200v-2.1q-.4-.7-.8-.8h-4v3.7h4l.4-.3.4-.5z'%20font-family='Blender%20Pro'%20font-size='22.5'%20font-weight='700'%20letter-spacing='0'%20style='-inkscape-font-specification:&quot;Blender%20Pro%20Bold&quot;'%20transform='translate(0%20-1028.4)'/%3e%3c/g%3e%3cpath%20fill='url(%23q)'%20fill-rule='evenodd'%20d='M31.4%201035.8v3.7h25.9l2-3.7h-28z'%20transform='translate(0%20-1028.4)'/%3e%3cg%20fill='%23252127'%20font-family='Blender%20Pro'%20font-size='22.5'%20font-weight='700'%20letter-spacing='0'%20style='line-height:125%25'%20word-spacing='0'%3e%3cpath%20d='M50.3%201047H48l-.1-.5q-1%20.6-1.4.6h-1.7q-1%200-1.7-.4-.6-.5-1-1.1-.4-.6-.4-1.4v-6.9H44v7l.8.7h1.7l.6-.3.7-.6v-6.8h2.3v7.7l.2%202z'%20style='-inkscape-font-specification:&quot;Blender%20Pro%20Bold&quot;'%20transform='translate(0%20-1028.4)'/%3e%3cpath%20d='M63.2%201047h-2.9l-4.7-5.6h-.2v5.6H53v-13.4h2.4v5.6h.2l2.4-2.8q1.5-2%202.3-2.8h2.9l-5.6%206.7%202.5%203%203.1%203.7z'%20style='-inkscape-font-specification:&quot;Blender%20Pro%20Bold&quot;'%20transform='translate(0%20-1028.4)'/%3e%3c/g%3e%3c/svg%3e";
-function Vi(i) {
+const Xi = "4";
+typeof window < "u" && (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(Xi);
+const Ji = "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20viewBox='0%200%2024%2024'%3e%3cdefs%3e%3clinearGradient%20id='g'%3e%3cstop%20offset='0'%20stop-color='%23ffecc8'%20stop-opacity='.1'/%3e%3cstop%20offset='.3'%20stop-color='%23ffecc8'%20stop-opacity='0'/%3e%3cstop%20offset='1'%20stop-color='%23ffecc8'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='h'%3e%3cstop%20offset='0'%20stop-color='%23eb5e06'/%3e%3cstop%20offset='1'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='f'%3e%3cstop%20offset='0'%20stop-color='%23ffecc8'%20stop-opacity='.3'/%3e%3cstop%20offset='.3'%20stop-color='%23ffecc8'%20stop-opacity='.2'/%3e%3cstop%20offset='1'%20stop-color='%23ffecc8'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='e'%3e%3cstop%20offset='0'%20stop-color='%23ffd100'/%3e%3cstop%20offset='.3'%20stop-color='%23ffb501'/%3e%3cstop%20offset='1'%20stop-color='%23fe9e01'/%3e%3c/linearGradient%3e%3clinearGradient%20id='d'%3e%3cstop%20offset='0'%20stop-color='%23eb8403'/%3e%3cstop%20offset='1'%20stop-color='%23eb8403'%20stop-opacity='0'/%3e%3c/linearGradient%3e%3clinearGradient%20id='a'%3e%3cstop%20offset='0'%20stop-color='%23ffd100'/%3e%3cstop%20offset='.5'%20stop-color='%23ffb501'/%3e%3cstop%20offset='1'%20stop-color='%23fe9e01'/%3e%3c/linearGradient%3e%3clinearGradient%20id='b'%3e%3cstop%20offset='0'%20stop-color='%23ffd100'/%3e%3cstop%20offset='.5'%20stop-color='%23ffb501'/%3e%3cstop%20offset='1'%20stop-color='%23fe9e01'/%3e%3c/linearGradient%3e%3clinearGradient%20id='c'%3e%3cstop%20offset='0'%20stop-color='%23ffd100'/%3e%3cstop%20offset='.5'%20stop-color='%23ffb501'/%3e%3cstop%20offset='1'%20stop-color='%23fe9e01'/%3e%3c/linearGradient%3e%3clinearGradient%20xlink:href='%23a'%20id='i'%20x1='12'%20x2='18.8'%20y1='4'%20y2='15.8'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23b'%20id='j'%20x1='20.6'%20x2='14'%20y1='12.3'%20y2='16'%20gradientTransform='rotate(180%2012%20526.2)'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23c'%20id='l'%20x1='7'%20x2='11.3'%20y1='1038'%20y2='1042.2'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23d'%20id='k'%20x1='18'%20x2='14.8'%20y1='1039.3'%20y2='1039.3'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23e'%20id='n'%20x1='6'%20x2='10.2'%20y1='1038'%20y2='1042.1'%20gradientTransform='rotate(180%2012%201040.4)'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23f'%20id='m'%20x1='7.5'%20x2='18.2'%20y1='8.8'%20y2='11.7'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23g'%20id='o'%20x1='7.5'%20x2='21.2'%20y1='8.8'%20y2='12.5'%20gradientTransform='translate(0%201028.4)'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23h'%20id='p'%20x1='6.6'%20x2='15.9'%20y1='1038.8'%20y2='1044.5'%20gradientUnits='userSpaceOnUse'/%3e%3clinearGradient%20xlink:href='%23e'%20id='q'%20x1='31.4'%20x2='59.3'%20y1='1037.7'%20y2='1037.7'%20gradientUnits='userSpaceOnUse'/%3e%3c/defs%3e%3cpath%20fill='%23fe9e01'%20d='M2%2012c0-1.4%203.8-8%205-8.7a24%2024%200%200%201%2010%200c1.2.7%205%207.3%205%208.7%200%201.4-3.8%208-5%208.7a24%2024%200%200%201-10%200C5.8%2020%202%2013.4%202%2012z'/%3e%3cpath%20fill='none'%20d='M18%2012a15%2015%200%200%201-3%205.2c-.7.4-5.3.4-6%200A15%2015%200%200%201%206%2012a15%2015%200%200%201%203-5.2c.7-.4%205.3-.4%206%200%20.7.4%203%204.4%203%205.2z'/%3e%3cpath%20fill='url(%23i)'%20fill-rule='evenodd'%20d='M12%202.8a19.6%2019.6%200%200%200-3.7.3c1.7.1%204.3%201%205.5%202A30.3%2030.3%200%200%201%2018%2012c0%201-2.2%204.8-3%205.3l2%203.4a24%2024%200%200%200%205-8.6c0-1.4-3.8-8-5-8.7-.6-.3-2.8-.5-5-.5z'/%3e%3cpath%20fill='url(%23j)'%20fill-rule='evenodd'%20d='M12%201049.6a19.6%2019.6%200%200%200%203.7-.4c-1.7%200-4.3-1-5.5-2a30.3%2030.3%200%200%201-4.2-6.8c0-.9%202.2-4.7%203-5.2l-2-3.5a24%2024%200%200%200-5%208.7c0%201.4%203.8%208%205%208.6.6.4%202.8.6%205%20.6z'%20transform='translate(0%20-1028.4)'/%3e%3cpath%20fill='url(%23k)'%20d='M18%201040.4a16%2016%200%200%201-3%205.2c-.7.4-5.3.4-6%200a16%2016%200%200%201-3-5.2c0-.9%202.3-4.8%203-5.2.7-.5%205.3-.5%206%200%20.7.4%203%204.3%203%205.2z'%20transform='translate(0%20-1028.4)'/%3e%3cpath%20fill='url(%23l)'%20d='M9%201035.2c-.7.4-3%204.3-3%205.2a16%2016%200%200%200%203%205.2c.7-.5%203-4.4%203-5.2%200-.9-2.3-4.8-3-5.2z'%20transform='translate(0%20-1028.4)'/%3e%3cpath%20fill='url(%23m)'%20d='M9%206.8c-.8.5-3%204.4-3%205.2a30.3%2030.3%200%200%200%202.2%204.3c.7%201.1%201.4%202%202%202.5%201.2%201.1%203.8%202%205.5%202h1l.3-.1c1.2-.7%205-7.3%205-8.7l-4-.1v.1a15%2015%200%200%201-3%205.2%2015%2015%200%200%201-3-5.2%2015%2015%200%200%200-3-5.2z'/%3e%3cpath%20fill='url(%23n)'%20d='M15%201045.6c.7-.5%203-4.4%203-5.2%200-.9-2.3-4.8-3-5.2-.7.4-3%204.3-3%205.2a16%2016%200%200%200%203%205.2z'%20transform='translate(0%20-1028.4)'/%3e%3cpath%20fill='url(%23o)'%20stroke='url(%23p)'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-opacity='.3'%20stroke-width='.1'%20d='M18%201040.2h0v.2a16%2016%200%200%201-3%205.2%2016%2016%200%200%201-3-5.2c0-.9-2.3-4.8-3-5.2h0s0%200%200%200c-.8.5-3%204.3-3%205.2a30.3%2030.3%200%200%200%202.2%204.3s0%200%200%200%200%200%200%200c.7%201%201.4%202%202%202.5%201.2%201%203.8%202%205.5%202h1l.3-.2'%20transform='translate(0%20-1028.4)'/%3e%3cg%20style='line-height:125%25'%20word-spacing='0'%3e%3cpath%20fill='%23252127'%20d='M38.5%201038.7q0%20.7-.4%201.3l-.5.7-.7.5-.6.4%202.7%205.4h-2.6l-2.4-5.3h-2.6v5.3H29v-13.4h6.3q1%200%201.6.5l.7.6.5.6q.4.6.4%201.4v2zm-2.3%200v-2.1q-.4-.7-.8-.8h-4v3.7h4l.4-.3.4-.5z'%20font-family='Blender%20Pro'%20font-size='22.5'%20font-weight='700'%20letter-spacing='0'%20style='-inkscape-font-specification:&quot;Blender%20Pro%20Bold&quot;'%20transform='translate(0%20-1028.4)'/%3e%3c/g%3e%3cpath%20fill='url(%23q)'%20fill-rule='evenodd'%20d='M31.4%201035.8v3.7h25.9l2-3.7h-28z'%20transform='translate(0%20-1028.4)'/%3e%3cg%20fill='%23252127'%20font-family='Blender%20Pro'%20font-size='22.5'%20font-weight='700'%20letter-spacing='0'%20style='line-height:125%25'%20word-spacing='0'%3e%3cpath%20d='M50.3%201047H48l-.1-.5q-1%20.6-1.4.6h-1.7q-1%200-1.7-.4-.6-.5-1-1.1-.4-.6-.4-1.4v-6.9H44v7l.8.7h1.7l.6-.3.7-.6v-6.8h2.3v7.7l.2%202z'%20style='-inkscape-font-specification:&quot;Blender%20Pro%20Bold&quot;'%20transform='translate(0%20-1028.4)'/%3e%3cpath%20d='M63.2%201047h-2.9l-4.7-5.6h-.2v5.6H53v-13.4h2.4v5.6h.2l2.4-2.8q1.5-2%202.3-2.8h2.9l-5.6%206.7%202.5%203%203.1%203.7z'%20style='-inkscape-font-specification:&quot;Blender%20Pro%20Bold&quot;'%20transform='translate(0%20-1028.4)'/%3e%3c/g%3e%3c/svg%3e";
+function ea(l) {
   let t;
   return {
     c() {
-      t = k("div"), t.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1422 800" class="svelte-rvpkcl"><defs><filter id="blur"><feGaussianBlur stdDeviation="12"></feGaussianBlur></filter><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="oooscillate-grad" class="svelte-rvpkcl"><stop stop-color="hsl(105, 69%, 40%)" stop-opacity="1" offset="0%" class="svelte-rvpkcl"></stop><stop stop-color="hsl(105, 69%, 60%)" stop-opacity="1" offset="100%" class="svelte-rvpkcl"></stop></linearGradient></defs><g stroke-width="2" stroke="url(#oooscillate-grad)" fill="none" stroke-linecap="round" filter="url(#blur)"><path d="M 0 572 Q 355.5 -100 711 400 Q 1066.5 900 1422 572" opacity="1.00"></path><path d="M 0 550 Q 355.5 -100 711 400 Q 1066.5 900 1422 550" opacity="0.96"></path><path d="M 0 528 Q 355.5 -100 711 400 Q 1066.5 900 1422 528" opacity="0.92"></path><path d="M 0 506 Q 355.5 -100 711 400 Q 1066.5 900 1422 506" opacity="0.89"></path><path d="M 0 484 Q 355.5 -100 711 400 Q 1066.5 900 1422 484" opacity="0.85"></path><path d="M 0 462 Q 355.5 -100 711 400 Q 1066.5 900 1422 462" opacity="0.81"></path><path d="M 0 440 Q 355.5 -100 711 400 Q 1066.5 900 1422 440" opacity="0.77"></path><path d="M 0 418 Q 355.5 -100 711 400 Q 1066.5 900 1422 418" opacity="0.73"></path><path d="M 0 396 Q 355.5 -100 711 400 Q 1066.5 900 1422 396" opacity="0.70"></path><path d="M 0 374 Q 355.5 -100 711 400 Q 1066.5 900 1422 374" opacity="0.66"></path><path d="M 0 352 Q 355.5 -100 711 400 Q 1066.5 900 1422 352" opacity="0.62"></path><path d="M 0 330 Q 355.5 -100 711 400 Q 1066.5 900 1422 330" opacity="0.58"></path><path d="M 0 308 Q 355.5 -100 711 400 Q 1066.5 900 1422 308" opacity="0.54"></path><path d="M 0 286 Q 355.5 -100 711 400 Q 1066.5 900 1422 286" opacity="0.51"></path><path d="M 0 264 Q 355.5 -100 711 400 Q 1066.5 900 1422 264" opacity="0.47"></path><path d="M 0 242 Q 355.5 -100 711 400 Q 1066.5 900 1422 242" opacity="0.43"></path><path d="M 0 220 Q 355.5 -100 711 400 Q 1066.5 900 1422 220" opacity="0.39"></path><path d="M 0 198 Q 355.5 -100 711 400 Q 1066.5 900 1422 198" opacity="0.35"></path><path d="M 0 176 Q 355.5 -100 711 400 Q 1066.5 900 1422 176" opacity="0.32"></path><path d="M 0 154 Q 355.5 -100 711 400 Q 1066.5 900 1422 154" opacity="0.28"></path><path d="M 0 132 Q 355.5 -100 711 400 Q 1066.5 900 1422 132" opacity="0.24"></path><path d="M 0 110 Q 355.5 -100 711 400 Q 1066.5 900 1422 110" opacity="0.20"></path><path d="M 0 88 Q 355.5 -100 711 400 Q 1066.5 900 1422 88" opacity="0.16"></path><path d="M 0 66 Q 355.5 -100 711 400 Q 1066.5 900 1422 66" opacity="0.13"></path><path d="M 0 44 Q 355.5 -100 711 400 Q 1066.5 900 1422 44" opacity="0.09"></path></g></svg>', e(t, "class", "bg-img svelte-rvpkcl");
+      t = _("div"), t.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1422 800" class="svelte-rvpkcl"><defs><filter id="blur"><feGaussianBlur stdDeviation="12"></feGaussianBlur></filter><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="oooscillate-grad" class="svelte-rvpkcl"><stop stop-color="hsl(105, 69%, 40%)" stop-opacity="1" offset="0%" class="svelte-rvpkcl"></stop><stop stop-color="hsl(105, 69%, 60%)" stop-opacity="1" offset="100%" class="svelte-rvpkcl"></stop></linearGradient></defs><g stroke-width="2" stroke="url(#oooscillate-grad)" fill="none" stroke-linecap="round" filter="url(#blur)"><path d="M 0 572 Q 355.5 -100 711 400 Q 1066.5 900 1422 572" opacity="1.00"></path><path d="M 0 550 Q 355.5 -100 711 400 Q 1066.5 900 1422 550" opacity="0.96"></path><path d="M 0 528 Q 355.5 -100 711 400 Q 1066.5 900 1422 528" opacity="0.92"></path><path d="M 0 506 Q 355.5 -100 711 400 Q 1066.5 900 1422 506" opacity="0.89"></path><path d="M 0 484 Q 355.5 -100 711 400 Q 1066.5 900 1422 484" opacity="0.85"></path><path d="M 0 462 Q 355.5 -100 711 400 Q 1066.5 900 1422 462" opacity="0.81"></path><path d="M 0 440 Q 355.5 -100 711 400 Q 1066.5 900 1422 440" opacity="0.77"></path><path d="M 0 418 Q 355.5 -100 711 400 Q 1066.5 900 1422 418" opacity="0.73"></path><path d="M 0 396 Q 355.5 -100 711 400 Q 1066.5 900 1422 396" opacity="0.70"></path><path d="M 0 374 Q 355.5 -100 711 400 Q 1066.5 900 1422 374" opacity="0.66"></path><path d="M 0 352 Q 355.5 -100 711 400 Q 1066.5 900 1422 352" opacity="0.62"></path><path d="M 0 330 Q 355.5 -100 711 400 Q 1066.5 900 1422 330" opacity="0.58"></path><path d="M 0 308 Q 355.5 -100 711 400 Q 1066.5 900 1422 308" opacity="0.54"></path><path d="M 0 286 Q 355.5 -100 711 400 Q 1066.5 900 1422 286" opacity="0.51"></path><path d="M 0 264 Q 355.5 -100 711 400 Q 1066.5 900 1422 264" opacity="0.47"></path><path d="M 0 242 Q 355.5 -100 711 400 Q 1066.5 900 1422 242" opacity="0.43"></path><path d="M 0 220 Q 355.5 -100 711 400 Q 1066.5 900 1422 220" opacity="0.39"></path><path d="M 0 198 Q 355.5 -100 711 400 Q 1066.5 900 1422 198" opacity="0.35"></path><path d="M 0 176 Q 355.5 -100 711 400 Q 1066.5 900 1422 176" opacity="0.32"></path><path d="M 0 154 Q 355.5 -100 711 400 Q 1066.5 900 1422 154" opacity="0.28"></path><path d="M 0 132 Q 355.5 -100 711 400 Q 1066.5 900 1422 132" opacity="0.24"></path><path d="M 0 110 Q 355.5 -100 711 400 Q 1066.5 900 1422 110" opacity="0.20"></path><path d="M 0 88 Q 355.5 -100 711 400 Q 1066.5 900 1422 88" opacity="0.16"></path><path d="M 0 66 Q 355.5 -100 711 400 Q 1066.5 900 1422 66" opacity="0.13"></path><path d="M 0 44 Q 355.5 -100 711 400 Q 1066.5 900 1422 44" opacity="0.09"></path></g></svg>', e(t, "class", "bg-img svelte-rvpkcl");
     },
-    m(r, a) {
-      S(r, t, a);
+    m(n, a) {
+      z(n, t, a);
     },
-    p: _,
-    i: _,
-    o: _,
-    d(r) {
-      r && U(t);
+    p: y,
+    i: y,
+    o: y,
+    d(n) {
+      n && $(t);
     }
   };
 }
-class Ti extends V {
+class ta extends K {
   constructor(t) {
-    super(), Y(this, t, null, Vi, A, {});
+    super(), V(this, t, null, ea, I, {});
   }
 }
-function Ii() {
-  var i = document.createElement("script");
-  i.setAttribute("async", ""), i.setAttribute("type", "text/javascript"), i.setAttribute("src", "calcemu.js"), document.body.appendChild(i);
+function na() {
+  var l = document.createElement("script");
+  l.setAttribute("async", ""), l.setAttribute("type", "text/javascript"), l.setAttribute("src", "calcemu.js"), document.body.appendChild(l);
 }
-function Ni(i) {
+function ra(l) {
   let t;
   return {
     c() {
-      t = k("div"), t.innerHTML = "", e(t, "id", "buttons");
+      t = _("div"), t.innerHTML = "", e(t, "id", "buttons");
     },
-    m(r, a) {
-      S(r, t, a);
+    m(n, a) {
+      z(n, t, a);
     },
-    p: _,
-    i: _,
-    o: _,
-    d(r) {
-      r && U(t);
+    p: y,
+    i: y,
+    o: y,
+    d(n) {
+      n && $(t);
     }
   };
 }
-class Zi extends V {
+class la extends K {
   constructor(t) {
-    super(), Y(this, t, null, Ni, A, {});
+    super(), V(this, t, null, ra, I, {});
   }
 }
-const Vl = [];
-function Ye(i, t = _) {
-  let r;
+const Jr = [];
+function Ae(l, t = y) {
+  let n;
   const a = /* @__PURE__ */ new Set();
-  function o(c) {
-    if (A(i, c) && (i = c, r)) {
-      const f = !Vl.length;
-      for (const p of a)
-        p[1](), Vl.push(p, i);
+  function s(c) {
+    if (I(l, c) && (l = c, n)) {
+      const f = !Jr.length;
+      for (const h of a)
+        h[1](), Jr.push(h, l);
       if (f) {
-        for (let p = 0; p < Vl.length; p += 2)
-          Vl[p][0](Vl[p + 1]);
-        Vl.length = 0;
+        for (let h = 0; h < Jr.length; h += 2)
+          Jr[h][0](Jr[h + 1]);
+        Jr.length = 0;
       }
     }
   }
-  function s(c) {
-    o(c(i));
+  function o(c) {
+    s(c(l));
   }
-  function d(c, f = _) {
-    const p = [c, f];
-    return a.add(p), a.size === 1 && (r = t(o, s) || _), c(i), () => {
-      a.delete(p), a.size === 0 && r && (r(), r = null);
+  function d(c, f = y) {
+    const h = [c, f];
+    return a.add(h), a.size === 1 && (n = t(s, o) || y), c(l), () => {
+      a.delete(h), a.size === 0 && n && (n(), n = null);
     };
   }
-  return { set: o, update: s, subscribe: d };
+  return { set: s, update: o, subscribe: d };
 }
-const Ze = Ye("empty"), ti = Ye(null), Xi = Ye(!1), D2 = Ye(""), ri = Ye(0), mi = Ye(), yi = Ye(), Z2 = Ye(!1), R2 = Ye(!1), cl = Ye(!1), B2 = Ye(null), V2 = Ye(null);
-function Wi(i) {
-  let t, r, a;
+const lt = Ae("empty"), si = Ae(null), ia = Ae(!1), L2 = Ae(""), oi = Ae(0), Ci = Ae(), Mi = Ae(), t2 = Ae(!1), ei = Ae(!1), Q2 = Ae(!1), gr = Ae(!1), I2 = Ae(null), Z2 = Ae(null);
+function aa(l) {
+  let t, n, a;
   return {
     c() {
-      t = l("svg"), r = l("path"), a = l("path"), e(r, "fill", "currentColor"), e(r, "d", "M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464"), e(r, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M7.55 9.6a.75.75 0 0 1 .9-1.2l2 1.5a.75.75 0 0 1 0 1.2l-2 1.5a.75.75 0 1 1-.9-1.2l1.2-.9zm9.05-1.05a.75.75 0 0 1-.15 1.05l-1.2.9l1.2.9a.75.75 0 1 1-.9 1.2l-2-1.5a.75.75 0 0 1 0-1.2l2-1.5a.75.75 0 0 1 1.05.15m-1.07 7.98a.75.75 0 0 1-1.06 0l-.47-.47c-.561.53-1.44.53-2 0c-.56.53-1.439.53-2 0l-.47.47a.75.75 0 1 1-1.06-1.06l.5-.5a1.457 1.457 0 0 1 2.03-.03c.56-.53 1.44-.53 2 0a1.457 1.457 0 0 1 2.03.03l.5.5a.75.75 0 0 1 0 1.06"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "viewBox", "0 0 24 24");
+      t = i("svg"), n = i("path"), a = i("path"), e(n, "fill", "currentColor"), e(n, "d", "M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M7.55 9.6a.75.75 0 0 1 .9-1.2l2 1.5a.75.75 0 0 1 0 1.2l-2 1.5a.75.75 0 1 1-.9-1.2l1.2-.9zm9.05-1.05a.75.75 0 0 1-.15 1.05l-1.2.9l1.2.9a.75.75 0 1 1-.9 1.2l-2-1.5a.75.75 0 0 1 0-1.2l2-1.5a.75.75 0 0 1 1.05.15m-1.07 7.98a.75.75 0 0 1-1.06 0l-.47-.47c-.561.53-1.44.53-2 0c-.56.53-1.439.53-2 0l-.47.47a.75.75 0 1 1-1.06-1.06l.5-.5a1.457 1.457 0 0 1 2.03-.03c.56-.53 1.44-.53 2 0a1.457 1.457 0 0 1 2.03.03l.5.5a.75.75 0 0 1 0 1.06"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "viewBox", "0 0 24 24");
     },
-    m(o, s) {
-      S(o, t, s), n(t, r), n(t, a);
+    m(s, o) {
+      z(s, t, o), r(t, n), r(t, a);
     },
-    p: _,
-    i: _,
-    o: _,
-    d(o) {
-      o && U(t);
+    p: y,
+    i: y,
+    o: y,
+    d(s) {
+      s && $(t);
     }
   };
 }
-class Ji extends V {
+class sa extends K {
   constructor(t) {
-    super(), Y(this, t, null, Wi, A, {});
+    super(), V(this, t, null, aa, I, {});
   }
 }
-function ni(i) {
-  let t, r, a, o, s, d, c = (
+function di(l) {
+  let t, n, a, s, o, d, c = (
     /*$traceback*/
-    i[2].name + ""
-  ), f, p, b, g = (
+    l[2].name + ""
+  ), f, h, p, g = (
     /*$traceback*/
-    i[2].message + ""
-  ), w, x, z, q;
-  r = new Ji({});
-  let m = (
+    l[2].message + ""
+  ), w, G, k, v;
+  n = new sa({});
+  let S = (
     /*$traceback*/
-    i[2].hint && li(i)
+    l[2].hint && ci(l)
   );
   return {
     c() {
-      t = k("div"), K(r.$$.fragment), a = E(), o = k("pre"), s = Z("            "), d = k("code"), f = Z(c), p = Z(`\r
-            `), b = k("code"), w = Z(g), x = Z(`\r
-            `), m && m.c(), z = Z(`\r
-        `), e(d, "class", "name svelte-s5x38s"), e(b, "class", "message svelte-s5x38s"), e(o, "class", "svelte-s5x38s"), e(t, "class", "bsod svelte-s5x38s");
+      t = _("div"), L(n.$$.fragment), a = B(), s = _("pre"), o = Y("            "), d = _("code"), f = Y(c), h = Y(`\r
+            `), p = _("code"), w = Y(g), G = Y(`\r
+            `), S && S.c(), k = Y(`\r
+        `), e(d, "class", "name svelte-s5x38s"), e(p, "class", "message svelte-s5x38s"), e(s, "class", "svelte-s5x38s"), e(t, "class", "bsod svelte-s5x38s");
     },
-    m(y, H) {
-      S(y, t, H), L(r, t, null), n(t, a), n(t, o), n(o, s), n(o, d), n(d, f), n(o, p), n(o, b), n(b, w), n(o, x), m && m.m(o, null), n(o, z), q = !0;
+    m(R, O) {
+      z(R, t, O), F(n, t, null), r(t, a), r(t, s), r(s, o), r(s, d), r(d, f), r(s, h), r(s, p), r(p, w), r(s, G), S && S.m(s, null), r(s, k), v = !0;
     },
-    p(y, H) {
-      (!q || H & /*$traceback*/
+    p(R, O) {
+      (!v || O & /*$traceback*/
       4) && c !== (c = /*$traceback*/
-      y[2].name + "") && N0(f, c), (!q || H & /*$traceback*/
+      R[2].name + "") && t0(f, c), (!v || O & /*$traceback*/
       4) && g !== (g = /*$traceback*/
-      y[2].message + "") && N0(w, g), /*$traceback*/
-      y[2].hint ? m ? m.p(y, H) : (m = li(y), m.c(), m.m(o, z)) : m && (m.d(1), m = null);
+      R[2].message + "") && t0(w, g), /*$traceback*/
+      R[2].hint ? S ? S.p(R, O) : (S = ci(R), S.c(), S.m(s, k)) : S && (S.d(1), S = null);
     },
-    i(y) {
-      q || (B(r.$$.fragment, y), q = !0);
+    i(R) {
+      v || (P(n.$$.fragment, R), v = !0);
     },
-    o(y) {
-      Q(r.$$.fragment, y), q = !1;
+    o(R) {
+      j(n.$$.fragment, R), v = !1;
     },
-    d(y) {
-      y && U(t), F(r), m && m.d();
+    d(R) {
+      R && $(t), A(n), S && S.d();
     }
   };
 }
-function li(i) {
-  let t, r, a;
+function ci(l) {
+  let t, n, a;
   return {
     c() {
-      t = k("a"), r = Z("Hint"), e(t, "href", a = /*$traceback*/
-      i[2].hint), e(t, "target", "_blank");
+      t = _("a"), n = Y("Hint"), e(t, "href", a = /*$traceback*/
+      l[2].hint), e(t, "target", "_blank");
     },
-    m(o, s) {
-      S(o, t, s), n(t, r);
+    m(s, o) {
+      z(s, t, o), r(t, n);
     },
-    p(o, s) {
-      s & /*$traceback*/
+    p(s, o) {
+      o & /*$traceback*/
       4 && a !== (a = /*$traceback*/
-      o[2].hint) && e(t, "href", a);
+      s[2].hint) && e(t, "href", a);
     },
-    d(o) {
-      o && U(t);
+    d(s) {
+      s && $(t);
     }
   };
 }
-function ea(i) {
-  let t, r, a, o, s, d, c = (
+function oa(l) {
+  let t, n, a, s, o, d, c = (
     /*crashed*/
-    i[1] && ni(i)
+    l[1] && di(l)
   );
   return {
     c() {
-      t = k("canvas"), r = E(), c && c.c(), a = Q2(), e(t, "class", "emscripten svelte-s5x38s"), e(t, "id", "canvas"), e(t, "tabindex", "-1");
+      t = _("canvas"), n = B(), c && c.c(), a = l2(), e(t, "class", "emscripten svelte-s5x38s"), e(t, "id", "canvas"), e(t, "tabindex", "-1");
     },
-    m(f, p) {
-      S(f, t, p), i[5](t), S(f, r, p), c && c.m(f, p), S(f, a, p), o = !0, s || (d = ee(t, "contextmenu", Mi(
+    m(f, h) {
+      z(f, t, h), l[5](t), z(f, n, h), c && c.m(f, h), z(f, a, h), s = !0, o || (d = ee(t, "contextmenu", Di(
         /*contextmenu_handler*/
-        i[4]
-      )), s = !0);
+        l[4]
+      )), o = !0);
     },
-    p(f, [p]) {
+    p(f, [h]) {
       /*crashed*/
-      f[1] ? c ? (c.p(f, p), p & /*crashed*/
-      2 && B(c, 1)) : (c = ni(f), c.c(), B(c, 1), c.m(a.parentNode, a)) : c && (Qi(), Q(c, 1, 1, () => {
+      f[1] ? c ? (c.p(f, h), h & /*crashed*/
+      2 && P(c, 1)) : (c = di(f), c.c(), P(c, 1), c.m(a.parentNode, a)) : c && (i2(), j(c, 1, 1, () => {
         c = null;
-      }), Pi());
+      }), a2());
     },
     i(f) {
-      o || (B(c), o = !0);
+      s || (P(c), s = !0);
     },
     o(f) {
-      Q(c), o = !1;
+      j(c), s = !1;
     },
     d(f) {
-      f && (U(t), U(r), U(a)), i[5](null), c && c.d(f), s = !1, d();
+      f && ($(t), $(n), $(a)), l[5](null), c && c.d(f), o = !1, d();
     }
   };
 }
-function ta(i, t, r) {
-  let a, o, s;
-  te(i, Ze, (p) => r(3, o = p)), te(i, D2, (p) => r(2, s = p));
+function da(l, t, n) {
+  let a, s, o;
+  re(l, lt, (h) => n(3, s = h)), re(l, L2, (h) => n(2, o = h));
   let d;
-  P2(() => {
+  rl(() => {
     window.Module.canvas = d, d.addEventListener(
       "webglcontextlost",
-      (p) => {
-        alert("WebGL context lost. You will need to reload the page."), p.preventDefault();
+      (h) => {
+        alert("WebGL context lost. You will need to reload the page."), h.preventDefault();
       },
       !1
     );
   });
-  function c(p) {
-    ji.call(this, i, p);
+  function c(h) {
+    Qi.call(this, l, h);
   }
-  function f(p) {
-    X0[p ? "unshift" : "push"](() => {
-      d = p, r(0, d);
+  function f(h) {
+    r2[h ? "unshift" : "push"](() => {
+      d = h, n(0, d);
     });
   }
-  return i.$$.update = () => {
-    i.$$.dirty & /*$state*/
-    8 && r(1, a = o === "crashed");
-  }, [d, a, s, o, c, f];
+  return l.$$.update = () => {
+    l.$$.dirty & /*$state*/
+    8 && n(1, a = s === "crashed");
+  }, [d, a, o, s, c, f];
 }
-class ra extends V {
+class ca extends K {
   constructor(t) {
-    super(), Y(this, t, ta, ea, A, {});
+    super(), V(this, t, da, oa, I, {});
   }
 }
-function na(i) {
-  let t, r, a, o, s, d, c;
+function fa(l) {
+  let t, n, a, s, o, d, c;
   return {
     c() {
-      t = k("figure"), t.innerHTML = '<div class="spinner"></div><center style="margin-top:0.5em"><strong>emscripten</strong></center>', r = E(), a = k("div"), a.textContent = "Downloading...", o = E(), s = k("div"), s.innerHTML = '<progress value="0" max="100" id="progress" hidden=""></progress>', d = E(), c = k("textarea"), G(t, "overflow", "visible"), e(t, "id", "spinner"), e(a, "class", "emscripten"), e(a, "id", "status"), e(s, "class", "emscripten"), e(c, "class", "emscripten"), e(c, "id", "output"), e(c, "rows", "8");
+      t = _("figure"), t.innerHTML = '<div class="spinner"></div><center style="margin-top:0.5em"><strong>emscripten</strong></center>', n = B(), a = _("div"), a.textContent = "Downloading...", s = B(), o = _("div"), o.innerHTML = '<progress value="0" max="100" id="progress" hidden=""></progress>', d = B(), c = _("textarea"), E(t, "overflow", "visible"), e(t, "id", "spinner"), e(a, "class", "emscripten"), e(a, "id", "status"), e(o, "class", "emscripten"), e(c, "class", "emscripten"), e(c, "id", "output"), e(c, "rows", "8");
     },
-    m(f, p) {
-      S(f, t, p), S(f, r, p), S(f, a, p), S(f, o, p), S(f, s, p), S(f, d, p), S(f, c, p);
+    m(f, h) {
+      z(f, t, h), z(f, n, h), z(f, a, h), z(f, s, h), z(f, o, h), z(f, d, h), z(f, c, h);
     },
-    p: _,
-    i: _,
-    o: _,
+    p: y,
+    i: y,
+    o: y,
     d(f) {
-      f && (U(t), U(r), U(a), U(o), U(s), U(d), U(c));
+      f && ($(t), $(n), $(a), $(s), $(o), $(d), $(c));
     }
   };
 }
-class la extends V {
+class ha extends K {
   constructor(t) {
-    super(), Y(this, t, null, na, A, {});
+    super(), V(this, t, null, fa, I, {});
   }
 }
-function ia(i) {
-  let t, r, a;
+function pa(l) {
+  let t, n, a;
   return {
     c() {
-      t = l("svg"), r = l("path"), a = l("path"), e(r, "fill", "currentColor"), e(r, "fill-rule", "evenodd"), e(r, "d", "M10 22h4c3.771 0 5.657 0 6.828-1.172S22 17.771 22 14v-.437c0-.873 0-1.529-.043-2.063h-4.052c-1.097 0-2.067 0-2.848-.105c-.847-.114-1.694-.375-2.385-1.066c-.692-.692-.953-1.539-1.067-2.386c-.105-.781-.105-1.75-.105-2.848l.01-2.834q0-.124.02-.244C11.121 2 10.636 2 10.03 2C6.239 2 4.343 2 3.172 3.172C2 4.343 2 6.229 2 10v4c0 3.771 0 5.657 1.172 6.828S6.229 22 10 22"), e(r, "clip-rule", "evenodd"), e(r, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M11.547 15.487a.75.75 0 0 1 0 1.026l-1.875 2a.75.75 0 0 1-1.094-1.026l.69-.737H6a.75.75 0 0 1 0-1.5h3.269l-.691-.737a.75.75 0 0 1 1.094-1.026zM11.51 2.26l-.01 2.835c0 1.097 0 2.066.105 2.848c.114.847.375 1.694 1.067 2.385c.69.691 1.538.953 2.385 1.067c.781.105 1.751.105 2.848.105h4.052q.02.232.028.5H22c0-.268 0-.402-.01-.56a5.3 5.3 0 0 0-.958-2.641c-.094-.128-.158-.204-.285-.357C19.954 7.494 18.91 6.312 18 5.5c-.81-.724-1.921-1.515-2.89-2.161c-.832-.556-1.248-.834-1.819-1.04a6 6 0 0 0-.506-.154c-.384-.095-.758-.128-1.285-.14z"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+      t = i("svg"), n = i("path"), a = i("path"), e(n, "fill", "currentColor"), e(n, "fill-rule", "evenodd"), e(n, "d", "M10 22h4c3.771 0 5.657 0 6.828-1.172S22 17.771 22 14v-.437c0-.873 0-1.529-.043-2.063h-4.052c-1.097 0-2.067 0-2.848-.105c-.847-.114-1.694-.375-2.385-1.066c-.692-.692-.953-1.539-1.067-2.386c-.105-.781-.105-1.75-.105-2.848l.01-2.834q0-.124.02-.244C11.121 2 10.636 2 10.03 2C6.239 2 4.343 2 3.172 3.172C2 4.343 2 6.229 2 10v4c0 3.771 0 5.657 1.172 6.828S6.229 22 10 22"), e(n, "clip-rule", "evenodd"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M11.547 15.487a.75.75 0 0 1 0 1.026l-1.875 2a.75.75 0 0 1-1.094-1.026l.69-.737H6a.75.75 0 0 1 0-1.5h3.269l-.691-.737a.75.75 0 0 1 1.094-1.026zM11.51 2.26l-.01 2.835c0 1.097 0 2.066.105 2.848c.114.847.375 1.694 1.067 2.385c.69.691 1.538.953 2.385 1.067c.781.105 1.751.105 2.848.105h4.052q.02.232.028.5H22c0-.268 0-.402-.01-.56a5.3 5.3 0 0 0-.958-2.641c-.094-.128-.158-.204-.285-.357C19.954 7.494 18.91 6.312 18 5.5c-.81-.724-1.921-1.515-2.89-2.161c-.832-.556-1.248-.834-1.819-1.04a6 6 0 0 0-.506-.154c-.384-.095-.758-.128-1.285-.14z"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
     },
-    m(o, s) {
-      S(o, t, s), n(t, r), n(t, a);
+    m(s, o) {
+      z(s, t, o), r(t, n), r(t, a);
     },
-    p: _,
-    i: _,
-    o: _,
-    d(o) {
-      o && U(t);
-    }
-  };
-}
-class aa extends V {
-  constructor(t) {
-    super(), Y(this, t, null, ia, A, {});
-  }
-}
-function oa(i) {
-  let t, r, a, o;
-  return {
-    c() {
-      t = l("svg"), r = l("path"), a = l("path"), o = l("path"), e(r, "fill", "currentColor"), e(r, "d", "M18 8a2 2 0 1 1-4 0a2 2 0 0 1 4 0"), e(a, "fill", "currentColor"), e(a, "fill-rule", "evenodd"), e(a, "d", "M11.943 1.25h.114c2.309 0 4.118 0 5.53.19c1.444.194 2.584.6 3.479 1.494c.895.895 1.3 2.035 1.494 3.48c.19 1.411.19 3.22.19 5.529v.088c0 1.909 0 3.471-.104 4.743c-.104 1.28-.317 2.347-.795 3.235q-.314.586-.785 1.057c-.895.895-2.035 1.3-3.48 1.494c-1.411.19-3.22.19-5.529.19h-.114c-2.309 0-4.118 0-5.53-.19c-1.444-.194-2.584-.6-3.479-1.494c-.793-.793-1.203-1.78-1.42-3.006c-.215-1.203-.254-2.7-.262-4.558Q1.25 12.792 1.25 12v-.058c0-2.309 0-4.118.19-5.53c.194-1.444.6-2.584 1.494-3.479c.895-.895 2.035-1.3 3.48-1.494c1.411-.19 3.22-.19 5.529-.19m-5.33 1.676c-1.278.172-2.049.5-2.618 1.069c-.57.57-.897 1.34-1.069 2.619c-.174 1.3-.176 3.008-.176 5.386q0 .793.002 1.495c.008 1.874.05 3.246.238 4.303c.184 1.035.498 1.7 1.005 2.207c.57.57 1.34.897 2.619 1.069c1.3.174 3.008.176 5.386.176s4.086-.002 5.386-.176c1.279-.172 2.05-.5 2.62-1.069c.21-.21.381-.442.524-.707c.332-.616.523-1.44.621-2.645s.099-2.707.099-4.653c0-2.378-.002-4.086-.176-5.386c-.172-1.279-.5-2.05-1.069-2.62c-.57-.569-1.34-.896-2.619-1.068c-1.3-.174-3.008-.176-5.386-.176s-4.086.002-5.386.176"), e(a, "clip-rule", "evenodd"), e(o, "fill", "currentColor"), e(o, "d", "m20.607 19.146l-2.83-2.547a3 3 0 0 0-3.732-.225l-.299.21a2 2 0 0 1-2.564-.222l-4.29-4.29a2.3 2.3 0 0 0-3.14-.104l-1.002.876l.002.65c.008 1.875.05 3.247.238 4.304c.185 1.035.498 1.7 1.005 2.207c.57.57 1.34.897 2.619 1.069c1.3.174 3.008.176 5.386.176s4.087-.002 5.387-.176c1.278-.172 2.049-.5 2.618-1.069a3 3 0 0 0 .602-.859"), e(o, "opacity", "0.4"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
-    },
-    m(s, d) {
-      S(s, t, d), n(t, r), n(t, a), n(t, o);
-    },
-    p: _,
-    i: _,
-    o: _,
+    p: y,
+    i: y,
+    o: y,
     d(s) {
-      s && U(t);
+      s && $(t);
     }
   };
 }
-class sa extends V {
+class ua extends K {
   constructor(t) {
-    super(), Y(this, t, null, oa, A, {});
+    super(), V(this, t, null, pa, I, {});
   }
 }
-function ca(i) {
-  let t, r, a;
+function ma(l) {
+  let t, n, a, s;
   return {
     c() {
-      t = l("svg"), r = l("path"), a = l("path"), e(r, "fill", "currentColor"), e(r, "d", "M22 12.698c-.002 1.47-.013 2.718-.096 3.743c-.097 1.19-.296 2.184-.74 3.009a4.2 4.2 0 0 1-.73.983c-.833.833-1.893 1.21-3.237 1.39C15.884 22 14.2 22 12.053 22h-.106c-2.148 0-3.83 0-5.144-.177c-1.343-.18-2.404-.557-3.236-1.39c-.738-.738-1.12-1.656-1.322-2.795c-.2-1.12-.236-2.512-.243-4.241Q1.999 12.737 2 12v-.054c0-2.148 0-3.83.177-5.144c.18-1.343.557-2.404 1.39-3.236s1.893-1.21 3.236-1.39c1.168-.157 2.67-.175 4.499-.177a.697.697 0 1 1 0 1.396c-1.855.002-3.234.018-4.313.163c-1.189.16-1.906.464-2.436.994S3.72 5.8 3.56 6.99C3.397 8.2 3.395 9.788 3.395 12v.784l.932-.814a2.14 2.14 0 0 1 2.922.097l3.99 3.99a1.86 1.86 0 0 0 2.385.207l.278-.195a2.79 2.79 0 0 1 3.471.209l2.633 2.37c.265-.557.423-1.288.507-2.32c.079-.972.09-2.152.091-3.63a.698.698 0 0 1 1.396 0"), e(r, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "fill-rule", "evenodd"), e(a, "d", "M17.5 2c-2.121 0-3.182 0-3.841.659S13 4.379 13 6.5s0 3.182.659 3.841S15.379 11 17.5 11s3.182 0 3.841-.659S22 8.621 22 6.5s0-3.182-.659-3.841S19.621 2 17.5 2m2.03 5.53l-1.5 1.5a.75.75 0 0 1-1.06 0l-1.5-1.5a.75.75 0 0 1 1.06-1.06l.22.22V4.5a.75.75 0 0 1 1.5 0v2.19l.22-.22a.75.75 0 1 1 1.06 1.06"), e(a, "clip-rule", "evenodd"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+      t = i("svg"), n = i("path"), a = i("path"), s = i("path"), e(n, "fill", "currentColor"), e(n, "d", "M18 8a2 2 0 1 1-4 0a2 2 0 0 1 4 0"), e(a, "fill", "currentColor"), e(a, "fill-rule", "evenodd"), e(a, "d", "M11.943 1.25h.114c2.309 0 4.118 0 5.53.19c1.444.194 2.584.6 3.479 1.494c.895.895 1.3 2.035 1.494 3.48c.19 1.411.19 3.22.19 5.529v.088c0 1.909 0 3.471-.104 4.743c-.104 1.28-.317 2.347-.795 3.235q-.314.586-.785 1.057c-.895.895-2.035 1.3-3.48 1.494c-1.411.19-3.22.19-5.529.19h-.114c-2.309 0-4.118 0-5.53-.19c-1.444-.194-2.584-.6-3.479-1.494c-.793-.793-1.203-1.78-1.42-3.006c-.215-1.203-.254-2.7-.262-4.558Q1.25 12.792 1.25 12v-.058c0-2.309 0-4.118.19-5.53c.194-1.444.6-2.584 1.494-3.479c.895-.895 2.035-1.3 3.48-1.494c1.411-.19 3.22-.19 5.529-.19m-5.33 1.676c-1.278.172-2.049.5-2.618 1.069c-.57.57-.897 1.34-1.069 2.619c-.174 1.3-.176 3.008-.176 5.386q0 .793.002 1.495c.008 1.874.05 3.246.238 4.303c.184 1.035.498 1.7 1.005 2.207c.57.57 1.34.897 2.619 1.069c1.3.174 3.008.176 5.386.176s4.086-.002 5.386-.176c1.279-.172 2.05-.5 2.62-1.069c.21-.21.381-.442.524-.707c.332-.616.523-1.44.621-2.645s.099-2.707.099-4.653c0-2.378-.002-4.086-.176-5.386c-.172-1.279-.5-2.05-1.069-2.62c-.57-.569-1.34-.896-2.619-1.068c-1.3-.174-3.008-.176-5.386-.176s-4.086.002-5.386.176"), e(a, "clip-rule", "evenodd"), e(s, "fill", "currentColor"), e(s, "d", "m20.607 19.146l-2.83-2.547a3 3 0 0 0-3.732-.225l-.299.21a2 2 0 0 1-2.564-.222l-4.29-4.29a2.3 2.3 0 0 0-3.14-.104l-1.002.876l.002.65c.008 1.875.05 3.247.238 4.304c.185 1.035.498 1.7 1.005 2.207c.57.57 1.34.897 2.619 1.069c1.3.174 3.008.176 5.386.176s4.087-.002 5.387-.176c1.278-.172 2.049-.5 2.618-1.069a3 3 0 0 0 .602-.859"), e(s, "opacity", "0.4"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
     },
-    m(o, s) {
-      S(o, t, s), n(t, r), n(t, a);
+    m(o, d) {
+      z(o, t, d), r(t, n), r(t, a), r(t, s);
     },
-    p: _,
-    i: _,
-    o: _,
+    p: y,
+    i: y,
+    o: y,
     d(o) {
-      o && U(t);
+      o && $(t);
     }
   };
 }
-class da extends V {
+class ga extends K {
   constructor(t) {
-    super(), Y(this, t, null, ca, A, {});
+    super(), V(this, t, null, ma, I, {});
   }
 }
-function fa(i) {
-  let t, r, a, o, s;
+function va(l) {
+  let t, n, a;
   return {
     c() {
-      t = l("svg"), r = l("path"), a = l("path"), o = l("path"), s = l("path"), e(r, "fill", "currentColor"), e(r, "fill-rule", "evenodd"), e(r, "d", "M19 11.938V15a7 7 0 0 1-6.25 6.96V15a.75.75 0 0 0-1.5 0v6.96A7 7 0 0 1 5 15v-3.062A3.94 3.94 0 0 1 8.938 8h6.124A3.94 3.94 0 0 1 19 11.938"), e(r, "clip-rule", "evenodd"), e(r, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M19 14.75v-1.5h3a.75.75 0 0 1 0 1.5zm-1.504 4.586c.31-.393.58-.82.801-1.276l2.538 1.27a.75.75 0 1 1-.67 1.34zM5.703 18.06q.333.684.801 1.276l-2.669 1.335a.75.75 0 0 1-.67-1.342zM5 13.25H2a.75.75 0 0 0 0 1.5h3zm12.354-4.515l2.81-1.406a.75.75 0 1 1 .671 1.341L18.42 9.88a4 4 0 0 0-1.065-1.144M6.647 8.735c-.427.306-.79.695-1.067 1.144L3.165 8.67a.75.75 0 0 1 .67-1.341zM16.5 8.27V7.5a4.5 4.5 0 1 0-9 0v.77A3.9 3.9 0 0 1 8.938 8h6.124c.508 0 .993.096 1.438.27"), e(o, "fill", "currentColor"), e(o, "d", "M6.376 1.584a.75.75 0 0 0 .208 1.04l2.36 1.573a4.5 4.5 0 0 1 1.387-.877L7.416 1.376a.75.75 0 0 0-1.04.208m8.68 2.613a4.5 4.5 0 0 0-1.387-.877l2.915-1.944a.75.75 0 1 1 .832 1.248z"), e(o, "opacity", "0.5"), e(s, "fill", "currentColor"), e(s, "fill-rule", "evenodd"), e(s, "d", "M12 14.25a.75.75 0 0 1 .75.75v7h-1.5v-7a.75.75 0 0 1 .75-.75"), e(s, "clip-rule", "evenodd"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24"), e(t, "class", "svelte-1v14ixl"), ht(
+      t = i("svg"), n = i("path"), a = i("path"), e(n, "fill", "currentColor"), e(n, "d", "M22 12.698c-.002 1.47-.013 2.718-.096 3.743c-.097 1.19-.296 2.184-.74 3.009a4.2 4.2 0 0 1-.73.983c-.833.833-1.893 1.21-3.237 1.39C15.884 22 14.2 22 12.053 22h-.106c-2.148 0-3.83 0-5.144-.177c-1.343-.18-2.404-.557-3.236-1.39c-.738-.738-1.12-1.656-1.322-2.795c-.2-1.12-.236-2.512-.243-4.241Q1.999 12.737 2 12v-.054c0-2.148 0-3.83.177-5.144c.18-1.343.557-2.404 1.39-3.236s1.893-1.21 3.236-1.39c1.168-.157 2.67-.175 4.499-.177a.697.697 0 1 1 0 1.396c-1.855.002-3.234.018-4.313.163c-1.189.16-1.906.464-2.436.994S3.72 5.8 3.56 6.99C3.397 8.2 3.395 9.788 3.395 12v.784l.932-.814a2.14 2.14 0 0 1 2.922.097l3.99 3.99a1.86 1.86 0 0 0 2.385.207l.278-.195a2.79 2.79 0 0 1 3.471.209l2.633 2.37c.265-.557.423-1.288.507-2.32c.079-.972.09-2.152.091-3.63a.698.698 0 0 1 1.396 0"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "fill-rule", "evenodd"), e(a, "d", "M17.5 2c-2.121 0-3.182 0-3.841.659S13 4.379 13 6.5s0 3.182.659 3.841S15.379 11 17.5 11s3.182 0 3.841-.659S22 8.621 22 6.5s0-3.182-.659-3.841S19.621 2 17.5 2m2.03 5.53l-1.5 1.5a.75.75 0 0 1-1.06 0l-1.5-1.5a.75.75 0 0 1 1.06-1.06l.22.22V4.5a.75.75 0 0 1 1.5 0v2.19l.22-.22a.75.75 0 1 1 1.06 1.06"), e(a, "clip-rule", "evenodd"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+    },
+    m(s, o) {
+      z(s, t, o), r(t, n), r(t, a);
+    },
+    p: y,
+    i: y,
+    o: y,
+    d(s) {
+      s && $(t);
+    }
+  };
+}
+class xa extends K {
+  constructor(t) {
+    super(), V(this, t, null, va, I, {});
+  }
+}
+function ba(l) {
+  let t, n, a, s, o;
+  return {
+    c() {
+      t = i("svg"), n = i("path"), a = i("path"), s = i("path"), o = i("path"), e(n, "fill", "currentColor"), e(n, "fill-rule", "evenodd"), e(n, "d", "M19 11.938V15a7 7 0 0 1-6.25 6.96V15a.75.75 0 0 0-1.5 0v6.96A7 7 0 0 1 5 15v-3.062A3.94 3.94 0 0 1 8.938 8h6.124A3.94 3.94 0 0 1 19 11.938"), e(n, "clip-rule", "evenodd"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M19 14.75v-1.5h3a.75.75 0 0 1 0 1.5zm-1.504 4.586c.31-.393.58-.82.801-1.276l2.538 1.27a.75.75 0 1 1-.67 1.34zM5.703 18.06q.333.684.801 1.276l-2.669 1.335a.75.75 0 0 1-.67-1.342zM5 13.25H2a.75.75 0 0 0 0 1.5h3zm12.354-4.515l2.81-1.406a.75.75 0 1 1 .671 1.341L18.42 9.88a4 4 0 0 0-1.065-1.144M6.647 8.735c-.427.306-.79.695-1.067 1.144L3.165 8.67a.75.75 0 0 1 .67-1.341zM16.5 8.27V7.5a4.5 4.5 0 1 0-9 0v.77A3.9 3.9 0 0 1 8.938 8h6.124c.508 0 .993.096 1.438.27"), e(s, "fill", "currentColor"), e(s, "d", "M6.376 1.584a.75.75 0 0 0 .208 1.04l2.36 1.573a4.5 4.5 0 0 1 1.387-.877L7.416 1.376a.75.75 0 0 0-1.04.208m8.68 2.613a4.5 4.5 0 0 0-1.387-.877l2.915-1.944a.75.75 0 1 1 .832 1.248z"), e(s, "opacity", "0.5"), e(o, "fill", "currentColor"), e(o, "fill-rule", "evenodd"), e(o, "d", "M12 14.25a.75.75 0 0 1 .75.75v7h-1.5v-7a.75.75 0 0 1 .75-.75"), e(o, "clip-rule", "evenodd"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24"), e(t, "class", "svelte-1v14ixl"), Je(
         t,
         "active",
         /*active*/
-        i[0]
+        l[0]
       );
     },
     m(d, c) {
-      S(d, t, c), n(t, r), n(t, a), n(t, o), n(t, s);
+      z(d, t, c), r(t, n), r(t, a), r(t, s), r(t, o);
     },
     p(d, [c]) {
       c & /*active*/
-      1 && ht(
+      1 && Je(
         t,
         "active",
         /*active*/
         d[0]
       );
     },
-    i: _,
-    o: _,
+    i: y,
+    o: y,
     d(d) {
-      d && U(t);
+      d && $(t);
     }
   };
 }
-function pa(i, t, r) {
+function ya(l, t, n) {
   let { active: a = !1 } = t;
-  return i.$$set = (o) => {
-    "active" in o && r(0, a = o.active);
+  return l.$$set = (s) => {
+    "active" in s && n(0, a = s.active);
   }, [a];
 }
-let ha = class extends V {
+let wa = class extends K {
   constructor(t) {
-    super(), Y(this, t, pa, fa, A, { active: 0 });
+    super(), V(this, t, ya, ba, I, { active: 0 });
   }
 };
-function ua(i) {
-  let t, r, a, o, s, d;
+function Ra(l) {
+  let t, n, a, s, o, d;
   return {
     c() {
-      t = l("svg"), r = l("g"), a = l("path"), o = l("path"), s = l("path"), d = l("path"), e(a, "d", "M7 10c0-1.414 0-2.121.44-2.56C7.878 7 8.585 7 10 7h4c1.414 0 2.121 0 2.56.44c.44.439.44 1.146.44 2.56v4c0 1.414 0 2.121-.44 2.56c-.439.44-1.146.44-2.56.44h-4c-1.414 0-2.121 0-2.56-.44C7 16.122 7 15.415 7 14z"), e(a, "opacity", "0.5"), e(o, "stroke-linecap", "round"), e(o, "stroke-linejoin", "round"), e(o, "d", "M12.429 10L11 12h2l-1.429 2"), e(s, "d", "M4 12c0-3.771 0-5.657 1.172-6.828S8.229 4 12 4s5.657 0 6.828 1.172S20 8.229 20 12s0 5.657-1.172 6.828S15.771 20 12 20s-5.657 0-6.828-1.172S4 15.771 4 12Z"), e(d, "stroke-linecap", "round"), e(d, "d", "M4 12H2m20 0h-2M4 9H2m20 0h-2M4 15H2m20 0h-2m-8 5v2m0-20v2M9 20v2M9 2v2m6 16v2m0-20v2"), e(d, "opacity", "0.5"), e(r, "fill", "none"), e(r, "stroke", "currentColor"), e(r, "stroke-width", "1.5"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+      t = i("svg"), n = i("g"), a = i("path"), s = i("path"), o = i("path"), d = i("path"), e(a, "d", "M7 10c0-1.414 0-2.121.44-2.56C7.878 7 8.585 7 10 7h4c1.414 0 2.121 0 2.56.44c.44.439.44 1.146.44 2.56v4c0 1.414 0 2.121-.44 2.56c-.439.44-1.146.44-2.56.44h-4c-1.414 0-2.121 0-2.56-.44C7 16.122 7 15.415 7 14z"), e(a, "opacity", "0.5"), e(s, "stroke-linecap", "round"), e(s, "stroke-linejoin", "round"), e(s, "d", "M12.429 10L11 12h2l-1.429 2"), e(o, "d", "M4 12c0-3.771 0-5.657 1.172-6.828S8.229 4 12 4s5.657 0 6.828 1.172S20 8.229 20 12s0 5.657-1.172 6.828S15.771 20 12 20s-5.657 0-6.828-1.172S4 15.771 4 12Z"), e(d, "stroke-linecap", "round"), e(d, "d", "M4 12H2m20 0h-2M4 9H2m20 0h-2M4 15H2m20 0h-2m-8 5v2m0-20v2M9 20v2M9 2v2m6 16v2m0-20v2"), e(d, "opacity", "0.5"), e(n, "fill", "none"), e(n, "stroke", "currentColor"), e(n, "stroke-width", "1.5"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
     },
     m(c, f) {
-      S(c, t, f), n(t, r), n(r, a), n(r, o), n(r, s), n(r, d);
+      z(c, t, f), r(t, n), r(n, a), r(n, s), r(n, o), r(n, d);
     },
-    p: _,
-    i: _,
-    o: _,
+    p: y,
+    i: y,
+    o: y,
     d(c) {
-      c && U(t);
+      c && $(t);
     }
   };
 }
-class ga extends V {
+class ka extends K {
   constructor(t) {
-    super(), Y(this, t, null, ua, A, {});
+    super(), V(this, t, null, Ra, I, {});
   }
 }
-function va(i) {
-  let t, r, a;
+function _a(l) {
+  let t, n, a;
   return {
     c() {
-      t = l("svg"), r = l("path"), a = l("path"), e(r, "fill", "currentColor"), e(r, "d", "M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12"), e(r, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "fill-rule", "evenodd"), e(a, "d", "M14 7.75a.75.75 0 0 1 0-1.5h3a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0V8.81l-2.22 2.22a.75.75 0 1 1-1.06-1.06l2.22-2.22zm-2.97 5.22a.75.75 0 0 1 0 1.06l-2.22 2.22H10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1-.75-.75v-3a.75.75 0 0 1 1.5 0v1.19l2.22-2.22a.75.75 0 0 1 1.06 0"), e(a, "clip-rule", "evenodd"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+      t = i("svg"), n = i("path"), a = i("path"), e(n, "fill", "currentColor"), e(n, "d", "M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "fill-rule", "evenodd"), e(a, "d", "M14 7.75a.75.75 0 0 1 0-1.5h3a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0V8.81l-2.22 2.22a.75.75 0 1 1-1.06-1.06l2.22-2.22zm-2.97 5.22a.75.75 0 0 1 0 1.06l-2.22 2.22H10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1-.75-.75v-3a.75.75 0 0 1 1.5 0v1.19l2.22-2.22a.75.75 0 0 1 1.06 0"), e(a, "clip-rule", "evenodd"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
     },
-    m(o, s) {
-      S(o, t, s), n(t, r), n(t, a);
+    m(s, o) {
+      z(s, t, o), r(t, n), r(t, a);
     },
-    p: _,
-    i: _,
-    o: _,
-    d(o) {
-      o && U(t);
+    p: y,
+    i: y,
+    o: y,
+    d(s) {
+      s && $(t);
     }
   };
 }
-class ma extends V {
+class qa extends K {
   constructor(t) {
-    super(), Y(this, t, null, va, A, {});
+    super(), V(this, t, null, _a, I, {});
   }
 }
-function ya(i) {
-  let t, r, a;
+function Sa(l) {
+  let t, n, a;
   return {
     c() {
-      t = l("svg"), r = l("path"), a = l("path"), e(r, "fill", "currentColor"), e(r, "fill-rule", "evenodd"), e(r, "d", "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10"), e(r, "clip-rule", "evenodd"), e(r, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "m15.414 13.059l-4.72 2.787C9.934 16.294 9 15.71 9 14.786V9.214c0-.924.934-1.507 1.694-1.059l4.72 2.787c.781.462.781 1.656 0 2.118"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+      t = i("svg"), n = i("path"), a = i("path"), e(n, "fill", "currentColor"), e(n, "fill-rule", "evenodd"), e(n, "d", "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10"), e(n, "clip-rule", "evenodd"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "m15.414 13.059l-4.72 2.787C9.934 16.294 9 15.71 9 14.786V9.214c0-.924.934-1.507 1.694-1.059l4.72 2.787c.781.462.781 1.656 0 2.118"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
     },
-    m(o, s) {
-      S(o, t, s), n(t, r), n(t, a);
+    m(s, o) {
+      z(s, t, o), r(t, n), r(t, a);
     },
-    p: _,
-    i: _,
-    o: _,
-    d(o) {
-      o && U(t);
+    p: y,
+    i: y,
+    o: y,
+    d(s) {
+      s && $(t);
     }
   };
 }
-class xa extends V {
+class Ga extends K {
   constructor(t) {
-    super(), Y(this, t, null, ya, A, {});
+    super(), V(this, t, null, Sa, I, {});
   }
 }
-function ba(i) {
-  let t, r, a, o, s;
-  const d = (
+function Ca(l) {
+  let t, n, a, s, o, d;
+  const c = (
     /*#slots*/
-    i[4].default
-  ), c = Gi(
-    d,
-    i,
+    l[4].default
+  ), f = Hi(
+    c,
+    l,
     /*$$scope*/
-    i[3],
+    l[3],
     null
   );
   return {
     c() {
-      t = k("div"), r = k("div"), a = E(), c && c.c(), e(r, "class", "tip svelte-hgj5m"), e(t, "class", o = "popover " + /*visible*/
-      (i[0] ? "visible" : "") + " svelte-hgj5m"), G(
+      t = _("div"), n = _("div"), a = _("div"), s = B(), f && f.c(), e(a, "class", "tip svelte-vvbv4g"), e(n, "class", o = "popover " + /*visible*/
+      (l[0] ? "visible" : "") + " svelte-vvbv4g"), e(t, "class", "popover-root svelte-vvbv4g"), E(
         t,
         "--x",
         /*position*/
-        i[2].x + "px"
-      ), G(
+        l[2].x + "px"
+      ), E(
         t,
         "--y",
         /*position*/
-        i[2].y + "px"
+        l[2].y + "px"
       );
     },
-    m(f, p) {
-      S(f, t, p), n(t, r), n(t, a), c && c.m(t, null), i[5](t), s = !0;
+    m(h, p) {
+      z(h, t, p), r(t, n), r(n, a), r(n, s), f && f.m(n, null), l[5](t), d = !0;
     },
-    p(f, [p]) {
-      c && c.p && (!s || p & /*$$scope*/
-      8) && zi(
-        c,
-        d,
+    p(h, [p]) {
+      f && f.p && (!d || p & /*$$scope*/
+      8) && ji(
         f,
+        c,
+        h,
         /*$$scope*/
-        f[3],
-        s ? Ui(
-          d,
+        h[3],
+        d ? Pi(
+          c,
           /*$$scope*/
-          f[3],
+          h[3],
           p,
           null
-        ) : Si(
+        ) : Ti(
           /*$$scope*/
-          f[3]
+          h[3]
         ),
         null
-      ), (!s || p & /*visible*/
+      ), (!d || p & /*visible*/
       1 && o !== (o = "popover " + /*visible*/
-      (f[0] ? "visible" : "") + " svelte-hgj5m")) && e(t, "class", o), (!s || p & /*position*/
-      4) && G(
+      (h[0] ? "visible" : "") + " svelte-vvbv4g")) && e(n, "class", o), (!d || p & /*position*/
+      4) && E(
         t,
         "--x",
         /*position*/
-        f[2].x + "px"
-      ), (!s || p & /*position*/
-      4) && G(
+        h[2].x + "px"
+      ), (!d || p & /*position*/
+      4) && E(
         t,
         "--y",
         /*position*/
-        f[2].y + "px"
+        h[2].y + "px"
       );
     },
-    i(f) {
-      s || (B(c, f), s = !0);
+    i(h) {
+      d || (P(f, h), d = !0);
     },
-    o(f) {
-      Q(c, f), s = !1;
+    o(h) {
+      j(f, h), d = !1;
     },
-    d(f) {
-      f && U(t), c && c.d(f), i[5](null);
+    d(h) {
+      h && $(t), f && f.d(h), l[5](null);
     }
   };
 }
-function wa(i, t, r) {
-  let { $$slots: a = {}, $$scope: o } = t, s, { visible: d = !1 } = t, c, f = { x: 0, y: 0 };
-  P2(() => {
-    if (s = c.parentElement, s) {
-      const b = s.getBoundingClientRect(), g = c.getBoundingClientRect();
-      r(2, f = {
-        x: b.left + window.scrollX,
-        y: b.top + window.scrollY
+function Ma(l, t, n) {
+  let { $$slots: a = {}, $$scope: s } = t, o, { visible: d = !1 } = t, c, f = { x: 0, y: 0 };
+  rl(() => {
+    if (o = c.parentElement, o) {
+      const p = o.getBoundingClientRect(), g = c.getBoundingClientRect();
+      n(2, f = {
+        x: p.left + window.scrollX,
+        y: p.top + window.scrollY
         // + (rect.height - popoverRect.height) / 2
-      }), f.x + g.width > window.innerWidth ? r(2, f.x -= g.width, f) : r(2, f.x += b.width, f);
+      }), f.x + g.width > window.innerWidth ? n(2, f.x -= g.width, f) : n(2, f.x += p.width, f);
     }
   });
-  function p(b) {
-    X0[b ? "unshift" : "push"](() => {
-      c = b, r(1, c);
+  function h(p) {
+    r2[p ? "unshift" : "push"](() => {
+      c = p, n(1, c);
     });
   }
-  return i.$$set = (b) => {
-    "visible" in b && r(0, d = b.visible), "$$scope" in b && r(3, o = b.$$scope);
-  }, [d, c, f, o, a, p];
+  return l.$$set = (p) => {
+    "visible" in p && n(0, d = p.visible), "$$scope" in p && n(3, s = p.$$scope);
+  }, [d, c, f, s, a, h];
 }
-class E2 extends V {
+class F2 extends K {
   constructor(t) {
-    super(), Y(this, t, wa, ba, A, { visible: 0 });
+    super(), V(this, t, Ma, Ca, I, { visible: 0 });
   }
 }
-function ka(i) {
-  let t;
+function Ua(l) {
+  let t, n, a, s, o = [
+    { xmlns: "http://www.w3.org/2000/svg" },
+    { width: "1em" },
+    { height: "1em" },
+    { viewBox: "0 0 24 24" },
+    /*$$props*/
+    l[0]
+  ], d = {};
+  for (let c = 0; c < o.length; c += 1)
+    d = N(d, o[c]);
   return {
     c() {
-      t = Z("Start by picking a BIN program");
+      t = i("svg"), n = i("path"), a = i("path"), s = i("path"), e(n, "fill", "currentColor"), e(n, "d", "M2 6.95c0-.883 0-1.324.07-1.692A4 4 0 0 1 5.257 2.07C5.626 2 6.068 2 6.95 2c.386 0 .58 0 .766.017a4 4 0 0 1 2.18.904c.144.119.28.255.554.529L11 4c.816.816 1.224 1.224 1.712 1.495a4 4 0 0 0 .848.352C14.098 6 14.675 6 15.828 6h.374c2.632 0 3.949 0 4.804.77q.119.105.224.224c.77.855.77 2.172.77 4.804V14c0 3.771 0 5.657-1.172 6.828S17.771 22 14 22h-4c-3.771 0-5.657 0-6.828-1.172S2 17.771 2 14z"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M20 6.238c0-.298-.005-.475-.025-.63a3 3 0 0 0-2.583-2.582C17.197 3 16.965 3 16.5 3H9.988c.116.104.247.234.462.45L11 4c.816.816 1.224 1.224 1.712 1.495a4 4 0 0 0 .849.352C14.098 6 14.675 6 15.829 6h.373c1.78 0 2.957 0 3.798.238"), e(s, "fill", "currentColor"), e(s, "fill-rule", "evenodd"), e(s, "d", "M12.25 10a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5h-5a.75.75 0 0 1-.75-.75"), e(s, "clip-rule", "evenodd"), ae(t, d);
     },
-    m(r, a) {
-      S(r, t, a);
+    m(c, f) {
+      z(c, t, f), r(t, n), r(t, a), r(t, s);
     },
-    d(r) {
-      r && U(t);
+    p(c, [f]) {
+      ae(t, d = n0(o, [
+        { xmlns: "http://www.w3.org/2000/svg" },
+        { width: "1em" },
+        { height: "1em" },
+        { viewBox: "0 0 24 24" },
+        f & /*$$props*/
+        1 && /*$$props*/
+        c[0]
+      ]));
+    },
+    i: y,
+    o: y,
+    d(c) {
+      c && $(t);
     }
   };
 }
-function qa(i) {
+function $a(l, t, n) {
+  return l.$$set = (a) => {
+    n(0, t = N(N({}, t), ie(a)));
+  }, t = ie(t), [t];
+}
+class za extends K {
+  constructor(t) {
+    super(), V(this, t, $a, Ua, I, {});
+  }
+}
+function Oa(l) {
   let t;
   return {
     c() {
-      t = Z(
+      t = Y("Start by picking a BIN program");
+    },
+    m(n, a) {
+      z(n, t, a);
+    },
+    d(n) {
+      n && $(t);
+    }
+  };
+}
+function Ea(l) {
+  let t;
+  return {
+    c() {
+      t = Y(
         /*$copyScreenFeedback*/
-        i[8]
+        l[8]
       );
     },
-    m(r, a) {
-      S(r, t, a);
+    m(n, a) {
+      z(n, t, a);
     },
-    p(r, a) {
+    p(n, a) {
       a & /*$copyScreenFeedback*/
-      256 && N0(
+      256 && t0(
         t,
         /*$copyScreenFeedback*/
-        r[8]
+        n[8]
       );
     },
-    d(r) {
-      r && U(t);
+    d(n) {
+      n && $(t);
     }
   };
 }
-function _a(i) {
+function Ba(l) {
   let t;
   return {
     c() {
-      t = Z("Check why it crashed here");
+      t = Y("Check why it crashed here");
     },
-    m(r, a) {
-      S(r, t, a);
+    m(n, a) {
+      z(n, t, a);
     },
-    d(r) {
-      r && U(t);
+    d(n) {
+      n && $(t);
     }
   };
 }
-function Ga(i) {
+function Ha(l) {
   let t;
   return {
     c() {
-      t = Z("Now let's start the program");
+      t = Y("Now let's start the program");
     },
-    m(r, a) {
-      S(r, t, a);
+    m(n, a) {
+      z(n, t, a);
     },
-    d(r) {
-      r && U(t);
+    d(n) {
+      n && $(t);
     }
   };
 }
-function Ua(i) {
-  let t, r, a, o, s, d, c, f, p, b, g, w, x, z, q, m, y, H, C, P, D, $, M, h, j, T, Re, N, R, ne, J, le, Xe, Ve, ut, Kn, Te, We, ie, Ie, Be, Xr, Wr;
-  return a = new E2({
+function Pa(l) {
+  let t, n, a, s, o, d, c, f, h, p, g, w, G, k, v, S, R, O, U, q, T, x, u, C, M, W, Q, Z, J, et, D, le, de, se, Le, N0, tt, Qe, Y0, nt, W0, ce, Ie, Ve, r0, l0;
+  return a = new F2({
     props: {
       visible: (
         /*loadHint*/
-        i[7]
+        l[7]
       ),
-      $$slots: { default: [ka] },
-      $$scope: { ctx: i }
+      $$slots: { default: [Oa] },
+      $$scope: { ctx: l }
     }
-  }), s = new aa({}), w = new E2({
+  }), o = new ua({}), p = new za({}), v = new F2({
     props: {
       visible: (
         /*$copyScreenFeedback*/
-        i[8] !== null
+        l[8] !== null
       ),
-      $$slots: { default: [qa] },
-      $$scope: { ctx: i }
+      $$slots: { default: [Ea] },
+      $$scope: { ctx: l }
     }
-  }), z = new sa({}), y = new da({}), $ = new ha({ props: { active: (
+  }), R = new ga({}), q = new xa({}), M = new wa({ props: { active: (
     /*$debugging*/
-    i[1]
-  ) } }), T = new E2({
+    l[1]
+  ) } }), J = new F2({
     props: {
       visible: (
         /*crashedHint*/
-        i[2] && !/*$tracing*/
-        i[9]
+        l[2] && !/*$tracing*/
+        l[9]
       ),
-      $$slots: { default: [_a] },
-      $$scope: { ctx: i }
+      $$slots: { default: [Ba] },
+      $$scope: { ctx: l }
     }
-  }), N = new ga({}), le = new E2({
+  }), D = new ka({}), Le = new F2({
     props: {
       visible: (
         /*loaded*/
-        i[6] && !/*$debugging*/
-        i[1]
+        l[6] && !/*$debugging*/
+        l[1]
       ),
-      $$slots: { default: [Ga] },
-      $$scope: { ctx: i }
+      $$slots: { default: [Ha] },
+      $$scope: { ctx: l }
     }
-  }), Ve = new xa({}), Ie = new ma({}), {
+  }), tt = new Ga({}), Ie = new qa({}), {
     c() {
-      t = k("div"), r = k("button"), K(a.$$.fragment), o = E(), K(s.$$.fragment), d = E(), c = k("input"), f = E(), p = k("div"), b = E(), g = k("button"), K(w.$$.fragment), x = E(), K(z.$$.fragment), q = E(), m = k("button"), K(y.$$.fragment), H = E(), C = k("div"), P = E(), D = k("button"), K($.$$.fragment), h = E(), j = k("button"), K(T.$$.fragment), Re = E(), K(N.$$.fragment), ne = E(), J = k("button"), K(le.$$.fragment), Xe = E(), K(Ve.$$.fragment), Kn = E(), Te = k("div"), We = E(), ie = k("button"), K(Ie.$$.fragment), e(c, "type", "file"), e(c, "id", "fileInput"), G(c, "display", "none"), e(r, "class", "toolbar-action"), e(r, "type", "button"), e(r, "tabindex", "0"), e(r, "id", "btn_pickFile"), e(p, "class", "separator"), e(p, "role", "separator"), e(p, "data-orientation", "horizontal"), e(p, "aria-orientation", "horizontal"), e(g, "class", "toolbar-action"), e(g, "type", "button"), e(g, "tabindex", "0"), e(g, "id", "btn_copyScreen"), e(m, "class", "toolbar-action"), e(m, "type", "button"), e(m, "tabindex", "0"), e(m, "id", "btn_saveScreen"), e(C, "class", "separator"), e(C, "role", "separator"), e(C, "data-orientation", "horizontal"), e(C, "aria-orientation", "horizontal"), e(D, "class", "toolbar-action"), e(D, "type", "button"), e(D, "tabindex", "0"), e(D, "id", "btn_debug"), D.disabled = M = !/*loaded*/
-      i[6] && /*running*/
-      i[5] && !/*isDebug*/
-      i[4], e(j, "class", "toolbar-action"), e(j, "type", "button"), e(j, "tabindex", "0"), e(j, "id", "btn_dump"), j.disabled = R = !/*loaded*/
-      i[6] && !/*crashed*/
-      i[0] && !/*running*/
-      i[5], e(J, "class", "toolbar-action"), e(J, "type", "button"), e(J, "tabindex", "0"), e(J, "id", "btn_run"), J.disabled = ut = !/*loaded*/
-      i[6], e(Te, "class", "separator"), e(Te, "role", "separator"), e(Te, "data-orientation", "horizontal"), e(Te, "aria-orientation", "horizontal"), e(ie, "class", "toolbar-action"), e(ie, "type", "button"), e(ie, "tabindex", "0"), e(ie, "id", "btn_fullscreen"), e(t, "class", "toolbar");
+      t = _("div"), n = _("button"), L(a.$$.fragment), s = B(), L(o.$$.fragment), d = B(), c = _("input"), f = B(), h = _("button"), L(p.$$.fragment), g = B(), w = _("div"), G = B(), k = _("button"), L(v.$$.fragment), S = B(), L(R.$$.fragment), O = B(), U = _("button"), L(q.$$.fragment), T = B(), x = _("div"), u = B(), C = _("button"), L(M.$$.fragment), Q = B(), Z = _("button"), L(J.$$.fragment), et = B(), L(D.$$.fragment), de = B(), se = _("button"), L(Le.$$.fragment), N0 = B(), L(tt.$$.fragment), Y0 = B(), nt = _("div"), W0 = B(), ce = _("button"), L(Ie.$$.fragment), e(c, "type", "file"), e(c, "id", "fileInput"), E(c, "display", "none"), e(n, "class", "toolbar-action"), e(n, "type", "button"), e(n, "tabindex", "0"), e(n, "id", "btn_pickFile"), e(h, "class", "toolbar-action"), e(h, "type", "button"), e(h, "tabindex", "0"), e(h, "id", "btn_browseFiles"), e(w, "class", "separator"), e(w, "role", "separator"), e(w, "data-orientation", "horizontal"), e(w, "aria-orientation", "horizontal"), e(k, "class", "toolbar-action"), e(k, "type", "button"), e(k, "tabindex", "0"), e(k, "id", "btn_copyScreen"), e(U, "class", "toolbar-action"), e(U, "type", "button"), e(U, "tabindex", "0"), e(U, "id", "btn_saveScreen"), e(x, "class", "separator"), e(x, "role", "separator"), e(x, "data-orientation", "horizontal"), e(x, "aria-orientation", "horizontal"), e(C, "class", "toolbar-action"), e(C, "type", "button"), e(C, "tabindex", "0"), e(C, "id", "btn_debug"), C.disabled = W = !/*loaded*/
+      l[6] && /*running*/
+      l[5] && !/*isDebug*/
+      l[4], e(Z, "class", "toolbar-action"), e(Z, "type", "button"), e(Z, "tabindex", "0"), e(Z, "id", "btn_dump"), Z.disabled = le = !/*loaded*/
+      l[6] && !/*crashed*/
+      l[0] && !/*running*/
+      l[5], e(se, "class", "toolbar-action"), e(se, "type", "button"), e(se, "tabindex", "0"), e(se, "id", "btn_run"), se.disabled = Qe = !/*loaded*/
+      l[6], e(nt, "class", "separator"), e(nt, "role", "separator"), e(nt, "data-orientation", "horizontal"), e(nt, "aria-orientation", "horizontal"), e(ce, "class", "toolbar-action"), e(ce, "type", "button"), e(ce, "tabindex", "0"), e(ce, "id", "btn_fullscreen"), e(t, "class", "toolbar");
     },
-    m(O, I) {
-      S(O, t, I), n(t, r), L(a, r, null), n(r, o), L(s, r, null), n(r, d), n(r, c), i[19](c), n(t, f), n(t, p), n(t, b), n(t, g), L(w, g, null), n(g, x), L(z, g, null), n(t, q), n(t, m), L(y, m, null), n(t, H), n(t, C), n(t, P), n(t, D), L($, D, null), n(t, h), n(t, j), L(T, j, null), n(j, Re), L(N, j, null), n(t, ne), n(t, J), L(le, J, null), n(J, Xe), L(Ve, J, null), n(t, Kn), n(t, Te), n(t, We), n(t, ie), L(Ie, ie, null), Be = !0, Xr || (Wr = [
+    m(H, X) {
+      z(H, t, X), r(t, n), F(a, n, null), r(n, s), F(o, n, null), r(n, d), r(n, c), l[20](c), r(t, f), r(t, h), F(p, h, null), r(t, g), r(t, w), r(t, G), r(t, k), F(v, k, null), r(k, S), F(R, k, null), r(t, O), r(t, U), F(q, U, null), r(t, T), r(t, x), r(t, u), r(t, C), F(M, C, null), r(t, Q), r(t, Z), F(J, Z, null), r(Z, et), F(D, Z, null), r(t, de), r(t, se), F(Le, se, null), r(se, N0), F(tt, se, null), r(t, Y0), r(t, nt), r(t, W0), r(t, ce), F(Ie, ce, null), Ve = !0, r0 || (l0 = [
         ee(
           c,
           "change",
           /*handleFile*/
-          i[11]
+          l[11]
         ),
         ee(
-          r,
+          n,
           "click",
           /*pickFile*/
-          i[10]
+          l[10]
         ),
         ee(
-          g,
+          h,
+          "click",
+          /*doBrowseFiles*/
+          l[12]
+        ),
+        ee(
+          k,
           "click",
           /*doCopyScreen*/
-          i[12]
+          l[13]
         ),
         ee(
-          m,
+          U,
           "click",
           /*doSaveScreen*/
-          i[13]
+          l[14]
         ),
         ee(
-          D,
+          C,
           "click",
           /*doDebug*/
-          i[17]
+          l[18]
         ),
         ee(
-          j,
+          Z,
           "click",
           /*doDump*/
-          i[16]
+          l[17]
         ),
         ee(
-          J,
+          se,
           "click",
           /*doRun*/
-          i[14]
+          l[15]
         ),
         ee(
-          ie,
+          ce,
           "click",
           /*doFullscreen*/
-          i[15]
+          l[16]
         )
-      ], Xr = !0);
+      ], r0 = !0);
     },
-    p(O, [I]) {
-      const gt = {};
-      I & /*loadHint*/
-      128 && (gt.visible = /*loadHint*/
-      O[7]), I & /*$$scope*/
-      4194304 && (gt.$$scope = { dirty: I, ctx: O }), a.$set(gt);
-      const Jr = {};
-      I & /*$copyScreenFeedback*/
-      256 && (Jr.visible = /*$copyScreenFeedback*/
-      O[8] !== null), I & /*$$scope, $copyScreenFeedback*/
-      4194560 && (Jr.$$scope = { dirty: I, ctx: O }), w.$set(Jr);
-      const An = {};
-      I & /*$debugging*/
-      2 && (An.active = /*$debugging*/
-      O[1]), $.$set(An), (!Be || I & /*loaded, running, isDebug*/
-      112 && M !== (M = !/*loaded*/
-      O[6] && /*running*/
-      O[5] && !/*isDebug*/
-      O[4])) && (D.disabled = M);
-      const vt = {};
-      I & /*crashedHint, $tracing*/
-      516 && (vt.visible = /*crashedHint*/
-      O[2] && !/*$tracing*/
-      O[9]), I & /*$$scope*/
-      4194304 && (vt.$$scope = { dirty: I, ctx: O }), T.$set(vt), (!Be || I & /*loaded, crashed, running*/
-      97 && R !== (R = !/*loaded*/
-      O[6] && !/*crashed*/
-      O[0] && !/*running*/
-      O[5])) && (j.disabled = R);
-      const en = {};
-      I & /*loaded, $debugging*/
-      66 && (en.visible = /*loaded*/
-      O[6] && !/*$debugging*/
-      O[1]), I & /*$$scope*/
-      4194304 && (en.$$scope = { dirty: I, ctx: O }), le.$set(en), (!Be || I & /*loaded*/
-      64 && ut !== (ut = !/*loaded*/
-      O[6])) && (J.disabled = ut);
+    p(H, [X]) {
+      const bt = {};
+      X & /*loadHint*/
+      128 && (bt.visible = /*loadHint*/
+      H[7]), X & /*$$scope*/
+      8388608 && (bt.$$scope = { dirty: X, ctx: H }), a.$set(bt);
+      const i0 = {};
+      X & /*$copyScreenFeedback*/
+      256 && (i0.visible = /*$copyScreenFeedback*/
+      H[8] !== null), X & /*$$scope, $copyScreenFeedback*/
+      8388864 && (i0.$$scope = { dirty: X, ctx: H }), v.$set(i0);
+      const Z0 = {};
+      X & /*$debugging*/
+      2 && (Z0.active = /*$debugging*/
+      H[1]), M.$set(Z0), (!Ve || X & /*loaded, running, isDebug*/
+      112 && W !== (W = !/*loaded*/
+      H[6] && /*running*/
+      H[5] && !/*isDebug*/
+      H[4])) && (C.disabled = W);
+      const yt = {};
+      X & /*crashedHint, $tracing*/
+      516 && (yt.visible = /*crashedHint*/
+      H[2] && !/*$tracing*/
+      H[9]), X & /*$$scope*/
+      8388608 && (yt.$$scope = { dirty: X, ctx: H }), J.$set(yt), (!Ve || X & /*loaded, crashed, running*/
+      97 && le !== (le = !/*loaded*/
+      H[6] && !/*crashed*/
+      H[0] && !/*running*/
+      H[5])) && (Z.disabled = le);
+      const a0 = {};
+      X & /*loaded, $debugging*/
+      66 && (a0.visible = /*loaded*/
+      H[6] && !/*$debugging*/
+      H[1]), X & /*$$scope*/
+      8388608 && (a0.$$scope = { dirty: X, ctx: H }), Le.$set(a0), (!Ve || X & /*loaded*/
+      64 && Qe !== (Qe = !/*loaded*/
+      H[6])) && (se.disabled = Qe);
     },
-    i(O) {
-      Be || (B(a.$$.fragment, O), B(s.$$.fragment, O), B(w.$$.fragment, O), B(z.$$.fragment, O), B(y.$$.fragment, O), B($.$$.fragment, O), B(T.$$.fragment, O), B(N.$$.fragment, O), B(le.$$.fragment, O), B(Ve.$$.fragment, O), B(Ie.$$.fragment, O), Be = !0);
+    i(H) {
+      Ve || (P(a.$$.fragment, H), P(o.$$.fragment, H), P(p.$$.fragment, H), P(v.$$.fragment, H), P(R.$$.fragment, H), P(q.$$.fragment, H), P(M.$$.fragment, H), P(J.$$.fragment, H), P(D.$$.fragment, H), P(Le.$$.fragment, H), P(tt.$$.fragment, H), P(Ie.$$.fragment, H), Ve = !0);
     },
-    o(O) {
-      Q(a.$$.fragment, O), Q(s.$$.fragment, O), Q(w.$$.fragment, O), Q(z.$$.fragment, O), Q(y.$$.fragment, O), Q($.$$.fragment, O), Q(T.$$.fragment, O), Q(N.$$.fragment, O), Q(le.$$.fragment, O), Q(Ve.$$.fragment, O), Q(Ie.$$.fragment, O), Be = !1;
+    o(H) {
+      j(a.$$.fragment, H), j(o.$$.fragment, H), j(p.$$.fragment, H), j(v.$$.fragment, H), j(R.$$.fragment, H), j(q.$$.fragment, H), j(M.$$.fragment, H), j(J.$$.fragment, H), j(D.$$.fragment, H), j(Le.$$.fragment, H), j(tt.$$.fragment, H), j(Ie.$$.fragment, H), Ve = !1;
     },
-    d(O) {
-      O && U(t), F(a), F(s), i[19](null), F(w), F(z), F(y), F($), F(T), F(N), F(le), F(Ve), F(Ie), Xr = !1, Zr(Wr);
+    d(H) {
+      H && $(t), A(a), A(o), l[20](null), A(p), A(v), A(R), A(q), A(M), A(J), A(D), A(Le), A(tt), A(Ie), r0 = !1, xt(l0);
     }
   };
 }
-function za(i, t, r) {
-  let a, o, s, d, c, f, p, b, g;
-  te(i, Z2, (h) => r(1, f = h)), te(i, Ze, (h) => r(18, p = h)), te(i, V2, (h) => r(8, b = h)), te(i, cl, (h) => r(9, g = h));
+function ja(l, t, n) {
+  let a, s, o, d, c, f, h, p, g;
+  re(l, ei, (M) => n(1, f = M)), re(l, lt, (M) => n(19, h = M)), re(l, Z2, (M) => n(8, p = M)), re(l, gr, (M) => n(9, g = M));
   const w = () => {
-    z.click();
+    k.click();
   };
-  let x = !1, z;
-  const q = I2(), m = (h) => {
-    q("romChanged", h);
-  }, y = (h) => {
-    q("doCopyScreen", h);
-  }, H = (h) => {
-    q("doSaveScreen", h);
-  }, C = (h) => {
-    q("doRun", h);
-  }, P = (h) => {
-    q("doFullscreen", h);
-  }, D = (h) => {
-    q("doDump", h);
-  }, $ = (h) => {
-    q("doDebug", h);
+  let G = !1, k;
+  const v = V2(), S = (M) => {
+    v("romChanged", M);
+  }, R = (M) => {
+    v("doBrowseFiles", M);
+  }, O = (M) => {
+    v("doCopyScreen", M);
+  }, U = (M) => {
+    v("doSaveScreen", M);
+  }, q = (M) => {
+    v("doRun", M);
+  }, T = (M) => {
+    v("doFullscreen", M);
+  }, x = (M) => {
+    v("doDump", M);
+  }, u = (M) => {
+    v("doDebug", M);
   };
-  function M(h) {
-    X0[h ? "unshift" : "push"](() => {
-      z = h, r(3, z);
+  function C(M) {
+    r2[M ? "unshift" : "push"](() => {
+      k = M, n(3, k);
     });
   }
-  return i.$$.update = () => {
-    i.$$.dirty & /*$state*/
-    262144 && r(7, a = p === "empty"), i.$$.dirty & /*$state*/
-    262144 && r(6, o = p === "loaded"), i.$$.dirty & /*$state*/
-    262144 && r(0, s = p === "crashed"), i.$$.dirty & /*$state*/
-    262144 && r(5, d = p === "running"), i.$$.dirty & /*crashed*/
-    1 && s && (r(2, x = !0), setTimeout(
+  return l.$$.update = () => {
+    l.$$.dirty & /*$state*/
+    524288 && n(7, a = h === "empty"), l.$$.dirty & /*$state*/
+    524288 && n(6, s = h === "loaded"), l.$$.dirty & /*$state*/
+    524288 && n(0, o = h === "crashed"), l.$$.dirty & /*$state*/
+    524288 && n(5, d = h === "running"), l.$$.dirty & /*crashed*/
+    1 && o && (n(2, G = !0), setTimeout(
       () => {
-        r(2, x = !1);
+        n(2, G = !1);
       },
       4e3
-    )), i.$$.dirty & /*$state*/
-    262144, i.$$.dirty & /*$debugging*/
-    2 && r(4, c = f);
+    )), l.$$.dirty & /*$state*/
+    524288, l.$$.dirty & /*$debugging*/
+    2 && n(4, c = f);
   }, [
-    s,
+    o,
     f,
-    x,
-    z,
+    G,
+    k,
     c,
     d,
-    o,
+    s,
     a,
-    b,
+    p,
     g,
     w,
-    m,
-    y,
-    H,
-    C,
-    P,
-    D,
-    $,
-    p,
-    M
+    S,
+    R,
+    O,
+    U,
+    q,
+    T,
+    x,
+    u,
+    h,
+    C
   ];
 }
-class Sa extends V {
+class Ta extends K {
   constructor(t) {
-    super(), Y(this, t, za, Ua, A, {});
+    super(), V(this, t, ja, Pa, I, {});
   }
 }
-function $a(i) {
-  let t, r, a, o;
+function Da(l) {
+  let t, n, a, s;
   return {
     c() {
-      t = l("svg"), r = l("g"), a = l("path"), o = l("path"), e(a, "d", "M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"), e(a, "opacity", "0.5"), e(o, "stroke-linecap", "round"), e(o, "d", "m14.5 9.5l-5 5m0-5l5 5"), e(r, "fill", "none"), e(r, "stroke", "currentColor"), e(r, "stroke-width", "1.5"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+      t = i("svg"), n = i("g"), a = i("path"), s = i("path"), e(a, "d", "M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"), e(a, "opacity", "0.5"), e(s, "stroke-linecap", "round"), e(s, "d", "m14.5 9.5l-5 5m0-5l5 5"), e(n, "fill", "none"), e(n, "stroke", "currentColor"), e(n, "stroke-width", "1.5"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
     },
-    m(s, d) {
-      S(s, t, d), n(t, r), n(r, a), n(r, o);
+    m(o, d) {
+      z(o, t, d), r(t, n), r(n, a), r(n, s);
     },
-    p: _,
-    i: _,
-    o: _,
+    p: y,
+    i: y,
+    o: y,
+    d(o) {
+      o && $(t);
+    }
+  };
+}
+class ti extends K {
+  constructor(t) {
+    super(), V(this, t, null, Da, I, {});
+  }
+}
+function Fa(l) {
+  let t, n, a;
+  return {
+    c() {
+      t = i("svg"), n = i("path"), a = i("path"), e(n, "fill", "currentColor"), e(n, "d", "M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M12.01 5.25a6.59 6.59 0 0 0-6.55 5.833H5a.75.75 0 0 0-.53 1.281l1.168 1.167a.75.75 0 0 0 1.06 0l1.169-1.167a.75.75 0 0 0-.53-1.28h-.364A5.09 5.09 0 0 1 12.01 6.75a5.08 5.08 0 0 1 3.838 1.743a.75.75 0 1 0 1.13-.986A6.58 6.58 0 0 0 12.01 5.25m6.352 5.22a.75.75 0 0 0-1.06 0l-1.168 1.166a.75.75 0 0 0 .53 1.28h.363a5.09 5.09 0 0 1-5.036 4.334a5.08 5.08 0 0 1-3.839-1.743a.75.75 0 0 0-1.13.987a6.58 6.58 0 0 0 4.969 2.256a6.59 6.59 0 0 0 6.549-5.833H19a.75.75 0 0 0 .53-1.281z"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+    },
+    m(s, o) {
+      z(s, t, o), r(t, n), r(t, a);
+    },
+    p: y,
+    i: y,
+    o: y,
     d(s) {
-      s && U(t);
+      s && $(t);
     }
   };
 }
-class xi extends V {
+class Aa extends K {
   constructor(t) {
-    super(), Y(this, t, null, $a, A, {});
+    super(), V(this, t, null, Fa, I, {});
   }
 }
-function Ma(i) {
-  let t, r, a;
+function La(l) {
+  let t, n, a;
   return {
     c() {
-      t = l("svg"), r = l("path"), a = l("path"), e(r, "fill", "currentColor"), e(r, "d", "M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464"), e(r, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M12.01 5.25a6.59 6.59 0 0 0-6.55 5.833H5a.75.75 0 0 0-.53 1.281l1.168 1.167a.75.75 0 0 0 1.06 0l1.169-1.167a.75.75 0 0 0-.53-1.28h-.364A5.09 5.09 0 0 1 12.01 6.75a5.08 5.08 0 0 1 3.838 1.743a.75.75 0 1 0 1.13-.986A6.58 6.58 0 0 0 12.01 5.25m6.352 5.22a.75.75 0 0 0-1.06 0l-1.168 1.166a.75.75 0 0 0 .53 1.28h.363a5.09 5.09 0 0 1-5.036 4.334a5.08 5.08 0 0 1-3.839-1.743a.75.75 0 0 0-1.13.987a6.58 6.58 0 0 0 4.969 2.256a6.59 6.59 0 0 0 6.549-5.833H19a.75.75 0 0 0 .53-1.281z"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+      t = i("g"), n = i("path"), a = i("path"), e(n, "d", "M22 5.814v.69c0 1.038 0 1.557-.26 1.987s-.733.697-1.682 1.231l-2.913 1.64c-.636.358-.955.538-1.182.735a2.68 2.68 0 0 0-.9 1.49c-.063.285-.063.619-.063 1.286v2.67c0 1.909 0 2.863-.668 3.281s-1.607.05-3.486-.684c-.895-.35-1.342-.524-1.594-.879C9 18.907 9 18.451 9 17.542v-2.67c0-.666 0-1-.064-1.285a2.68 2.68 0 0 0-.898-1.49c-.228-.197-.547-.377-1.183-.735l-2.913-1.64c-.949-.534-1.423-.8-1.682-1.23C2 8.06 2 7.541 2 6.503v-.69"), e(a, "d", "M22 5.815c0-1.327 0-1.99-.44-2.403C21.122 3 20.415 3 19 3H5c-1.414 0-2.121 0-2.56.412S2 4.488 2 5.815"), e(a, "opacity", "0.5"), e(t, "fill", "none"), e(t, "stroke", "currentColor"), e(t, "stroke-width", "1.5");
     },
-    m(o, s) {
-      S(o, t, s), n(t, r), n(t, a);
+    m(s, o) {
+      z(s, t, o), r(t, n), r(t, a);
     },
-    p: _,
-    i: _,
-    o: _,
-    d(o) {
-      o && U(t);
+    d(s) {
+      s && $(t);
     }
   };
 }
-class Oa extends V {
-  constructor(t) {
-    super(), Y(this, t, null, Ma, A, {});
-  }
-}
-function Ca(i) {
-  let t, r, a;
+function Qa(l) {
+  let t, n;
   return {
     c() {
-      t = l("g"), r = l("path"), a = l("path"), e(r, "d", "M22 5.814v.69c0 1.038 0 1.557-.26 1.987s-.733.697-1.682 1.231l-2.913 1.64c-.636.358-.955.538-1.182.735a2.68 2.68 0 0 0-.9 1.49c-.063.285-.063.619-.063 1.286v2.67c0 1.909 0 2.863-.668 3.281s-1.607.05-3.486-.684c-.895-.35-1.342-.524-1.594-.879C9 18.907 9 18.451 9 17.542v-2.67c0-.666 0-1-.064-1.285a2.68 2.68 0 0 0-.898-1.49c-.228-.197-.547-.377-1.183-.735l-2.913-1.64c-.949-.534-1.423-.8-1.682-1.23C2 8.06 2 7.541 2 6.503v-.69"), e(a, "d", "M22 5.815c0-1.327 0-1.99-.44-2.403C21.122 3 20.415 3 19 3H5c-1.414 0-2.121 0-2.56.412S2 4.488 2 5.815"), e(a, "opacity", "0.5"), e(t, "fill", "none"), e(t, "stroke", "currentColor"), e(t, "stroke-width", "1.5");
+      t = i("path"), n = i("path"), e(t, "fill", "currentColor"), e(t, "fill-rule", "evenodd"), e(t, "d", "M5 3h14L8.816 13.184a2.7 2.7 0 0 0-.778-1.086c-.228-.198-.547-.377-1.183-.736l-2.913-1.64c-.949-.533-1.423-.8-1.682-1.23C2 8.061 2 7.541 2 6.503v-.69c0-1.326 0-1.99.44-2.402C2.878 3 3.585 3 5 3"), e(t, "clip-rule", "evenodd"), e(n, "fill", "currentColor"), e(n, "d", "M22 6.504v-.69c0-1.326 0-1.99-.44-2.402C21.122 3 20.415 3 19 3L8.815 13.184q.075.193.121.403c.064.285.064.619.064 1.286v2.67c0 .909 0 1.364.252 1.718c.252.355.7.53 1.594.88c1.879.734 2.818 1.101 3.486.683S15 19.452 15 17.542v-2.67c0-.666 0-1 .063-1.285a2.68 2.68 0 0 1 .9-1.49c.227-.197.545-.376 1.182-.735l2.913-1.64c.948-.533 1.423-.8 1.682-1.23c.26-.43.26-.95.26-1.988"), e(n, "opacity", "0.5");
     },
-    m(o, s) {
-      S(o, t, s), n(t, r), n(t, a);
-    },
-    d(o) {
-      o && U(t);
-    }
-  };
-}
-function Ea(i) {
-  let t, r;
-  return {
-    c() {
-      t = l("path"), r = l("path"), e(t, "fill", "currentColor"), e(t, "fill-rule", "evenodd"), e(t, "d", "M5 3h14L8.816 13.184a2.7 2.7 0 0 0-.778-1.086c-.228-.198-.547-.377-1.183-.736l-2.913-1.64c-.949-.533-1.423-.8-1.682-1.23C2 8.061 2 7.541 2 6.503v-.69c0-1.326 0-1.99.44-2.402C2.878 3 3.585 3 5 3"), e(t, "clip-rule", "evenodd"), e(r, "fill", "currentColor"), e(r, "d", "M22 6.504v-.69c0-1.326 0-1.99-.44-2.402C21.122 3 20.415 3 19 3L8.815 13.184q.075.193.121.403c.064.285.064.619.064 1.286v2.67c0 .909 0 1.364.252 1.718c.252.355.7.53 1.594.88c1.879.734 2.818 1.101 3.486.683S15 19.452 15 17.542v-2.67c0-.666 0-1 .063-1.285a2.68 2.68 0 0 1 .9-1.49c.227-.197.545-.376 1.182-.735l2.913-1.64c.948-.533 1.423-.8 1.682-1.23c.26-.43.26-.95.26-1.988"), e(r, "opacity", "0.5");
-    },
-    m(a, o) {
-      S(a, t, o), S(a, r, o);
+    m(a, s) {
+      z(a, t, s), z(a, n, s);
     },
     d(a) {
-      a && (U(t), U(r));
+      a && ($(t), $(n));
     }
   };
 }
-function ja(i) {
+function Ia(l) {
   let t;
-  function r(s, d) {
+  function n(o, d) {
     return (
       /*on*/
-      s[0] ? Ea : Ca
+      o[0] ? Qa : La
     );
   }
-  let a = r(i), o = a(i);
+  let a = n(l), s = a(l);
   return {
     c() {
-      t = l("svg"), o.c(), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+      t = i("svg"), s.c(), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
     },
-    m(s, d) {
-      S(s, t, d), o.m(t, null);
+    m(o, d) {
+      z(o, t, d), s.m(t, null);
     },
-    p(s, [d]) {
-      a !== (a = r(s)) && (o.d(1), o = a(s), o && (o.c(), o.m(t, null)));
+    p(o, [d]) {
+      a !== (a = n(o)) && (s.d(1), s = a(o), s && (s.c(), s.m(t, null)));
     },
-    i: _,
-    o: _,
-    d(s) {
-      s && U(t), o.d();
+    i: y,
+    o: y,
+    d(o) {
+      o && $(t), s.d();
     }
   };
 }
-function Ha(i, t, r) {
+function Va(l, t, n) {
   let { on: a = !1 } = t;
-  return i.$$set = (o) => {
-    "on" in o && r(0, a = o.on);
+  return l.$$set = (s) => {
+    "on" in s && n(0, a = s.on);
   }, [a];
 }
-class Da extends V {
+class Ka extends K {
   constructor(t) {
-    super(), Y(this, t, Ha, ja, A, { on: 0 });
+    super(), V(this, t, Va, Ia, I, { on: 0 });
   }
 }
-function ii(i, t, r) {
-  const a = i.slice();
-  a[10] = t[r], a[13] = r;
-  const o = (
+function fi(l, t, n) {
+  const a = l.slice();
+  a[10] = t[n], a[13] = n;
+  const s = (
     /*registers_names*/
     a[3][
       /*i*/
@@ -1368,214 +1426,214 @@ function ii(i, t, r) {
     ] || "r" + /*i*/
     a[13].toString(16)
   );
-  return a[11] = o, a;
+  return a[11] = s, a;
 }
-function Ra(i) {
+function Na(l) {
   let t;
   return {
     c() {
-      t = k("p"), t.textContent = "Loading ...";
+      t = _("p"), t.textContent = "Loading ...";
     },
-    m(r, a) {
-      S(r, t, a);
+    m(n, a) {
+      z(n, t, a);
     },
-    p: _,
-    d(r) {
-      r && U(t);
+    p: y,
+    d(n) {
+      n && $(t);
     }
   };
 }
-function Ba(i) {
+function Ya(l) {
   let t = (
     /*filtered*/
-    i[1]
-  ), r, a = si(i);
+    l[1]
+  ), n, a = ui(l);
   return {
     c() {
-      a.c(), r = Q2();
+      a.c(), n = l2();
     },
-    m(o, s) {
-      a.m(o, s), S(o, r, s);
+    m(s, o) {
+      a.m(s, o), z(s, n, o);
     },
-    p(o, s) {
-      s & /*filtered*/
-      2 && A(t, t = /*filtered*/
-      o[1]) ? (a.d(1), a = si(o), a.c(), a.m(r.parentNode, r)) : a.p(o, s);
+    p(s, o) {
+      o & /*filtered*/
+      2 && I(t, t = /*filtered*/
+      s[1]) ? (a.d(1), a = ui(s), a.c(), a.m(n.parentNode, n)) : a.p(s, o);
     },
-    d(o) {
-      o && U(r), a.d(o);
+    d(s) {
+      s && $(n), a.d(s);
     }
   };
 }
-function ai(i) {
-  let t, r, a = (
+function hi(l) {
+  let t, n, a = (
     /*label*/
-    i[11] + ""
-  ), o, s, d, c, f;
+    l[11] + ""
+  ), s, o, d, c, f;
   return {
     c() {
-      t = k("div"), r = k("label"), o = Z(a), s = E(), d = k("input"), f = E(), e(r, "for", "reg_" + /*i*/
-      i[13]), e(
-        r,
+      t = _("div"), n = _("label"), s = Y(a), o = B(), d = _("input"), f = B(), e(n, "for", "reg_" + /*i*/
+      l[13]), e(
+        n,
         "title",
         /*label*/
-        i[11]
-      ), e(r, "class", "svelte-1l9tfs5"), e(d, "type", "text"), e(d, "name", "reg_" + /*i*/
-      i[13]), d.value = c = /*reg*/
-      i[10].toString(16).toUpperCase(), d.readOnly = !0, e(d, "class", "svelte-1l9tfs5"), e(t, "class", "row svelte-1l9tfs5");
+        l[11]
+      ), e(n, "class", "svelte-11ce0t0"), e(d, "type", "text"), e(d, "name", "reg_" + /*i*/
+      l[13]), d.value = c = /*reg*/
+      l[10].toString(16).toUpperCase(), d.readOnly = !0, e(d, "class", "svelte-11ce0t0"), e(t, "class", "row svelte-11ce0t0");
     },
-    m(p, b) {
-      S(p, t, b), n(t, r), n(r, o), n(t, s), n(t, d), n(t, f);
+    m(h, p) {
+      z(h, t, p), r(t, n), r(n, s), r(t, o), r(t, d), r(t, f);
     },
-    p(p, b) {
-      b & /*dump*/
+    p(h, p) {
+      p & /*dump*/
       1 && c !== (c = /*reg*/
-      p[10].toString(16).toUpperCase()) && d.value !== c && (d.value = c);
+      h[10].toString(16).toUpperCase()) && d.value !== c && (d.value = c);
     },
-    d(p) {
-      p && U(t);
+    d(h) {
+      h && $(t);
     }
   };
 }
-function oi(i) {
+function pi(l) {
   let t = !/*filtered*/
-  i[1] || /*filtered_names*/
-  i[4].includes(
+  l[1] || /*filtered_names*/
+  l[4].includes(
     /*label*/
-    i[11]
-  ), r, a = t && ai(i);
+    l[11]
+  ), n, a = t && hi(l);
   return {
     c() {
-      a && a.c(), r = Q2();
+      a && a.c(), n = l2();
     },
-    m(o, s) {
-      a && a.m(o, s), S(o, r, s);
+    m(s, o) {
+      a && a.m(s, o), z(s, n, o);
     },
-    p(o, s) {
-      s & /*filtered*/
+    p(s, o) {
+      o & /*filtered*/
       2 && (t = !/*filtered*/
-      o[1] || /*filtered_names*/
-      o[4].includes(
+      s[1] || /*filtered_names*/
+      s[4].includes(
         /*label*/
-        o[11]
-      )), t ? a ? a.p(o, s) : (a = ai(o), a.c(), a.m(r.parentNode, r)) : a && (a.d(1), a = null);
+        s[11]
+      )), t ? a ? a.p(s, o) : (a = hi(s), a.c(), a.m(n.parentNode, n)) : a && (a.d(1), a = null);
     },
-    d(o) {
-      o && U(r), a && a.d(o);
+    d(s) {
+      s && $(n), a && a.d(s);
     }
   };
 }
-function si(i) {
-  let t, r = H2(
+function ui(l) {
+  let t, n = nl(
     /*dump*/
-    i[0].registers
+    l[0].registers
   ), a = [];
-  for (let o = 0; o < r.length; o += 1)
-    a[o] = oi(ii(i, r, o));
+  for (let s = 0; s < n.length; s += 1)
+    a[s] = pi(fi(l, n, s));
   return {
     c() {
-      for (let o = 0; o < a.length; o += 1)
-        a[o].c();
-      t = Q2();
+      for (let s = 0; s < a.length; s += 1)
+        a[s].c();
+      t = l2();
     },
-    m(o, s) {
+    m(s, o) {
       for (let d = 0; d < a.length; d += 1)
-        a[d] && a[d].m(o, s);
-      S(o, t, s);
+        a[d] && a[d].m(s, o);
+      z(s, t, o);
     },
-    p(o, s) {
-      if (s & /*dump, registers_names, filtered, filtered_names*/
+    p(s, o) {
+      if (o & /*dump, registers_names, filtered, filtered_names*/
       27) {
-        r = H2(
+        n = nl(
           /*dump*/
-          o[0].registers
+          s[0].registers
         );
         let d;
-        for (d = 0; d < r.length; d += 1) {
-          const c = ii(o, r, d);
-          a[d] ? a[d].p(c, s) : (a[d] = oi(c), a[d].c(), a[d].m(t.parentNode, t));
+        for (d = 0; d < n.length; d += 1) {
+          const c = fi(s, n, d);
+          a[d] ? a[d].p(c, o) : (a[d] = pi(c), a[d].c(), a[d].m(t.parentNode, t));
         }
         for (; d < a.length; d += 1)
           a[d].d(1);
-        a.length = r.length;
+        a.length = n.length;
       }
     },
-    d(o) {
-      o && U(t), $i(a, o);
+    d(s) {
+      s && $(t), Si(a, s);
     }
   };
 }
-function Qa(i) {
-  let t, r, a, o, s, d, c, f, p, b, g, w, x, z, q, m, y, H;
-  d = new Da({ props: { on: (
+function Wa(l) {
+  let t, n, a, s, o, d, c, f, h, p, g, w, G, k, v, S, R, O;
+  d = new Ka({ props: { on: (
     /*filtered*/
-    i[1]
-  ) } }), p = new Oa({}), w = new xi({});
-  function C($, M) {
+    l[1]
+  ) } }), h = new Aa({}), w = new ti({});
+  function U(x, u) {
     return (
       /*dump*/
-      $[0] ? Ba : Ra
+      x[0] ? Ya : Na
     );
   }
-  let P = C(i), D = P(i);
+  let q = U(l), T = q(l);
   return {
     c() {
-      t = k("div"), r = k("div"), a = k("h4"), a.textContent = "Registers", o = E(), s = k("button"), K(d.$$.fragment), c = E(), f = k("button"), K(p.$$.fragment), b = E(), g = k("button"), K(w.$$.fragment), x = E(), z = k("div"), q = k("div"), D.c(), e(a, "class", "header"), e(s, "class", "toolbar-action"), e(s, "type", "button"), e(s, "tabindex", "0"), e(s, "id", "btn_filter_trace"), e(f, "class", "toolbar-action"), e(f, "type", "button"), e(f, "tabindex", "0"), e(f, "id", "btn_refresh_trace"), e(g, "class", "toolbar-action"), e(g, "type", "button"), e(g, "tabindex", "0"), e(g, "id", "btn_close_trace"), e(r, "class", "titlebar"), e(q, "class", "registers svelte-1l9tfs5"), e(z, "class", "contents svelte-1l9tfs5"), e(t, "class", "tracing-panel view-panel svelte-1l9tfs5"), ht(
+      t = _("div"), n = _("div"), a = _("h4"), a.textContent = "Registers", s = B(), o = _("button"), L(d.$$.fragment), c = B(), f = _("button"), L(h.$$.fragment), p = B(), g = _("button"), L(w.$$.fragment), G = B(), k = _("div"), v = _("div"), T.c(), e(a, "class", "header"), e(o, "class", "toolbar-action"), e(o, "type", "button"), e(o, "tabindex", "0"), e(o, "id", "btn_filter_trace"), e(f, "class", "toolbar-action"), e(f, "type", "button"), e(f, "tabindex", "0"), e(f, "id", "btn_refresh_trace"), e(g, "class", "toolbar-action"), e(g, "type", "button"), e(g, "tabindex", "0"), e(g, "id", "btn_close_trace"), e(n, "class", "titlebar"), e(v, "class", "registers svelte-11ce0t0"), e(k, "class", "contents svelte-11ce0t0"), e(t, "class", "tracing-panel view-panel svelte-11ce0t0"), Je(
         t,
         "visible",
         /*$tracing*/
-        i[2]
+        l[2]
       );
     },
-    m($, M) {
-      S($, t, M), n(t, r), n(r, a), n(r, o), n(r, s), L(d, s, null), n(r, c), n(r, f), L(p, f, null), n(r, b), n(r, g), L(w, g, null), n(t, x), n(t, z), n(z, q), D.m(q, null), m = !0, y || (H = [
+    m(x, u) {
+      z(x, t, u), r(t, n), r(n, a), r(n, s), r(n, o), F(d, o, null), r(n, c), r(n, f), F(h, f, null), r(n, p), r(n, g), F(w, g, null), r(t, G), r(t, k), r(k, v), T.m(v, null), S = !0, R || (O = [
         ee(
-          s,
+          o,
           "click",
           /*doFilter*/
-          i[5]
+          l[5]
         ),
         ee(
           f,
           "click",
           /*doRefresh*/
-          i[6]
+          l[6]
         ),
         ee(
           g,
           "click",
           /*doClose*/
-          i[7]
+          l[7]
         )
-      ], y = !0);
+      ], R = !0);
     },
-    p($, [M]) {
-      const h = {};
-      M & /*filtered*/
-      2 && (h.on = /*filtered*/
-      $[1]), d.$set(h), P === (P = C($)) && D ? D.p($, M) : (D.d(1), D = P($), D && (D.c(), D.m(q, null))), (!m || M & /*$tracing*/
-      4) && ht(
+    p(x, [u]) {
+      const C = {};
+      u & /*filtered*/
+      2 && (C.on = /*filtered*/
+      x[1]), d.$set(C), q === (q = U(x)) && T ? T.p(x, u) : (T.d(1), T = q(x), T && (T.c(), T.m(v, null))), (!S || u & /*$tracing*/
+      4) && Je(
         t,
         "visible",
         /*$tracing*/
-        $[2]
+        x[2]
       );
     },
-    i($) {
-      m || (B(d.$$.fragment, $), B(p.$$.fragment, $), B(w.$$.fragment, $), m = !0);
+    i(x) {
+      S || (P(d.$$.fragment, x), P(h.$$.fragment, x), P(w.$$.fragment, x), S = !0);
     },
-    o($) {
-      Q(d.$$.fragment, $), Q(p.$$.fragment, $), Q(w.$$.fragment, $), m = !1;
+    o(x) {
+      j(d.$$.fragment, x), j(h.$$.fragment, x), j(w.$$.fragment, x), S = !1;
     },
-    d($) {
-      $ && U(t), F(d), F(p), F(w), D.d(), y = !1, Zr(H);
+    d(x) {
+      x && $(t), A(d), A(h), A(w), T.d(), R = !1, xt(O);
     }
   };
 }
-function Pa(i, t, r) {
+function Za(l, t, n) {
   let a;
-  te(i, cl, (x) => r(2, a = x));
-  const o = [
+  re(l, gr, (G) => n(2, a = G));
+  const s = [
     "r0",
     "r1",
     "r2",
@@ -1628,7 +1686,7 @@ function Pa(i, t, r) {
     "m0",
     "m1"
   ];
-  let s = [
+  let o = [
     "r0",
     "r1",
     "r2",
@@ -1650,122 +1708,122 @@ function Pa(i, t, r) {
     "SR",
     "PC"
   ], d = null;
-  const c = B2.subscribe((x) => {
-    r(0, d = x);
+  const c = I2.subscribe((G) => {
+    n(0, d = G);
   });
-  Ei(() => {
+  Li(() => {
     c();
   });
   let f = !0;
-  const p = (x) => {
-    r(1, f = !f);
-  }, b = I2();
+  const h = (G) => {
+    n(1, f = !f);
+  }, p = V2();
   return [
     d,
     f,
     a,
-    o,
     s,
-    p,
-    (x) => {
-      b("doRefresh", x);
+    o,
+    h,
+    (G) => {
+      p("doRefresh", G);
     },
-    (x) => {
-      b("doClose", x), cl.set(!1);
+    (G) => {
+      p("doClose", G), gr.set(!1);
     }
   ];
 }
-class La extends V {
+class Xa extends K {
   constructor(t) {
-    super(), Y(this, t, Pa, Qa, A, {});
+    super(), V(this, t, Za, Wa, I, {});
   }
 }
-function Fa(i, t, r) {
+function Ja(l, t, n) {
   var a = new FileReader();
-  a.onload = function(o) {
-    if (o.target && o.target.result) {
-      var s = new Uint8Array(o.target.result);
-      window.Module.FS.analyzePath(t).exists && window.Module.FS.unlink(t), window.Module.FS.createDataFile("/", t, s, !0, !0), console.log(`${t} loaded into the Emscripten filesystem.`), r(null);
+  a.onload = function(s) {
+    if (s.target && s.target.result) {
+      var o = new Uint8Array(s.target.result);
+      window.Module.FS.analyzePath(t).exists && window.Module.FS.unlink(t), window.Module.FS.createDataFile("/", t, o, !0, !0), console.log(`${t} loaded into the Emscripten filesystem.`), n(null);
     } else
-      r("target is empty");
-  }, a.onerror = function(o) {
-    r(o);
-  }, a.readAsArrayBuffer(i);
+      n("target is empty");
+  }, a.onerror = function(s) {
+    n(s);
+  }, a.readAsArrayBuffer(l);
 }
-function Ka(i, t) {
-  return new Promise((r, a) => {
-    Fa(i, t, (o) => {
-      o ? a(o) : r(() => {
+function es(l, t) {
+  return new Promise((n, a) => {
+    t.startsWith("/fls0") || (t = `/fls0/${t}`), Ja(l, t, (s) => {
+      s ? a(s) : n(() => {
       });
     });
   });
 }
-function Aa(i) {
-  let t, r, a, o, s, d, c, f, p, b, g, w, x, z, q, m, y, H, C, P, D, $, M, h, j, T, Re, N, R, ne, J, le, Xe, Ve, ut, Kn, Te, We, ie, Ie, Be, Xr, Wr, O, I, gt, Jr, An, vt, en, W0, Xl, J0, Wl, dl, Jl, e0, t0, fl, r0, n0, l0, Yn, e2, t2, r2, n2, tn, l2, i2, a2, o2, s2, i0, c2, a0, Vn, d2, f2, p2, o0, pl, h2, s0, c0, hl, u2, d0, f0, p0, g2, h0, u0, v2, g0, ul, m2, v0, y2, Je, x2, b2, w2, k2, q2, _2, G2, mt, yt, xt, bt, wt, kt, qt, _t, Gt, Ut, zt, St, $t, Mt, Ot, Ct, Et, jt, Ht, Dt, Rt, Bt, Qt, Pt, Lt, Ft, Kt, At, Yt, Vt, Tt, It, Nt, Zt, Xt, Wt, Jt, e1, t1, r1, n1, l1, i1, a1, o1, s1, c1, d1, f1, p1, h1, u1, g1, v1, m1, y1, x1, b1, w1, k1, q1, _1, G1, U1, et, tt, rt, z1, S1, $1, M1, O1, C1, E1, j1, H1, D1, R1, B1, Q1, P1, L1, F1, K1, A1, Y1, V1, T1, I1, N1, Z1, X1, W1, J1, er, tr, rr, nr, lr, ir, ar, Qe, Tn, m0, y0, or, re, gl, x0, vl, In, Pe, Le, Fe, Ke, nt, lt, it, rn, ae, sr, b0, U2, z2, S2, nn, $2, v, w0, k0, q0, ml, yl, Nn, oe, cr, _0, ln, se, dr, G0, an, ce, fr, U0, on, de, pr, z0, sn, fe, hr, S0, cn, pe, ur, $0, dn, he, gr, M0, fn, ue, vr, O0, pn, ge, mr, C0, hn, ve, yr, E0, un, me, xr, j0, gn, ye, br, H0, vn, xe, wr, D0, mn, be, kr, R0, yn, we, qr, B0, xn, ke, _r, Q0, bn, qe, Gr, P0, M2, O2, C2, Ur, zr, Sr, $r, Ae, at, ot, st, L0, Zn, _e, Mr, Xn, Ge, Or, Wn, Ue, Cr, Jn, ze, Er, el, Se, jr, tl, $e, Hr, rl, Me, Dr, nl, Oe, Rr, ct, ll, Ce, Br, il, Ee, Qr, al, je, Pr, ol, He, Lr, xl, wn, bl, Fr, De, kn, X2, W2, wl, qn, kl, _n, ql, Gn, _l, Un, Gl, zn, Ul, Sn, zl, $n, Sl, Mn, $l, On, Ml, Kr, F0, Ne, Ol, Ar, Cl, Cn, El, En, jl, jn, Hl, Yr, Dl, Vr, Rl, Tr, Bl, Hn, Ql, Dn, Pl, Rn, Ll, Bn, Fl, Qn, Kl, Pn, Ln, Ir, Fn, Nr, X, W, Al, K0, A0, dt, Y0, V0, T0, ft;
+function ts(l) {
+  let t, n, a, s, o, d, c, f, h, p, g, w, G, k, v, S, R, O, U, q, T, x, u, C, M, W, Q, Z, J, et, D, le, de, se, Le, N0, tt, Qe, Y0, nt, W0, ce, Ie, Ve, r0, l0, H, X, bt, i0, Z0, yt, a0, ll, vr, il, al, sl, xr, ol, dl, cl, X0, s2, o2, d2, c2, s0, f2, h2, p2, u2, m2, fl, g2, hl, J0, v2, x2, b2, pl, br, y2, ul, ml, yr, w2, gl, vl, xl, R2, bl, yl, k2, wl, wr, _2, Rl, q2, it, S2, G2, C2, M2, U2, $2, z2, wt, Rt, kt, _t, qt, St, Gt, Ct, Mt, Ut, $t, zt, Ot, Et, Bt, Ht, Pt, jt, Tt, Dt, Ft, At, Lt, Qt, It, Vt, Kt, Nt, Yt, Wt, Zt, Xt, Jt, e1, t1, n1, r1, l1, i1, a1, s1, o1, d1, c1, f1, h1, p1, u1, m1, g1, v1, x1, b1, y1, w1, R1, k1, _1, q1, S1, G1, C1, M1, U1, at, st, ot, $1, z1, O1, E1, B1, H1, P1, j1, T1, D1, F1, A1, L1, Q1, I1, V1, K1, N1, Y1, W1, Z1, X1, J1, en, tn, nn, rn, ln, an, sn, on, dn, cn, fn, Ke, er, kl, _l, hn, oe, Rr, ql, kr, tr, Ne, Ye, We, Ze, dt, ct, ft, o0, fe, pn, Sl, O2, E2, B2, d0, H2, b, Gl, Cl, Ml, _r, qr, nr, he, un, Ul, c0, pe, mn, $l, f0, ue, gn, zl, h0, me, vn, Ol, p0, ge, xn, El, u0, ve, bn, Bl, m0, xe, yn, Hl, g0, be, wn, Pl, v0, ye, Rn, jl, x0, we, kn, Tl, b0, Re, _n, Dl, y0, ke, qn, Fl, w0, _e, Sn, Al, R0, qe, Gn, Ll, k0, Se, Cn, Ql, _0, Ge, Mn, Il, q0, Ce, Un, Vl, P2, j2, T2, $n, zn, On, En, Xe, ht, pt, ut, Kl, rr, Me, Bn, lr, Ue, Hn, ir, $e, Pn, ar, ze, jn, sr, Oe, Tn, or, Ee, Dn, dr, Be, Fn, cr, He, An, mt, fr, Pe, Ln, hr, je, Qn, pr, Te, In, ur, De, Vn, Sr, S0, Gr, Kn, Fe, G0, ni, ri, Cr, C0, Mr, M0, Ur, U0, $r, $0, zr, z0, Or, O0, Er, E0, Br, B0, Hr, H0, Pr, Nn, Nl, rt, jr, Yn, Tr, P0, Dr, j0, Fr, T0, Ar, Wn, Lr, Zn, Qr, Xn, Ir, D0, Vr, F0, Kr, A0, Nr, L0, Yr, Q0, Wr, I0, V0, Jn, K0, e0, te, ne, Zr, Yl, Wl, gt, Zl, Xl, Jl, vt;
   return {
     c() {
-      t = l("svg"), r = l("defs"), a = l("linearGradient"), o = l("stop"), s = l("stop"), d = l("stop"), c = l("stop"), f = l("linearGradient"), p = l("stop"), b = l("stop"), g = l("stop"), w = l("stop"), x = l("stop"), z = l("linearGradient"), q = l("stop"), m = l("stop"), y = l("stop"), H = l("stop"), C = l("linearGradient"), P = l("stop"), D = l("stop"), $ = l("stop"), M = l("stop"), h = l("stop"), j = l("linearGradient"), T = l("stop"), Re = l("stop"), N = l("stop"), R = l("stop"), ne = l("linearGradient"), J = l("stop"), le = l("stop"), Xe = l("linearGradient"), Ve = l("stop"), ut = l("stop"), Kn = l("stop"), Te = l("stop"), We = l("linearGradient"), ie = l("stop"), Ie = l("stop"), Be = l("stop"), Xr = l("stop"), Wr = l("linearGradient"), O = l("stop"), I = l("stop"), gt = l("linearGradient"), Jr = l("stop"), An = l("stop"), vt = l("linearGradient"), en = l("stop"), W0 = l("stop"), Xl = l("linearGradient"), J0 = l("stop"), Wl = l("stop"), dl = l("linearGradient"), Jl = l("stop"), e0 = l("stop"), t0 = l("stop"), fl = l("linearGradient"), r0 = l("stop"), n0 = l("stop"), l0 = l("stop"), Yn = l("linearGradient"), e2 = l("stop"), t2 = l("stop"), r2 = l("stop"), n2 = l("stop"), tn = l("linearGradient"), l2 = l("stop"), i2 = l("stop"), a2 = l("stop"), o2 = l("stop"), s2 = l("stop"), i0 = l("linearGradient"), c2 = l("stop"), a0 = l("stop"), Vn = l("linearGradient"), d2 = l("stop"), f2 = l("stop"), p2 = l("stop"), o0 = l("stop"), pl = l("linearGradient"), h2 = l("stop"), s0 = l("stop"), c0 = l("stop"), hl = l("linearGradient"), u2 = l("stop"), d0 = l("stop"), f0 = l("stop"), p0 = l("linearGradient"), g2 = l("stop"), h0 = l("stop"), u0 = l("linearGradient"), v2 = l("stop"), g0 = l("stop"), ul = l("linearGradient"), m2 = l("stop"), v0 = l("stop"), y2 = l("stop"), Je = l("linearGradient"), x2 = l("stop"), b2 = l("stop"), w2 = l("stop"), k2 = l("stop"), q2 = l("stop"), _2 = l("stop"), G2 = l("stop"), mt = l("linearGradient"), yt = l("linearGradient"), xt = l("linearGradient"), bt = l("linearGradient"), wt = l("linearGradient"), kt = l("linearGradient"), qt = l("linearGradient"), _t = l("linearGradient"), Gt = l("linearGradient"), Ut = l("linearGradient"), zt = l("linearGradient"), St = l("linearGradient"), $t = l("linearGradient"), Mt = l("linearGradient"), Ot = l("linearGradient"), Ct = l("linearGradient"), Et = l("linearGradient"), jt = l("linearGradient"), Ht = l("linearGradient"), Dt = l("linearGradient"), Rt = l("linearGradient"), Bt = l("linearGradient"), Qt = l("linearGradient"), Pt = l("linearGradient"), Lt = l("linearGradient"), Ft = l("linearGradient"), Kt = l("linearGradient"), At = l("linearGradient"), Yt = l("linearGradient"), Vt = l("linearGradient"), Tt = l("linearGradient"), It = l("linearGradient"), Nt = l("linearGradient"), Zt = l("linearGradient"), Xt = l("linearGradient"), Wt = l("linearGradient"), Jt = l("linearGradient"), e1 = l("linearGradient"), t1 = l("linearGradient"), r1 = l("linearGradient"), n1 = l("linearGradient"), l1 = l("linearGradient"), i1 = l("linearGradient"), a1 = l("linearGradient"), o1 = l("linearGradient"), s1 = l("linearGradient"), c1 = l("linearGradient"), d1 = l("linearGradient"), f1 = l("linearGradient"), p1 = l("linearGradient"), h1 = l("linearGradient"), u1 = l("linearGradient"), g1 = l("linearGradient"), v1 = l("linearGradient"), m1 = l("linearGradient"), y1 = l("linearGradient"), x1 = l("linearGradient"), b1 = l("linearGradient"), w1 = l("linearGradient"), k1 = l("linearGradient"), q1 = l("linearGradient"), _1 = l("linearGradient"), G1 = l("linearGradient"), U1 = l("linearGradient"), et = l("linearGradient"), tt = l("linearGradient"), rt = l("linearGradient"), z1 = l("linearGradient"), S1 = l("linearGradient"), $1 = l("linearGradient"), M1 = l("linearGradient"), O1 = l("linearGradient"), C1 = l("linearGradient"), E1 = l("linearGradient"), j1 = l("linearGradient"), H1 = l("linearGradient"), D1 = l("linearGradient"), R1 = l("linearGradient"), B1 = l("linearGradient"), Q1 = l("linearGradient"), P1 = l("linearGradient"), L1 = l("linearGradient"), F1 = l("linearGradient"), K1 = l("linearGradient"), A1 = l("linearGradient"), Y1 = l("linearGradient"), V1 = l("linearGradient"), T1 = l("linearGradient"), I1 = l("linearGradient"), N1 = l("linearGradient"), Z1 = l("linearGradient"), X1 = l("linearGradient"), W1 = l("linearGradient"), J1 = l("linearGradient"), er = l("linearGradient"), tr = l("linearGradient"), rr = l("linearGradient"), nr = l("linearGradient"), lr = l("linearGradient"), ir = l("linearGradient"), ar = l("linearGradient"), Qe = l("pattern"), Tn = l("rect"), m0 = l("path"), y0 = l("path"), or = l("linearGradient"), re = l("g"), gl = l("path"), x0 = l("path"), vl = l("path"), In = l("path"), Pe = l("rect"), Le = l("rect"), Fe = l("rect"), Ke = l("rect"), nt = l("rect"), lt = l("rect"), it = l("rect"), rn = l("g"), ae = l("rect"), sr = l("rect"), b0 = l("path"), U2 = l("mask"), z2 = l("path"), S2 = l("g"), nn = l("foreignObject"), $2 = k("div"), $2.innerHTML = '<canvas width="320" height="528" style="width: 320px; height: 528px"></canvas>', v = l("g"), w0 = l("path"), k0 = l("path"), q0 = l("path"), ml = l("path"), yl = l("path"), Nn = l("g"), oe = l("rect"), cr = l("rect"), _0 = l("path"), ln = l("g"), se = l("rect"), dr = l("rect"), G0 = l("path"), an = l("g"), ce = l("rect"), fr = l("rect"), U0 = l("path"), on = l("g"), de = l("rect"), pr = l("rect"), z0 = l("path"), sn = l("g"), fe = l("rect"), hr = l("rect"), S0 = l("path"), cn = l("g"), pe = l("rect"), ur = l("rect"), $0 = l("path"), dn = l("g"), he = l("rect"), gr = l("rect"), M0 = l("path"), fn = l("g"), ue = l("rect"), vr = l("rect"), O0 = l("path"), pn = l("g"), ge = l("rect"), mr = l("rect"), C0 = l("path"), hn = l("g"), ve = l("rect"), yr = l("rect"), E0 = l("path"), un = l("g"), me = l("rect"), xr = l("rect"), j0 = l("path"), gn = l("g"), ye = l("rect"), br = l("rect"), H0 = l("path"), vn = l("g"), xe = l("rect"), wr = l("rect"), D0 = l("path"), mn = l("g"), be = l("rect"), kr = l("rect"), R0 = l("path"), yn = l("g"), we = l("rect"), qr = l("rect"), B0 = l("path"), xn = l("g"), ke = l("rect"), _r = l("rect"), Q0 = l("path"), bn = l("g"), qe = l("rect"), Gr = l("rect"), P0 = l("path"), M2 = l("path"), O2 = l("path"), C2 = l("path"), Ur = l("rect"), zr = l("rect"), Sr = l("rect"), $r = l("path"), Ae = l("rect"), at = l("path"), ot = l("path"), st = l("path"), L0 = l("path"), Zn = l("g"), _e = l("rect"), Mr = l("rect"), Xn = l("g"), Ge = l("rect"), Or = l("rect"), Wn = l("g"), Ue = l("rect"), Cr = l("rect"), Jn = l("g"), ze = l("rect"), Er = l("rect"), el = l("g"), Se = l("rect"), jr = l("rect"), tl = l("g"), $e = l("rect"), Hr = l("rect"), rl = l("g"), Me = l("rect"), Dr = l("rect"), nl = l("g"), Oe = l("rect"), Rr = l("rect"), ct = l("rect"), ll = l("g"), Ce = l("rect"), Br = l("rect"), il = l("g"), Ee = l("rect"), Qr = l("rect"), al = l("g"), je = l("rect"), Pr = l("rect"), ol = l("g"), He = l("rect"), Lr = l("rect"), xl = l("g"), wn = l("path"), bl = l("g"), Fr = l("path"), De = l("text"), kn = l("tspan"), X2 = Z("xyz"), W2 = E(), wl = l("g"), qn = l("path"), kl = l("g"), _n = l("path"), ql = l("g"), Gn = l("path"), _l = l("g"), Un = l("path"), Gl = l("g"), zn = l("path"), Ul = l("g"), Sn = l("path"), zl = l("g"), $n = l("path"), Sl = l("g"), Mn = l("path"), $l = l("g"), On = l("path"), Ml = l("g"), Kr = l("path"), F0 = l("path"), Ne = l("path"), Ol = l("g"), Ar = l("path"), Cl = l("g"), Cn = l("path"), El = l("g"), En = l("path"), jl = l("g"), jn = l("path"), Hl = l("g"), Yr = l("path"), Dl = l("g"), Vr = l("path"), Rl = l("g"), Tr = l("path"), Bl = l("g"), Hn = l("path"), Ql = l("g"), Dn = l("path"), Pl = l("g"), Rn = l("path"), Ll = l("g"), Bn = l("path"), Fl = l("g"), Qn = l("path"), Kl = l("g"), Pn = l("path"), Ln = l("g"), Ir = l("path"), Fn = l("g"), Nr = l("path"), X = l("path"), W = l("path"), Al = l("path"), K0 = l("path"), A0 = l("path"), dt = l("rect"), Y0 = l("path"), V0 = l("path"), T0 = l("path"), ft = l("rect"), e(o, "offset", "0"), e(o, "stop-color", "#3b3b3b"), e(s, "offset", ".1"), e(s, "stop-color", "#282828"), e(d, "offset", ".2"), e(d, "stop-color", "#282828"), e(c, "offset", "1"), e(c, "stop-color", "#272727"), e(a, "id", "x"), e(p, "offset", "0"), e(p, "stop-color", "#99b0df"), e(b, "offset", ".1"), e(b, "stop-color", "#7396de"), e(g, "offset", ".3"), e(g, "stop-color", "#4171d2"), e(w, "offset", ".9"), e(w, "stop-color", "#1f3d79"), e(x, "offset", "1"), e(x, "stop-color", "#173166"), e(f, "id", "l"), e(q, "offset", "0"), e(q, "stop-color", "#2b60cd"), e(m, "offset", ".5"), e(m, "stop-color", "#295fcc"), e(y, "offset", ".8"), e(y, "stop-color", "#3c73e3"), e(H, "offset", "1"), e(H, "stop-color", "#4279e8"), e(z, "id", "m"), e(P, "offset", "0"), e(P, "stop-color", "#ececec"), e(D, "offset", ".1"), e(D, "stop-color", "#ededed"), e($, "offset", ".3"), e($, "stop-color", "#ddd"), e(M, "offset", ".9"), e(M, "stop-color", "#b0b0b0"), e(h, "offset", "1"), e(h, "stop-color", "#9c9c9c"), e(C, "id", "v"), e(T, "offset", "0"), e(T, "stop-color", "#e7e7e7"), e(Re, "offset", ".5"), e(Re, "stop-color", "#f8f8f8"), e(N, "offset", ".8"), e(N, "stop-color", "#fff"), e(R, "offset", "1"), e(R, "stop-color", "#fbfbfb"), e(j, "id", "w"), e(J, "offset", "0"), e(J, "stop-color", "#cdcdcd"), e(J, "stop-opacity", ".4"), e(le, "offset", "1"), e(le, "stop-color", "#cdcdcd"), e(le, "stop-opacity", "0"), e(ne, "id", "u"), e(Ve, "offset", "0"), e(Ve, "stop-color", "#d1d1d1"), e(ut, "offset", ".4"), e(ut, "stop-color", "#c2c2c2"), e(Kn, "offset", ".7"), e(Kn, "stop-color", "#6b6b6b"), e(Te, "offset", "1"), e(Te, "stop-color", "#616161"), e(Xe, "id", "t"), e(ie, "offset", "0"), e(ie, "stop-color", "#a8a8a8"), e(Ie, "offset", ".3"), e(Ie, "stop-color", "#b2b2b2"), e(Be, "offset", ".8"), e(Be, "stop-color", "#dadada"), e(Xr, "offset", "1"), e(Xr, "stop-color", "#ccc"), e(We, "id", "s"), e(O, "offset", "0"), e(O, "stop-color", "#252525"), e(I, "offset", "1"), e(I, "stop-color", "#363636"), e(Wr, "id", "r"), e(Jr, "offset", "0"), e(Jr, "stop-color", "#f7f7f7"), e(An, "offset", "1"), e(An, "stop-color", "#535353"), e(gt, "id", "q"), e(en, "offset", "0"), e(en, "stop-color", "#909090"), e(W0, "offset", "1"), e(W0, "stop-color", "#2d2d2d"), e(vt, "id", "p"), e(J0, "offset", "0"), e(J0, "stop-color", "#313131"), e(Wl, "offset", "1"), e(Wl, "stop-color", "#3a3a3a"), e(Wl, "stop-opacity", "0"), e(Xl, "id", "o"), e(Jl, "offset", "0"), e(Jl, "stop-color", "#c6c6c6"), e(Jl, "stop-opacity", ".4"), e(e0, "offset", ".4"), e(e0, "stop-color", "#a2a2a2"), e(e0, "stop-opacity", ".1"), e(t0, "offset", "1"), e(t0, "stop-color", "#a2a2a2"), e(t0, "stop-opacity", "0"), e(dl, "id", "n"), e(r0, "offset", "0"), e(r0, "stop-color", "#c6c6c6"), e(r0, "stop-opacity", ".4"), e(n0, "offset", ".7"), e(n0, "stop-color", "#a2a2a2"), e(n0, "stop-opacity", ".1"), e(l0, "offset", "1"), e(l0, "stop-color", "#a2a2a2"), e(l0, "stop-opacity", "0"), e(fl, "id", "k"), e(e2, "offset", "0"), e(e2, "stop-color", "#2e2e2e"), e(t2, "offset", ".5"), e(t2, "stop-color", "#2d2d2d"), e(r2, "offset", ".8"), e(r2, "stop-color", "#393939"), e(n2, "offset", "1"), e(n2, "stop-color", "#3d3d3d"), e(Yn, "id", "j"), e(l2, "offset", "0"), e(l2, "stop-color", "#464646"), e(i2, "offset", ".1"), e(i2, "stop-color", "#393939"), e(a2, "offset", ".3"), e(a2, "stop-color", "#2c2c2c"), e(o2, "offset", ".9"), e(o2, "stop-color", "#202020"), e(s2, "offset", "1"), e(s2, "stop-color", "#242424"), e(tn, "id", "i"), e(c2, "offset", "0"), e(c2, "stop-color", "#1e7999"), e(a0, "offset", "1"), e(a0, "stop-color", "#1d7998"), e(a0, "stop-opacity", "0"), e(i0, "id", "h"), e(d2, "offset", "0"), e(d2, "stop-color", "#3a3a3a"), e(f2, "offset", ".3"), e(f2, "stop-color", "#414141"), e(p2, "offset", ".6"), e(p2, "stop-color", "#464646"), e(o0, "offset", "1"), e(o0, "stop-color", "#4b4b4b"), e(o0, "stop-opacity", "0"), e(Vn, "id", "g"), e(h2, "offset", "0"), e(h2, "stop-color", "#313131"), e(s0, "offset", ".4"), e(s0, "stop-color", "#3a3a3a"), e(s0, "stop-opacity", ".6"), e(c0, "offset", "1"), e(c0, "stop-color", "#3a3a3a"), e(c0, "stop-opacity", "0"), e(pl, "id", "f"), e(u2, "offset", "0"), e(u2, "stop-color", "#3a3a3a"), e(d0, "offset", ".4"), e(d0, "stop-color", "#3a3a3a"), e(d0, "stop-opacity", ".6"), e(f0, "offset", "1"), e(f0, "stop-color", "#3a3a3a"), e(f0, "stop-opacity", "0"), e(hl, "id", "e"), e(g2, "offset", "0"), e(g2, "stop-color", "#4e4e4e"), e(h0, "offset", "1"), e(h0, "stop-color", "#4e4e4e"), e(h0, "stop-opacity", "0"), e(p0, "id", "d"), e(v2, "offset", "0"), e(v2, "stop-color", "#555"), e(g0, "offset", "1"), e(g0, "stop-color", "#424242"), e(g0, "stop-opacity", "0"), e(u0, "id", "c"), e(m2, "offset", "0"), e(m2, "stop-color", "#9c9c9c"), e(v0, "offset", ".8"), e(v0, "stop-color", "#b0b0b0"), e(v0, "stop-opacity", ".1"), e(y2, "offset", "1"), e(y2, "stop-color", "#f5f5f5"), e(ul, "id", "b"), e(x2, "offset", "0"), e(x2, "stop-color", "#b6b6b6"), e(b2, "offset", "0"), e(b2, "stop-color", "#fefefe"), e(w2, "offset", ".1"), e(w2, "stop-color", "#e7e7e7"), e(k2, "offset", ".8"), e(k2, "stop-color", "#e8e8e8"), e(q2, "offset", ".9"), e(q2, "stop-color", "#e6e6e6"), e(_2, "offset", "1"), e(_2, "stop-color", "#e1e1e1"), e(G2, "offset", "1"), e(G2, "stop-color", "#b2b2b2"), e(Je, "id", "a"), u(mt, "xlink:href", "#a"), e(mt, "id", "y"), e(mt, "x1", "6.5"), e(mt, "x2", "641.5"), e(mt, "y1", "320.4"), e(mt, "y2", "320.4"), e(mt, "gradientUnits", "userSpaceOnUse"), u(yt, "xlink:href", "#b"), e(yt, "id", "z"), e(yt, "x1", "9.3"), e(yt, "x2", "634"), e(yt, "y1", "-300.4"), e(yt, "y2", "1004.4"), e(yt, "gradientUnits", "userSpaceOnUse"), u(xt, "xlink:href", "#c"), e(xt, "id", "B"), e(xt, "x1", "570"), e(xt, "x2", "94.5"), e(xt, "y1", "560.4"), e(xt, "y2", "-263.2"), e(xt, "gradientUnits", "userSpaceOnUse"), u(bt, "xlink:href", "#d"), e(bt, "id", "C"), e(bt, "x1", "570"), e(bt, "x2", "498.4"), e(bt, "y1", "560.4"), e(bt, "y2", "293"), e(bt, "gradientUnits", "userSpaceOnUse"), u(wt, "xlink:href", "#e"), e(wt, "id", "J"), e(wt, "x1", "91.3"), e(wt, "x2", "71.6"), e(wt, "y1", "978.6"), e(wt, "y2", "958.9"), e(wt, "gradientUnits", "userSpaceOnUse"), u(kt, "xlink:href", "#f"), e(kt, "id", "I"), e(kt, "x1", "504"), e(kt, "x2", "504"), e(kt, "y1", "978"), e(kt, "y2", "215.2"), e(kt, "gradientUnits", "userSpaceOnUse"), u(qt, "xlink:href", "#g"), e(qt, "id", "K"), e(qt, "x1", "544"), e(qt, "x2", "582"), e(qt, "y1", "980"), e(qt, "y2", "942"), e(qt, "gradientUnits", "userSpaceOnUse"), u(_t, "xlink:href", "#h"), e(_t, "id", "L"), e(_t, "x1", "300"), e(_t, "x2", "300"), e(_t, "y1", "44"), e(_t, "y2", "1124"), e(_t, "gradientUnits", "userSpaceOnUse"), u(Gt, "xlink:href", "#i"), e(Gt, "id", "M"), e(Gt, "x1", "514.8"), e(Gt, "x2", "583.9"), e(Gt, "y1", "711.8"), e(Gt, "y2", "751.7"), e(Gt, "gradientUnits", "userSpaceOnUse"), u(Ut, "xlink:href", "#j"), e(Ut, "id", "N"), e(Ut, "x1", "549"), e(Ut, "x2", "549"), e(Ut, "y1", "713.4"), e(Ut, "y2", "748.4"), e(Ut, "gradientUnits", "userSpaceOnUse"), u(zt, "xlink:href", "#k"), e(zt, "id", "O"), e(zt, "x1", "515"), e(zt, "x2", "536.3"), e(zt, "y1", "1125"), e(zt, "y2", "1146.3"), e(zt, "gradientUnits", "userSpaceOnUse"), u(St, "xlink:href", "#k"), e(St, "id", "H"), e(St, "x1", "515"), e(St, "x2", "536.3"), e(St, "y1", "1125"), e(St, "y2", "1146.3"), e(St, "gradientUnits", "userSpaceOnUse"), u($t, "xlink:href", "#i"), e($t, "id", "F"), e($t, "x1", "514.8"), e($t, "x2", "583.9"), e($t, "y1", "711.8"), e($t, "y2", "751.7"), e($t, "gradientUnits", "userSpaceOnUse"), u(Mt, "xlink:href", "#j"), e(Mt, "id", "G"), e(Mt, "x1", "549"), e(Mt, "x2", "549"), e(Mt, "y1", "713.4"), e(Mt, "y2", "748.4"), e(Mt, "gradientUnits", "userSpaceOnUse"), u(Ot, "xlink:href", "#k"), e(Ot, "id", "R"), e(Ot, "x1", "515"), e(Ot, "x2", "536.3"), e(Ot, "y1", "1125"), e(Ot, "y2", "1146.3"), e(Ot, "gradientUnits", "userSpaceOnUse"), u(Ct, "xlink:href", "#i"), e(Ct, "id", "P"), e(Ct, "x1", "514.8"), e(Ct, "x2", "583.9"), e(Ct, "y1", "711.8"), e(Ct, "y2", "751.7"), e(Ct, "gradientUnits", "userSpaceOnUse"), u(Et, "xlink:href", "#j"), e(Et, "id", "Q"), e(Et, "x1", "549"), e(Et, "x2", "549"), e(Et, "y1", "713.4"), e(Et, "y2", "748.4"), e(Et, "gradientUnits", "userSpaceOnUse"), u(jt, "xlink:href", "#k"), e(jt, "id", "U"), e(jt, "x1", "515"), e(jt, "x2", "536.3"), e(jt, "y1", "1125"), e(jt, "y2", "1146.3"), e(jt, "gradientUnits", "userSpaceOnUse"), u(Ht, "xlink:href", "#i"), e(Ht, "id", "S"), e(Ht, "x1", "514.8"), e(Ht, "x2", "583.9"), e(Ht, "y1", "711.8"), e(Ht, "y2", "751.7"), e(Ht, "gradientUnits", "userSpaceOnUse"), u(Dt, "xlink:href", "#j"), e(Dt, "id", "T"), e(Dt, "x1", "549"), e(Dt, "x2", "549"), e(Dt, "y1", "713.4"), e(Dt, "y2", "748.4"), e(Dt, "gradientUnits", "userSpaceOnUse"), u(Rt, "xlink:href", "#k"), e(Rt, "id", "X"), e(Rt, "x1", "515"), e(Rt, "x2", "536.3"), e(Rt, "y1", "1125"), e(Rt, "y2", "1146.3"), e(Rt, "gradientUnits", "userSpaceOnUse"), u(Bt, "xlink:href", "#l"), e(Bt, "id", "V"), e(Bt, "x1", "514.8"), e(Bt, "x2", "583.9"), e(Bt, "y1", "711.8"), e(Bt, "y2", "751.7"), e(Bt, "gradientUnits", "userSpaceOnUse"), u(Qt, "xlink:href", "#m"), e(Qt, "id", "W"), e(Qt, "x1", "549"), e(Qt, "x2", "549"), e(Qt, "y1", "713.4"), e(Qt, "y2", "748.4"), e(Qt, "gradientUnits", "userSpaceOnUse"), u(Pt, "xlink:href", "#k"), e(Pt, "id", "aa"), e(Pt, "x1", "515"), e(Pt, "x2", "536.3"), e(Pt, "y1", "1125"), e(Pt, "y2", "1146.3"), e(Pt, "gradientUnits", "userSpaceOnUse"), u(Lt, "xlink:href", "#i"), e(Lt, "id", "Y"), e(Lt, "x1", "514.8"), e(Lt, "x2", "583.9"), e(Lt, "y1", "711.8"), e(Lt, "y2", "751.7"), e(Lt, "gradientUnits", "userSpaceOnUse"), u(Ft, "xlink:href", "#j"), e(Ft, "id", "Z"), e(Ft, "x1", "549"), e(Ft, "x2", "549"), e(Ft, "y1", "713.4"), e(Ft, "y2", "748.4"), e(Ft, "gradientUnits", "userSpaceOnUse"), u(Kt, "xlink:href", "#k"), e(Kt, "id", "ad"), e(Kt, "x1", "515"), e(Kt, "x2", "536.3"), e(Kt, "y1", "1125"), e(Kt, "y2", "1146.3"), e(Kt, "gradientUnits", "userSpaceOnUse"), u(At, "xlink:href", "#i"), e(At, "id", "ab"), e(At, "x1", "514.8"), e(At, "x2", "583.9"), e(At, "y1", "711.8"), e(At, "y2", "751.7"), e(At, "gradientUnits", "userSpaceOnUse"), u(Yt, "xlink:href", "#j"), e(Yt, "id", "ac"), e(Yt, "x1", "549"), e(Yt, "x2", "549"), e(Yt, "y1", "713.4"), e(Yt, "y2", "748.4"), e(Yt, "gradientUnits", "userSpaceOnUse"), u(Vt, "xlink:href", "#k"), e(Vt, "id", "ag"), e(Vt, "x1", "515"), e(Vt, "x2", "536.3"), e(Vt, "y1", "1125"), e(Vt, "y2", "1146.3"), e(Vt, "gradientUnits", "userSpaceOnUse"), u(Tt, "xlink:href", "#i"), e(Tt, "id", "ae"), e(Tt, "x1", "514.8"), e(Tt, "x2", "583.9"), e(Tt, "y1", "711.8"), e(Tt, "y2", "751.7"), e(Tt, "gradientUnits", "userSpaceOnUse"), u(It, "xlink:href", "#j"), e(It, "id", "af"), e(It, "x1", "549"), e(It, "x2", "549"), e(It, "y1", "713.4"), e(It, "y2", "748.4"), e(It, "gradientUnits", "userSpaceOnUse"), u(Nt, "xlink:href", "#k"), e(Nt, "id", "aj"), e(Nt, "x1", "515"), e(Nt, "x2", "536.3"), e(Nt, "y1", "1125"), e(Nt, "y2", "1146.3"), e(Nt, "gradientUnits", "userSpaceOnUse"), u(Zt, "xlink:href", "#i"), e(Zt, "id", "ah"), e(Zt, "x1", "514.8"), e(Zt, "x2", "583.9"), e(Zt, "y1", "711.8"), e(Zt, "y2", "751.7"), e(Zt, "gradientUnits", "userSpaceOnUse"), u(Xt, "xlink:href", "#j"), e(Xt, "id", "ai"), e(Xt, "x1", "549"), e(Xt, "x2", "549"), e(Xt, "y1", "713.4"), e(Xt, "y2", "748.4"), e(Xt, "gradientUnits", "userSpaceOnUse"), u(Wt, "xlink:href", "#k"), e(Wt, "id", "ay"), e(Wt, "x1", "515"), e(Wt, "x2", "536.3"), e(Wt, "y1", "1125"), e(Wt, "y2", "1146.3"), e(Wt, "gradientUnits", "userSpaceOnUse"), u(Jt, "xlink:href", "#i"), e(Jt, "id", "at"), e(Jt, "x1", "514.8"), e(Jt, "x2", "583.9"), e(Jt, "y1", "711.8"), e(Jt, "y2", "751.7"), e(Jt, "gradientUnits", "userSpaceOnUse"), u(e1, "xlink:href", "#j"), e(e1, "id", "au"), e(e1, "x1", "549"), e(e1, "x2", "549"), e(e1, "y1", "713.4"), e(e1, "y2", "748.4"), e(e1, "gradientUnits", "userSpaceOnUse"), u(t1, "xlink:href", "#k"), e(t1, "id", "av"), e(t1, "x1", "515"), e(t1, "x2", "536.3"), e(t1, "y1", "1125"), e(t1, "y2", "1146.3"), e(t1, "gradientUnits", "userSpaceOnUse"), u(r1, "xlink:href", "#i"), e(r1, "id", "aq"), e(r1, "x1", "514.8"), e(r1, "x2", "583.9"), e(r1, "y1", "711.8"), e(r1, "y2", "751.7"), e(r1, "gradientUnits", "userSpaceOnUse"), u(n1, "xlink:href", "#j"), e(n1, "id", "ar"), e(n1, "x1", "549"), e(n1, "x2", "549"), e(n1, "y1", "713.4"), e(n1, "y2", "748.4"), e(n1, "gradientUnits", "userSpaceOnUse"), u(l1, "xlink:href", "#k"), e(l1, "id", "as"), e(l1, "x1", "515"), e(l1, "x2", "536.3"), e(l1, "y1", "1125"), e(l1, "y2", "1146.3"), e(l1, "gradientUnits", "userSpaceOnUse"), u(i1, "xlink:href", "#k"), e(i1, "id", "ap"), e(i1, "x1", "515"), e(i1, "x2", "536.3"), e(i1, "y1", "1125"), e(i1, "y2", "1146.3"), e(i1, "gradientUnits", "userSpaceOnUse"), u(a1, "xlink:href", "#i"), e(a1, "id", "ak"), e(a1, "x1", "514.8"), e(a1, "x2", "583.9"), e(a1, "y1", "711.8"), e(a1, "y2", "751.7"), e(a1, "gradientUnits", "userSpaceOnUse"), u(o1, "xlink:href", "#j"), e(o1, "id", "al"), e(o1, "x1", "549"), e(o1, "x2", "549"), e(o1, "y1", "713.4"), e(o1, "y2", "748.4"), e(o1, "gradientUnits", "userSpaceOnUse"), u(s1, "xlink:href", "#k"), e(s1, "id", "am"), e(s1, "x1", "515"), e(s1, "x2", "536.3"), e(s1, "y1", "1125"), e(s1, "y2", "1146.3"), e(s1, "gradientUnits", "userSpaceOnUse"), u(c1, "xlink:href", "#i"), e(c1, "id", "an"), e(c1, "x1", "514.8"), e(c1, "x2", "583.9"), e(c1, "y1", "711.8"), e(c1, "y2", "751.7"), e(c1, "gradientUnits", "userSpaceOnUse"), u(d1, "xlink:href", "#j"), e(d1, "id", "ao"), e(d1, "x1", "549"), e(d1, "x2", "549"), e(d1, "y1", "713.4"), e(d1, "y2", "748.4"), e(d1, "gradientUnits", "userSpaceOnUse"), u(f1, "xlink:href", "#i"), e(f1, "id", "aw"), e(f1, "x1", "514.8"), e(f1, "x2", "583.9"), e(f1, "y1", "711.8"), e(f1, "y2", "751.7"), e(f1, "gradientUnits", "userSpaceOnUse"), u(p1, "xlink:href", "#j"), e(p1, "id", "ax"), e(p1, "x1", "549"), e(p1, "x2", "549"), e(p1, "y1", "713.4"), e(p1, "y2", "748.4"), e(p1, "gradientUnits", "userSpaceOnUse"), u(h1, "xlink:href", "#n"), e(h1, "id", "aB"), e(h1, "x1", "520"), e(h1, "x2", "528.5"), e(h1, "y1", "1122"), e(h1, "y2", "1152"), e(h1, "gradientUnits", "userSpaceOnUse"), u(u1, "xlink:href", "#i"), e(u1, "id", "az"), e(u1, "x1", "514.8"), e(u1, "x2", "624"), e(u1, "y1", "711.8"), e(u1, "y2", "743.4"), e(u1, "gradientUnits", "userSpaceOnUse"), u(g1, "xlink:href", "#j"), e(g1, "id", "aA"), e(g1, "x1", "549"), e(g1, "x2", "549"), e(g1, "y1", "713.4"), e(g1, "y2", "748.4"), e(g1, "gradientUnits", "userSpaceOnUse"), u(v1, "xlink:href", "#i"), e(v1, "id", "aC"), e(v1, "x1", "514.8"), e(v1, "x2", "624"), e(v1, "y1", "711.8"), e(v1, "y2", "743.4"), e(v1, "gradientUnits", "userSpaceOnUse"), u(m1, "xlink:href", "#n"), e(m1, "id", "aE"), e(m1, "x1", "520"), e(m1, "x2", "528.5"), e(m1, "y1", "1122"), e(m1, "y2", "1152"), e(m1, "gradientUnits", "userSpaceOnUse"), u(y1, "xlink:href", "#j"), e(y1, "id", "aD"), e(y1, "x1", "549"), e(y1, "x2", "549"), e(y1, "y1", "713.4"), e(y1, "y2", "748.4"), e(y1, "gradientUnits", "userSpaceOnUse"), u(x1, "xlink:href", "#i"), e(x1, "id", "aI"), e(x1, "x1", "514.8"), e(x1, "x2", "624"), e(x1, "y1", "711.8"), e(x1, "y2", "743.4"), e(x1, "gradientUnits", "userSpaceOnUse"), u(b1, "xlink:href", "#n"), e(b1, "id", "aK"), e(b1, "x1", "520"), e(b1, "x2", "528.5"), e(b1, "y1", "1122"), e(b1, "y2", "1152"), e(b1, "gradientUnits", "userSpaceOnUse"), u(w1, "xlink:href", "#i"), e(w1, "id", "aF"), e(w1, "x1", "514.8"), e(w1, "x2", "624"), e(w1, "y1", "711.8"), e(w1, "y2", "743.4"), e(w1, "gradientUnits", "userSpaceOnUse"), u(k1, "xlink:href", "#j"), e(k1, "id", "aG"), e(k1, "x1", "549"), e(k1, "x2", "549"), e(k1, "y1", "713.4"), e(k1, "y2", "748.4"), e(k1, "gradientUnits", "userSpaceOnUse"), u(q1, "xlink:href", "#n"), e(q1, "id", "aH"), e(q1, "x1", "520"), e(q1, "x2", "528.5"), e(q1, "y1", "1122"), e(q1, "y2", "1152"), e(q1, "gradientUnits", "userSpaceOnUse"), u(_1, "xlink:href", "#j"), e(_1, "id", "aJ"), e(_1, "x1", "549"), e(_1, "x2", "549"), e(_1, "y1", "713.4"), e(_1, "y2", "748.4"), e(_1, "gradientUnits", "userSpaceOnUse"), u(G1, "xlink:href", "#c"), e(G1, "id", "D"), e(G1, "x1", "575.8"), e(G1, "x2", "543.8"), e(G1, "y1", "691.7"), e(G1, "y2", "572.4"), e(G1, "gradientUnits", "userSpaceOnUse"), u(U1, "xlink:href", "#d"), e(U1, "id", "E"), e(U1, "x1", "562"), e(U1, "x2", "537.9"), e(U1, "y1", "686.2"), e(U1, "y2", "596.4"), e(U1, "gradientUnits", "userSpaceOnUse"), u(et, "xlink:href", "#o"), e(et, "id", "aL"), e(et, "x1", "504"), e(et, "x2", "504"), e(et, "y1", "978"), e(et, "y2", "876.8"), e(et, "gradientTransform", "translate(0 -285.6)"), e(et, "gradientUnits", "userSpaceOnUse"), u(tt, "xlink:href", "#e"), e(tt, "id", "aM"), e(tt, "x1", "91.3"), e(tt, "x2", "71.6"), e(tt, "y1", "978.6"), e(tt, "y2", "958.9"), e(tt, "gradientTransform", "translate(0 -285.6)"), e(tt, "gradientUnits", "userSpaceOnUse"), u(rt, "xlink:href", "#g"), e(rt, "id", "aN"), e(rt, "x1", "544"), e(rt, "x2", "575.4"), e(rt, "y1", "980"), e(rt, "y2", "948.6"), e(rt, "gradientTransform", "translate(0 -285.6)"), e(rt, "gradientUnits", "userSpaceOnUse"), u(z1, "xlink:href", "#p"), e(z1, "id", "aO"), e(z1, "x1", "327.1"), e(z1, "x2", "327.1"), e(z1, "y1", "580.4"), e(z1, "y2", "694.4"), e(z1, "gradientUnits", "userSpaceOnUse"), u(S1, "xlink:href", "#q"), e(S1, "id", "aP"), e(S1, "x1", "330.1"), e(S1, "x2", "330.1"), e(S1, "y1", "582.4"), e(S1, "y2", "694.4"), e(S1, "gradientUnits", "userSpaceOnUse"), u($1, "xlink:href", "#r"), e($1, "id", "aQ"), e($1, "x1", "264.5"), e($1, "x2", "350.3"), e($1, "y1", "600.6"), e($1, "y2", "686.4"), e($1, "gradientUnits", "userSpaceOnUse"), u(M1, "xlink:href", "#s"), e(M1, "id", "aS"), e(M1, "x1", "274"), e(M1, "x2", "367.4"), e(M1, "y1", "632.4"), e(M1, "y2", "644.4"), e(M1, "gradientUnits", "userSpaceOnUse"), u(O1, "xlink:href", "#t"), e(O1, "id", "aT"), e(O1, "x1", "311.9"), e(O1, "x2", "313.6"), e(O1, "y1", "632.4"), e(O1, "y2", "644.4"), e(O1, "gradientUnits", "userSpaceOnUse"), u(C1, "xlink:href", "#t"), e(C1, "id", "aV"), e(C1, "x1", "251"), e(C1, "x2", "262.3"), e(C1, "y1", "645.1"), e(C1, "y2", "638.6"), e(C1, "gradientUnits", "userSpaceOnUse"), u(E1, "xlink:href", "#t"), e(E1, "id", "aU"), e(E1, "x1", "-329.7"), e(E1, "x2", "-320.5"), e(E1, "y1", "-677.4"), e(E1, "y2", "-667.2"), e(E1, "gradientUnits", "userSpaceOnUse"), u(j1, "xlink:href", "#t"), e(j1, "id", "aW"), e(j1, "x1", "251.4"), e(j1, "x2", "261.3"), e(j1, "y1", "633.6"), e(j1, "y2", "639.3"), e(j1, "gradientUnits", "userSpaceOnUse"), u(H1, "xlink:href", "#t"), e(H1, "id", "aR"), e(H1, "x1", "325"), e(H1, "x2", "325"), e(H1, "y1", "612.4"), e(H1, "y2", "606.9"), e(H1, "gradientUnits", "userSpaceOnUse"), u(D1, "xlink:href", "#u"), e(D1, "id", "aX"), e(D1, "x1", "328.8"), e(D1, "x2", "328.8"), e(D1, "y1", "1099"), e(D1, "y2", "1108"), e(D1, "gradientUnits", "userSpaceOnUse"), u(R1, "xlink:href", "#v"), e(R1, "id", "aY"), e(R1, "x1", "559.3"), e(R1, "x2", "583.9"), e(R1, "y1", "709.1"), e(R1, "y2", "751.7"), e(R1, "gradientUnits", "userSpaceOnUse"), u(B1, "xlink:href", "#w"), e(B1, "id", "aZ"), e(B1, "x1", "549"), e(B1, "x2", "549"), e(B1, "y1", "713.4"), e(B1, "y2", "748.4"), e(B1, "gradientUnits", "userSpaceOnUse"), u(Q1, "xlink:href", "#v"), e(Q1, "id", "ba"), e(Q1, "x1", "559.3"), e(Q1, "x2", "583.9"), e(Q1, "y1", "709.1"), e(Q1, "y2", "751.7"), e(Q1, "gradientUnits", "userSpaceOnUse"), u(P1, "xlink:href", "#w"), e(P1, "id", "bb"), e(P1, "x1", "549"), e(P1, "x2", "549"), e(P1, "y1", "713.4"), e(P1, "y2", "748.4"), e(P1, "gradientUnits", "userSpaceOnUse"), u(L1, "xlink:href", "#v"), e(L1, "id", "bc"), e(L1, "x1", "559.3"), e(L1, "x2", "583.9"), e(L1, "y1", "709.1"), e(L1, "y2", "751.7"), e(L1, "gradientUnits", "userSpaceOnUse"), u(F1, "xlink:href", "#w"), e(F1, "id", "bd"), e(F1, "x1", "549"), e(F1, "x2", "549"), e(F1, "y1", "713.4"), e(F1, "y2", "748.4"), e(F1, "gradientUnits", "userSpaceOnUse"), u(K1, "xlink:href", "#v"), e(K1, "id", "be"), e(K1, "x1", "559.3"), e(K1, "x2", "583.9"), e(K1, "y1", "709.1"), e(K1, "y2", "751.7"), e(K1, "gradientUnits", "userSpaceOnUse"), u(A1, "xlink:href", "#w"), e(A1, "id", "bf"), e(A1, "x1", "549"), e(A1, "x2", "549"), e(A1, "y1", "713.4"), e(A1, "y2", "748.4"), e(A1, "gradientUnits", "userSpaceOnUse"), u(Y1, "xlink:href", "#v"), e(Y1, "id", "bg"), e(Y1, "x1", "559.3"), e(Y1, "x2", "583.9"), e(Y1, "y1", "709.1"), e(Y1, "y2", "751.7"), e(Y1, "gradientUnits", "userSpaceOnUse"), u(V1, "xlink:href", "#w"), e(V1, "id", "bh"), e(V1, "x1", "549"), e(V1, "x2", "549"), e(V1, "y1", "713.4"), e(V1, "y2", "748.4"), e(V1, "gradientUnits", "userSpaceOnUse"), u(T1, "xlink:href", "#v"), e(T1, "id", "bi"), e(T1, "x1", "559.3"), e(T1, "x2", "583.9"), e(T1, "y1", "709.1"), e(T1, "y2", "751.7"), e(T1, "gradientUnits", "userSpaceOnUse"), u(I1, "xlink:href", "#w"), e(I1, "id", "bj"), e(I1, "x1", "549"), e(I1, "x2", "549"), e(I1, "y1", "713.4"), e(I1, "y2", "748.4"), e(I1, "gradientUnits", "userSpaceOnUse"), u(N1, "xlink:href", "#v"), e(N1, "id", "bk"), e(N1, "x1", "559.3"), e(N1, "x2", "583.9"), e(N1, "y1", "709.1"), e(N1, "y2", "751.7"), e(N1, "gradientUnits", "userSpaceOnUse"), u(Z1, "xlink:href", "#w"), e(Z1, "id", "bl"), e(Z1, "x1", "549"), e(Z1, "x2", "549"), e(Z1, "y1", "713.4"), e(Z1, "y2", "748.4"), e(Z1, "gradientUnits", "userSpaceOnUse"), u(X1, "xlink:href", "#v"), e(X1, "id", "bm"), e(X1, "x1", "559.3"), e(X1, "x2", "583.9"), e(X1, "y1", "709.1"), e(X1, "y2", "751.7"), e(X1, "gradientUnits", "userSpaceOnUse"), u(W1, "xlink:href", "#w"), e(W1, "id", "bn"), e(W1, "x1", "549"), e(W1, "x2", "549"), e(W1, "y1", "713.4"), e(W1, "y2", "748.4"), e(W1, "gradientUnits", "userSpaceOnUse"), u(J1, "xlink:href", "#v"), e(J1, "id", "bo"), e(J1, "x1", "559.3"), e(J1, "x2", "583.9"), e(J1, "y1", "709.1"), e(J1, "y2", "751.7"), e(J1, "gradientUnits", "userSpaceOnUse"), u(er, "xlink:href", "#w"), e(er, "id", "bp"), e(er, "x1", "549"), e(er, "x2", "549"), e(er, "y1", "713.4"), e(er, "y2", "748.4"), e(er, "gradientUnits", "userSpaceOnUse"), u(tr, "xlink:href", "#v"), e(tr, "id", "bq"), e(tr, "x1", "559.3"), e(tr, "x2", "583.9"), e(tr, "y1", "709.1"), e(tr, "y2", "751.7"), e(tr, "gradientUnits", "userSpaceOnUse"), u(rr, "xlink:href", "#w"), e(rr, "id", "br"), e(rr, "x1", "549"), e(rr, "x2", "549"), e(rr, "y1", "713.4"), e(rr, "y2", "748.4"), e(rr, "gradientUnits", "userSpaceOnUse"), u(nr, "xlink:href", "#v"), e(nr, "id", "bs"), e(nr, "x1", "559.3"), e(nr, "x2", "583.9"), e(nr, "y1", "709.1"), e(nr, "y2", "751.7"), e(nr, "gradientUnits", "userSpaceOnUse"), u(lr, "xlink:href", "#w"), e(lr, "id", "bt"), e(lr, "x1", "549"), e(lr, "x2", "549"), e(lr, "y1", "713.4"), e(lr, "y2", "748.4"), e(lr, "gradientUnits", "userSpaceOnUse"), u(ir, "xlink:href", "#v"), e(ir, "id", "bu"), e(ir, "x1", "559.3"), e(ir, "x2", "583.9"), e(ir, "y1", "709.1"), e(ir, "y2", "751.7"), e(ir, "gradientUnits", "userSpaceOnUse"), u(ar, "xlink:href", "#w"), e(ar, "id", "bv"), e(ar, "x1", "549"), e(ar, "x2", "549"), e(ar, "y1", "713.4"), e(ar, "y2", "748.4"), e(ar, "gradientUnits", "userSpaceOnUse"), e(Tn, "y", "0"), e(Tn, "x", "0"), e(Tn, "height", "18"), e(Tn, "width", "20"), e(Tn, "fill", "#272727"), e(m0, "fill", "#222"), e(m0, "fill-rule", "evenodd"), e(m0, "d", "M9.99 0 5 3v6l-5 3v6l10-6V0h-.01zm10 0L15 3v6l5-3V0h-.01z"), e(y0, "fill", "#1c1c1c"), e(y0, "fill-rule", "evenodd"), e(y0, "d", "M0 0v6l5 3V3L.01 0H0zm10 0v12l10 6v-6l-5-3V3l-4.99-3H10z"), e(Qe, "id", "pattern1"), e(Qe, "x", "0"), e(Qe, "y", "0"), e(Qe, "width", "20"), e(Qe, "height", "18"), e(Qe, "patternUnits", "userSpaceOnUse"), e(Qe, "class", "svelte-py5gbp"), u(or, "xlink:href", "#x"), e(or, "id", "A"), e(or, "x1", "295"), e(or, "x2", "295"), e(or, "y1", "1004.4"), e(or, "y2", "-357.6"), e(or, "gradientUnits", "userSpaceOnUse"), e(gl, "fill", "url(#y)"), e(gl, "fill-rule", "evenodd"), e(gl, "stroke", "#696a69"), e(gl, "d", "M119 1046.4c-33-.4-94-23-105-42-1-7-7-94-7-162v-1075c0-13 3.5-103 5-130 8-13.9 56-33.8 68-37 12-3.3 25-6 36-6h416c11 0 24 2.7 36 6 12 3.2 60 23.1 68 37 1.5 27 5 117 5 130v1075c0 68-6 155-7 162-11 19-72 41.6-105 42H365z"), e(x0, "fill", "url(#z)"), e(x0, "fill-rule", "evenodd"), e(x0, "d", "M120 1022.4c-60 0-102-25-102-135v-1135c0-75 17-133 117-133h378c100 0 117 58 117 133v1135c0 110-42 135-102 135H365z"), e(vl, "fill", "#269dc5"), e(vl, "fill-rule", "evenodd"), e(vl, "stroke", "#6ac1df"), e(vl, "d", "M120 1015.4c-55 0-96-23-96-128v-1135c0-75 16-128 111-128h378c95 0 111 53 111 128v1135c0 105-41 128-96 128H365z"), e(In, "id", "pattern-bg"), e(In, "fill", "url(#pattern1)"), e(In, "fill-rule", "evenodd"), e(In, "stroke", "#000"), e(In, "d", "M120 1007.4c-45.4 0-90-15-90-120v-1127c0-75 15-128 105-128h378c90 0 105 53 105 128v1127c0 105-44.6 120-90 120H365z"), e(Pe, "width", "516"), e(Pe, "height", "894"), e(Pe, "x", "66"), e(Pe, "y", "-321.6"), e(Pe, "fill", "#0d0d0d"), e(Pe, "stroke", "url(#B)"), e(Pe, "stroke-linecap", "round"), e(Pe, "stroke-linejoin", "round"), e(Pe, "rx", "22"), e(Pe, "ry", "22"), e(Le, "width", "493"), e(Le, "height", "871"), e(Le, "x", "77"), e(Le, "y", "-310.6"), e(Le, "fill", "#0d0d0d"), e(Le, "stroke", "url(#C)"), e(Le, "stroke-linecap", "round"), e(Le, "stroke-linejoin", "round"), e(Le, "rx", "10"), e(Le, "ry", "10"), e(Fe, "width", "516"), e(Fe, "height", "120"), e(Fe, "x", "66"), e(Fe, "y", "578.4"), e(Fe, "fill", "#0d0d0d"), e(Fe, "stroke", "url(#D)"), e(Fe, "stroke-linecap", "round"), e(Fe, "stroke-linejoin", "round"), e(Fe, "rx", "22"), e(Fe, "ry", "22"), e(Ke, "width", "493"), e(Ke, "height", "96"), e(Ke, "x", "77"), e(Ke, "y", "590.4"), e(Ke, "fill", "#0d0d0d"), e(Ke, "stroke", "url(#E)"), e(Ke, "stroke-linecap", "round"), e(Ke, "stroke-linejoin", "round"), e(Ke, "rx", "10"), e(Ke, "ry", "10"), e(nt, "width", "116"), e(nt, "height", "36"), e(nt, "x", "86"), e(nt, "y", "644.4"), e(nt, "fill", "#00ec3a"), e(nt, "fill-opacity", ".2"), e(nt, "rx", "7"), e(nt, "ry", "7"), e(lt, "width", "116"), e(lt, "height", "36"), e(lt, "x", "446"), e(lt, "y", "596.4"), e(lt, "fill", "#00ec3a"), e(lt, "fill-opacity", ".2"), e(lt, "rx", "7"), e(lt, "ry", "7"), e(it, "width", "116"), e(it, "height", "36"), e(it, "x", "446"), e(it, "y", "644.4"), e(it, "fill", "#00ec3a"), e(it, "fill-opacity", ".2"), e(it, "rx", "7"), e(it, "ry", "7"), e(ae, "width", "76"), e(ae, "height", "44"), e(ae, "x", "511"), e(ae, "y", "709.4"), e(ae, "fill", "url(#F)"), e(ae, "stroke", "var(--btn-border-stroke)"), e(ae, "stroke-linecap", "round"), e(ae, "stroke-linejoin", "round"), e(ae, "stroke-width", "2"), e(ae, "rx", "8"), e(ae, "ry", "8"), e(sr, "width", "68"), e(sr, "height", "35"), e(sr, "x", "515"), e(sr, "y", "713.4"), e(sr, "fill", "url(#G)"), e(sr, "rx", "4"), e(sr, "ry", "4"), e(b0, "fill", "url(#H)"), e(b0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(b0, "transform", "translate(0 -411.6)"), e(rn, "transform", "translate(0 54)"), e(rn, "class", "cp-button"), e(rn, "data-cp", "KEYCODE_TIMES"), e(z2, "fill", "#fff"), e(z2, "d", "M84-303.6h480v792H84z"), e(U2, "id", "uid_3418"), e(re, "transform", "translate(0 411.6)"), e($2, "class", "cp-wrapper svelte-py5gbp"), e(nn, "x", "0"), e(nn, "y", "0"), e(nn, "width", "480"), e(nn, "height", "792"), e(nn, "overflow", "hidden"), e(S2, "transform", "translate(85 109)"), e(w0, "fill", "url(#I)"), e(w0, "d", "M387.7 90a22 22 0 0 0-19 11H560a10 10 0 0 1 10 10v851a10 10 0 0 1-10 10H365.7v12H560a22 22 0 0 0 22-22V112a22 22 0 0 0-22-22H387.7z"), e(w0, "transform", "translate(0 -411.6)"), e(k0, "fill", "url(#J)"), e(k0, "d", "M66 904v58a22 22 0 0 0 22 22h472v-12H87a10 10 0 0 1-10-10v-58z"), e(k0, "transform", "translate(0 -411.6)"), e(q0, "fill", "url(#K)"), e(q0, "d", "M570 900v62a10 10 0 0 1-10 10h-57.9v12H560a22 22 0 0 0 22-22v-62h-12z"), e(q0, "transform", "translate(0 -411.6)"), e(ml, "fill", "url(#L)"), e(ml, "fill-rule", "evenodd"), e(ml, "d", "M136.9 40C42.9 40 27 93 27 168v1135c0 44.7 7.4 74.6 20 94.1 17.3 23 43 29.9 73 29.9h408c30 0 55.7-6.8 73-29.9 12.6-19.5 20-49.4 20-94.1V168c0-75-15.8-128-109.9-128H137zm-1.9 4h378c90 0 105 53 105 128v1127c0 105-44.6 120-90 120H120c-45.4 0-90-15-90-120V172C30 97 45 44 135 44z"), e(ml, "transform", "translate(0 -411.6)"), e(yl, "fill", "#1f7e9e"), e(yl, "fill-opacity", ".3"), e(yl, "fill-rule", "evenodd"), e(yl, "d", "M-638 1019.4c-54.4 0-95-23-95-128v-1135c0-75 15.8-128 109.9-128H-249c94 0 109.9 53 109.9 128v1135c0 105-40.6 128-95 128h-161.4z"), e(oe, "width", "76"), e(oe, "height", "44"), e(oe, "x", "511"), e(oe, "y", "709.4"), e(oe, "fill", "url(#M)"), e(oe, "stroke", "var(--btn-border-stroke)"), e(oe, "stroke-linecap", "round"), e(oe, "stroke-linejoin", "round"), e(oe, "stroke-width", "2"), e(oe, "rx", "8"), e(oe, "ry", "8"), e(cr, "width", "68"), e(cr, "height", "35"), e(cr, "x", "515"), e(cr, "y", "713.4"), e(cr, "fill", "url(#N)"), e(cr, "rx", "4"), e(cr, "ry", "4"), e(_0, "fill", "url(#O)"), e(_0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(_0, "transform", "translate(0 -411.6)"), e(Nn, "class", "cp-button"), e(Nn, "data-cp", "KEYCODE_DIVIDE"), e(se, "width", "76"), e(se, "height", "44"), e(se, "x", "511"), e(se, "y", "709.4"), e(se, "fill", "url(#P)"), e(se, "stroke", "var(--btn-border-stroke)"), e(se, "stroke-linecap", "round"), e(se, "stroke-linejoin", "round"), e(se, "stroke-width", "2"), e(se, "rx", "8"), e(se, "ry", "8"), e(dr, "width", "68"), e(dr, "height", "35"), e(dr, "x", "515"), e(dr, "y", "713.4"), e(dr, "fill", "url(#Q)"), e(dr, "rx", "4"), e(dr, "ry", "4"), e(G0, "fill", "url(#R)"), e(G0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(G0, "transform", "translate(0 -411.6)"), e(ln, "transform", "translate(0 108)"), e(ln, "class", "cp-button"), e(ln, "data-cp", "KEYCODE_MINUS"), e(ce, "width", "76"), e(ce, "height", "44"), e(ce, "x", "511"), e(ce, "y", "709.4"), e(ce, "fill", "url(#S)"), e(ce, "stroke", "var(--btn-border-stroke)"), e(ce, "stroke-linecap", "round"), e(ce, "stroke-linejoin", "round"), e(ce, "stroke-width", "2"), e(ce, "rx", "8"), e(ce, "ry", "8"), e(fr, "width", "68"), e(fr, "height", "35"), e(fr, "x", "515"), e(fr, "y", "713.4"), e(fr, "fill", "url(#T)"), e(fr, "rx", "4"), e(fr, "ry", "4"), e(U0, "fill", "url(#U)"), e(U0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(U0, "transform", "translate(0 -411.6)"), e(an, "transform", "translate(0 162)"), e(an, "class", "cp-button"), e(an, "data-cp", "KEYCODE_PLUS"), e(de, "width", "76"), e(de, "height", "44"), e(de, "x", "511"), e(de, "y", "709.4"), e(de, "fill", "url(#V)"), e(de, "stroke", "var(--btn-border-stroke)"), e(de, "stroke-linecap", "round"), e(de, "stroke-linejoin", "round"), e(de, "stroke-width", "2"), e(de, "rx", "8"), e(de, "ry", "8"), e(pr, "width", "68"), e(pr, "height", "35"), e(pr, "x", "515"), e(pr, "y", "713.4"), e(pr, "fill", "url(#W)"), e(pr, "rx", "4"), e(pr, "ry", "4"), e(z0, "fill", "url(#X)"), e(z0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(z0, "transform", "translate(0 -411.6)"), e(on, "transform", "translate(0 216)"), e(on, "class", "cp-button"), e(on, "data-cp", "KEYCODE_EXE"), e(fe, "width", "76"), e(fe, "height", "44"), e(fe, "x", "511"), e(fe, "y", "709.4"), e(fe, "fill", "url(#Y)"), e(fe, "stroke", "var(--btn-border-stroke)"), e(fe, "stroke-linecap", "round"), e(fe, "stroke-linejoin", "round"), e(fe, "stroke-width", "2"), e(fe, "rx", "8"), e(fe, "ry", "8"), e(hr, "width", "68"), e(hr, "height", "35"), e(hr, "x", "515"), e(hr, "y", "713.4"), e(hr, "fill", "url(#Z)"), e(hr, "rx", "4"), e(hr, "ry", "4"), e(S0, "fill", "url(#aa)"), e(S0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(S0, "transform", "translate(0 -411.6)"), e(sn, "transform", "translate(-90)"), e(sn, "class", "cp-button"), e(sn, "data-cp", "KEYCODE_POWER"), e(pe, "width", "76"), e(pe, "height", "44"), e(pe, "x", "511"), e(pe, "y", "709.4"), e(pe, "fill", "url(#ab)"), e(pe, "stroke", "var(--btn-border-stroke)"), e(pe, "stroke-linecap", "round"), e(pe, "stroke-linejoin", "round"), e(pe, "stroke-width", "2"), e(pe, "rx", "8"), e(pe, "ry", "8"), e(ur, "width", "68"), e(ur, "height", "35"), e(ur, "x", "515"), e(ur, "y", "713.4"), e(ur, "fill", "url(#ac)"), e(ur, "rx", "4"), e(ur, "ry", "4"), e($0, "fill", "url(#ad)"), e($0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e($0, "transform", "translate(0 -411.6)"), e(cn, "transform", "translate(-180)"), e(cn, "class", "cp-button"), e(cn, "data-cp", "KEYCODE_Z"), e(he, "width", "76"), e(he, "height", "44"), e(he, "x", "511"), e(he, "y", "709.4"), e(he, "fill", "url(#ae)"), e(he, "stroke", "var(--btn-border-stroke)"), e(he, "stroke-linecap", "round"), e(he, "stroke-linejoin", "round"), e(he, "stroke-width", "2"), e(he, "rx", "8"), e(he, "ry", "8"), e(gr, "width", "68"), e(gr, "height", "35"), e(gr, "x", "515"), e(gr, "y", "713.4"), e(gr, "fill", "url(#af)"), e(gr, "rx", "4"), e(gr, "ry", "4"), e(M0, "fill", "url(#ag)"), e(M0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(M0, "transform", "translate(0 -411.6)"), e(dn, "transform", "translate(-270)"), e(dn, "class", "cp-button"), e(dn, "data-cp", "KEYCODE_Y"), e(ue, "width", "76"), e(ue, "height", "44"), e(ue, "x", "511"), e(ue, "y", "709.4"), e(ue, "fill", "url(#ah)"), e(ue, "stroke", "var(--btn-border-stroke)"), e(ue, "stroke-linecap", "round"), e(ue, "stroke-linejoin", "round"), e(ue, "stroke-width", "2"), e(ue, "rx", "8"), e(ue, "ry", "8"), e(vr, "width", "68"), e(vr, "height", "35"), e(vr, "x", "515"), e(vr, "y", "713.4"), e(vr, "fill", "url(#ai)"), e(vr, "rx", "4"), e(vr, "ry", "4"), e(O0, "fill", "url(#aj)"), e(O0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(O0, "transform", "translate(0 -411.6)"), e(fn, "transform", "translate(-360)"), e(fn, "class", "cp-button"), e(fn, "data-cp", "KEYCODE_X"), e(ge, "width", "76"), e(ge, "height", "44"), e(ge, "x", "511"), e(ge, "y", "709.4"), e(ge, "fill", "url(#ak)"), e(ge, "stroke", "var(--btn-border-stroke)"), e(ge, "stroke-linecap", "round"), e(ge, "stroke-linejoin", "round"), e(ge, "stroke-width", "2"), e(ge, "rx", "8"), e(ge, "ry", "8"), e(mr, "width", "68"), e(mr, "height", "35"), e(mr, "x", "515"), e(mr, "y", "713.4"), e(mr, "fill", "url(#al)"), e(mr, "rx", "4"), e(mr, "ry", "4"), e(C0, "fill", "url(#am)"), e(C0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(C0, "transform", "translate(0 -411.6)"), e(pn, "transform", "translate(-450 54)"), e(pn, "class", "cp-button"), e(pn, "data-cp", "KEYCODE_OPEN_PARENTHESIS"), e(ve, "width", "76"), e(ve, "height", "44"), e(ve, "x", "511"), e(ve, "y", "709.4"), e(ve, "fill", "url(#an)"), e(ve, "stroke", "var(--btn-border-stroke)"), e(ve, "stroke-linecap", "round"), e(ve, "stroke-linejoin", "round"), e(ve, "stroke-width", "2"), e(ve, "rx", "8"), e(ve, "ry", "8"), e(yr, "width", "68"), e(yr, "height", "35"), e(yr, "x", "515"), e(yr, "y", "713.4"), e(yr, "fill", "url(#ao)"), e(yr, "rx", "4"), e(yr, "ry", "4"), e(E0, "fill", "url(#ap)"), e(E0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(E0, "transform", "translate(0 -411.6)"), e(hn, "transform", "translate(-450)"), e(hn, "class", "cp-button"), e(hn, "data-cp", "KEYCODE_EQUALS"), e(me, "width", "76"), e(me, "height", "44"), e(me, "x", "511"), e(me, "y", "709.4"), e(me, "fill", "url(#aq)"), e(me, "stroke", "var(--btn-border-stroke)"), e(me, "stroke-linecap", "round"), e(me, "stroke-linejoin", "round"), e(me, "stroke-width", "2"), e(me, "rx", "8"), e(me, "ry", "8"), e(xr, "width", "68"), e(xr, "height", "35"), e(xr, "x", "515"), e(xr, "y", "713.4"), e(xr, "fill", "url(#ar)"), e(xr, "rx", "4"), e(xr, "ry", "4"), e(j0, "fill", "url(#as)"), e(j0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(j0, "transform", "translate(0 -411.6)"), e(un, "transform", "translate(-450 108)"), e(un, "class", "cp-button"), e(un, "data-cp", "KEYCODE_CLOSE_PARENTHESIS"), e(ye, "width", "76"), e(ye, "height", "44"), e(ye, "x", "511"), e(ye, "y", "709.4"), e(ye, "fill", "url(#at)"), e(ye, "stroke", "var(--btn-border-stroke)"), e(ye, "stroke-linecap", "round"), e(ye, "stroke-linejoin", "round"), e(ye, "stroke-width", "2"), e(ye, "rx", "8"), e(ye, "ry", "8"), e(br, "width", "68"), e(br, "height", "35"), e(br, "x", "515"), e(br, "y", "713.4"), e(br, "fill", "url(#au)"), e(br, "rx", "4"), e(br, "ry", "4"), e(H0, "fill", "url(#av)"), e(H0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(H0, "transform", "translate(0 -411.6)"), e(gn, "transform", "translate(-450 162)"), e(gn, "class", "cp-button"), e(gn, "data-cp", "KEYCODE_COMMA"), e(xe, "width", "76"), e(xe, "height", "44"), e(xe, "x", "511"), e(xe, "y", "709.4"), e(xe, "fill", "url(#aw)"), e(xe, "stroke", "var(--btn-border-stroke)"), e(xe, "stroke-linecap", "round"), e(xe, "stroke-linejoin", "round"), e(xe, "stroke-width", "2"), e(xe, "rx", "8"), e(xe, "ry", "8"), e(wr, "width", "68"), e(wr, "height", "35"), e(wr, "x", "515"), e(wr, "y", "713.4"), e(wr, "fill", "url(#ax)"), e(wr, "rx", "4"), e(wr, "ry", "4"), e(D0, "fill", "url(#ay)"), e(D0, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(D0, "transform", "translate(0 -411.6)"), e(vn, "transform", "translate(-450 216)"), e(vn, "class", "cp-button"), e(vn, "data-cp", "KEYCODE_NEGATIVE"), e(be, "width", "116"), e(be, "height", "36"), e(be, "x", "511"), e(be, "y", "709.4"), e(be, "fill", "url(#az)"), e(be, "stroke", "var(--btn-border-stroke)"), e(be, "stroke-linecap", "round"), e(be, "stroke-linejoin", "round"), e(be, "stroke-width", "2"), e(be, "rx", "8"), e(be, "ry", "8"), e(kr, "width", "107"), e(kr, "height", "27"), e(kr, "x", "515"), e(kr, "y", "713.4"), e(kr, "fill", "url(#aA)"), e(kr, "rx", "4"), e(kr, "ry", "4"), e(R0, "fill", "url(#aB)"), e(R0, "d", "M519 1122a7 7 0 0 0-7 7v20a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-19a4 4 0 0 1 4-4h100a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6Z"), e(R0, "transform", "translate(0 -411.6)"), e(mn, "transform", "translate(-425 -113)"), e(mn, "class", "cp-button"), e(mn, "data-cp", "KEYCODE_KEYBOARD"), e(we, "width", "116"), e(we, "height", "36"), e(we, "x", "511"), e(we, "y", "709.4"), e(we, "fill", "url(#aC)"), e(we, "stroke", "var(--btn-border-stroke)"), e(we, "stroke-linecap", "round"), e(we, "stroke-linejoin", "round"), e(we, "stroke-width", "2"), e(we, "rx", "8"), e(we, "ry", "8"), e(qr, "width", "107"), e(qr, "height", "27"), e(qr, "x", "515"), e(qr, "y", "713.4"), e(qr, "fill", "url(#aD)"), e(qr, "rx", "4"), e(qr, "ry", "4"), e(B0, "fill", "url(#aE)"), e(B0, "d", "M519 1122a7 7 0 0 0-7 7v20a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-19a4 4 0 0 1 4-4h100a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6Z"), e(B0, "transform", "translate(0 -411.6)"), e(yn, "transform", "translate(-425 -65)"), e(yn, "class", "cp-button"), e(yn, "data-cp", "KEYCODE_SHIFT"), e(ke, "width", "116"), e(ke, "height", "36"), e(ke, "x", "511"), e(ke, "y", "709.4"), e(ke, "fill", "url(#aF)"), e(ke, "stroke", "var(--btn-border-stroke)"), e(ke, "stroke-linecap", "round"), e(ke, "stroke-linejoin", "round"), e(ke, "stroke-width", "2"), e(ke, "rx", "8"), e(ke, "ry", "8"), e(_r, "width", "107"), e(_r, "height", "27"), e(_r, "x", "515"), e(_r, "y", "713.4"), e(_r, "fill", "url(#aG)"), e(_r, "rx", "4"), e(_r, "ry", "4"), e(Q0, "fill", "url(#aH)"), e(Q0, "d", "M519 1122a7 7 0 0 0-7 7v20a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-19a4 4 0 0 1 4-4h100a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6Z"), e(Q0, "transform", "translate(0 -411.6)"), e(xn, "transform", "translate(-65 -113)"), e(xn, "class", "cp-button"), e(xn, "data-cp", "KEYCODE_BACKSPACE"), e(qe, "width", "116"), e(qe, "height", "36"), e(qe, "x", "511"), e(qe, "y", "709.4"), e(qe, "fill", "url(#aI)"), e(qe, "stroke", "var(--btn-border-stroke)"), e(qe, "stroke-linecap", "round"), e(qe, "stroke-linejoin", "round"), e(qe, "stroke-width", "2"), e(qe, "rx", "8"), e(qe, "ry", "8"), e(Gr, "width", "107"), e(Gr, "height", "27"), e(Gr, "x", "515"), e(Gr, "y", "713.4"), e(Gr, "fill", "url(#aJ)"), e(Gr, "rx", "4"), e(Gr, "ry", "4"), e(P0, "fill", "url(#aK)"), e(P0, "d", "M519 1122a7 7 0 0 0-7 7v20a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-19a4 4 0 0 1 4-4h100a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6Z"), e(P0, "transform", "translate(0 -411.6)"), e(bn, "transform", "translate(-65 -65)"), e(bn, "class", "cp-button"), e(bn, "data-cp", "KEYCODE_CLEAR"), e(M2, "fill", "url(#aL)"), e(M2, "d", "M560 589.4s10 4.4 10 10v77a10 10 0 0 1-10 10H365.7v12H560c13.2 0 22-9.3 22-28v-70c0-12.2-22-22-22-22z"), e(O2, "fill", "url(#aM)"), e(O2, "d", "M66 618.4v58a22 22 0 0 0 22 22h472v-12H87a10 10 0 0 1-10-10v-58z"), e(C2, "fill", "url(#aN)"), e(C2, "d", "M570 614.4v62a10 10 0 0 1-10 10h-57.9v12H560a22 22 0 0 0 22-22v-62z"), e(Ur, "width", "204"), e(Ur, "height", "116"), e(Ur, "x", "221"), e(Ur, "y", "580.4"), e(Ur, "fill", "url(#aO)"), e(Ur, "rx", "25"), e(Ur, "ry", "58"), e(zr, "width", "200"), e(zr, "height", "112"), e(zr, "x", "223"), e(zr, "y", "582.4"), e(zr, "fill", "url(#aP)"), e(zr, "rx", "23"), e(zr, "ry", "55.9"), e(Sr, "width", "185"), e(Sr, "height", "98"), e(Sr, "x", "231"), e(Sr, "y", "589.4"), e(Sr, "fill", "url(#aQ)"), e(Sr, "rx", "16"), e(Sr, "ry", "47.5"), e($r, "class", "cp-button cp-button-arrow"), e($r, "data-cp", "KEYCODE_UP"), e($r, "fill", "#7f7f7f"), e($r, "stroke", "url(#aR)"), e($r, "stroke-linecap", "round"), e($r, "stroke-linejoin", "round"), e($r, "d", "M330.2 611.5c-.4.8-5.3.9-6.2.9-.9 0-5.8 0-6.2-.9-.5-.7 2-5 2.4-5.8.4-.7 3-5 3.8-5 .9 0 3.4 4.3 3.8 5 .5.8 2.9 5 2.4 5.8z"), e(Ae, "width", "104"), e(Ae, "height", "12"), e(Ae, "x", "272"), e(Ae, "y", "632.4"), e(Ae, "fill", "url(#aS)"), e(Ae, "stroke", "url(#aT)"), e(Ae, "stroke-linecap", "round"), e(Ae, "stroke-linejoin", "round"), e(Ae, "rx", "2"), e(Ae, "ry", "2"), e(at, "class", "cp-button cp-button-arrow"), e(at, "data-cp", "KEYCODE_DOWN"), e(at, "fill", "#7f7f7f"), e(at, "stroke", "url(#aU)"), e(at, "stroke-linecap", "round"), e(at, "stroke-linejoin", "round"), e(at, "d", "M-317.8-665.2c-.4.8-5.3.8-6.2.8-.9 0-5.8 0-6.2-.8-.5-.7 2-5 2.4-5.8.4-.8 3-5 3.8-5 .9 0 3.4 4.2 3.8 5 .5.8 2.9 5 2.4 5.8z"), e(at, "transform", "scale(-1)"), e(ot, "class", "cp-button cp-button-arrow"), e(ot, "data-cp", "KEYCODE_LEFT"), e(ot, "fill", "#7f7f7f"), e(ot, "stroke", "url(#aV)"), e(ot, "stroke-linecap", "round"), e(ot, "stroke-linejoin", "round"), e(ot, "d", "M265.2 641.5c-.4.8-5.3.9-6.2.9-.9 0-5.8 0-6.2-.9-.5-.7 2-5 2.4-5.8.4-.7 3-5 3.8-5 .9 0 3.4 4.3 3.8 5 .5.8 2.9 5 2.4 5.8z"), e(ot, "transform", "rotate(-90 255.8 641.5)"), e(st, "class", "cp-button cp-button-arrow"), e(st, "data-cp", "KEYCODE_RIGHT"), e(st, "fill", "#7f7f7f"), e(st, "stroke", "url(#aW)"), e(st, "stroke-linecap", "round"), e(st, "stroke-linejoin", "round"), e(st, "d", "M265.2 641.5c-.4.8-5.3.9-6.2.9-.9 0-5.8 0-6.2-.9-.5-.7 2-5 2.4-5.8.4-.7 3-5 3.8-5 .9 0 3.4 4.3 3.8 5 .5.8 2.9 5 2.4 5.8z"), e(st, "transform", "matrix(0 -1 -1 0 1033.7 897.4)"), e(L0, "fill", "url(#aX)"), e(L0, "d", "m245 1098.7-2.5 6.7c1.1.4 2.3.6 3.5.6h154c2 0 3.8-.6 5.6-1.7l-4-5.6c-.5.2-1 .3-1.6.3H247l-2-.3z"), e(L0, "transform", "translate(0 -411.6)"), e(_e, "width", "102"), e(_e, "height", "44"), e(_e, "x", "511"), e(_e, "y", "709.4"), e(_e, "fill", "url(#aY)"), e(_e, "stroke", "var(--btn-border-stroke)"), e(_e, "stroke-linecap", "round"), e(_e, "stroke-linejoin", "round"), e(_e, "stroke-width", "2"), e(_e, "rx", "8"), e(_e, "ry", "8"), e(Mr, "width", "94"), e(Mr, "height", "35"), e(Mr, "x", "515"), e(Mr, "y", "713.4"), e(Mr, "fill", "url(#aZ)"), e(Mr, "rx", "4"), e(Mr, "ry", "4"), e(Zn, "transform", "translate(-117 216)"), e(Zn, "class", "cp-button"), e(Zn, "data-cp", "KEYCODE_EXP"), e(Ge, "width", "102"), e(Ge, "height", "44"), e(Ge, "x", "511"), e(Ge, "y", "709.4"), e(Ge, "fill", "url(#ba)"), e(Ge, "stroke", "var(--btn-border-stroke)"), e(Ge, "stroke-linecap", "round"), e(Ge, "stroke-linejoin", "round"), e(Ge, "stroke-width", "2"), e(Ge, "rx", "8"), e(Ge, "ry", "8"), e(Or, "width", "94"), e(Or, "height", "35"), e(Or, "x", "515"), e(Or, "y", "713.4"), e(Or, "fill", "url(#bb)"), e(Or, "rx", "4"), e(Or, "ry", "4"), e(Xn, "transform", "translate(-117 162)"), e(Xn, "class", "cp-button"), e(Xn, "data-cp", "KEYCODE_3"), e(Ue, "width", "102"), e(Ue, "height", "44"), e(Ue, "x", "511"), e(Ue, "y", "709.4"), e(Ue, "fill", "url(#bc)"), e(Ue, "stroke", "var(--btn-border-stroke)"), e(Ue, "stroke-linecap", "round"), e(Ue, "stroke-linejoin", "round"), e(Ue, "stroke-width", "2"), e(Ue, "rx", "8"), e(Ue, "ry", "8"), e(Cr, "width", "94"), e(Cr, "height", "35"), e(Cr, "x", "515"), e(Cr, "y", "713.4"), e(Cr, "fill", "url(#bd)"), e(Cr, "rx", "4"), e(Cr, "ry", "4"), e(Wn, "transform", "translate(-117 108)"), e(Wn, "class", "cp-button"), e(Wn, "data-cp", "KEYCODE_6"), e(ze, "width", "102"), e(ze, "height", "44"), e(ze, "x", "511"), e(ze, "y", "709.4"), e(ze, "fill", "url(#be)"), e(ze, "stroke", "var(--btn-border-stroke)"), e(ze, "stroke-linecap", "round"), e(ze, "stroke-linejoin", "round"), e(ze, "stroke-width", "2"), e(ze, "rx", "8"), e(ze, "ry", "8"), e(Er, "width", "94"), e(Er, "height", "35"), e(Er, "x", "515"), e(Er, "y", "713.4"), e(Er, "fill", "url(#bf)"), e(Er, "rx", "4"), e(Er, "ry", "4"), e(Jn, "transform", "translate(-117 54)"), e(Jn, "class", "cp-button"), e(Jn, "data-cp", "KEYCODE_9"), e(Se, "width", "102"), e(Se, "height", "44"), e(Se, "x", "511"), e(Se, "y", "709.4"), e(Se, "fill", "url(#bg)"), e(Se, "stroke", "var(--btn-border-stroke)"), e(Se, "stroke-linecap", "round"), e(Se, "stroke-linejoin", "round"), e(Se, "stroke-width", "2"), e(Se, "rx", "8"), e(Se, "ry", "8"), e(jr, "width", "94"), e(jr, "height", "35"), e(jr, "x", "515"), e(jr, "y", "713.4"), e(jr, "fill", "url(#bh)"), e(jr, "rx", "4"), e(jr, "ry", "4"), e(el, "transform", "translate(-238 216)"), e(el, "class", "cp-button"), e(el, "data-cp", "KEYCODE_DOT"), e($e, "width", "102"), e($e, "height", "44"), e($e, "x", "511"), e($e, "y", "709.4"), e($e, "fill", "url(#bi)"), e($e, "stroke", "var(--btn-border-stroke)"), e($e, "stroke-linecap", "round"), e($e, "stroke-linejoin", "round"), e($e, "stroke-width", "2"), e($e, "rx", "8"), e($e, "ry", "8"), e(Hr, "width", "94"), e(Hr, "height", "35"), e(Hr, "x", "515"), e(Hr, "y", "713.4"), e(Hr, "fill", "url(#bj)"), e(Hr, "rx", "4"), e(Hr, "ry", "4"), e(tl, "transform", "translate(-238 162)"), e(tl, "class", "cp-button"), e(tl, "data-cp", "KEYCODE_2"), e(Me, "width", "102"), e(Me, "height", "44"), e(Me, "x", "511"), e(Me, "y", "709.4"), e(Me, "fill", "url(#bk)"), e(Me, "stroke", "var(--btn-border-stroke)"), e(Me, "stroke-linecap", "round"), e(Me, "stroke-linejoin", "round"), e(Me, "stroke-width", "2"), e(Me, "rx", "8"), e(Me, "ry", "8"), e(Dr, "width", "94"), e(Dr, "height", "35"), e(Dr, "x", "515"), e(Dr, "y", "713.4"), e(Dr, "fill", "url(#bl)"), e(Dr, "rx", "4"), e(Dr, "ry", "4"), e(rl, "transform", "translate(-238 108)"), e(rl, "class", "cp-button"), e(rl, "data-cp", "KEYCODE_5"), e(Oe, "width", "102"), e(Oe, "height", "44"), e(Oe, "x", "511"), e(Oe, "y", "709.4"), e(Oe, "fill", "url(#bm)"), e(Oe, "stroke", "var(--btn-border-stroke)"), e(Oe, "stroke-linecap", "round"), e(Oe, "stroke-linejoin", "round"), e(Oe, "stroke-width", "2"), e(Oe, "rx", "8"), e(Oe, "ry", "8"), e(Rr, "width", "94"), e(Rr, "height", "35"), e(Rr, "x", "515"), e(Rr, "y", "713.4"), e(Rr, "fill", "url(#bn)"), e(Rr, "rx", "4"), e(Rr, "ry", "4"), e(nl, "transform", "translate(-238 54)"), e(nl, "class", "cp-button"), e(nl, "data-cp", "KEYCODE_8"), e(ct, "width", "76"), e(ct, "height", "44"), e(ct, "x", "511"), e(ct, "y", "1085.4"), e(ct, "fill", "#15d81e"), e(ct, "fill-opacity", ".2"), e(ct, "rx", "8"), e(ct, "ry", "8"), e(Ce, "width", "102"), e(Ce, "height", "44"), e(Ce, "x", "511"), e(Ce, "y", "709.4"), e(Ce, "fill", "url(#bo)"), e(Ce, "stroke", "var(--btn-border-stroke)"), e(Ce, "stroke-linecap", "round"), e(Ce, "stroke-linejoin", "round"), e(Ce, "stroke-width", "2"), e(Ce, "rx", "8"), e(Ce, "ry", "8"), e(Br, "width", "94"), e(Br, "height", "35"), e(Br, "x", "515"), e(Br, "y", "713.4"), e(Br, "fill", "url(#bp)"), e(Br, "rx", "4"), e(Br, "ry", "4"), e(ll, "transform", "translate(-359 216)"), e(ll, "class", "cp-button"), e(ll, "data-cp", "KEYCODE_0"), e(Ee, "width", "102"), e(Ee, "height", "44"), e(Ee, "x", "511"), e(Ee, "y", "709.4"), e(Ee, "fill", "url(#bq)"), e(Ee, "stroke", "var(--btn-border-stroke)"), e(Ee, "stroke-linecap", "round"), e(Ee, "stroke-linejoin", "round"), e(Ee, "stroke-width", "2"), e(Ee, "rx", "8"), e(Ee, "ry", "8"), e(Qr, "width", "94"), e(Qr, "height", "35"), e(Qr, "x", "515"), e(Qr, "y", "713.4"), e(Qr, "fill", "url(#br)"), e(Qr, "rx", "4"), e(Qr, "ry", "4"), e(il, "transform", "translate(-359 162)"), e(il, "class", "cp-button"), e(il, "data-cp", "KEYCODE_1"), e(je, "width", "102"), e(je, "height", "44"), e(je, "x", "511"), e(je, "y", "709.4"), e(je, "fill", "url(#bs)"), e(je, "stroke", "var(--btn-border-stroke)"), e(je, "stroke-linecap", "round"), e(je, "stroke-linejoin", "round"), e(je, "stroke-width", "2"), e(je, "rx", "8"), e(je, "ry", "8"), e(Pr, "width", "94"), e(Pr, "height", "35"), e(Pr, "x", "515"), e(Pr, "y", "713.4"), e(Pr, "fill", "url(#bt)"), e(Pr, "rx", "4"), e(Pr, "ry", "4"), e(al, "transform", "translate(-359 108)"), e(al, "class", "cp-button"), e(al, "data-cp", "KEYCODE_4"), e(He, "width", "102"), e(He, "height", "44"), e(He, "x", "511"), e(He, "y", "709.4"), e(He, "fill", "url(#bu)"), e(He, "stroke", "var(--btn-border-stroke)"), e(He, "stroke-linecap", "round"), e(He, "stroke-linejoin", "round"), e(He, "stroke-width", "2"), e(He, "rx", "8"), e(He, "ry", "8"), e(Lr, "width", "94"), e(Lr, "height", "35"), e(Lr, "x", "515"), e(Lr, "y", "713.4"), e(Lr, "fill", "url(#bv)"), e(Lr, "rx", "4"), e(Lr, "ry", "4"), e(ol, "transform", "translate(-359 54)"), e(ol, "class", "cp-button"), e(ol, "data-cp", "KEYCODE_7"), e(wn, "fill", "#3d3d3d"), e(wn, "d", "M201.5 795.5h-2.4q-.7 0-.3-.6l7.5-18.7h-8.8q-.6 0-.6-.7v-1.9q0-.6.6-.6h11.8q.7 0 .7.6v2.2q0 .5-.4 1.5l-7.1 17.7q-.2.5-1 .5z"), e(wn, "font-family", "Rajdhani"), e(wn, "font-size", "35"), e(wn, "font-weight", "600"), e(wn, "letter-spacing", "0"), e(xl, "word-spacing", "0"), e(xl, "class", "cp-button-label"), G(xl, "line-height", "125%"), e(Fr, "fill", "#fff"), e(Fr, "d", "M199.3 723.3q-3.8 4-8 8l1.9 4.3 1.1 2.5q.4.8.8 1.2l.7.5 1.1.3-.2 1h-4.9l-2.7-8-1.2 1.2-1.5 1.6-1 1.3-.4.9-.1.8q0 .5.3.8.3.3 1 .4l-.3 1h-5.5l-.4-1q4.3-4.6 8.4-8.5l-1.8-4.3-1-2q-.3-.8-.6-1.1l-.8-.6-1.2-.3.2-1h5l2.5 7.4 1.8-1.8 1.2-1.5q.4-.5.5-1 .2-.4.2-.9 0-1-1.3-1.2l.2-1h5.6l.4 1z"), e(Fr, "font-family", "Cambria"), e(Fr, "font-size", "40"), e(Fr, "font-style", "italic"), e(Fr, "font-weight", "400"), e(Fr, "letter-spacing", "0"), e(bl, "word-spacing", "0"), e(bl, "class", "cp-button-label"), G(bl, "line-height", "125%"), e(kn, "x", "1714.4"), e(kn, "y", "880.6"), e(kn, "font-family", "Lucida Calligraphy"), e(kn, "font-style", "italic"), e(kn, "font-weight", "400"), e(De, "xml:space", "preserve"), e(De, "x", "1714.4"), e(De, "y", "880.6"), e(De, "font-family", "Script MT Bold"), e(De, "font-size", "40"), e(De, "font-weight", "700"), e(De, "letter-spacing", "0"), e(De, "word-spacing", "0"), G(De, "line-height", "125%"), e(qn, "fill", "#3d3d3d"), e(qn, "d", "M322.2 792.6h2.7q1.3 0 2-.6.6-.6.6-2v-1.8q0-2.6-2.6-2.6h-2.7q-2.5 0-2.5 2.6v1.9q0 1.3.6 1.9.6.6 1.9.6zm0-9.8h2.7q2.6 0 2.6-2.6v-1.7q0-1.3-.7-2-.6-.5-1.9-.5h-2.7q-1.3 0-2 .6-.5.6-.5 1.9v1.7q0 2.6 2.5 2.6zm3.2 12.7h-3.7q-2.6 0-4-1.3t-1.4-3.9v-1.9q0-3.2 2.4-4.2-2.4-1-2.4-4.2v-1.8q0-2.5 1.4-3.8 1.4-1.4 4-1.4h3.7q2.6 0 4 1.4 1.5 1.3 1.5 3.8v1.8q0 1.6-.7 2.7-.6 1.1-1.7 1.5 2.4 1 2.4 4.3v1.8q0 2.6-1.5 3.9-1.4 1.3-4 1.3z"), e(qn, "font-family", "Rajdhani"), e(qn, "font-size", "35"), e(qn, "font-weight", "600"), e(qn, "letter-spacing", "0"), e(wl, "word-spacing", "0"), e(wl, "class", "cp-button-label"), G(wl, "line-height", "125%"), e(_n, "fill", "#3d3d3d"), e(_n, "d", "M441.9 784.1h4.9v-5.5q0-2.6-2.6-2.6H442q-2.5 0-2.5 2.6v3q0 2.5 2.5 2.5zm2.8 11.4h-7q-.7 0-.7-.6v-1.8q0-.5.6-.5h6.6q2.6 0 2.6-2.6v-3h-5.4q-2.6 0-4-1.4-1.5-1.4-1.5-4v-3.3q0-2.5 1.4-4 1.5-1.4 4-1.4h3.4q2.6 0 4 1.5 1.5 1.4 1.5 4V790q0 2.6-1.4 4-1.5 1.4-4 1.4z"), e(_n, "font-family", "Rajdhani"), e(_n, "font-size", "35"), e(_n, "font-weight", "600"), e(_n, "letter-spacing", "0"), e(kl, "word-spacing", "0"), e(kl, "class", "cp-button-label"), G(kl, "line-height", "125%"), e(Gn, "fill", "#3d3d3d"), e(Gn, "d", "M204 842.2V830l-7 12.3h7zm2.6 7.3h-2q-.7 0-.7-.6v-3.6h-9.2q-1 0-1-1v-1.1q0-.8.3-1.4l7.8-13.9.5-.7q.3-.2.8-.2h3q1 0 1 1v14.2h2.6q.6 0 .6.6v1.8q0 .7-.6.7h-2.5v3.6q0 .6-.6.6z"), e(Gn, "font-family", "Rajdhani"), e(Gn, "font-size", "35"), e(Gn, "font-weight", "600"), e(Gn, "letter-spacing", "0"), e(ql, "word-spacing", "0"), e(ql, "class", "cp-button-label"), G(ql, "line-height", "125%"), e(Un, "fill", "#3d3d3d"), e(Un, "d", "M323.9 837.6h-2.2q-.6 0-1.1.3-.4.2-.6.5-.3.8-.9.8h-2.2q-.6 0-.6-.6v-11q0-.6.6-.6h11.9q.6 0 .6.6v2q0 .6-.6.6h-9v6.4q.5-1.7 2.9-1.7h2q2.6 0 3.9 1.3 1.3 1.3 1.3 3.8v4.1q0 2.6-1.4 4-1.5 1.4-4 1.4h-3q-2.6 0-4-1.4t-1.4-4v-1q0-.5.6-.5h2.2q.6 0 .6.6v.9q0 2.5 2.5 2.5h2q2.6 0 2.6-2.5v-3.6q0-1.5-.6-2.2-.6-.7-2.1-.7z"), e(Un, "font-family", "Rajdhani"), e(Un, "font-size", "35"), e(Un, "font-weight", "600"), e(Un, "letter-spacing", "0"), e(_l, "word-spacing", "0"), e(_l, "class", "cp-button-label"), G(_l, "line-height", "125%"), e(zn, "fill", "#3d3d3d"), e(zn, "d", "M442 846.6h2.5q2.5 0 2.5-2.6v-2.8q0-2.6-2.5-2.6h-5v5.4q0 2.6 2.6 2.6zm3 3h-3.4q-2.6 0-4-1.5-1.5-1.4-1.5-4v-11.7q0-2.5 1.5-4 1.4-1.4 4-1.4h7q.5 0 .5.6v1.8q0 .6-.6.6h-6.4q-2.5 0-2.5 2.6v3h5.3q2.6 0 4 1.4 1.5 1.4 1.5 4v3.1q0 2.6-1.4 4-1.5 1.4-4 1.4z"), e(zn, "font-family", "Rajdhani"), e(zn, "font-size", "35"), e(zn, "font-weight", "600"), e(zn, "letter-spacing", "0"), e(Gl, "word-spacing", "0"), e(Gl, "class", "cp-button-label"), G(Gl, "line-height", "125%"), e(Sn, "fill", "#3d3d3d"), e(Sn, "d", "M197.2 886.5v-2q0-.6.5-.9l3.6-2.2q.7-.4 1.2-.4h2q.7 0 .7.6V903q0 .6-.6.6h-2.3q-.6 0-.6-.6v-18.2l-3.8 2.2q-.7.3-.7-.4z"), e(Sn, "font-family", "Rajdhani"), e(Sn, "font-size", "35"), e(Sn, "font-weight", "600"), e(Sn, "letter-spacing", "0"), e(Ul, "word-spacing", "0"), e(Ul, "class", "cp-button-label"), G(Ul, "line-height", "125%"), e($n, "fill", "#3d3d3d"), e($n, "d", "M316 903v-3.3q0-2.2 2-3.6l6.5-5.4q1.7-1.3 1.7-3.1v-1.2q0-2.5-2.6-2.5h-1.7q-1.4 0-2 .6-.6.6-.6 2v1.2q0 .7-.6.7h-2.2q-.6 0-.6-.7v-1.3q0-2.6 1.4-4 1.5-1.4 4-1.4h2.8q2.6 0 4 1.4t1.4 4v1.4q0 2.7-2.1 4.5l-6.7 5.5q-.8.7-.8 1.6v1h9q.7 0 .7.7v1.8q0 .6-.6.6h-12.3q-.6 0-.6-.6z"), e($n, "font-family", "Rajdhani"), e($n, "font-size", "35"), e($n, "font-weight", "600"), e($n, "letter-spacing", "0"), e(zl, "word-spacing", "0"), e(zl, "class", "cp-button-label"), G(zl, "line-height", "125%"), e(Mn, "fill", "#3d3d3d"), e(Mn, "d", "M442 890.8h1.9q2.6 0 2.6-2.5v-1.9q0-2.5-2.6-2.5h-2q-1.4 0-2 .6-.6.6-.6 2v1q0 .6-.6.6h-2.2q-.6 0-.6-.6v-1.1q0-2.6 1.4-4t4-1.4h3q2.7 0 4.1 1.4 1.4 1.4 1.4 4v1.9q0 3-2.8 4 2.8.6 2.8 3.8v2q0 2.6-1.4 4t-4 1.4h-3q-2.7 0-4-1.4-1.5-1.4-1.5-4V897q0-.6.6-.6h2.2q.6 0 .6.6v1.2q0 1.3.6 2 .6.5 2 .5h2q2.6 0 2.6-2.5v-2q0-2.5-2.6-2.5h-2q-.5 0-.5-.6v-1.5q0-.7.6-.7z"), e(Mn, "font-family", "Rajdhani"), e(Mn, "font-size", "35"), e(Mn, "font-weight", "600"), e(Mn, "letter-spacing", "0"), e(Sl, "word-spacing", "0"), e(Sl, "class", "cp-button-label"), G(Sl, "line-height", "125%"), e(On, "fill", "#3d3d3d"), e(On, "d", "M204.2 954.6h2.5q2.6 0 2.6-2.6v-11.4q0-2.6-2.6-2.6h-2.5q-2.5 0-2.5 2.6V952q0 2.6 2.5 2.6zm3 3h-3.5q-2.6 0-4-1.5-1.4-1.4-1.4-4v-11.7q0-2.5 1.4-4 1.4-1.4 4-1.4h3.5q2.6 0 4 1.5 1.4 1.4 1.4 4V952q0 2.6-1.4 4t-4 1.4z"), e(On, "font-family", "Rajdhani"), e(On, "font-size", "35"), e(On, "font-weight", "600"), e(On, "letter-spacing", "0"), e($l, "word-spacing", "0"), e($l, "class", "cp-button-label"), G($l, "line-height", "125%"), e(Kr, "fill", "#3d3d3d"), e(Kr, "d", "M387 1061.8h-10q-.5 0-.5-.5V1042q0-.5.5-.5h10q.6 0 .6.5v1.6q0 .6-.5.6h-7.2q-.4 0-.4.3v5.3q0 .3.4.3h6q.6 0 .6.5v1.6q0 .6-.5.6h-6.1q-.4 0-.4.3v5.6q0 .3.4.3h7.2q.5 0 .5.6v1.6q0 .5-.5.5zm5.9 0h-2.4l-.3-.1q-.1-.2 0-.4l5.2-10-5-9.2v-.3q.1-.2.4-.2h2.2q.6 0 .9.5l3.6 7.3h.1l3.7-7.3q.2-.5.8-.5h2.3q.3 0 .3.2.2.2 0 .4l-5 9.1 5.2 10q.2.2 0 .4l-.3.1h-2.4q-.5 0-.7-.5l-3.9-7.7-4 7.7q-.2.5-.7.5zm17.8 0h-2q-.6 0-.6-.5V1042q0-.5.6-.5h7.5q2.3 0 3.6 1.3 1.2 1.2 1.2 3.6v3.2q0 2.3-1.2 3.6-1.3 1.3-3.6 1.3h-4.6q-.4 0-.4.3v6.4q0 .5-.5.5zm.8-9.9h4.2q2.3 0 2.3-2.3v-3q0-2.3-2.3-2.3h-4.2q-.3 0-.3.3v7q0 .3.3.3z"), e(Kr, "font-family", "Rajdhani"), e(Kr, "font-size", "31.5"), e(Kr, "font-weight", "600"), e(Kr, "letter-spacing", "0"), e(Kr, "transform", "scale(1.1 .9)"), e(Ml, "word-spacing", "0"), e(Ml, "class", "cp-button-label"), G(Ml, "line-height", "125%"), e(F0, "fill", "#3d3d3d"), e(F0, "d", "M327 946.4a4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4 4 4 0 0 1 4 4z"), e(F0, "class", "cp-button-label"), e(Ne, "fill", "#fff"), e(Ne, "d", "m273.8 721.7-.3 1.7h.5c.4 0 .6.2.7.2l.3.4.2 1.5 1.4 10.6-1.4 1.8-1.1 1.2-.9.6-.5.3h-1l-.2-.5v-.5h-2l-.8 3.5.4.2 1 .2a5.6 5.6 0 0 0 2.5-.1c.5-.1 1-.4 1.5-.7a9 9 0 0 0 1.6-1.3 109.4 109.4 0 0 0 6.7-8.7l3-4.7 2-4.3v-.2l-.6-1.2h-4.5l-.3 1.7h.6c.4 0 .6.2.7.2v.6c0 1.4-1.4 4.3-4 8l-1-10.5h-4.6z"), e(Ne, "font-family", "Script MT Bold"), e(Ne, "font-size", "29.8"), e(Ne, "font-weight", "700"), e(Ne, "letter-spacing", "0"), e(Ne, "word-spacing", "0"), e(Ne, "class", "cp-button-label"), G(Ne, "line-height", "125%"), e(Ar, "fill", "#fff"), e(Ar, "d", "m375.3 734.5-1.1 5.5H360l-.4-1 10.7-12.2 3.3-3.7v-.2H369q-1 0-1.5.2-.5.1-1 .5l-1 1q-.5.6-1.2 1.9h-1.7l1.1-5.1h14l.3 1-14 16h6.3q.6-.2 1.1-.6.5-.3 1-1t1.2-2.3h1.7z"), e(Ar, "font-family", "Cambria"), e(Ar, "font-size", "40"), e(Ar, "font-style", "italic"), e(Ar, "font-weight", "400"), e(Ar, "letter-spacing", "0"), e(Ol, "word-spacing", "0"), e(Ol, "class", "cp-button-label"), G(Ol, "line-height", "125%"), e(Cn, "fill", "#fff"), e(Cn, "d", "m102 795-2.6 2.5-1-1-1.3-1.3-2.6-2.6q-.6-1-.6-2v-10.8q0-1 .6-2l2.3-2.5 1.1-1 1.5-1.4 2.6 2.5-1.3 1.2-2.2 2.1q-1 1-1 1.2v10.6q0 .3 1.9 2l2.7 2.5z"), e(Cn, "font-family", "Blender Pro"), e(Cn, "font-size", "35"), e(Cn, "font-weight", "700"), e(Cn, "letter-spacing", "0"), e(Cl, "word-spacing", "0"), e(Cl, "class", "cp-button-label"), G(Cl, "line-height", "125%"), e(En, "fill", "#fff"), e(En, "d", "M102 844.6q0 1.1-.6 2-.6.8-2.6 2.6l-2.4 2.3-2.6-2.6q1-.7 2.7-2.3 1.8-1.8 1.8-2.1v-10.6q0-.3-1-1.2-.8-1-2.1-2l-1.3-1.3 2.5-2.5 1 1 1.7 1.4q1.6 1.6 2.3 2.6.5.8.5 2v10.7z"), e(En, "font-family", "Blender Pro"), e(En, "font-size", "35"), e(En, "font-weight", "700"), e(En, "letter-spacing", "0"), e(El, "word-spacing", "0"), e(El, "class", "cp-button-label"), G(El, "line-height", "125%"), e(jn, "fill", "#fff"), e(jn, "d", "M108 728.7H85.6V723H108v5.6zm0 9H85.6V732H108v5.6z"), e(jn, "font-family", "Blender Pro"), e(jn, "font-size", "60"), e(jn, "font-weight", "700"), e(jn, "letter-spacing", "0"), e(jl, "word-spacing", "0"), e(jl, "class", "cp-button-label"), G(jl, "line-height", "125%"), e(Yr, "fill", "#fff"), e(Yr, "d", "M98 1300.2c-1 0-2 .2-2.6.8a4 4 0 0 0-.9 2.7c0 1 .2 1.9.8 2.5.4.4 1 .7 1.7.8-.3.7-.7 1.3-1.5 1.8l-.2.1v3.1l.6-.2a7.8 7.8 0 0 0 4.2-2.7 8 8 0 0 0 1.4-4.9c0-1.2-.3-2.3-.9-3-.6-.7-1.5-1-2.6-1z"), e(Yr, "font-family", "Britannic Bold"), e(Yr, "font-size", "35"), e(Yr, "font-weight", "400"), e(Yr, "letter-spacing", "0"), e(Yr, "transform", "translate(0 -411.6)"), e(Hl, "word-spacing", "0"), e(Hl, "class", "cp-button-label"), G(Hl, "line-height", "125%"), e(Vr, "fill", "#fff"), e(Vr, "d", "m808.1 955-2.6 2.5-1.1-1-1.3-1.3q-2-1.9-2.5-2.6-.6-1-.6-2v-10.8q0-1 .6-2 .6-.9 2.3-2.5l1-1 1.6-1.4 2.6 2.5-1.4 1.2-2.1 2.1q-1 1-1 1.2v10.6q0 .3 1.8 2l2.7 2.5zm17.4-8h-13.6v-3.3h13.6v3.3zm10.6 3.6q0 1.1-.5 2-.6.8-2.5 2.6l-2.5 2.3-2.5-2.6 2.6-2.3q1.8-1.8 1.8-2.1v-10.6q0-.3-1-1.2-.8-1-2-2l-1.4-1.3 2.5-2.5 1.1 1 1.6 1.4q1.6 1.6 2.3 2.6.5.8.5 2v10.7z"), e(Vr, "font-family", "Blender Pro"), e(Vr, "font-size", "35"), e(Vr, "font-weight", "700"), e(Vr, "letter-spacing", "0"), e(Vr, "transform", "translate(-720)"), e(Dl, "word-spacing", "0"), e(Dl, "class", "cp-button-label"), G(Dl, "line-height", "125%"), e(Tr, "fill", "#fff"), e(Tr, "d", "M482.4 1061.8h-10q-.6 0-.6-.5V1042q0-.5.6-.5h10q.5 0 .5.5v1.6q0 .6-.5.6h-7.1q-.4 0-.4.3v5.3q0 .3.4.3h6q.6 0 .6.5v1.6q0 .6-.6.6h-6q-.4 0-.4.3v5.6q0 .3.4.3h7.1q.5 0 .5.6v1.6q0 .5-.5.5zm5.9 0h-2.4l-.4-.1v-.4l5.3-10-5-9.2v-.3q0-.2.3-.2h2.3q.6 0 .9.5l3.6 7.3h.1l3.6-7.3q.3-.5.8-.5h2.4q.2 0 .3.2.1.2 0 .4l-5 9.1 5.2 10q.1.2 0 .4l-.3.1h-2.4q-.5 0-.7-.5l-3.9-7.7h-.1l-3.9 7.7q-.2.5-.7.5zm25.8 0h-10q-.6 0-.6-.5V1042q0-.5.5-.5h10.1q.5 0 .5.5v1.6q0 .6-.5.6H507q-.3 0-.3.3v5.3q0 .3.3.3h6.1q.6 0 .6.5v1.6q0 .6-.6.6h-6q-.4 0-.4.3v5.6q0 .3.3.3h7.2q.5 0 .5.6v1.6q0 .5-.5.5z"), e(Tr, "font-family", "Rajdhani"), e(Tr, "font-size", "31.5"), e(Tr, "font-weight", "600"), e(Tr, "letter-spacing", "0"), e(Tr, "transform", "scale(1.1 .9)"), e(Rl, "word-spacing", "0"), e(Rl, "class", "cp-button-label"), G(Rl, "line-height", "125%"), e(Hn, "fill", "#fff"), e(Hn, "d", "M552.6 889.9h8.5q1.2 0 1.2 1.2v2.5q0 1.2-1.2 1.2h-8.5v8.7q0 1.2-1.2 1.2h-2.7q-1.2 0-1.2-1.2v-8.7H539q-1.2 0-1.2-1.2v-2.5q0-1.2 1.2-1.2h8.6v-8.6q0-1.2 1.2-1.2h2.7q1.2 0 1.2 1.2v8.6z"), e(Hn, "font-family", "Rajdhani"), e(Hn, "font-size", "60"), e(Hn, "font-weight", "600"), e(Hn, "letter-spacing", "0"), e(Bl, "word-spacing", "0"), e(Bl, "class", "cp-button-label"), G(Bl, "line-height", "125%"), e(Dn, "fill", "#fff"), e(Dn, "d", "M559.3 840H539q-1 0-1-1v-1.3q0-1 1-1h20.3q1 0 1 1v1.3q0 1-1 1z"), e(Dn, "font-family", "Rajdhani"), e(Dn, "font-size", "60"), e(Dn, "font-weight", "600"), e(Dn, "letter-spacing", "0"), e(Ql, "word-spacing", "0"), e(Ql, "class", "cp-button-label"), G(Ql, "line-height", "125%"), e(Rn, "fill", "#fff"), e(Rn, "d", "m552.6 784 6.3 6.4q.8.7 0 1.6l-2 1.9q-.7.9-1.6 0l-6.3-6.3-6.3 6.4q-.9.8-1.6-.1l-2-2q-.8-.8 0-1.5l6.3-6.4-6.3-6.2q-.8-.9 0-1.7l2-2q.8-.8 1.6 0l6.3 6.3 6.3-6.2q.8-.9 1.6 0l2 2q.7.7 0 1.6l-6.3 6.2z"), e(Rn, "font-family", "Rajdhani"), e(Rn, "font-size", "60"), e(Rn, "font-weight", "600"), e(Rn, "letter-spacing", "0"), e(Pl, "word-spacing", "0"), e(Pl, "class", "cp-button-label"), G(Pl, "line-height", "125%"), e(Bn, "fill", "#fff"), e(Bn, "d", "M547 740.3v-3.2q0-1 1-1 h2q1.1 0 1.1 1v3.2q0 1-1 1h-2q-1.1 0-1.1-1zm11.1-7.9H540q-1.1 0-1.1-1v-2q0-1 1-1h18.2q1 0 1 1v2q0 1-1 1zm-11.1-8.8v-3.1q0-1.1 1-1.1h2q1.1 0 1.1 1v3.2q0 1-1 1h-2q-1.1 0-1.1-1z"), e(Bn, "font-family", "Rajdhani"), e(Bn, "font-size", "60"), e(Bn, "font-weight", "600"), e(Bn, "letter-spacing", "0"), e(Ll, "word-spacing", "0"), e(Ll, "class", "cp-button-label"), G(Ll, "line-height", "125%"), e(Qn, "fill", "#fff"), e(Qn, "d", "M450.5 738.4H447q-1.3 0-.7-1.1l7.4-14.2q.5-1 .9-1.2.4-.3 1.3-.3h4.2q.9 0 1.3.3t.9 1.2l7.4 14.2q.6 1-.7 1h-3.4q-1 0-1.4-1l-6.2-12-6.2 12q-.6 1-1.4 1z"), e(Qn, "font-family", "Rajdhani"), e(Qn, "font-size", "60"), e(Qn, "font-weight", "600"), e(Qn, "letter-spacing", "0"), e(Fl, "word-spacing", "0"), e(Fl, "class", "cp-button-label"), G(Fl, "line-height", "125%"), e(Pn, "fill", "#fff"), e(Pn, "d", "M101.6 619.1h-1.5q-.4 0-.4-.3v-12.2q0-.4.4-.4h1.5q.4 0 .4.4v6.3h.1l.6-1 4.5-5.3q.3-.4.8-.4h1.7q.5 0 .2.4l-4.6 5.3 5.2 6.8q.2.4-.3.4h-1.3q-.7 0-1-.3l-4-5.5-1.9 1.9v3.6q0 .3-.4.3zm19.4 0h-5.2q-1.7 0-2.7-.8-1-.8-1-2.3v-4q0-1.5 1-2.3 1-.8 2.7-.8h2q1.7 0 2.7.8 1 .8 1 2.3v2.5q0 .4-.5.4h-6.3q-.2 0-.2.2v.9q0 1.4 1.7 1.4h4.7q.4 0 .4.4v1q0 .3-.4.3zm-6.3-5.6h4.2q.3 0 .3-.2v-1.2q0-.8-.4-1.1-.4-.4-1.3-.4h-1.3q-1 0-1.3.4-.4.3-.4 1v1.3q0 .2.2.2zm10.7 8.9h-1.2q-.4 0-.4-.4v-1q0-.4.4-.4h.5q1.5 0 2-.5.6-.4 1-1.5h-1q-.4 0-.5-.4l-3.1-9q-.1-.3.3-.3h1.6q.3 0 .4.3l2.6 7.9 2.7-7.9q0-.3.4-.3h1.5q.5 0 .4.3l-3.2 9.7q-.6 1.7-1.5 2.6-1 .9-2.9.9zm12.1-5h3q1.7 0 1.7-1.5v-4q0-1.4-1.7-1.4h-1.3q-2 0-2 1.7v5q0 .2.3.2zm-2.5 1.4v-13.4q0-.4.4-.4h1.5q.4 0 .4.4v4.5q.7-1 2.5-1h1q1.7 0 2.7.7 1 .8 1 2.3v4.1q0 1.5-1 2.3-1 .8-2.7.8h-5.4q-.4 0-.4-.3zm17.7.3h-2.1q-1.7 0-2.7-.8-1-.8-1-2.3v-4q0-1.5 1-2.3 1-.8 2.7-.8h2q1.8 0 2.8.8 1 .8 1 2.3v4q0 1.5-1 2.3-1 .8-2.7.8zm-1.8-1.7h1.5q1.7 0 1.7-1.5v-3.8q0-1.5-1.7-1.5h-1.5q-.9 0-1.3.4-.4.3-.4 1v4q0 .7.4 1 .4.4 1.3.4zm12.5 1.7h-1q-1.7 0-2.6-.8-1-.8-1-2.3v-4q0-1.5 1-2.3 1-.8 2.7-.8h5.2q.5 0 .5.3v9.6q0 .3-.5.3h-1.4q-.4 0-.4-.3v-.8h-.1q-.6 1.1-2.4 1.1zm2.5-3.4v-5l-.3-.1h-2.8q-1.7 0-1.7 1.5v3.8q0 1.5 1.7 1.5h1.1q2 0 2-1.7zm7.1 3.4h-1.5q-.4 0-.4-.3v-9.6q0-.3.4-.3h1.5q.4 0 .4.3v.8q.3-.5 1-.8.6-.3 1.5-.3h.8q.4 0 .4.3v1q0 .5-.4.4h-1.4q-2 0-2 1.8v6.4q0 .3-.3.3zm10.5 0h-1.2q-1.7 0-2.6-.8-1-.8-1-2.3v-4q0-1.5 1-2.3.9-.8 2.6-.8h1.2q1.8 0 2.3 1h.1v-4.5q0-.4.4-.4h1.5q.4 0 .4.4v13.4q0 .3-.4.3h-1.5q-.4 0-.4-.3v-.8q-.6 1.1-2.4 1.1zm2.4-3.4v-3.4q0-1.7-2-1.7h-1.2q-1.6 0-1.6 1.5v3.8q0 1.5 1.6 1.5h1.3q2 0 2-1.7z"), e(Pn, "font-family", "Rajdhani"), e(Pn, "font-size", "25"), e(Pn, "font-weight", "600"), e(Pn, "letter-spacing", "0"), e(Kl, "word-spacing", "0"), e(Kl, "class", "cp-button-label"), G(Kl, "line-height", "125%"), e(Ir, "fill", "#42caf7"), e(Ir, "d", "M118.6 667.2v-.6q0-.4.4-.4h1.6q.4 0 .4.4v.4q0 1.1.5 1.6.4.4 1.5.4h1.7q1.1 0 1.6-.5t.5-1.6v-.5q0-.8-.7-1.3-.6-.5-1.5-.6l-2-.4-2-.6q-.8-.3-1.4-1.2-.6-.9-.6-2.3v-1q0-1.9 1-2.9t2.9-1h2.6q1.9 0 2.9 1t1 2.9v.5q0 .4-.4.4H127q-.4 0-.4-.4v-.3q0-1-.5-1.5-.4-.5-1.5-.5H123q-1 0-1.5.5t-.5 1.6v.8q0 1.1 1.6 1.5l1.6.3 1.8.4 1.6.7q.7.4 1.1 1.2.5.9.5 2v1q0 1.9-1 3-1.1 1-3 1h-2.7q-1.8 0-2.9-1-1-1.1-1-3zm15.7 3.9h-1.6q-.4 0-.4-.4V654q0-.4.4-.4h1.6q.4 0 .4.4v5.7h.1q.6-1.3 2.6-1.3h1q1.9 0 2.9 1t1 2.9v8.4q0 .4-.5.4h-1.6q-.4 0-.4-.4v-8.3q0-1.9-1.8-1.9h-1.2q-2 0-2 2.1v8.1q0 .4-.5.4zm11.1-14.8V654q0-.4.4-.4h1.6q.4 0 .4.4v2.3q0 .4-.4.4h-1.6q-.4 0-.4-.4zm0 14.4v-11.9q0-.4.4-.4h1.6q.4 0 .4.4v12.3h-2q-.4 0-.4-.4zm9.6-12.3h2q.5 0 .5.4v1.3q0 .4-.5.4h-2q-.3 0-.3.3v10q0 .3-.5.3h-1.6q-.4 0-.4-.4v-10q0-.2-.3-.2h-1.3q-.4 0-.4-.4v-1.6l.4-.1h1.3q.3 0 .3-.3v-.7q0-1.8 1-2.8 1-1 2.7-1h1.1q.5 0 .5.4v1.3q0 .4-.5.4h-.7q-.9 0-1.3.4-.3.5-.3 1.4v.6q0 .3.2.3zm4.8 2.1h-1.5v-1.8q0-.4.3-.4h1.2q.3 0 .3-.3v-2q0-.4.4-.4h1.6q.4 0 .4.4v2.2q0 .3.3.3h2.3q.5 0 .5.4v1.3q0 .4-.5.4h-2.3q-.3 0-.3.3v6.4q0 1.8 2 1.8h.9q.4 0 .4.4v1.3q0 .4-.4.4H164q-1.8 0-2.9-1-1-1-1-2.8v-6.5q0-.3-.3-.3z"), e(Ir, "font-family", "Rajdhani"), e(Ir, "font-size", "25"), e(Ir, "font-weight", "600"), e(Ir, "letter-spacing", "0"), G(Ir, "text-align", "center"), e(Ln, "text-anchor", "middle"), e(Ln, "word-spacing", "0"), e(Ln, "class", "cp-button-label"), G(Ln, "line-height", "125%"), G(Ln, "text-align", "center"), e(Nr, "fill", "#fff"), e(Nr, "d", "M503.8 671.1H501q-1.8 0-2.9-1-1-1-1-2.8v-8.4q0-1.8 1-2.8 1-1 3-1h2.8q1.8 0 2.9 1 1 1 1 2.8v1.2q0 .5-.5.5h-1.5q-.5 0-.5-.5v-1q0-1.9-1.8-1.9h-2.1q-1.8 0-1.8 1.8v8.2q0 1.8 1.8 1.8h2.1q1.8 0 1.8-1.8V666q0-.5.5-.5h1.5q.5 0 .5.5v1.2q0 1.8-1 2.8-1 1-2.9 1zm8.8 0h-1.5q-.5 0-.5-.4V654q0-.4.5-.4h1.5q.5 0 .5.4v16.7q0 .4-.5.4zm12.8 0H520q-1.9 0-3-1-1-1-1-2.8v-5q0-1.9 1-2.9 1.1-1 3-1h2q1.9 0 2.9 1t1 2.9v3.1q0 .5-.4.5h-6.7q-.3 0-.3.2v1.1q0 1.8 1.8 1.8h5q.5 0 .5.5v1.2q0 .4-.4.4zm-6.6-6.9h4.4q.3 0 .3-.3v-1.6q0-.9-.4-1.3-.5-.5-1.4-.5h-1.4q-1 0-1.4.5-.4.4-.4 1.3v1.6q0 .3.3.3zm14.4 6.9h-1q-1.8 0-2.8-1-1-1-1-2.8v-5q0-1.9 1-2.9t2.9-1h5.6q.4 0 .4.4v12q0 .3-.4.3h-1.6q-.4 0-.4-.4v-.9h-.1q-.6 1.3-2.6 1.3zm2.7-4.2v-6.1q0-.3-.3-.3h-3q-1.8 0-1.8 1.9v4.8q0 1.8 1.8 1.8h1.2q2 0 2-2.1zm7.5 4.2h-1.6q-.4 0-.4-.4v-11.9q0-.4.4-.4h1.6q.4 0 .4.4v1h.1q.3-.7 1-1 .7-.4 1.6-.4h1q.3 0 .3.4v1.3q0 .5-.4.4H546q-2 0-2 2.3v8q0 .3-.5.3z"), e(Nr, "font-family", "Rajdhani"), e(Nr, "font-size", "25"), e(Nr, "font-weight", "600"), e(Nr, "letter-spacing", "0"), G(Nr, "text-align", "center"), e(Fn, "text-anchor", "middle"), e(Fn, "word-spacing", "0"), e(Fn, "class", "cp-button-label"), G(Fn, "line-height", "125%"), G(Fn, "text-align", "center"), e(X, "fill", "#42caf7"), e(X, "d", "M473.6 656.2a1.5 1.5 0 0 0-1 2.6 6.5 6.5 0 1 1-9.2 0 1.5 1.5 0 1 0-2.1-2.2 9.5 9.5 0 1 0 13.4 0 1.5 1.5 0 0 0-1-.4z"), e(X, "color", "#000"), e(X, "font-family", "sans-serif"), e(X, "font-weight", "400"), e(X, "overflow", "visible"), e(X, "class", "cp-button-label"), G(X, "line-height", "normal"), G(X, "text-indent", "0px"), G(X, "text-align", "start"), G(X, "text-decoration-line", "none"), G(X, "text-decoration-style", "solid"), G(X, "text-decoration-color", "rgb(0, 0, 0)"), G(X, "text-transform", "none"), G(X, "white-space", "normal"), G(X, "isolation", "auto"), G(X, "mix-blend-mode", "normal"), e(W, "fill", "#42caf7"), e(W, "d", "M468 652.4c-.8 0-1.5.6-1.5 1.5v10c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-10c0-.9-.7-1.5-1.5-1.5z"), e(W, "color", "#000"), e(W, "font-family", "sans-serif"), e(W, "font-weight", "400"), e(W, "overflow", "visible"), e(W, "class", "cp-button-label"), G(W, "line-height", "normal"), G(W, "text-indent", "0px"), G(W, "text-align", "start"), G(W, "text-decoration-line", "none"), G(W, "text-decoration-style", "solid"), G(W, "text-decoration-color", "rgb(0, 0, 0)"), G(W, "text-transform", "none"), G(W, "white-space", "normal"), G(W, "isolation", "auto"), G(W, "mix-blend-mode", "normal"), e(Al, "fill", "#fff"), e(Al, "fill-rule", "evenodd"), e(Al, "d", "m500 607.4-12 6.9 12.2 7v-4H520v-6h-20z"), e(Al, "class", "cp-button-label"), e(K0, "fill", "#222"), e(K0, "fill-rule", "evenodd"), e(K0, "d", "m1210-959.6-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm30 0-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm30 0-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6z"), e(A0, "fill", "#1c1c1c"), e(A0, "fill-rule", "evenodd"), e(A0, "d", "M1210-959.6v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm30 0v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm30 0v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6z"), e(dt, "width", "20"), e(dt, "height", "18"), e(dt, "x", "1200"), e(dt, "y", "-941.6"), e(dt, "fill", "#7e7e7e"), e(dt, "fill-opacity", ".2"), e(dt, "rx", "0"), e(dt, "ry", "0"), e(Y0, "fill", "#272727"), e(Y0, "fill-rule", "evenodd"), e(Y0, "d", "m1275-897.6-10 6 5 3 5-3 5 3 5-3zm-15 9-10 6 5 3 5-3 5 3 5-3zm30 0-10 6 5 3 5-3 5 3 5-3zm-15 9-10 6 5 3 5-3 5 3 5-3zm-15 9-10 6 5 3 5-3 5 3 5-3zm30 0-10 6 5 3 5-3 5 3 5-3zm-15 9-10 6 5 3 5-3 5 3 5-3z"), e(V0, "fill", "#222"), e(V0, "fill-rule", "evenodd"), e(V0, "d", "m1275-909.6-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm30 0-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm30 0-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6z"), e(T0, "fill", "#1c1c1c"), e(T0, "fill-rule", "evenodd"), e(T0, "d", "M1275-909.6v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm30 0v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm30 0v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6z"), e(ft, "width", "20"), e(ft, "height", "18"), e(ft, "x", "1265"), e(ft, "y", "-891.6"), e(ft, "fill", "#7e7e7e"), e(ft, "fill-opacity", ".2"), e(ft, "rx", "0"), e(ft, "ry", "0"), e(v, "transform", "translate(0 411.6)"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "xmlns:xlink", "http://www.w3.org/1999/xlink"), e(t, "viewBox", "0 0 648 1464");
+      t = i("svg"), n = i("defs"), a = i("linearGradient"), s = i("stop"), o = i("stop"), d = i("stop"), c = i("stop"), f = i("linearGradient"), h = i("stop"), p = i("stop"), g = i("stop"), w = i("stop"), G = i("stop"), k = i("linearGradient"), v = i("stop"), S = i("stop"), R = i("stop"), O = i("stop"), U = i("linearGradient"), q = i("stop"), T = i("stop"), x = i("stop"), u = i("stop"), C = i("stop"), M = i("linearGradient"), W = i("stop"), Q = i("stop"), Z = i("stop"), J = i("stop"), et = i("linearGradient"), D = i("stop"), le = i("stop"), de = i("linearGradient"), se = i("stop"), Le = i("stop"), N0 = i("stop"), tt = i("stop"), Qe = i("linearGradient"), Y0 = i("stop"), nt = i("stop"), W0 = i("stop"), ce = i("stop"), Ie = i("linearGradient"), Ve = i("stop"), r0 = i("stop"), l0 = i("linearGradient"), H = i("stop"), X = i("stop"), bt = i("linearGradient"), i0 = i("stop"), Z0 = i("stop"), yt = i("linearGradient"), a0 = i("stop"), ll = i("stop"), vr = i("linearGradient"), il = i("stop"), al = i("stop"), sl = i("stop"), xr = i("linearGradient"), ol = i("stop"), dl = i("stop"), cl = i("stop"), X0 = i("linearGradient"), s2 = i("stop"), o2 = i("stop"), d2 = i("stop"), c2 = i("stop"), s0 = i("linearGradient"), f2 = i("stop"), h2 = i("stop"), p2 = i("stop"), u2 = i("stop"), m2 = i("stop"), fl = i("linearGradient"), g2 = i("stop"), hl = i("stop"), J0 = i("linearGradient"), v2 = i("stop"), x2 = i("stop"), b2 = i("stop"), pl = i("stop"), br = i("linearGradient"), y2 = i("stop"), ul = i("stop"), ml = i("stop"), yr = i("linearGradient"), w2 = i("stop"), gl = i("stop"), vl = i("stop"), xl = i("linearGradient"), R2 = i("stop"), bl = i("stop"), yl = i("linearGradient"), k2 = i("stop"), wl = i("stop"), wr = i("linearGradient"), _2 = i("stop"), Rl = i("stop"), q2 = i("stop"), it = i("linearGradient"), S2 = i("stop"), G2 = i("stop"), C2 = i("stop"), M2 = i("stop"), U2 = i("stop"), $2 = i("stop"), z2 = i("stop"), wt = i("linearGradient"), Rt = i("linearGradient"), kt = i("linearGradient"), _t = i("linearGradient"), qt = i("linearGradient"), St = i("linearGradient"), Gt = i("linearGradient"), Ct = i("linearGradient"), Mt = i("linearGradient"), Ut = i("linearGradient"), $t = i("linearGradient"), zt = i("linearGradient"), Ot = i("linearGradient"), Et = i("linearGradient"), Bt = i("linearGradient"), Ht = i("linearGradient"), Pt = i("linearGradient"), jt = i("linearGradient"), Tt = i("linearGradient"), Dt = i("linearGradient"), Ft = i("linearGradient"), At = i("linearGradient"), Lt = i("linearGradient"), Qt = i("linearGradient"), It = i("linearGradient"), Vt = i("linearGradient"), Kt = i("linearGradient"), Nt = i("linearGradient"), Yt = i("linearGradient"), Wt = i("linearGradient"), Zt = i("linearGradient"), Xt = i("linearGradient"), Jt = i("linearGradient"), e1 = i("linearGradient"), t1 = i("linearGradient"), n1 = i("linearGradient"), r1 = i("linearGradient"), l1 = i("linearGradient"), i1 = i("linearGradient"), a1 = i("linearGradient"), s1 = i("linearGradient"), o1 = i("linearGradient"), d1 = i("linearGradient"), c1 = i("linearGradient"), f1 = i("linearGradient"), h1 = i("linearGradient"), p1 = i("linearGradient"), u1 = i("linearGradient"), m1 = i("linearGradient"), g1 = i("linearGradient"), v1 = i("linearGradient"), x1 = i("linearGradient"), b1 = i("linearGradient"), y1 = i("linearGradient"), w1 = i("linearGradient"), R1 = i("linearGradient"), k1 = i("linearGradient"), _1 = i("linearGradient"), q1 = i("linearGradient"), S1 = i("linearGradient"), G1 = i("linearGradient"), C1 = i("linearGradient"), M1 = i("linearGradient"), U1 = i("linearGradient"), at = i("linearGradient"), st = i("linearGradient"), ot = i("linearGradient"), $1 = i("linearGradient"), z1 = i("linearGradient"), O1 = i("linearGradient"), E1 = i("linearGradient"), B1 = i("linearGradient"), H1 = i("linearGradient"), P1 = i("linearGradient"), j1 = i("linearGradient"), T1 = i("linearGradient"), D1 = i("linearGradient"), F1 = i("linearGradient"), A1 = i("linearGradient"), L1 = i("linearGradient"), Q1 = i("linearGradient"), I1 = i("linearGradient"), V1 = i("linearGradient"), K1 = i("linearGradient"), N1 = i("linearGradient"), Y1 = i("linearGradient"), W1 = i("linearGradient"), Z1 = i("linearGradient"), X1 = i("linearGradient"), J1 = i("linearGradient"), en = i("linearGradient"), tn = i("linearGradient"), nn = i("linearGradient"), rn = i("linearGradient"), ln = i("linearGradient"), an = i("linearGradient"), sn = i("linearGradient"), on = i("linearGradient"), dn = i("linearGradient"), cn = i("linearGradient"), fn = i("linearGradient"), Ke = i("pattern"), er = i("rect"), kl = i("path"), _l = i("path"), hn = i("linearGradient"), oe = i("g"), Rr = i("path"), ql = i("path"), kr = i("path"), tr = i("path"), Ne = i("rect"), Ye = i("rect"), We = i("rect"), Ze = i("rect"), dt = i("rect"), ct = i("rect"), ft = i("rect"), o0 = i("g"), fe = i("rect"), pn = i("rect"), Sl = i("path"), O2 = i("mask"), E2 = i("path"), B2 = i("g"), d0 = i("foreignObject"), H2 = _("div"), H2.innerHTML = '<canvas width="320" height="528" style="width: 320px; height: 528px"></canvas>', b = i("g"), Gl = i("path"), Cl = i("path"), Ml = i("path"), _r = i("path"), qr = i("path"), nr = i("g"), he = i("rect"), un = i("rect"), Ul = i("path"), c0 = i("g"), pe = i("rect"), mn = i("rect"), $l = i("path"), f0 = i("g"), ue = i("rect"), gn = i("rect"), zl = i("path"), h0 = i("g"), me = i("rect"), vn = i("rect"), Ol = i("path"), p0 = i("g"), ge = i("rect"), xn = i("rect"), El = i("path"), u0 = i("g"), ve = i("rect"), bn = i("rect"), Bl = i("path"), m0 = i("g"), xe = i("rect"), yn = i("rect"), Hl = i("path"), g0 = i("g"), be = i("rect"), wn = i("rect"), Pl = i("path"), v0 = i("g"), ye = i("rect"), Rn = i("rect"), jl = i("path"), x0 = i("g"), we = i("rect"), kn = i("rect"), Tl = i("path"), b0 = i("g"), Re = i("rect"), _n = i("rect"), Dl = i("path"), y0 = i("g"), ke = i("rect"), qn = i("rect"), Fl = i("path"), w0 = i("g"), _e = i("rect"), Sn = i("rect"), Al = i("path"), R0 = i("g"), qe = i("rect"), Gn = i("rect"), Ll = i("path"), k0 = i("g"), Se = i("rect"), Cn = i("rect"), Ql = i("path"), _0 = i("g"), Ge = i("rect"), Mn = i("rect"), Il = i("path"), q0 = i("g"), Ce = i("rect"), Un = i("rect"), Vl = i("path"), P2 = i("path"), j2 = i("path"), T2 = i("path"), $n = i("rect"), zn = i("rect"), On = i("rect"), En = i("path"), Xe = i("rect"), ht = i("path"), pt = i("path"), ut = i("path"), Kl = i("path"), rr = i("g"), Me = i("rect"), Bn = i("rect"), lr = i("g"), Ue = i("rect"), Hn = i("rect"), ir = i("g"), $e = i("rect"), Pn = i("rect"), ar = i("g"), ze = i("rect"), jn = i("rect"), sr = i("g"), Oe = i("rect"), Tn = i("rect"), or = i("g"), Ee = i("rect"), Dn = i("rect"), dr = i("g"), Be = i("rect"), Fn = i("rect"), cr = i("g"), He = i("rect"), An = i("rect"), mt = i("rect"), fr = i("g"), Pe = i("rect"), Ln = i("rect"), hr = i("g"), je = i("rect"), Qn = i("rect"), pr = i("g"), Te = i("rect"), In = i("rect"), ur = i("g"), De = i("rect"), Vn = i("rect"), Sr = i("g"), S0 = i("path"), Gr = i("g"), Kn = i("path"), Fe = i("text"), G0 = i("tspan"), ni = Y("xyz"), ri = B(), Cr = i("g"), C0 = i("path"), Mr = i("g"), M0 = i("path"), Ur = i("g"), U0 = i("path"), $r = i("g"), $0 = i("path"), zr = i("g"), z0 = i("path"), Or = i("g"), O0 = i("path"), Er = i("g"), E0 = i("path"), Br = i("g"), B0 = i("path"), Hr = i("g"), H0 = i("path"), Pr = i("g"), Nn = i("path"), Nl = i("path"), rt = i("path"), jr = i("g"), Yn = i("path"), Tr = i("g"), P0 = i("path"), Dr = i("g"), j0 = i("path"), Fr = i("g"), T0 = i("path"), Ar = i("g"), Wn = i("path"), Lr = i("g"), Zn = i("path"), Qr = i("g"), Xn = i("path"), Ir = i("g"), D0 = i("path"), Vr = i("g"), F0 = i("path"), Kr = i("g"), A0 = i("path"), Nr = i("g"), L0 = i("path"), Yr = i("g"), Q0 = i("path"), Wr = i("g"), I0 = i("path"), V0 = i("g"), Jn = i("path"), K0 = i("g"), e0 = i("path"), te = i("path"), ne = i("path"), Zr = i("path"), Yl = i("path"), Wl = i("path"), gt = i("rect"), Zl = i("path"), Xl = i("path"), Jl = i("path"), vt = i("rect"), e(s, "offset", "0"), e(s, "stop-color", "#3b3b3b"), e(o, "offset", ".1"), e(o, "stop-color", "#282828"), e(d, "offset", ".2"), e(d, "stop-color", "#282828"), e(c, "offset", "1"), e(c, "stop-color", "#272727"), e(a, "id", "x"), e(h, "offset", "0"), e(h, "stop-color", "#99b0df"), e(p, "offset", ".1"), e(p, "stop-color", "#7396de"), e(g, "offset", ".3"), e(g, "stop-color", "#4171d2"), e(w, "offset", ".9"), e(w, "stop-color", "#1f3d79"), e(G, "offset", "1"), e(G, "stop-color", "#173166"), e(f, "id", "l"), e(v, "offset", "0"), e(v, "stop-color", "#2b60cd"), e(S, "offset", ".5"), e(S, "stop-color", "#295fcc"), e(R, "offset", ".8"), e(R, "stop-color", "#3c73e3"), e(O, "offset", "1"), e(O, "stop-color", "#4279e8"), e(k, "id", "m"), e(q, "offset", "0"), e(q, "stop-color", "#ececec"), e(T, "offset", ".1"), e(T, "stop-color", "#ededed"), e(x, "offset", ".3"), e(x, "stop-color", "#ddd"), e(u, "offset", ".9"), e(u, "stop-color", "#b0b0b0"), e(C, "offset", "1"), e(C, "stop-color", "#9c9c9c"), e(U, "id", "v"), e(W, "offset", "0"), e(W, "stop-color", "#e7e7e7"), e(Q, "offset", ".5"), e(Q, "stop-color", "#f8f8f8"), e(Z, "offset", ".8"), e(Z, "stop-color", "#fff"), e(J, "offset", "1"), e(J, "stop-color", "#fbfbfb"), e(M, "id", "w"), e(D, "offset", "0"), e(D, "stop-color", "#cdcdcd"), e(D, "stop-opacity", ".4"), e(le, "offset", "1"), e(le, "stop-color", "#cdcdcd"), e(le, "stop-opacity", "0"), e(et, "id", "u"), e(se, "offset", "0"), e(se, "stop-color", "#d1d1d1"), e(Le, "offset", ".4"), e(Le, "stop-color", "#c2c2c2"), e(N0, "offset", ".7"), e(N0, "stop-color", "#6b6b6b"), e(tt, "offset", "1"), e(tt, "stop-color", "#616161"), e(de, "id", "t"), e(Y0, "offset", "0"), e(Y0, "stop-color", "#a8a8a8"), e(nt, "offset", ".3"), e(nt, "stop-color", "#b2b2b2"), e(W0, "offset", ".8"), e(W0, "stop-color", "#dadada"), e(ce, "offset", "1"), e(ce, "stop-color", "#ccc"), e(Qe, "id", "s"), e(Ve, "offset", "0"), e(Ve, "stop-color", "#252525"), e(r0, "offset", "1"), e(r0, "stop-color", "#363636"), e(Ie, "id", "r"), e(H, "offset", "0"), e(H, "stop-color", "#f7f7f7"), e(X, "offset", "1"), e(X, "stop-color", "#535353"), e(l0, "id", "q"), e(i0, "offset", "0"), e(i0, "stop-color", "#909090"), e(Z0, "offset", "1"), e(Z0, "stop-color", "#2d2d2d"), e(bt, "id", "p"), e(a0, "offset", "0"), e(a0, "stop-color", "#313131"), e(ll, "offset", "1"), e(ll, "stop-color", "#3a3a3a"), e(ll, "stop-opacity", "0"), e(yt, "id", "o"), e(il, "offset", "0"), e(il, "stop-color", "#c6c6c6"), e(il, "stop-opacity", ".4"), e(al, "offset", ".4"), e(al, "stop-color", "#a2a2a2"), e(al, "stop-opacity", ".1"), e(sl, "offset", "1"), e(sl, "stop-color", "#a2a2a2"), e(sl, "stop-opacity", "0"), e(vr, "id", "n"), e(ol, "offset", "0"), e(ol, "stop-color", "#c6c6c6"), e(ol, "stop-opacity", ".4"), e(dl, "offset", ".7"), e(dl, "stop-color", "#a2a2a2"), e(dl, "stop-opacity", ".1"), e(cl, "offset", "1"), e(cl, "stop-color", "#a2a2a2"), e(cl, "stop-opacity", "0"), e(xr, "id", "k"), e(s2, "offset", "0"), e(s2, "stop-color", "#2e2e2e"), e(o2, "offset", ".5"), e(o2, "stop-color", "#2d2d2d"), e(d2, "offset", ".8"), e(d2, "stop-color", "#393939"), e(c2, "offset", "1"), e(c2, "stop-color", "#3d3d3d"), e(X0, "id", "j"), e(f2, "offset", "0"), e(f2, "stop-color", "#464646"), e(h2, "offset", ".1"), e(h2, "stop-color", "#393939"), e(p2, "offset", ".3"), e(p2, "stop-color", "#2c2c2c"), e(u2, "offset", ".9"), e(u2, "stop-color", "#202020"), e(m2, "offset", "1"), e(m2, "stop-color", "#242424"), e(s0, "id", "i"), e(g2, "offset", "0"), e(g2, "stop-color", "#1e7999"), e(hl, "offset", "1"), e(hl, "stop-color", "#1d7998"), e(hl, "stop-opacity", "0"), e(fl, "id", "h"), e(v2, "offset", "0"), e(v2, "stop-color", "#3a3a3a"), e(x2, "offset", ".3"), e(x2, "stop-color", "#414141"), e(b2, "offset", ".6"), e(b2, "stop-color", "#464646"), e(pl, "offset", "1"), e(pl, "stop-color", "#4b4b4b"), e(pl, "stop-opacity", "0"), e(J0, "id", "g"), e(y2, "offset", "0"), e(y2, "stop-color", "#313131"), e(ul, "offset", ".4"), e(ul, "stop-color", "#3a3a3a"), e(ul, "stop-opacity", ".6"), e(ml, "offset", "1"), e(ml, "stop-color", "#3a3a3a"), e(ml, "stop-opacity", "0"), e(br, "id", "f"), e(w2, "offset", "0"), e(w2, "stop-color", "#3a3a3a"), e(gl, "offset", ".4"), e(gl, "stop-color", "#3a3a3a"), e(gl, "stop-opacity", ".6"), e(vl, "offset", "1"), e(vl, "stop-color", "#3a3a3a"), e(vl, "stop-opacity", "0"), e(yr, "id", "e"), e(R2, "offset", "0"), e(R2, "stop-color", "#4e4e4e"), e(bl, "offset", "1"), e(bl, "stop-color", "#4e4e4e"), e(bl, "stop-opacity", "0"), e(xl, "id", "d"), e(k2, "offset", "0"), e(k2, "stop-color", "#555"), e(wl, "offset", "1"), e(wl, "stop-color", "#424242"), e(wl, "stop-opacity", "0"), e(yl, "id", "c"), e(_2, "offset", "0"), e(_2, "stop-color", "#9c9c9c"), e(Rl, "offset", ".8"), e(Rl, "stop-color", "#b0b0b0"), e(Rl, "stop-opacity", ".1"), e(q2, "offset", "1"), e(q2, "stop-color", "#f5f5f5"), e(wr, "id", "b"), e(S2, "offset", "0"), e(S2, "stop-color", "#b6b6b6"), e(G2, "offset", "0"), e(G2, "stop-color", "#fefefe"), e(C2, "offset", ".1"), e(C2, "stop-color", "#e7e7e7"), e(M2, "offset", ".8"), e(M2, "stop-color", "#e8e8e8"), e(U2, "offset", ".9"), e(U2, "stop-color", "#e6e6e6"), e($2, "offset", "1"), e($2, "stop-color", "#e1e1e1"), e(z2, "offset", "1"), e(z2, "stop-color", "#b2b2b2"), e(it, "id", "a"), m(wt, "xlink:href", "#a"), e(wt, "id", "y"), e(wt, "x1", "6.5"), e(wt, "x2", "641.5"), e(wt, "y1", "320.4"), e(wt, "y2", "320.4"), e(wt, "gradientUnits", "userSpaceOnUse"), m(Rt, "xlink:href", "#b"), e(Rt, "id", "z"), e(Rt, "x1", "9.3"), e(Rt, "x2", "634"), e(Rt, "y1", "-300.4"), e(Rt, "y2", "1004.4"), e(Rt, "gradientUnits", "userSpaceOnUse"), m(kt, "xlink:href", "#c"), e(kt, "id", "B"), e(kt, "x1", "570"), e(kt, "x2", "94.5"), e(kt, "y1", "560.4"), e(kt, "y2", "-263.2"), e(kt, "gradientUnits", "userSpaceOnUse"), m(_t, "xlink:href", "#d"), e(_t, "id", "C"), e(_t, "x1", "570"), e(_t, "x2", "498.4"), e(_t, "y1", "560.4"), e(_t, "y2", "293"), e(_t, "gradientUnits", "userSpaceOnUse"), m(qt, "xlink:href", "#e"), e(qt, "id", "J"), e(qt, "x1", "91.3"), e(qt, "x2", "71.6"), e(qt, "y1", "978.6"), e(qt, "y2", "958.9"), e(qt, "gradientUnits", "userSpaceOnUse"), m(St, "xlink:href", "#f"), e(St, "id", "I"), e(St, "x1", "504"), e(St, "x2", "504"), e(St, "y1", "978"), e(St, "y2", "215.2"), e(St, "gradientUnits", "userSpaceOnUse"), m(Gt, "xlink:href", "#g"), e(Gt, "id", "K"), e(Gt, "x1", "544"), e(Gt, "x2", "582"), e(Gt, "y1", "980"), e(Gt, "y2", "942"), e(Gt, "gradientUnits", "userSpaceOnUse"), m(Ct, "xlink:href", "#h"), e(Ct, "id", "L"), e(Ct, "x1", "300"), e(Ct, "x2", "300"), e(Ct, "y1", "44"), e(Ct, "y2", "1124"), e(Ct, "gradientUnits", "userSpaceOnUse"), m(Mt, "xlink:href", "#i"), e(Mt, "id", "M"), e(Mt, "x1", "514.8"), e(Mt, "x2", "583.9"), e(Mt, "y1", "711.8"), e(Mt, "y2", "751.7"), e(Mt, "gradientUnits", "userSpaceOnUse"), m(Ut, "xlink:href", "#j"), e(Ut, "id", "N"), e(Ut, "x1", "549"), e(Ut, "x2", "549"), e(Ut, "y1", "713.4"), e(Ut, "y2", "748.4"), e(Ut, "gradientUnits", "userSpaceOnUse"), m($t, "xlink:href", "#k"), e($t, "id", "O"), e($t, "x1", "515"), e($t, "x2", "536.3"), e($t, "y1", "1125"), e($t, "y2", "1146.3"), e($t, "gradientUnits", "userSpaceOnUse"), m(zt, "xlink:href", "#k"), e(zt, "id", "H"), e(zt, "x1", "515"), e(zt, "x2", "536.3"), e(zt, "y1", "1125"), e(zt, "y2", "1146.3"), e(zt, "gradientUnits", "userSpaceOnUse"), m(Ot, "xlink:href", "#i"), e(Ot, "id", "F"), e(Ot, "x1", "514.8"), e(Ot, "x2", "583.9"), e(Ot, "y1", "711.8"), e(Ot, "y2", "751.7"), e(Ot, "gradientUnits", "userSpaceOnUse"), m(Et, "xlink:href", "#j"), e(Et, "id", "G"), e(Et, "x1", "549"), e(Et, "x2", "549"), e(Et, "y1", "713.4"), e(Et, "y2", "748.4"), e(Et, "gradientUnits", "userSpaceOnUse"), m(Bt, "xlink:href", "#k"), e(Bt, "id", "R"), e(Bt, "x1", "515"), e(Bt, "x2", "536.3"), e(Bt, "y1", "1125"), e(Bt, "y2", "1146.3"), e(Bt, "gradientUnits", "userSpaceOnUse"), m(Ht, "xlink:href", "#i"), e(Ht, "id", "P"), e(Ht, "x1", "514.8"), e(Ht, "x2", "583.9"), e(Ht, "y1", "711.8"), e(Ht, "y2", "751.7"), e(Ht, "gradientUnits", "userSpaceOnUse"), m(Pt, "xlink:href", "#j"), e(Pt, "id", "Q"), e(Pt, "x1", "549"), e(Pt, "x2", "549"), e(Pt, "y1", "713.4"), e(Pt, "y2", "748.4"), e(Pt, "gradientUnits", "userSpaceOnUse"), m(jt, "xlink:href", "#k"), e(jt, "id", "U"), e(jt, "x1", "515"), e(jt, "x2", "536.3"), e(jt, "y1", "1125"), e(jt, "y2", "1146.3"), e(jt, "gradientUnits", "userSpaceOnUse"), m(Tt, "xlink:href", "#i"), e(Tt, "id", "S"), e(Tt, "x1", "514.8"), e(Tt, "x2", "583.9"), e(Tt, "y1", "711.8"), e(Tt, "y2", "751.7"), e(Tt, "gradientUnits", "userSpaceOnUse"), m(Dt, "xlink:href", "#j"), e(Dt, "id", "T"), e(Dt, "x1", "549"), e(Dt, "x2", "549"), e(Dt, "y1", "713.4"), e(Dt, "y2", "748.4"), e(Dt, "gradientUnits", "userSpaceOnUse"), m(Ft, "xlink:href", "#k"), e(Ft, "id", "X"), e(Ft, "x1", "515"), e(Ft, "x2", "536.3"), e(Ft, "y1", "1125"), e(Ft, "y2", "1146.3"), e(Ft, "gradientUnits", "userSpaceOnUse"), m(At, "xlink:href", "#l"), e(At, "id", "V"), e(At, "x1", "514.8"), e(At, "x2", "583.9"), e(At, "y1", "711.8"), e(At, "y2", "751.7"), e(At, "gradientUnits", "userSpaceOnUse"), m(Lt, "xlink:href", "#m"), e(Lt, "id", "W"), e(Lt, "x1", "549"), e(Lt, "x2", "549"), e(Lt, "y1", "713.4"), e(Lt, "y2", "748.4"), e(Lt, "gradientUnits", "userSpaceOnUse"), m(Qt, "xlink:href", "#k"), e(Qt, "id", "aa"), e(Qt, "x1", "515"), e(Qt, "x2", "536.3"), e(Qt, "y1", "1125"), e(Qt, "y2", "1146.3"), e(Qt, "gradientUnits", "userSpaceOnUse"), m(It, "xlink:href", "#i"), e(It, "id", "Y"), e(It, "x1", "514.8"), e(It, "x2", "583.9"), e(It, "y1", "711.8"), e(It, "y2", "751.7"), e(It, "gradientUnits", "userSpaceOnUse"), m(Vt, "xlink:href", "#j"), e(Vt, "id", "Z"), e(Vt, "x1", "549"), e(Vt, "x2", "549"), e(Vt, "y1", "713.4"), e(Vt, "y2", "748.4"), e(Vt, "gradientUnits", "userSpaceOnUse"), m(Kt, "xlink:href", "#k"), e(Kt, "id", "ad"), e(Kt, "x1", "515"), e(Kt, "x2", "536.3"), e(Kt, "y1", "1125"), e(Kt, "y2", "1146.3"), e(Kt, "gradientUnits", "userSpaceOnUse"), m(Nt, "xlink:href", "#i"), e(Nt, "id", "ab"), e(Nt, "x1", "514.8"), e(Nt, "x2", "583.9"), e(Nt, "y1", "711.8"), e(Nt, "y2", "751.7"), e(Nt, "gradientUnits", "userSpaceOnUse"), m(Yt, "xlink:href", "#j"), e(Yt, "id", "ac"), e(Yt, "x1", "549"), e(Yt, "x2", "549"), e(Yt, "y1", "713.4"), e(Yt, "y2", "748.4"), e(Yt, "gradientUnits", "userSpaceOnUse"), m(Wt, "xlink:href", "#k"), e(Wt, "id", "ag"), e(Wt, "x1", "515"), e(Wt, "x2", "536.3"), e(Wt, "y1", "1125"), e(Wt, "y2", "1146.3"), e(Wt, "gradientUnits", "userSpaceOnUse"), m(Zt, "xlink:href", "#i"), e(Zt, "id", "ae"), e(Zt, "x1", "514.8"), e(Zt, "x2", "583.9"), e(Zt, "y1", "711.8"), e(Zt, "y2", "751.7"), e(Zt, "gradientUnits", "userSpaceOnUse"), m(Xt, "xlink:href", "#j"), e(Xt, "id", "af"), e(Xt, "x1", "549"), e(Xt, "x2", "549"), e(Xt, "y1", "713.4"), e(Xt, "y2", "748.4"), e(Xt, "gradientUnits", "userSpaceOnUse"), m(Jt, "xlink:href", "#k"), e(Jt, "id", "aj"), e(Jt, "x1", "515"), e(Jt, "x2", "536.3"), e(Jt, "y1", "1125"), e(Jt, "y2", "1146.3"), e(Jt, "gradientUnits", "userSpaceOnUse"), m(e1, "xlink:href", "#i"), e(e1, "id", "ah"), e(e1, "x1", "514.8"), e(e1, "x2", "583.9"), e(e1, "y1", "711.8"), e(e1, "y2", "751.7"), e(e1, "gradientUnits", "userSpaceOnUse"), m(t1, "xlink:href", "#j"), e(t1, "id", "ai"), e(t1, "x1", "549"), e(t1, "x2", "549"), e(t1, "y1", "713.4"), e(t1, "y2", "748.4"), e(t1, "gradientUnits", "userSpaceOnUse"), m(n1, "xlink:href", "#k"), e(n1, "id", "ay"), e(n1, "x1", "515"), e(n1, "x2", "536.3"), e(n1, "y1", "1125"), e(n1, "y2", "1146.3"), e(n1, "gradientUnits", "userSpaceOnUse"), m(r1, "xlink:href", "#i"), e(r1, "id", "at"), e(r1, "x1", "514.8"), e(r1, "x2", "583.9"), e(r1, "y1", "711.8"), e(r1, "y2", "751.7"), e(r1, "gradientUnits", "userSpaceOnUse"), m(l1, "xlink:href", "#j"), e(l1, "id", "au"), e(l1, "x1", "549"), e(l1, "x2", "549"), e(l1, "y1", "713.4"), e(l1, "y2", "748.4"), e(l1, "gradientUnits", "userSpaceOnUse"), m(i1, "xlink:href", "#k"), e(i1, "id", "av"), e(i1, "x1", "515"), e(i1, "x2", "536.3"), e(i1, "y1", "1125"), e(i1, "y2", "1146.3"), e(i1, "gradientUnits", "userSpaceOnUse"), m(a1, "xlink:href", "#i"), e(a1, "id", "aq"), e(a1, "x1", "514.8"), e(a1, "x2", "583.9"), e(a1, "y1", "711.8"), e(a1, "y2", "751.7"), e(a1, "gradientUnits", "userSpaceOnUse"), m(s1, "xlink:href", "#j"), e(s1, "id", "ar"), e(s1, "x1", "549"), e(s1, "x2", "549"), e(s1, "y1", "713.4"), e(s1, "y2", "748.4"), e(s1, "gradientUnits", "userSpaceOnUse"), m(o1, "xlink:href", "#k"), e(o1, "id", "as"), e(o1, "x1", "515"), e(o1, "x2", "536.3"), e(o1, "y1", "1125"), e(o1, "y2", "1146.3"), e(o1, "gradientUnits", "userSpaceOnUse"), m(d1, "xlink:href", "#k"), e(d1, "id", "ap"), e(d1, "x1", "515"), e(d1, "x2", "536.3"), e(d1, "y1", "1125"), e(d1, "y2", "1146.3"), e(d1, "gradientUnits", "userSpaceOnUse"), m(c1, "xlink:href", "#i"), e(c1, "id", "ak"), e(c1, "x1", "514.8"), e(c1, "x2", "583.9"), e(c1, "y1", "711.8"), e(c1, "y2", "751.7"), e(c1, "gradientUnits", "userSpaceOnUse"), m(f1, "xlink:href", "#j"), e(f1, "id", "al"), e(f1, "x1", "549"), e(f1, "x2", "549"), e(f1, "y1", "713.4"), e(f1, "y2", "748.4"), e(f1, "gradientUnits", "userSpaceOnUse"), m(h1, "xlink:href", "#k"), e(h1, "id", "am"), e(h1, "x1", "515"), e(h1, "x2", "536.3"), e(h1, "y1", "1125"), e(h1, "y2", "1146.3"), e(h1, "gradientUnits", "userSpaceOnUse"), m(p1, "xlink:href", "#i"), e(p1, "id", "an"), e(p1, "x1", "514.8"), e(p1, "x2", "583.9"), e(p1, "y1", "711.8"), e(p1, "y2", "751.7"), e(p1, "gradientUnits", "userSpaceOnUse"), m(u1, "xlink:href", "#j"), e(u1, "id", "ao"), e(u1, "x1", "549"), e(u1, "x2", "549"), e(u1, "y1", "713.4"), e(u1, "y2", "748.4"), e(u1, "gradientUnits", "userSpaceOnUse"), m(m1, "xlink:href", "#i"), e(m1, "id", "aw"), e(m1, "x1", "514.8"), e(m1, "x2", "583.9"), e(m1, "y1", "711.8"), e(m1, "y2", "751.7"), e(m1, "gradientUnits", "userSpaceOnUse"), m(g1, "xlink:href", "#j"), e(g1, "id", "ax"), e(g1, "x1", "549"), e(g1, "x2", "549"), e(g1, "y1", "713.4"), e(g1, "y2", "748.4"), e(g1, "gradientUnits", "userSpaceOnUse"), m(v1, "xlink:href", "#n"), e(v1, "id", "aB"), e(v1, "x1", "520"), e(v1, "x2", "528.5"), e(v1, "y1", "1122"), e(v1, "y2", "1152"), e(v1, "gradientUnits", "userSpaceOnUse"), m(x1, "xlink:href", "#i"), e(x1, "id", "az"), e(x1, "x1", "514.8"), e(x1, "x2", "624"), e(x1, "y1", "711.8"), e(x1, "y2", "743.4"), e(x1, "gradientUnits", "userSpaceOnUse"), m(b1, "xlink:href", "#j"), e(b1, "id", "aA"), e(b1, "x1", "549"), e(b1, "x2", "549"), e(b1, "y1", "713.4"), e(b1, "y2", "748.4"), e(b1, "gradientUnits", "userSpaceOnUse"), m(y1, "xlink:href", "#i"), e(y1, "id", "aC"), e(y1, "x1", "514.8"), e(y1, "x2", "624"), e(y1, "y1", "711.8"), e(y1, "y2", "743.4"), e(y1, "gradientUnits", "userSpaceOnUse"), m(w1, "xlink:href", "#n"), e(w1, "id", "aE"), e(w1, "x1", "520"), e(w1, "x2", "528.5"), e(w1, "y1", "1122"), e(w1, "y2", "1152"), e(w1, "gradientUnits", "userSpaceOnUse"), m(R1, "xlink:href", "#j"), e(R1, "id", "aD"), e(R1, "x1", "549"), e(R1, "x2", "549"), e(R1, "y1", "713.4"), e(R1, "y2", "748.4"), e(R1, "gradientUnits", "userSpaceOnUse"), m(k1, "xlink:href", "#i"), e(k1, "id", "aI"), e(k1, "x1", "514.8"), e(k1, "x2", "624"), e(k1, "y1", "711.8"), e(k1, "y2", "743.4"), e(k1, "gradientUnits", "userSpaceOnUse"), m(_1, "xlink:href", "#n"), e(_1, "id", "aK"), e(_1, "x1", "520"), e(_1, "x2", "528.5"), e(_1, "y1", "1122"), e(_1, "y2", "1152"), e(_1, "gradientUnits", "userSpaceOnUse"), m(q1, "xlink:href", "#i"), e(q1, "id", "aF"), e(q1, "x1", "514.8"), e(q1, "x2", "624"), e(q1, "y1", "711.8"), e(q1, "y2", "743.4"), e(q1, "gradientUnits", "userSpaceOnUse"), m(S1, "xlink:href", "#j"), e(S1, "id", "aG"), e(S1, "x1", "549"), e(S1, "x2", "549"), e(S1, "y1", "713.4"), e(S1, "y2", "748.4"), e(S1, "gradientUnits", "userSpaceOnUse"), m(G1, "xlink:href", "#n"), e(G1, "id", "aH"), e(G1, "x1", "520"), e(G1, "x2", "528.5"), e(G1, "y1", "1122"), e(G1, "y2", "1152"), e(G1, "gradientUnits", "userSpaceOnUse"), m(C1, "xlink:href", "#j"), e(C1, "id", "aJ"), e(C1, "x1", "549"), e(C1, "x2", "549"), e(C1, "y1", "713.4"), e(C1, "y2", "748.4"), e(C1, "gradientUnits", "userSpaceOnUse"), m(M1, "xlink:href", "#c"), e(M1, "id", "D"), e(M1, "x1", "575.8"), e(M1, "x2", "543.8"), e(M1, "y1", "691.7"), e(M1, "y2", "572.4"), e(M1, "gradientUnits", "userSpaceOnUse"), m(U1, "xlink:href", "#d"), e(U1, "id", "E"), e(U1, "x1", "562"), e(U1, "x2", "537.9"), e(U1, "y1", "686.2"), e(U1, "y2", "596.4"), e(U1, "gradientUnits", "userSpaceOnUse"), m(at, "xlink:href", "#o"), e(at, "id", "aL"), e(at, "x1", "504"), e(at, "x2", "504"), e(at, "y1", "978"), e(at, "y2", "876.8"), e(at, "gradientTransform", "translate(0 -285.6)"), e(at, "gradientUnits", "userSpaceOnUse"), m(st, "xlink:href", "#e"), e(st, "id", "aM"), e(st, "x1", "91.3"), e(st, "x2", "71.6"), e(st, "y1", "978.6"), e(st, "y2", "958.9"), e(st, "gradientTransform", "translate(0 -285.6)"), e(st, "gradientUnits", "userSpaceOnUse"), m(ot, "xlink:href", "#g"), e(ot, "id", "aN"), e(ot, "x1", "544"), e(ot, "x2", "575.4"), e(ot, "y1", "980"), e(ot, "y2", "948.6"), e(ot, "gradientTransform", "translate(0 -285.6)"), e(ot, "gradientUnits", "userSpaceOnUse"), m($1, "xlink:href", "#p"), e($1, "id", "aO"), e($1, "x1", "327.1"), e($1, "x2", "327.1"), e($1, "y1", "580.4"), e($1, "y2", "694.4"), e($1, "gradientUnits", "userSpaceOnUse"), m(z1, "xlink:href", "#q"), e(z1, "id", "aP"), e(z1, "x1", "330.1"), e(z1, "x2", "330.1"), e(z1, "y1", "582.4"), e(z1, "y2", "694.4"), e(z1, "gradientUnits", "userSpaceOnUse"), m(O1, "xlink:href", "#r"), e(O1, "id", "aQ"), e(O1, "x1", "264.5"), e(O1, "x2", "350.3"), e(O1, "y1", "600.6"), e(O1, "y2", "686.4"), e(O1, "gradientUnits", "userSpaceOnUse"), m(E1, "xlink:href", "#s"), e(E1, "id", "aS"), e(E1, "x1", "274"), e(E1, "x2", "367.4"), e(E1, "y1", "632.4"), e(E1, "y2", "644.4"), e(E1, "gradientUnits", "userSpaceOnUse"), m(B1, "xlink:href", "#t"), e(B1, "id", "aT"), e(B1, "x1", "311.9"), e(B1, "x2", "313.6"), e(B1, "y1", "632.4"), e(B1, "y2", "644.4"), e(B1, "gradientUnits", "userSpaceOnUse"), m(H1, "xlink:href", "#t"), e(H1, "id", "aV"), e(H1, "x1", "251"), e(H1, "x2", "262.3"), e(H1, "y1", "645.1"), e(H1, "y2", "638.6"), e(H1, "gradientUnits", "userSpaceOnUse"), m(P1, "xlink:href", "#t"), e(P1, "id", "aU"), e(P1, "x1", "-329.7"), e(P1, "x2", "-320.5"), e(P1, "y1", "-677.4"), e(P1, "y2", "-667.2"), e(P1, "gradientUnits", "userSpaceOnUse"), m(j1, "xlink:href", "#t"), e(j1, "id", "aW"), e(j1, "x1", "251.4"), e(j1, "x2", "261.3"), e(j1, "y1", "633.6"), e(j1, "y2", "639.3"), e(j1, "gradientUnits", "userSpaceOnUse"), m(T1, "xlink:href", "#t"), e(T1, "id", "aR"), e(T1, "x1", "325"), e(T1, "x2", "325"), e(T1, "y1", "612.4"), e(T1, "y2", "606.9"), e(T1, "gradientUnits", "userSpaceOnUse"), m(D1, "xlink:href", "#u"), e(D1, "id", "aX"), e(D1, "x1", "328.8"), e(D1, "x2", "328.8"), e(D1, "y1", "1099"), e(D1, "y2", "1108"), e(D1, "gradientUnits", "userSpaceOnUse"), m(F1, "xlink:href", "#v"), e(F1, "id", "aY"), e(F1, "x1", "559.3"), e(F1, "x2", "583.9"), e(F1, "y1", "709.1"), e(F1, "y2", "751.7"), e(F1, "gradientUnits", "userSpaceOnUse"), m(A1, "xlink:href", "#w"), e(A1, "id", "aZ"), e(A1, "x1", "549"), e(A1, "x2", "549"), e(A1, "y1", "713.4"), e(A1, "y2", "748.4"), e(A1, "gradientUnits", "userSpaceOnUse"), m(L1, "xlink:href", "#v"), e(L1, "id", "ba"), e(L1, "x1", "559.3"), e(L1, "x2", "583.9"), e(L1, "y1", "709.1"), e(L1, "y2", "751.7"), e(L1, "gradientUnits", "userSpaceOnUse"), m(Q1, "xlink:href", "#w"), e(Q1, "id", "bb"), e(Q1, "x1", "549"), e(Q1, "x2", "549"), e(Q1, "y1", "713.4"), e(Q1, "y2", "748.4"), e(Q1, "gradientUnits", "userSpaceOnUse"), m(I1, "xlink:href", "#v"), e(I1, "id", "bc"), e(I1, "x1", "559.3"), e(I1, "x2", "583.9"), e(I1, "y1", "709.1"), e(I1, "y2", "751.7"), e(I1, "gradientUnits", "userSpaceOnUse"), m(V1, "xlink:href", "#w"), e(V1, "id", "bd"), e(V1, "x1", "549"), e(V1, "x2", "549"), e(V1, "y1", "713.4"), e(V1, "y2", "748.4"), e(V1, "gradientUnits", "userSpaceOnUse"), m(K1, "xlink:href", "#v"), e(K1, "id", "be"), e(K1, "x1", "559.3"), e(K1, "x2", "583.9"), e(K1, "y1", "709.1"), e(K1, "y2", "751.7"), e(K1, "gradientUnits", "userSpaceOnUse"), m(N1, "xlink:href", "#w"), e(N1, "id", "bf"), e(N1, "x1", "549"), e(N1, "x2", "549"), e(N1, "y1", "713.4"), e(N1, "y2", "748.4"), e(N1, "gradientUnits", "userSpaceOnUse"), m(Y1, "xlink:href", "#v"), e(Y1, "id", "bg"), e(Y1, "x1", "559.3"), e(Y1, "x2", "583.9"), e(Y1, "y1", "709.1"), e(Y1, "y2", "751.7"), e(Y1, "gradientUnits", "userSpaceOnUse"), m(W1, "xlink:href", "#w"), e(W1, "id", "bh"), e(W1, "x1", "549"), e(W1, "x2", "549"), e(W1, "y1", "713.4"), e(W1, "y2", "748.4"), e(W1, "gradientUnits", "userSpaceOnUse"), m(Z1, "xlink:href", "#v"), e(Z1, "id", "bi"), e(Z1, "x1", "559.3"), e(Z1, "x2", "583.9"), e(Z1, "y1", "709.1"), e(Z1, "y2", "751.7"), e(Z1, "gradientUnits", "userSpaceOnUse"), m(X1, "xlink:href", "#w"), e(X1, "id", "bj"), e(X1, "x1", "549"), e(X1, "x2", "549"), e(X1, "y1", "713.4"), e(X1, "y2", "748.4"), e(X1, "gradientUnits", "userSpaceOnUse"), m(J1, "xlink:href", "#v"), e(J1, "id", "bk"), e(J1, "x1", "559.3"), e(J1, "x2", "583.9"), e(J1, "y1", "709.1"), e(J1, "y2", "751.7"), e(J1, "gradientUnits", "userSpaceOnUse"), m(en, "xlink:href", "#w"), e(en, "id", "bl"), e(en, "x1", "549"), e(en, "x2", "549"), e(en, "y1", "713.4"), e(en, "y2", "748.4"), e(en, "gradientUnits", "userSpaceOnUse"), m(tn, "xlink:href", "#v"), e(tn, "id", "bm"), e(tn, "x1", "559.3"), e(tn, "x2", "583.9"), e(tn, "y1", "709.1"), e(tn, "y2", "751.7"), e(tn, "gradientUnits", "userSpaceOnUse"), m(nn, "xlink:href", "#w"), e(nn, "id", "bn"), e(nn, "x1", "549"), e(nn, "x2", "549"), e(nn, "y1", "713.4"), e(nn, "y2", "748.4"), e(nn, "gradientUnits", "userSpaceOnUse"), m(rn, "xlink:href", "#v"), e(rn, "id", "bo"), e(rn, "x1", "559.3"), e(rn, "x2", "583.9"), e(rn, "y1", "709.1"), e(rn, "y2", "751.7"), e(rn, "gradientUnits", "userSpaceOnUse"), m(ln, "xlink:href", "#w"), e(ln, "id", "bp"), e(ln, "x1", "549"), e(ln, "x2", "549"), e(ln, "y1", "713.4"), e(ln, "y2", "748.4"), e(ln, "gradientUnits", "userSpaceOnUse"), m(an, "xlink:href", "#v"), e(an, "id", "bq"), e(an, "x1", "559.3"), e(an, "x2", "583.9"), e(an, "y1", "709.1"), e(an, "y2", "751.7"), e(an, "gradientUnits", "userSpaceOnUse"), m(sn, "xlink:href", "#w"), e(sn, "id", "br"), e(sn, "x1", "549"), e(sn, "x2", "549"), e(sn, "y1", "713.4"), e(sn, "y2", "748.4"), e(sn, "gradientUnits", "userSpaceOnUse"), m(on, "xlink:href", "#v"), e(on, "id", "bs"), e(on, "x1", "559.3"), e(on, "x2", "583.9"), e(on, "y1", "709.1"), e(on, "y2", "751.7"), e(on, "gradientUnits", "userSpaceOnUse"), m(dn, "xlink:href", "#w"), e(dn, "id", "bt"), e(dn, "x1", "549"), e(dn, "x2", "549"), e(dn, "y1", "713.4"), e(dn, "y2", "748.4"), e(dn, "gradientUnits", "userSpaceOnUse"), m(cn, "xlink:href", "#v"), e(cn, "id", "bu"), e(cn, "x1", "559.3"), e(cn, "x2", "583.9"), e(cn, "y1", "709.1"), e(cn, "y2", "751.7"), e(cn, "gradientUnits", "userSpaceOnUse"), m(fn, "xlink:href", "#w"), e(fn, "id", "bv"), e(fn, "x1", "549"), e(fn, "x2", "549"), e(fn, "y1", "713.4"), e(fn, "y2", "748.4"), e(fn, "gradientUnits", "userSpaceOnUse"), e(er, "y", "0"), e(er, "x", "0"), e(er, "height", "18"), e(er, "width", "20"), e(er, "fill", "#272727"), e(kl, "fill", "#222"), e(kl, "fill-rule", "evenodd"), e(kl, "d", "M9.99 0 5 3v6l-5 3v6l10-6V0h-.01zm10 0L15 3v6l5-3V0h-.01z"), e(_l, "fill", "#1c1c1c"), e(_l, "fill-rule", "evenodd"), e(_l, "d", "M0 0v6l5 3V3L.01 0H0zm10 0v12l10 6v-6l-5-3V3l-4.99-3H10z"), e(Ke, "id", "pattern1"), e(Ke, "x", "0"), e(Ke, "y", "0"), e(Ke, "width", "20"), e(Ke, "height", "18"), e(Ke, "patternUnits", "userSpaceOnUse"), e(Ke, "class", "svelte-py5gbp"), m(hn, "xlink:href", "#x"), e(hn, "id", "A"), e(hn, "x1", "295"), e(hn, "x2", "295"), e(hn, "y1", "1004.4"), e(hn, "y2", "-357.6"), e(hn, "gradientUnits", "userSpaceOnUse"), e(Rr, "fill", "url(#y)"), e(Rr, "fill-rule", "evenodd"), e(Rr, "stroke", "#696a69"), e(Rr, "d", "M119 1046.4c-33-.4-94-23-105-42-1-7-7-94-7-162v-1075c0-13 3.5-103 5-130 8-13.9 56-33.8 68-37 12-3.3 25-6 36-6h416c11 0 24 2.7 36 6 12 3.2 60 23.1 68 37 1.5 27 5 117 5 130v1075c0 68-6 155-7 162-11 19-72 41.6-105 42H365z"), e(ql, "fill", "url(#z)"), e(ql, "fill-rule", "evenodd"), e(ql, "d", "M120 1022.4c-60 0-102-25-102-135v-1135c0-75 17-133 117-133h378c100 0 117 58 117 133v1135c0 110-42 135-102 135H365z"), e(kr, "fill", "#269dc5"), e(kr, "fill-rule", "evenodd"), e(kr, "stroke", "#6ac1df"), e(kr, "d", "M120 1015.4c-55 0-96-23-96-128v-1135c0-75 16-128 111-128h378c95 0 111 53 111 128v1135c0 105-41 128-96 128H365z"), e(tr, "id", "pattern-bg"), e(tr, "fill", "url(#pattern1)"), e(tr, "fill-rule", "evenodd"), e(tr, "stroke", "#000"), e(tr, "d", "M120 1007.4c-45.4 0-90-15-90-120v-1127c0-75 15-128 105-128h378c90 0 105 53 105 128v1127c0 105-44.6 120-90 120H365z"), e(Ne, "width", "516"), e(Ne, "height", "894"), e(Ne, "x", "66"), e(Ne, "y", "-321.6"), e(Ne, "fill", "#0d0d0d"), e(Ne, "stroke", "url(#B)"), e(Ne, "stroke-linecap", "round"), e(Ne, "stroke-linejoin", "round"), e(Ne, "rx", "22"), e(Ne, "ry", "22"), e(Ye, "width", "493"), e(Ye, "height", "871"), e(Ye, "x", "77"), e(Ye, "y", "-310.6"), e(Ye, "fill", "#0d0d0d"), e(Ye, "stroke", "url(#C)"), e(Ye, "stroke-linecap", "round"), e(Ye, "stroke-linejoin", "round"), e(Ye, "rx", "10"), e(Ye, "ry", "10"), e(We, "width", "516"), e(We, "height", "120"), e(We, "x", "66"), e(We, "y", "578.4"), e(We, "fill", "#0d0d0d"), e(We, "stroke", "url(#D)"), e(We, "stroke-linecap", "round"), e(We, "stroke-linejoin", "round"), e(We, "rx", "22"), e(We, "ry", "22"), e(Ze, "width", "493"), e(Ze, "height", "96"), e(Ze, "x", "77"), e(Ze, "y", "590.4"), e(Ze, "fill", "#0d0d0d"), e(Ze, "stroke", "url(#E)"), e(Ze, "stroke-linecap", "round"), e(Ze, "stroke-linejoin", "round"), e(Ze, "rx", "10"), e(Ze, "ry", "10"), e(dt, "width", "116"), e(dt, "height", "36"), e(dt, "x", "86"), e(dt, "y", "644.4"), e(dt, "fill", "#00ec3a"), e(dt, "fill-opacity", ".2"), e(dt, "rx", "7"), e(dt, "ry", "7"), e(ct, "width", "116"), e(ct, "height", "36"), e(ct, "x", "446"), e(ct, "y", "596.4"), e(ct, "fill", "#00ec3a"), e(ct, "fill-opacity", ".2"), e(ct, "rx", "7"), e(ct, "ry", "7"), e(ft, "width", "116"), e(ft, "height", "36"), e(ft, "x", "446"), e(ft, "y", "644.4"), e(ft, "fill", "#00ec3a"), e(ft, "fill-opacity", ".2"), e(ft, "rx", "7"), e(ft, "ry", "7"), e(fe, "width", "76"), e(fe, "height", "44"), e(fe, "x", "511"), e(fe, "y", "709.4"), e(fe, "fill", "url(#F)"), e(fe, "stroke", "var(--btn-border-stroke)"), e(fe, "stroke-linecap", "round"), e(fe, "stroke-linejoin", "round"), e(fe, "stroke-width", "2"), e(fe, "rx", "8"), e(fe, "ry", "8"), e(pn, "width", "68"), e(pn, "height", "35"), e(pn, "x", "515"), e(pn, "y", "713.4"), e(pn, "fill", "url(#G)"), e(pn, "rx", "4"), e(pn, "ry", "4"), e(Sl, "fill", "url(#H)"), e(Sl, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(Sl, "transform", "translate(0 -411.6)"), e(o0, "transform", "translate(0 54)"), e(o0, "class", "cp-button"), e(o0, "data-cp", "KEYCODE_TIMES"), e(E2, "fill", "#fff"), e(E2, "d", "M84-303.6h480v792H84z"), e(O2, "id", "uid_3418"), e(oe, "transform", "translate(0 411.6)"), e(H2, "class", "cp-wrapper svelte-py5gbp"), e(d0, "x", "0"), e(d0, "y", "0"), e(d0, "width", "480"), e(d0, "height", "792"), e(d0, "overflow", "hidden"), e(B2, "transform", "translate(85 109)"), e(Gl, "fill", "url(#I)"), e(Gl, "d", "M387.7 90a22 22 0 0 0-19 11H560a10 10 0 0 1 10 10v851a10 10 0 0 1-10 10H365.7v12H560a22 22 0 0 0 22-22V112a22 22 0 0 0-22-22H387.7z"), e(Gl, "transform", "translate(0 -411.6)"), e(Cl, "fill", "url(#J)"), e(Cl, "d", "M66 904v58a22 22 0 0 0 22 22h472v-12H87a10 10 0 0 1-10-10v-58z"), e(Cl, "transform", "translate(0 -411.6)"), e(Ml, "fill", "url(#K)"), e(Ml, "d", "M570 900v62a10 10 0 0 1-10 10h-57.9v12H560a22 22 0 0 0 22-22v-62h-12z"), e(Ml, "transform", "translate(0 -411.6)"), e(_r, "fill", "url(#L)"), e(_r, "fill-rule", "evenodd"), e(_r, "d", "M136.9 40C42.9 40 27 93 27 168v1135c0 44.7 7.4 74.6 20 94.1 17.3 23 43 29.9 73 29.9h408c30 0 55.7-6.8 73-29.9 12.6-19.5 20-49.4 20-94.1V168c0-75-15.8-128-109.9-128H137zm-1.9 4h378c90 0 105 53 105 128v1127c0 105-44.6 120-90 120H120c-45.4 0-90-15-90-120V172C30 97 45 44 135 44z"), e(_r, "transform", "translate(0 -411.6)"), e(qr, "fill", "#1f7e9e"), e(qr, "fill-opacity", ".3"), e(qr, "fill-rule", "evenodd"), e(qr, "d", "M-638 1019.4c-54.4 0-95-23-95-128v-1135c0-75 15.8-128 109.9-128H-249c94 0 109.9 53 109.9 128v1135c0 105-40.6 128-95 128h-161.4z"), e(he, "width", "76"), e(he, "height", "44"), e(he, "x", "511"), e(he, "y", "709.4"), e(he, "fill", "url(#M)"), e(he, "stroke", "var(--btn-border-stroke)"), e(he, "stroke-linecap", "round"), e(he, "stroke-linejoin", "round"), e(he, "stroke-width", "2"), e(he, "rx", "8"), e(he, "ry", "8"), e(un, "width", "68"), e(un, "height", "35"), e(un, "x", "515"), e(un, "y", "713.4"), e(un, "fill", "url(#N)"), e(un, "rx", "4"), e(un, "ry", "4"), e(Ul, "fill", "url(#O)"), e(Ul, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(Ul, "transform", "translate(0 -411.6)"), e(nr, "class", "cp-button"), e(nr, "data-cp", "KEYCODE_DIVIDE"), e(pe, "width", "76"), e(pe, "height", "44"), e(pe, "x", "511"), e(pe, "y", "709.4"), e(pe, "fill", "url(#P)"), e(pe, "stroke", "var(--btn-border-stroke)"), e(pe, "stroke-linecap", "round"), e(pe, "stroke-linejoin", "round"), e(pe, "stroke-width", "2"), e(pe, "rx", "8"), e(pe, "ry", "8"), e(mn, "width", "68"), e(mn, "height", "35"), e(mn, "x", "515"), e(mn, "y", "713.4"), e(mn, "fill", "url(#Q)"), e(mn, "rx", "4"), e(mn, "ry", "4"), e($l, "fill", "url(#R)"), e($l, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e($l, "transform", "translate(0 -411.6)"), e(c0, "transform", "translate(0 108)"), e(c0, "class", "cp-button"), e(c0, "data-cp", "KEYCODE_MINUS"), e(ue, "width", "76"), e(ue, "height", "44"), e(ue, "x", "511"), e(ue, "y", "709.4"), e(ue, "fill", "url(#S)"), e(ue, "stroke", "var(--btn-border-stroke)"), e(ue, "stroke-linecap", "round"), e(ue, "stroke-linejoin", "round"), e(ue, "stroke-width", "2"), e(ue, "rx", "8"), e(ue, "ry", "8"), e(gn, "width", "68"), e(gn, "height", "35"), e(gn, "x", "515"), e(gn, "y", "713.4"), e(gn, "fill", "url(#T)"), e(gn, "rx", "4"), e(gn, "ry", "4"), e(zl, "fill", "url(#U)"), e(zl, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(zl, "transform", "translate(0 -411.6)"), e(f0, "transform", "translate(0 162)"), e(f0, "class", "cp-button"), e(f0, "data-cp", "KEYCODE_PLUS"), e(me, "width", "76"), e(me, "height", "44"), e(me, "x", "511"), e(me, "y", "709.4"), e(me, "fill", "url(#V)"), e(me, "stroke", "var(--btn-border-stroke)"), e(me, "stroke-linecap", "round"), e(me, "stroke-linejoin", "round"), e(me, "stroke-width", "2"), e(me, "rx", "8"), e(me, "ry", "8"), e(vn, "width", "68"), e(vn, "height", "35"), e(vn, "x", "515"), e(vn, "y", "713.4"), e(vn, "fill", "url(#W)"), e(vn, "rx", "4"), e(vn, "ry", "4"), e(Ol, "fill", "url(#X)"), e(Ol, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(Ol, "transform", "translate(0 -411.6)"), e(h0, "transform", "translate(0 216)"), e(h0, "class", "cp-button"), e(h0, "data-cp", "KEYCODE_EXE"), e(ge, "width", "76"), e(ge, "height", "44"), e(ge, "x", "511"), e(ge, "y", "709.4"), e(ge, "fill", "url(#Y)"), e(ge, "stroke", "var(--btn-border-stroke)"), e(ge, "stroke-linecap", "round"), e(ge, "stroke-linejoin", "round"), e(ge, "stroke-width", "2"), e(ge, "rx", "8"), e(ge, "ry", "8"), e(xn, "width", "68"), e(xn, "height", "35"), e(xn, "x", "515"), e(xn, "y", "713.4"), e(xn, "fill", "url(#Z)"), e(xn, "rx", "4"), e(xn, "ry", "4"), e(El, "fill", "url(#aa)"), e(El, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(El, "transform", "translate(0 -411.6)"), e(p0, "transform", "translate(-90)"), e(p0, "class", "cp-button"), e(p0, "data-cp", "KEYCODE_POWER"), e(ve, "width", "76"), e(ve, "height", "44"), e(ve, "x", "511"), e(ve, "y", "709.4"), e(ve, "fill", "url(#ab)"), e(ve, "stroke", "var(--btn-border-stroke)"), e(ve, "stroke-linecap", "round"), e(ve, "stroke-linejoin", "round"), e(ve, "stroke-width", "2"), e(ve, "rx", "8"), e(ve, "ry", "8"), e(bn, "width", "68"), e(bn, "height", "35"), e(bn, "x", "515"), e(bn, "y", "713.4"), e(bn, "fill", "url(#ac)"), e(bn, "rx", "4"), e(bn, "ry", "4"), e(Bl, "fill", "url(#ad)"), e(Bl, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(Bl, "transform", "translate(0 -411.6)"), e(u0, "transform", "translate(-180)"), e(u0, "class", "cp-button"), e(u0, "data-cp", "KEYCODE_Z"), e(xe, "width", "76"), e(xe, "height", "44"), e(xe, "x", "511"), e(xe, "y", "709.4"), e(xe, "fill", "url(#ae)"), e(xe, "stroke", "var(--btn-border-stroke)"), e(xe, "stroke-linecap", "round"), e(xe, "stroke-linejoin", "round"), e(xe, "stroke-width", "2"), e(xe, "rx", "8"), e(xe, "ry", "8"), e(yn, "width", "68"), e(yn, "height", "35"), e(yn, "x", "515"), e(yn, "y", "713.4"), e(yn, "fill", "url(#af)"), e(yn, "rx", "4"), e(yn, "ry", "4"), e(Hl, "fill", "url(#ag)"), e(Hl, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(Hl, "transform", "translate(0 -411.6)"), e(m0, "transform", "translate(-270)"), e(m0, "class", "cp-button"), e(m0, "data-cp", "KEYCODE_Y"), e(be, "width", "76"), e(be, "height", "44"), e(be, "x", "511"), e(be, "y", "709.4"), e(be, "fill", "url(#ah)"), e(be, "stroke", "var(--btn-border-stroke)"), e(be, "stroke-linecap", "round"), e(be, "stroke-linejoin", "round"), e(be, "stroke-width", "2"), e(be, "rx", "8"), e(be, "ry", "8"), e(wn, "width", "68"), e(wn, "height", "35"), e(wn, "x", "515"), e(wn, "y", "713.4"), e(wn, "fill", "url(#ai)"), e(wn, "rx", "4"), e(wn, "ry", "4"), e(Pl, "fill", "url(#aj)"), e(Pl, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(Pl, "transform", "translate(0 -411.6)"), e(g0, "transform", "translate(-360)"), e(g0, "class", "cp-button"), e(g0, "data-cp", "KEYCODE_X"), e(ye, "width", "76"), e(ye, "height", "44"), e(ye, "x", "511"), e(ye, "y", "709.4"), e(ye, "fill", "url(#ak)"), e(ye, "stroke", "var(--btn-border-stroke)"), e(ye, "stroke-linecap", "round"), e(ye, "stroke-linejoin", "round"), e(ye, "stroke-width", "2"), e(ye, "rx", "8"), e(ye, "ry", "8"), e(Rn, "width", "68"), e(Rn, "height", "35"), e(Rn, "x", "515"), e(Rn, "y", "713.4"), e(Rn, "fill", "url(#al)"), e(Rn, "rx", "4"), e(Rn, "ry", "4"), e(jl, "fill", "url(#am)"), e(jl, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(jl, "transform", "translate(0 -411.6)"), e(v0, "transform", "translate(-450 54)"), e(v0, "class", "cp-button"), e(v0, "data-cp", "KEYCODE_OPEN_PARENTHESIS"), e(we, "width", "76"), e(we, "height", "44"), e(we, "x", "511"), e(we, "y", "709.4"), e(we, "fill", "url(#an)"), e(we, "stroke", "var(--btn-border-stroke)"), e(we, "stroke-linecap", "round"), e(we, "stroke-linejoin", "round"), e(we, "stroke-width", "2"), e(we, "rx", "8"), e(we, "ry", "8"), e(kn, "width", "68"), e(kn, "height", "35"), e(kn, "x", "515"), e(kn, "y", "713.4"), e(kn, "fill", "url(#ao)"), e(kn, "rx", "4"), e(kn, "ry", "4"), e(Tl, "fill", "url(#ap)"), e(Tl, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(Tl, "transform", "translate(0 -411.6)"), e(x0, "transform", "translate(-450)"), e(x0, "class", "cp-button"), e(x0, "data-cp", "KEYCODE_EQUALS"), e(Re, "width", "76"), e(Re, "height", "44"), e(Re, "x", "511"), e(Re, "y", "709.4"), e(Re, "fill", "url(#aq)"), e(Re, "stroke", "var(--btn-border-stroke)"), e(Re, "stroke-linecap", "round"), e(Re, "stroke-linejoin", "round"), e(Re, "stroke-width", "2"), e(Re, "rx", "8"), e(Re, "ry", "8"), e(_n, "width", "68"), e(_n, "height", "35"), e(_n, "x", "515"), e(_n, "y", "713.4"), e(_n, "fill", "url(#ar)"), e(_n, "rx", "4"), e(_n, "ry", "4"), e(Dl, "fill", "url(#as)"), e(Dl, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(Dl, "transform", "translate(0 -411.6)"), e(b0, "transform", "translate(-450 108)"), e(b0, "class", "cp-button"), e(b0, "data-cp", "KEYCODE_CLOSE_PARENTHESIS"), e(ke, "width", "76"), e(ke, "height", "44"), e(ke, "x", "511"), e(ke, "y", "709.4"), e(ke, "fill", "url(#at)"), e(ke, "stroke", "var(--btn-border-stroke)"), e(ke, "stroke-linecap", "round"), e(ke, "stroke-linejoin", "round"), e(ke, "stroke-width", "2"), e(ke, "rx", "8"), e(ke, "ry", "8"), e(qn, "width", "68"), e(qn, "height", "35"), e(qn, "x", "515"), e(qn, "y", "713.4"), e(qn, "fill", "url(#au)"), e(qn, "rx", "4"), e(qn, "ry", "4"), e(Fl, "fill", "url(#av)"), e(Fl, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(Fl, "transform", "translate(0 -411.6)"), e(y0, "transform", "translate(-450 162)"), e(y0, "class", "cp-button"), e(y0, "data-cp", "KEYCODE_COMMA"), e(_e, "width", "76"), e(_e, "height", "44"), e(_e, "x", "511"), e(_e, "y", "709.4"), e(_e, "fill", "url(#aw)"), e(_e, "stroke", "var(--btn-border-stroke)"), e(_e, "stroke-linecap", "round"), e(_e, "stroke-linejoin", "round"), e(_e, "stroke-width", "2"), e(_e, "rx", "8"), e(_e, "ry", "8"), e(Sn, "width", "68"), e(Sn, "height", "35"), e(Sn, "x", "515"), e(Sn, "y", "713.4"), e(Sn, "fill", "url(#ax)"), e(Sn, "rx", "4"), e(Sn, "ry", "4"), e(Al, "fill", "url(#ay)"), e(Al, "d", "M519 1122a7 7 0 0 0-7 7v28a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-27a4 4 0 0 1 4-4h60a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6h-60z"), e(Al, "transform", "translate(0 -411.6)"), e(w0, "transform", "translate(-450 216)"), e(w0, "class", "cp-button"), e(w0, "data-cp", "KEYCODE_NEGATIVE"), e(qe, "width", "116"), e(qe, "height", "36"), e(qe, "x", "511"), e(qe, "y", "709.4"), e(qe, "fill", "url(#az)"), e(qe, "stroke", "var(--btn-border-stroke)"), e(qe, "stroke-linecap", "round"), e(qe, "stroke-linejoin", "round"), e(qe, "stroke-width", "2"), e(qe, "rx", "8"), e(qe, "ry", "8"), e(Gn, "width", "107"), e(Gn, "height", "27"), e(Gn, "x", "515"), e(Gn, "y", "713.4"), e(Gn, "fill", "url(#aA)"), e(Gn, "rx", "4"), e(Gn, "ry", "4"), e(Ll, "fill", "url(#aB)"), e(Ll, "d", "M519 1122a7 7 0 0 0-7 7v20a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-19a4 4 0 0 1 4-4h100a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6Z"), e(Ll, "transform", "translate(0 -411.6)"), e(R0, "transform", "translate(-425 -113)"), e(R0, "class", "cp-button"), e(R0, "data-cp", "KEYCODE_KEYBOARD"), e(Se, "width", "116"), e(Se, "height", "36"), e(Se, "x", "511"), e(Se, "y", "709.4"), e(Se, "fill", "url(#aC)"), e(Se, "stroke", "var(--btn-border-stroke)"), e(Se, "stroke-linecap", "round"), e(Se, "stroke-linejoin", "round"), e(Se, "stroke-width", "2"), e(Se, "rx", "8"), e(Se, "ry", "8"), e(Cn, "width", "107"), e(Cn, "height", "27"), e(Cn, "x", "515"), e(Cn, "y", "713.4"), e(Cn, "fill", "url(#aD)"), e(Cn, "rx", "4"), e(Cn, "ry", "4"), e(Ql, "fill", "url(#aE)"), e(Ql, "d", "M519 1122a7 7 0 0 0-7 7v20a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-19a4 4 0 0 1 4-4h100a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6Z"), e(Ql, "transform", "translate(0 -411.6)"), e(k0, "transform", "translate(-425 -65)"), e(k0, "class", "cp-button"), e(k0, "data-cp", "KEYCODE_SHIFT"), e(Ge, "width", "116"), e(Ge, "height", "36"), e(Ge, "x", "511"), e(Ge, "y", "709.4"), e(Ge, "fill", "url(#aF)"), e(Ge, "stroke", "var(--btn-border-stroke)"), e(Ge, "stroke-linecap", "round"), e(Ge, "stroke-linejoin", "round"), e(Ge, "stroke-width", "2"), e(Ge, "rx", "8"), e(Ge, "ry", "8"), e(Mn, "width", "107"), e(Mn, "height", "27"), e(Mn, "x", "515"), e(Mn, "y", "713.4"), e(Mn, "fill", "url(#aG)"), e(Mn, "rx", "4"), e(Mn, "ry", "4"), e(Il, "fill", "url(#aH)"), e(Il, "d", "M519 1122a7 7 0 0 0-7 7v20a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-19a4 4 0 0 1 4-4h100a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6Z"), e(Il, "transform", "translate(0 -411.6)"), e(_0, "transform", "translate(-65 -113)"), e(_0, "class", "cp-button"), e(_0, "data-cp", "KEYCODE_BACKSPACE"), e(Ce, "width", "116"), e(Ce, "height", "36"), e(Ce, "x", "511"), e(Ce, "y", "709.4"), e(Ce, "fill", "url(#aI)"), e(Ce, "stroke", "var(--btn-border-stroke)"), e(Ce, "stroke-linecap", "round"), e(Ce, "stroke-linejoin", "round"), e(Ce, "stroke-width", "2"), e(Ce, "rx", "8"), e(Ce, "ry", "8"), e(Un, "width", "107"), e(Un, "height", "27"), e(Un, "x", "515"), e(Un, "y", "713.4"), e(Un, "fill", "url(#aJ)"), e(Un, "rx", "4"), e(Un, "ry", "4"), e(Vl, "fill", "url(#aK)"), e(Vl, "d", "M519 1122a7 7 0 0 0-7 7v20a7 7 0 0 0 7 7h4.3l1.3-4H519a4 4 0 0 1-4-4v-19a4 4 0 0 1 4-4h100a4 4 0 0 1 3.5 2l3-.4a7 7 0 0 0-6.5-4.6Z"), e(Vl, "transform", "translate(0 -411.6)"), e(q0, "transform", "translate(-65 -65)"), e(q0, "class", "cp-button"), e(q0, "data-cp", "KEYCODE_CLEAR"), e(P2, "fill", "url(#aL)"), e(P2, "d", "M560 589.4s10 4.4 10 10v77a10 10 0 0 1-10 10H365.7v12H560c13.2 0 22-9.3 22-28v-70c0-12.2-22-22-22-22z"), e(j2, "fill", "url(#aM)"), e(j2, "d", "M66 618.4v58a22 22 0 0 0 22 22h472v-12H87a10 10 0 0 1-10-10v-58z"), e(T2, "fill", "url(#aN)"), e(T2, "d", "M570 614.4v62a10 10 0 0 1-10 10h-57.9v12H560a22 22 0 0 0 22-22v-62z"), e($n, "width", "204"), e($n, "height", "116"), e($n, "x", "221"), e($n, "y", "580.4"), e($n, "fill", "url(#aO)"), e($n, "rx", "25"), e($n, "ry", "58"), e(zn, "width", "200"), e(zn, "height", "112"), e(zn, "x", "223"), e(zn, "y", "582.4"), e(zn, "fill", "url(#aP)"), e(zn, "rx", "23"), e(zn, "ry", "55.9"), e(On, "width", "185"), e(On, "height", "98"), e(On, "x", "231"), e(On, "y", "589.4"), e(On, "fill", "url(#aQ)"), e(On, "rx", "16"), e(On, "ry", "47.5"), e(En, "class", "cp-button cp-button-arrow"), e(En, "data-cp", "KEYCODE_UP"), e(En, "fill", "#7f7f7f"), e(En, "stroke", "url(#aR)"), e(En, "stroke-linecap", "round"), e(En, "stroke-linejoin", "round"), e(En, "d", "M330.2 611.5c-.4.8-5.3.9-6.2.9-.9 0-5.8 0-6.2-.9-.5-.7 2-5 2.4-5.8.4-.7 3-5 3.8-5 .9 0 3.4 4.3 3.8 5 .5.8 2.9 5 2.4 5.8z"), e(Xe, "width", "104"), e(Xe, "height", "12"), e(Xe, "x", "272"), e(Xe, "y", "632.4"), e(Xe, "fill", "url(#aS)"), e(Xe, "stroke", "url(#aT)"), e(Xe, "stroke-linecap", "round"), e(Xe, "stroke-linejoin", "round"), e(Xe, "rx", "2"), e(Xe, "ry", "2"), e(ht, "class", "cp-button cp-button-arrow"), e(ht, "data-cp", "KEYCODE_DOWN"), e(ht, "fill", "#7f7f7f"), e(ht, "stroke", "url(#aU)"), e(ht, "stroke-linecap", "round"), e(ht, "stroke-linejoin", "round"), e(ht, "d", "M-317.8-665.2c-.4.8-5.3.8-6.2.8-.9 0-5.8 0-6.2-.8-.5-.7 2-5 2.4-5.8.4-.8 3-5 3.8-5 .9 0 3.4 4.2 3.8 5 .5.8 2.9 5 2.4 5.8z"), e(ht, "transform", "scale(-1)"), e(pt, "class", "cp-button cp-button-arrow"), e(pt, "data-cp", "KEYCODE_LEFT"), e(pt, "fill", "#7f7f7f"), e(pt, "stroke", "url(#aV)"), e(pt, "stroke-linecap", "round"), e(pt, "stroke-linejoin", "round"), e(pt, "d", "M265.2 641.5c-.4.8-5.3.9-6.2.9-.9 0-5.8 0-6.2-.9-.5-.7 2-5 2.4-5.8.4-.7 3-5 3.8-5 .9 0 3.4 4.3 3.8 5 .5.8 2.9 5 2.4 5.8z"), e(pt, "transform", "rotate(-90 255.8 641.5)"), e(ut, "class", "cp-button cp-button-arrow"), e(ut, "data-cp", "KEYCODE_RIGHT"), e(ut, "fill", "#7f7f7f"), e(ut, "stroke", "url(#aW)"), e(ut, "stroke-linecap", "round"), e(ut, "stroke-linejoin", "round"), e(ut, "d", "M265.2 641.5c-.4.8-5.3.9-6.2.9-.9 0-5.8 0-6.2-.9-.5-.7 2-5 2.4-5.8.4-.7 3-5 3.8-5 .9 0 3.4 4.3 3.8 5 .5.8 2.9 5 2.4 5.8z"), e(ut, "transform", "matrix(0 -1 -1 0 1033.7 897.4)"), e(Kl, "fill", "url(#aX)"), e(Kl, "d", "m245 1098.7-2.5 6.7c1.1.4 2.3.6 3.5.6h154c2 0 3.8-.6 5.6-1.7l-4-5.6c-.5.2-1 .3-1.6.3H247l-2-.3z"), e(Kl, "transform", "translate(0 -411.6)"), e(Me, "width", "102"), e(Me, "height", "44"), e(Me, "x", "511"), e(Me, "y", "709.4"), e(Me, "fill", "url(#aY)"), e(Me, "stroke", "var(--btn-border-stroke)"), e(Me, "stroke-linecap", "round"), e(Me, "stroke-linejoin", "round"), e(Me, "stroke-width", "2"), e(Me, "rx", "8"), e(Me, "ry", "8"), e(Bn, "width", "94"), e(Bn, "height", "35"), e(Bn, "x", "515"), e(Bn, "y", "713.4"), e(Bn, "fill", "url(#aZ)"), e(Bn, "rx", "4"), e(Bn, "ry", "4"), e(rr, "transform", "translate(-117 216)"), e(rr, "class", "cp-button"), e(rr, "data-cp", "KEYCODE_EXP"), e(Ue, "width", "102"), e(Ue, "height", "44"), e(Ue, "x", "511"), e(Ue, "y", "709.4"), e(Ue, "fill", "url(#ba)"), e(Ue, "stroke", "var(--btn-border-stroke)"), e(Ue, "stroke-linecap", "round"), e(Ue, "stroke-linejoin", "round"), e(Ue, "stroke-width", "2"), e(Ue, "rx", "8"), e(Ue, "ry", "8"), e(Hn, "width", "94"), e(Hn, "height", "35"), e(Hn, "x", "515"), e(Hn, "y", "713.4"), e(Hn, "fill", "url(#bb)"), e(Hn, "rx", "4"), e(Hn, "ry", "4"), e(lr, "transform", "translate(-117 162)"), e(lr, "class", "cp-button"), e(lr, "data-cp", "KEYCODE_3"), e($e, "width", "102"), e($e, "height", "44"), e($e, "x", "511"), e($e, "y", "709.4"), e($e, "fill", "url(#bc)"), e($e, "stroke", "var(--btn-border-stroke)"), e($e, "stroke-linecap", "round"), e($e, "stroke-linejoin", "round"), e($e, "stroke-width", "2"), e($e, "rx", "8"), e($e, "ry", "8"), e(Pn, "width", "94"), e(Pn, "height", "35"), e(Pn, "x", "515"), e(Pn, "y", "713.4"), e(Pn, "fill", "url(#bd)"), e(Pn, "rx", "4"), e(Pn, "ry", "4"), e(ir, "transform", "translate(-117 108)"), e(ir, "class", "cp-button"), e(ir, "data-cp", "KEYCODE_6"), e(ze, "width", "102"), e(ze, "height", "44"), e(ze, "x", "511"), e(ze, "y", "709.4"), e(ze, "fill", "url(#be)"), e(ze, "stroke", "var(--btn-border-stroke)"), e(ze, "stroke-linecap", "round"), e(ze, "stroke-linejoin", "round"), e(ze, "stroke-width", "2"), e(ze, "rx", "8"), e(ze, "ry", "8"), e(jn, "width", "94"), e(jn, "height", "35"), e(jn, "x", "515"), e(jn, "y", "713.4"), e(jn, "fill", "url(#bf)"), e(jn, "rx", "4"), e(jn, "ry", "4"), e(ar, "transform", "translate(-117 54)"), e(ar, "class", "cp-button"), e(ar, "data-cp", "KEYCODE_9"), e(Oe, "width", "102"), e(Oe, "height", "44"), e(Oe, "x", "511"), e(Oe, "y", "709.4"), e(Oe, "fill", "url(#bg)"), e(Oe, "stroke", "var(--btn-border-stroke)"), e(Oe, "stroke-linecap", "round"), e(Oe, "stroke-linejoin", "round"), e(Oe, "stroke-width", "2"), e(Oe, "rx", "8"), e(Oe, "ry", "8"), e(Tn, "width", "94"), e(Tn, "height", "35"), e(Tn, "x", "515"), e(Tn, "y", "713.4"), e(Tn, "fill", "url(#bh)"), e(Tn, "rx", "4"), e(Tn, "ry", "4"), e(sr, "transform", "translate(-238 216)"), e(sr, "class", "cp-button"), e(sr, "data-cp", "KEYCODE_DOT"), e(Ee, "width", "102"), e(Ee, "height", "44"), e(Ee, "x", "511"), e(Ee, "y", "709.4"), e(Ee, "fill", "url(#bi)"), e(Ee, "stroke", "var(--btn-border-stroke)"), e(Ee, "stroke-linecap", "round"), e(Ee, "stroke-linejoin", "round"), e(Ee, "stroke-width", "2"), e(Ee, "rx", "8"), e(Ee, "ry", "8"), e(Dn, "width", "94"), e(Dn, "height", "35"), e(Dn, "x", "515"), e(Dn, "y", "713.4"), e(Dn, "fill", "url(#bj)"), e(Dn, "rx", "4"), e(Dn, "ry", "4"), e(or, "transform", "translate(-238 162)"), e(or, "class", "cp-button"), e(or, "data-cp", "KEYCODE_2"), e(Be, "width", "102"), e(Be, "height", "44"), e(Be, "x", "511"), e(Be, "y", "709.4"), e(Be, "fill", "url(#bk)"), e(Be, "stroke", "var(--btn-border-stroke)"), e(Be, "stroke-linecap", "round"), e(Be, "stroke-linejoin", "round"), e(Be, "stroke-width", "2"), e(Be, "rx", "8"), e(Be, "ry", "8"), e(Fn, "width", "94"), e(Fn, "height", "35"), e(Fn, "x", "515"), e(Fn, "y", "713.4"), e(Fn, "fill", "url(#bl)"), e(Fn, "rx", "4"), e(Fn, "ry", "4"), e(dr, "transform", "translate(-238 108)"), e(dr, "class", "cp-button"), e(dr, "data-cp", "KEYCODE_5"), e(He, "width", "102"), e(He, "height", "44"), e(He, "x", "511"), e(He, "y", "709.4"), e(He, "fill", "url(#bm)"), e(He, "stroke", "var(--btn-border-stroke)"), e(He, "stroke-linecap", "round"), e(He, "stroke-linejoin", "round"), e(He, "stroke-width", "2"), e(He, "rx", "8"), e(He, "ry", "8"), e(An, "width", "94"), e(An, "height", "35"), e(An, "x", "515"), e(An, "y", "713.4"), e(An, "fill", "url(#bn)"), e(An, "rx", "4"), e(An, "ry", "4"), e(cr, "transform", "translate(-238 54)"), e(cr, "class", "cp-button"), e(cr, "data-cp", "KEYCODE_8"), e(mt, "width", "76"), e(mt, "height", "44"), e(mt, "x", "511"), e(mt, "y", "1085.4"), e(mt, "fill", "#15d81e"), e(mt, "fill-opacity", ".2"), e(mt, "rx", "8"), e(mt, "ry", "8"), e(Pe, "width", "102"), e(Pe, "height", "44"), e(Pe, "x", "511"), e(Pe, "y", "709.4"), e(Pe, "fill", "url(#bo)"), e(Pe, "stroke", "var(--btn-border-stroke)"), e(Pe, "stroke-linecap", "round"), e(Pe, "stroke-linejoin", "round"), e(Pe, "stroke-width", "2"), e(Pe, "rx", "8"), e(Pe, "ry", "8"), e(Ln, "width", "94"), e(Ln, "height", "35"), e(Ln, "x", "515"), e(Ln, "y", "713.4"), e(Ln, "fill", "url(#bp)"), e(Ln, "rx", "4"), e(Ln, "ry", "4"), e(fr, "transform", "translate(-359 216)"), e(fr, "class", "cp-button"), e(fr, "data-cp", "KEYCODE_0"), e(je, "width", "102"), e(je, "height", "44"), e(je, "x", "511"), e(je, "y", "709.4"), e(je, "fill", "url(#bq)"), e(je, "stroke", "var(--btn-border-stroke)"), e(je, "stroke-linecap", "round"), e(je, "stroke-linejoin", "round"), e(je, "stroke-width", "2"), e(je, "rx", "8"), e(je, "ry", "8"), e(Qn, "width", "94"), e(Qn, "height", "35"), e(Qn, "x", "515"), e(Qn, "y", "713.4"), e(Qn, "fill", "url(#br)"), e(Qn, "rx", "4"), e(Qn, "ry", "4"), e(hr, "transform", "translate(-359 162)"), e(hr, "class", "cp-button"), e(hr, "data-cp", "KEYCODE_1"), e(Te, "width", "102"), e(Te, "height", "44"), e(Te, "x", "511"), e(Te, "y", "709.4"), e(Te, "fill", "url(#bs)"), e(Te, "stroke", "var(--btn-border-stroke)"), e(Te, "stroke-linecap", "round"), e(Te, "stroke-linejoin", "round"), e(Te, "stroke-width", "2"), e(Te, "rx", "8"), e(Te, "ry", "8"), e(In, "width", "94"), e(In, "height", "35"), e(In, "x", "515"), e(In, "y", "713.4"), e(In, "fill", "url(#bt)"), e(In, "rx", "4"), e(In, "ry", "4"), e(pr, "transform", "translate(-359 108)"), e(pr, "class", "cp-button"), e(pr, "data-cp", "KEYCODE_4"), e(De, "width", "102"), e(De, "height", "44"), e(De, "x", "511"), e(De, "y", "709.4"), e(De, "fill", "url(#bu)"), e(De, "stroke", "var(--btn-border-stroke)"), e(De, "stroke-linecap", "round"), e(De, "stroke-linejoin", "round"), e(De, "stroke-width", "2"), e(De, "rx", "8"), e(De, "ry", "8"), e(Vn, "width", "94"), e(Vn, "height", "35"), e(Vn, "x", "515"), e(Vn, "y", "713.4"), e(Vn, "fill", "url(#bv)"), e(Vn, "rx", "4"), e(Vn, "ry", "4"), e(ur, "transform", "translate(-359 54)"), e(ur, "class", "cp-button"), e(ur, "data-cp", "KEYCODE_7"), e(S0, "fill", "#3d3d3d"), e(S0, "d", "M201.5 795.5h-2.4q-.7 0-.3-.6l7.5-18.7h-8.8q-.6 0-.6-.7v-1.9q0-.6.6-.6h11.8q.7 0 .7.6v2.2q0 .5-.4 1.5l-7.1 17.7q-.2.5-1 .5z"), e(S0, "font-family", "Rajdhani"), e(S0, "font-size", "35"), e(S0, "font-weight", "600"), e(S0, "letter-spacing", "0"), e(Sr, "word-spacing", "0"), e(Sr, "class", "cp-button-label"), E(Sr, "line-height", "125%"), e(Kn, "fill", "#fff"), e(Kn, "d", "M199.3 723.3q-3.8 4-8 8l1.9 4.3 1.1 2.5q.4.8.8 1.2l.7.5 1.1.3-.2 1h-4.9l-2.7-8-1.2 1.2-1.5 1.6-1 1.3-.4.9-.1.8q0 .5.3.8.3.3 1 .4l-.3 1h-5.5l-.4-1q4.3-4.6 8.4-8.5l-1.8-4.3-1-2q-.3-.8-.6-1.1l-.8-.6-1.2-.3.2-1h5l2.5 7.4 1.8-1.8 1.2-1.5q.4-.5.5-1 .2-.4.2-.9 0-1-1.3-1.2l.2-1h5.6l.4 1z"), e(Kn, "font-family", "Cambria"), e(Kn, "font-size", "40"), e(Kn, "font-style", "italic"), e(Kn, "font-weight", "400"), e(Kn, "letter-spacing", "0"), e(Gr, "word-spacing", "0"), e(Gr, "class", "cp-button-label"), E(Gr, "line-height", "125%"), e(G0, "x", "1714.4"), e(G0, "y", "880.6"), e(G0, "font-family", "Lucida Calligraphy"), e(G0, "font-style", "italic"), e(G0, "font-weight", "400"), e(Fe, "xml:space", "preserve"), e(Fe, "x", "1714.4"), e(Fe, "y", "880.6"), e(Fe, "font-family", "Script MT Bold"), e(Fe, "font-size", "40"), e(Fe, "font-weight", "700"), e(Fe, "letter-spacing", "0"), e(Fe, "word-spacing", "0"), E(Fe, "line-height", "125%"), e(C0, "fill", "#3d3d3d"), e(C0, "d", "M322.2 792.6h2.7q1.3 0 2-.6.6-.6.6-2v-1.8q0-2.6-2.6-2.6h-2.7q-2.5 0-2.5 2.6v1.9q0 1.3.6 1.9.6.6 1.9.6zm0-9.8h2.7q2.6 0 2.6-2.6v-1.7q0-1.3-.7-2-.6-.5-1.9-.5h-2.7q-1.3 0-2 .6-.5.6-.5 1.9v1.7q0 2.6 2.5 2.6zm3.2 12.7h-3.7q-2.6 0-4-1.3t-1.4-3.9v-1.9q0-3.2 2.4-4.2-2.4-1-2.4-4.2v-1.8q0-2.5 1.4-3.8 1.4-1.4 4-1.4h3.7q2.6 0 4 1.4 1.5 1.3 1.5 3.8v1.8q0 1.6-.7 2.7-.6 1.1-1.7 1.5 2.4 1 2.4 4.3v1.8q0 2.6-1.5 3.9-1.4 1.3-4 1.3z"), e(C0, "font-family", "Rajdhani"), e(C0, "font-size", "35"), e(C0, "font-weight", "600"), e(C0, "letter-spacing", "0"), e(Cr, "word-spacing", "0"), e(Cr, "class", "cp-button-label"), E(Cr, "line-height", "125%"), e(M0, "fill", "#3d3d3d"), e(M0, "d", "M441.9 784.1h4.9v-5.5q0-2.6-2.6-2.6H442q-2.5 0-2.5 2.6v3q0 2.5 2.5 2.5zm2.8 11.4h-7q-.7 0-.7-.6v-1.8q0-.5.6-.5h6.6q2.6 0 2.6-2.6v-3h-5.4q-2.6 0-4-1.4-1.5-1.4-1.5-4v-3.3q0-2.5 1.4-4 1.5-1.4 4-1.4h3.4q2.6 0 4 1.5 1.5 1.4 1.5 4V790q0 2.6-1.4 4-1.5 1.4-4 1.4z"), e(M0, "font-family", "Rajdhani"), e(M0, "font-size", "35"), e(M0, "font-weight", "600"), e(M0, "letter-spacing", "0"), e(Mr, "word-spacing", "0"), e(Mr, "class", "cp-button-label"), E(Mr, "line-height", "125%"), e(U0, "fill", "#3d3d3d"), e(U0, "d", "M204 842.2V830l-7 12.3h7zm2.6 7.3h-2q-.7 0-.7-.6v-3.6h-9.2q-1 0-1-1v-1.1q0-.8.3-1.4l7.8-13.9.5-.7q.3-.2.8-.2h3q1 0 1 1v14.2h2.6q.6 0 .6.6v1.8q0 .7-.6.7h-2.5v3.6q0 .6-.6.6z"), e(U0, "font-family", "Rajdhani"), e(U0, "font-size", "35"), e(U0, "font-weight", "600"), e(U0, "letter-spacing", "0"), e(Ur, "word-spacing", "0"), e(Ur, "class", "cp-button-label"), E(Ur, "line-height", "125%"), e($0, "fill", "#3d3d3d"), e($0, "d", "M323.9 837.6h-2.2q-.6 0-1.1.3-.4.2-.6.5-.3.8-.9.8h-2.2q-.6 0-.6-.6v-11q0-.6.6-.6h11.9q.6 0 .6.6v2q0 .6-.6.6h-9v6.4q.5-1.7 2.9-1.7h2q2.6 0 3.9 1.3 1.3 1.3 1.3 3.8v4.1q0 2.6-1.4 4-1.5 1.4-4 1.4h-3q-2.6 0-4-1.4t-1.4-4v-1q0-.5.6-.5h2.2q.6 0 .6.6v.9q0 2.5 2.5 2.5h2q2.6 0 2.6-2.5v-3.6q0-1.5-.6-2.2-.6-.7-2.1-.7z"), e($0, "font-family", "Rajdhani"), e($0, "font-size", "35"), e($0, "font-weight", "600"), e($0, "letter-spacing", "0"), e($r, "word-spacing", "0"), e($r, "class", "cp-button-label"), E($r, "line-height", "125%"), e(z0, "fill", "#3d3d3d"), e(z0, "d", "M442 846.6h2.5q2.5 0 2.5-2.6v-2.8q0-2.6-2.5-2.6h-5v5.4q0 2.6 2.6 2.6zm3 3h-3.4q-2.6 0-4-1.5-1.5-1.4-1.5-4v-11.7q0-2.5 1.5-4 1.4-1.4 4-1.4h7q.5 0 .5.6v1.8q0 .6-.6.6h-6.4q-2.5 0-2.5 2.6v3h5.3q2.6 0 4 1.4 1.5 1.4 1.5 4v3.1q0 2.6-1.4 4-1.5 1.4-4 1.4z"), e(z0, "font-family", "Rajdhani"), e(z0, "font-size", "35"), e(z0, "font-weight", "600"), e(z0, "letter-spacing", "0"), e(zr, "word-spacing", "0"), e(zr, "class", "cp-button-label"), E(zr, "line-height", "125%"), e(O0, "fill", "#3d3d3d"), e(O0, "d", "M197.2 886.5v-2q0-.6.5-.9l3.6-2.2q.7-.4 1.2-.4h2q.7 0 .7.6V903q0 .6-.6.6h-2.3q-.6 0-.6-.6v-18.2l-3.8 2.2q-.7.3-.7-.4z"), e(O0, "font-family", "Rajdhani"), e(O0, "font-size", "35"), e(O0, "font-weight", "600"), e(O0, "letter-spacing", "0"), e(Or, "word-spacing", "0"), e(Or, "class", "cp-button-label"), E(Or, "line-height", "125%"), e(E0, "fill", "#3d3d3d"), e(E0, "d", "M316 903v-3.3q0-2.2 2-3.6l6.5-5.4q1.7-1.3 1.7-3.1v-1.2q0-2.5-2.6-2.5h-1.7q-1.4 0-2 .6-.6.6-.6 2v1.2q0 .7-.6.7h-2.2q-.6 0-.6-.7v-1.3q0-2.6 1.4-4 1.5-1.4 4-1.4h2.8q2.6 0 4 1.4t1.4 4v1.4q0 2.7-2.1 4.5l-6.7 5.5q-.8.7-.8 1.6v1h9q.7 0 .7.7v1.8q0 .6-.6.6h-12.3q-.6 0-.6-.6z"), e(E0, "font-family", "Rajdhani"), e(E0, "font-size", "35"), e(E0, "font-weight", "600"), e(E0, "letter-spacing", "0"), e(Er, "word-spacing", "0"), e(Er, "class", "cp-button-label"), E(Er, "line-height", "125%"), e(B0, "fill", "#3d3d3d"), e(B0, "d", "M442 890.8h1.9q2.6 0 2.6-2.5v-1.9q0-2.5-2.6-2.5h-2q-1.4 0-2 .6-.6.6-.6 2v1q0 .6-.6.6h-2.2q-.6 0-.6-.6v-1.1q0-2.6 1.4-4t4-1.4h3q2.7 0 4.1 1.4 1.4 1.4 1.4 4v1.9q0 3-2.8 4 2.8.6 2.8 3.8v2q0 2.6-1.4 4t-4 1.4h-3q-2.7 0-4-1.4-1.5-1.4-1.5-4V897q0-.6.6-.6h2.2q.6 0 .6.6v1.2q0 1.3.6 2 .6.5 2 .5h2q2.6 0 2.6-2.5v-2q0-2.5-2.6-2.5h-2q-.5 0-.5-.6v-1.5q0-.7.6-.7z"), e(B0, "font-family", "Rajdhani"), e(B0, "font-size", "35"), e(B0, "font-weight", "600"), e(B0, "letter-spacing", "0"), e(Br, "word-spacing", "0"), e(Br, "class", "cp-button-label"), E(Br, "line-height", "125%"), e(H0, "fill", "#3d3d3d"), e(H0, "d", "M204.2 954.6h2.5q2.6 0 2.6-2.6v-11.4q0-2.6-2.6-2.6h-2.5q-2.5 0-2.5 2.6V952q0 2.6 2.5 2.6zm3 3h-3.5q-2.6 0-4-1.5-1.4-1.4-1.4-4v-11.7q0-2.5 1.4-4 1.4-1.4 4-1.4h3.5q2.6 0 4 1.5 1.4 1.4 1.4 4V952q0 2.6-1.4 4t-4 1.4z"), e(H0, "font-family", "Rajdhani"), e(H0, "font-size", "35"), e(H0, "font-weight", "600"), e(H0, "letter-spacing", "0"), e(Hr, "word-spacing", "0"), e(Hr, "class", "cp-button-label"), E(Hr, "line-height", "125%"), e(Nn, "fill", "#3d3d3d"), e(Nn, "d", "M387 1061.8h-10q-.5 0-.5-.5V1042q0-.5.5-.5h10q.6 0 .6.5v1.6q0 .6-.5.6h-7.2q-.4 0-.4.3v5.3q0 .3.4.3h6q.6 0 .6.5v1.6q0 .6-.5.6h-6.1q-.4 0-.4.3v5.6q0 .3.4.3h7.2q.5 0 .5.6v1.6q0 .5-.5.5zm5.9 0h-2.4l-.3-.1q-.1-.2 0-.4l5.2-10-5-9.2v-.3q.1-.2.4-.2h2.2q.6 0 .9.5l3.6 7.3h.1l3.7-7.3q.2-.5.8-.5h2.3q.3 0 .3.2.2.2 0 .4l-5 9.1 5.2 10q.2.2 0 .4l-.3.1h-2.4q-.5 0-.7-.5l-3.9-7.7-4 7.7q-.2.5-.7.5zm17.8 0h-2q-.6 0-.6-.5V1042q0-.5.6-.5h7.5q2.3 0 3.6 1.3 1.2 1.2 1.2 3.6v3.2q0 2.3-1.2 3.6-1.3 1.3-3.6 1.3h-4.6q-.4 0-.4.3v6.4q0 .5-.5.5zm.8-9.9h4.2q2.3 0 2.3-2.3v-3q0-2.3-2.3-2.3h-4.2q-.3 0-.3.3v7q0 .3.3.3z"), e(Nn, "font-family", "Rajdhani"), e(Nn, "font-size", "31.5"), e(Nn, "font-weight", "600"), e(Nn, "letter-spacing", "0"), e(Nn, "transform", "scale(1.1 .9)"), e(Pr, "word-spacing", "0"), e(Pr, "class", "cp-button-label"), E(Pr, "line-height", "125%"), e(Nl, "fill", "#3d3d3d"), e(Nl, "d", "M327 946.4a4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4 4 4 0 0 1 4 4z"), e(Nl, "class", "cp-button-label"), e(rt, "fill", "#fff"), e(rt, "d", "m273.8 721.7-.3 1.7h.5c.4 0 .6.2.7.2l.3.4.2 1.5 1.4 10.6-1.4 1.8-1.1 1.2-.9.6-.5.3h-1l-.2-.5v-.5h-2l-.8 3.5.4.2 1 .2a5.6 5.6 0 0 0 2.5-.1c.5-.1 1-.4 1.5-.7a9 9 0 0 0 1.6-1.3 109.4 109.4 0 0 0 6.7-8.7l3-4.7 2-4.3v-.2l-.6-1.2h-4.5l-.3 1.7h.6c.4 0 .6.2.7.2v.6c0 1.4-1.4 4.3-4 8l-1-10.5h-4.6z"), e(rt, "font-family", "Script MT Bold"), e(rt, "font-size", "29.8"), e(rt, "font-weight", "700"), e(rt, "letter-spacing", "0"), e(rt, "word-spacing", "0"), e(rt, "class", "cp-button-label"), E(rt, "line-height", "125%"), e(Yn, "fill", "#fff"), e(Yn, "d", "m375.3 734.5-1.1 5.5H360l-.4-1 10.7-12.2 3.3-3.7v-.2H369q-1 0-1.5.2-.5.1-1 .5l-1 1q-.5.6-1.2 1.9h-1.7l1.1-5.1h14l.3 1-14 16h6.3q.6-.2 1.1-.6.5-.3 1-1t1.2-2.3h1.7z"), e(Yn, "font-family", "Cambria"), e(Yn, "font-size", "40"), e(Yn, "font-style", "italic"), e(Yn, "font-weight", "400"), e(Yn, "letter-spacing", "0"), e(jr, "word-spacing", "0"), e(jr, "class", "cp-button-label"), E(jr, "line-height", "125%"), e(P0, "fill", "#fff"), e(P0, "d", "m102 795-2.6 2.5-1-1-1.3-1.3-2.6-2.6q-.6-1-.6-2v-10.8q0-1 .6-2l2.3-2.5 1.1-1 1.5-1.4 2.6 2.5-1.3 1.2-2.2 2.1q-1 1-1 1.2v10.6q0 .3 1.9 2l2.7 2.5z"), e(P0, "font-family", "Blender Pro"), e(P0, "font-size", "35"), e(P0, "font-weight", "700"), e(P0, "letter-spacing", "0"), e(Tr, "word-spacing", "0"), e(Tr, "class", "cp-button-label"), E(Tr, "line-height", "125%"), e(j0, "fill", "#fff"), e(j0, "d", "M102 844.6q0 1.1-.6 2-.6.8-2.6 2.6l-2.4 2.3-2.6-2.6q1-.7 2.7-2.3 1.8-1.8 1.8-2.1v-10.6q0-.3-1-1.2-.8-1-2.1-2l-1.3-1.3 2.5-2.5 1 1 1.7 1.4q1.6 1.6 2.3 2.6.5.8.5 2v10.7z"), e(j0, "font-family", "Blender Pro"), e(j0, "font-size", "35"), e(j0, "font-weight", "700"), e(j0, "letter-spacing", "0"), e(Dr, "word-spacing", "0"), e(Dr, "class", "cp-button-label"), E(Dr, "line-height", "125%"), e(T0, "fill", "#fff"), e(T0, "d", "M108 728.7H85.6V723H108v5.6zm0 9H85.6V732H108v5.6z"), e(T0, "font-family", "Blender Pro"), e(T0, "font-size", "60"), e(T0, "font-weight", "700"), e(T0, "letter-spacing", "0"), e(Fr, "word-spacing", "0"), e(Fr, "class", "cp-button-label"), E(Fr, "line-height", "125%"), e(Wn, "fill", "#fff"), e(Wn, "d", "M98 1300.2c-1 0-2 .2-2.6.8a4 4 0 0 0-.9 2.7c0 1 .2 1.9.8 2.5.4.4 1 .7 1.7.8-.3.7-.7 1.3-1.5 1.8l-.2.1v3.1l.6-.2a7.8 7.8 0 0 0 4.2-2.7 8 8 0 0 0 1.4-4.9c0-1.2-.3-2.3-.9-3-.6-.7-1.5-1-2.6-1z"), e(Wn, "font-family", "Britannic Bold"), e(Wn, "font-size", "35"), e(Wn, "font-weight", "400"), e(Wn, "letter-spacing", "0"), e(Wn, "transform", "translate(0 -411.6)"), e(Ar, "word-spacing", "0"), e(Ar, "class", "cp-button-label"), E(Ar, "line-height", "125%"), e(Zn, "fill", "#fff"), e(Zn, "d", "m808.1 955-2.6 2.5-1.1-1-1.3-1.3q-2-1.9-2.5-2.6-.6-1-.6-2v-10.8q0-1 .6-2 .6-.9 2.3-2.5l1-1 1.6-1.4 2.6 2.5-1.4 1.2-2.1 2.1q-1 1-1 1.2v10.6q0 .3 1.8 2l2.7 2.5zm17.4-8h-13.6v-3.3h13.6v3.3zm10.6 3.6q0 1.1-.5 2-.6.8-2.5 2.6l-2.5 2.3-2.5-2.6 2.6-2.3q1.8-1.8 1.8-2.1v-10.6q0-.3-1-1.2-.8-1-2-2l-1.4-1.3 2.5-2.5 1.1 1 1.6 1.4q1.6 1.6 2.3 2.6.5.8.5 2v10.7z"), e(Zn, "font-family", "Blender Pro"), e(Zn, "font-size", "35"), e(Zn, "font-weight", "700"), e(Zn, "letter-spacing", "0"), e(Zn, "transform", "translate(-720)"), e(Lr, "word-spacing", "0"), e(Lr, "class", "cp-button-label"), E(Lr, "line-height", "125%"), e(Xn, "fill", "#fff"), e(Xn, "d", "M482.4 1061.8h-10q-.6 0-.6-.5V1042q0-.5.6-.5h10q.5 0 .5.5v1.6q0 .6-.5.6h-7.1q-.4 0-.4.3v5.3q0 .3.4.3h6q.6 0 .6.5v1.6q0 .6-.6.6h-6q-.4 0-.4.3v5.6q0 .3.4.3h7.1q.5 0 .5.6v1.6q0 .5-.5.5zm5.9 0h-2.4l-.4-.1v-.4l5.3-10-5-9.2v-.3q0-.2.3-.2h2.3q.6 0 .9.5l3.6 7.3h.1l3.6-7.3q.3-.5.8-.5h2.4q.2 0 .3.2.1.2 0 .4l-5 9.1 5.2 10q.1.2 0 .4l-.3.1h-2.4q-.5 0-.7-.5l-3.9-7.7h-.1l-3.9 7.7q-.2.5-.7.5zm25.8 0h-10q-.6 0-.6-.5V1042q0-.5.5-.5h10.1q.5 0 .5.5v1.6q0 .6-.5.6H507q-.3 0-.3.3v5.3q0 .3.3.3h6.1q.6 0 .6.5v1.6q0 .6-.6.6h-6q-.4 0-.4.3v5.6q0 .3.3.3h7.2q.5 0 .5.6v1.6q0 .5-.5.5z"), e(Xn, "font-family", "Rajdhani"), e(Xn, "font-size", "31.5"), e(Xn, "font-weight", "600"), e(Xn, "letter-spacing", "0"), e(Xn, "transform", "scale(1.1 .9)"), e(Qr, "word-spacing", "0"), e(Qr, "class", "cp-button-label"), E(Qr, "line-height", "125%"), e(D0, "fill", "#fff"), e(D0, "d", "M552.6 889.9h8.5q1.2 0 1.2 1.2v2.5q0 1.2-1.2 1.2h-8.5v8.7q0 1.2-1.2 1.2h-2.7q-1.2 0-1.2-1.2v-8.7H539q-1.2 0-1.2-1.2v-2.5q0-1.2 1.2-1.2h8.6v-8.6q0-1.2 1.2-1.2h2.7q1.2 0 1.2 1.2v8.6z"), e(D0, "font-family", "Rajdhani"), e(D0, "font-size", "60"), e(D0, "font-weight", "600"), e(D0, "letter-spacing", "0"), e(Ir, "word-spacing", "0"), e(Ir, "class", "cp-button-label"), E(Ir, "line-height", "125%"), e(F0, "fill", "#fff"), e(F0, "d", "M559.3 840H539q-1 0-1-1v-1.3q0-1 1-1h20.3q1 0 1 1v1.3q0 1-1 1z"), e(F0, "font-family", "Rajdhani"), e(F0, "font-size", "60"), e(F0, "font-weight", "600"), e(F0, "letter-spacing", "0"), e(Vr, "word-spacing", "0"), e(Vr, "class", "cp-button-label"), E(Vr, "line-height", "125%"), e(A0, "fill", "#fff"), e(A0, "d", "m552.6 784 6.3 6.4q.8.7 0 1.6l-2 1.9q-.7.9-1.6 0l-6.3-6.3-6.3 6.4q-.9.8-1.6-.1l-2-2q-.8-.8 0-1.5l6.3-6.4-6.3-6.2q-.8-.9 0-1.7l2-2q.8-.8 1.6 0l6.3 6.3 6.3-6.2q.8-.9 1.6 0l2 2q.7.7 0 1.6l-6.3 6.2z"), e(A0, "font-family", "Rajdhani"), e(A0, "font-size", "60"), e(A0, "font-weight", "600"), e(A0, "letter-spacing", "0"), e(Kr, "word-spacing", "0"), e(Kr, "class", "cp-button-label"), E(Kr, "line-height", "125%"), e(L0, "fill", "#fff"), e(L0, "d", "M547 740.3v-3.2q0-1 1-1 h2q1.1 0 1.1 1v3.2q0 1-1 1h-2q-1.1 0-1.1-1zm11.1-7.9H540q-1.1 0-1.1-1v-2q0-1 1-1h18.2q1 0 1 1v2q0 1-1 1zm-11.1-8.8v-3.1q0-1.1 1-1.1h2q1.1 0 1.1 1v3.2q0 1-1 1h-2q-1.1 0-1.1-1z"), e(L0, "font-family", "Rajdhani"), e(L0, "font-size", "60"), e(L0, "font-weight", "600"), e(L0, "letter-spacing", "0"), e(Nr, "word-spacing", "0"), e(Nr, "class", "cp-button-label"), E(Nr, "line-height", "125%"), e(Q0, "fill", "#fff"), e(Q0, "d", "M450.5 738.4H447q-1.3 0-.7-1.1l7.4-14.2q.5-1 .9-1.2.4-.3 1.3-.3h4.2q.9 0 1.3.3t.9 1.2l7.4 14.2q.6 1-.7 1h-3.4q-1 0-1.4-1l-6.2-12-6.2 12q-.6 1-1.4 1z"), e(Q0, "font-family", "Rajdhani"), e(Q0, "font-size", "60"), e(Q0, "font-weight", "600"), e(Q0, "letter-spacing", "0"), e(Yr, "word-spacing", "0"), e(Yr, "class", "cp-button-label"), E(Yr, "line-height", "125%"), e(I0, "fill", "#fff"), e(I0, "d", "M101.6 619.1h-1.5q-.4 0-.4-.3v-12.2q0-.4.4-.4h1.5q.4 0 .4.4v6.3h.1l.6-1 4.5-5.3q.3-.4.8-.4h1.7q.5 0 .2.4l-4.6 5.3 5.2 6.8q.2.4-.3.4h-1.3q-.7 0-1-.3l-4-5.5-1.9 1.9v3.6q0 .3-.4.3zm19.4 0h-5.2q-1.7 0-2.7-.8-1-.8-1-2.3v-4q0-1.5 1-2.3 1-.8 2.7-.8h2q1.7 0 2.7.8 1 .8 1 2.3v2.5q0 .4-.5.4h-6.3q-.2 0-.2.2v.9q0 1.4 1.7 1.4h4.7q.4 0 .4.4v1q0 .3-.4.3zm-6.3-5.6h4.2q.3 0 .3-.2v-1.2q0-.8-.4-1.1-.4-.4-1.3-.4h-1.3q-1 0-1.3.4-.4.3-.4 1v1.3q0 .2.2.2zm10.7 8.9h-1.2q-.4 0-.4-.4v-1q0-.4.4-.4h.5q1.5 0 2-.5.6-.4 1-1.5h-1q-.4 0-.5-.4l-3.1-9q-.1-.3.3-.3h1.6q.3 0 .4.3l2.6 7.9 2.7-7.9q0-.3.4-.3h1.5q.5 0 .4.3l-3.2 9.7q-.6 1.7-1.5 2.6-1 .9-2.9.9zm12.1-5h3q1.7 0 1.7-1.5v-4q0-1.4-1.7-1.4h-1.3q-2 0-2 1.7v5q0 .2.3.2zm-2.5 1.4v-13.4q0-.4.4-.4h1.5q.4 0 .4.4v4.5q.7-1 2.5-1h1q1.7 0 2.7.7 1 .8 1 2.3v4.1q0 1.5-1 2.3-1 .8-2.7.8h-5.4q-.4 0-.4-.3zm17.7.3h-2.1q-1.7 0-2.7-.8-1-.8-1-2.3v-4q0-1.5 1-2.3 1-.8 2.7-.8h2q1.8 0 2.8.8 1 .8 1 2.3v4q0 1.5-1 2.3-1 .8-2.7.8zm-1.8-1.7h1.5q1.7 0 1.7-1.5v-3.8q0-1.5-1.7-1.5h-1.5q-.9 0-1.3.4-.4.3-.4 1v4q0 .7.4 1 .4.4 1.3.4zm12.5 1.7h-1q-1.7 0-2.6-.8-1-.8-1-2.3v-4q0-1.5 1-2.3 1-.8 2.7-.8h5.2q.5 0 .5.3v9.6q0 .3-.5.3h-1.4q-.4 0-.4-.3v-.8h-.1q-.6 1.1-2.4 1.1zm2.5-3.4v-5l-.3-.1h-2.8q-1.7 0-1.7 1.5v3.8q0 1.5 1.7 1.5h1.1q2 0 2-1.7zm7.1 3.4h-1.5q-.4 0-.4-.3v-9.6q0-.3.4-.3h1.5q.4 0 .4.3v.8q.3-.5 1-.8.6-.3 1.5-.3h.8q.4 0 .4.3v1q0 .5-.4.4h-1.4q-2 0-2 1.8v6.4q0 .3-.3.3zm10.5 0h-1.2q-1.7 0-2.6-.8-1-.8-1-2.3v-4q0-1.5 1-2.3.9-.8 2.6-.8h1.2q1.8 0 2.3 1h.1v-4.5q0-.4.4-.4h1.5q.4 0 .4.4v13.4q0 .3-.4.3h-1.5q-.4 0-.4-.3v-.8q-.6 1.1-2.4 1.1zm2.4-3.4v-3.4q0-1.7-2-1.7h-1.2q-1.6 0-1.6 1.5v3.8q0 1.5 1.6 1.5h1.3q2 0 2-1.7z"), e(I0, "font-family", "Rajdhani"), e(I0, "font-size", "25"), e(I0, "font-weight", "600"), e(I0, "letter-spacing", "0"), e(Wr, "word-spacing", "0"), e(Wr, "class", "cp-button-label"), E(Wr, "line-height", "125%"), e(Jn, "fill", "#42caf7"), e(Jn, "d", "M118.6 667.2v-.6q0-.4.4-.4h1.6q.4 0 .4.4v.4q0 1.1.5 1.6.4.4 1.5.4h1.7q1.1 0 1.6-.5t.5-1.6v-.5q0-.8-.7-1.3-.6-.5-1.5-.6l-2-.4-2-.6q-.8-.3-1.4-1.2-.6-.9-.6-2.3v-1q0-1.9 1-2.9t2.9-1h2.6q1.9 0 2.9 1t1 2.9v.5q0 .4-.4.4H127q-.4 0-.4-.4v-.3q0-1-.5-1.5-.4-.5-1.5-.5H123q-1 0-1.5.5t-.5 1.6v.8q0 1.1 1.6 1.5l1.6.3 1.8.4 1.6.7q.7.4 1.1 1.2.5.9.5 2v1q0 1.9-1 3-1.1 1-3 1h-2.7q-1.8 0-2.9-1-1-1.1-1-3zm15.7 3.9h-1.6q-.4 0-.4-.4V654q0-.4.4-.4h1.6q.4 0 .4.4v5.7h.1q.6-1.3 2.6-1.3h1q1.9 0 2.9 1t1 2.9v8.4q0 .4-.5.4h-1.6q-.4 0-.4-.4v-8.3q0-1.9-1.8-1.9h-1.2q-2 0-2 2.1v8.1q0 .4-.5.4zm11.1-14.8V654q0-.4.4-.4h1.6q.4 0 .4.4v2.3q0 .4-.4.4h-1.6q-.4 0-.4-.4zm0 14.4v-11.9q0-.4.4-.4h1.6q.4 0 .4.4v12.3h-2q-.4 0-.4-.4zm9.6-12.3h2q.5 0 .5.4v1.3q0 .4-.5.4h-2q-.3 0-.3.3v10q0 .3-.5.3h-1.6q-.4 0-.4-.4v-10q0-.2-.3-.2h-1.3q-.4 0-.4-.4v-1.6l.4-.1h1.3q.3 0 .3-.3v-.7q0-1.8 1-2.8 1-1 2.7-1h1.1q.5 0 .5.4v1.3q0 .4-.5.4h-.7q-.9 0-1.3.4-.3.5-.3 1.4v.6q0 .3.2.3zm4.8 2.1h-1.5v-1.8q0-.4.3-.4h1.2q.3 0 .3-.3v-2q0-.4.4-.4h1.6q.4 0 .4.4v2.2q0 .3.3.3h2.3q.5 0 .5.4v1.3q0 .4-.5.4h-2.3q-.3 0-.3.3v6.4q0 1.8 2 1.8h.9q.4 0 .4.4v1.3q0 .4-.4.4H164q-1.8 0-2.9-1-1-1-1-2.8v-6.5q0-.3-.3-.3z"), e(Jn, "font-family", "Rajdhani"), e(Jn, "font-size", "25"), e(Jn, "font-weight", "600"), e(Jn, "letter-spacing", "0"), E(Jn, "text-align", "center"), e(V0, "text-anchor", "middle"), e(V0, "word-spacing", "0"), e(V0, "class", "cp-button-label"), E(V0, "line-height", "125%"), E(V0, "text-align", "center"), e(e0, "fill", "#fff"), e(e0, "d", "M503.8 671.1H501q-1.8 0-2.9-1-1-1-1-2.8v-8.4q0-1.8 1-2.8 1-1 3-1h2.8q1.8 0 2.9 1 1 1 1 2.8v1.2q0 .5-.5.5h-1.5q-.5 0-.5-.5v-1q0-1.9-1.8-1.9h-2.1q-1.8 0-1.8 1.8v8.2q0 1.8 1.8 1.8h2.1q1.8 0 1.8-1.8V666q0-.5.5-.5h1.5q.5 0 .5.5v1.2q0 1.8-1 2.8-1 1-2.9 1zm8.8 0h-1.5q-.5 0-.5-.4V654q0-.4.5-.4h1.5q.5 0 .5.4v16.7q0 .4-.5.4zm12.8 0H520q-1.9 0-3-1-1-1-1-2.8v-5q0-1.9 1-2.9 1.1-1 3-1h2q1.9 0 2.9 1t1 2.9v3.1q0 .5-.4.5h-6.7q-.3 0-.3.2v1.1q0 1.8 1.8 1.8h5q.5 0 .5.5v1.2q0 .4-.4.4zm-6.6-6.9h4.4q.3 0 .3-.3v-1.6q0-.9-.4-1.3-.5-.5-1.4-.5h-1.4q-1 0-1.4.5-.4.4-.4 1.3v1.6q0 .3.3.3zm14.4 6.9h-1q-1.8 0-2.8-1-1-1-1-2.8v-5q0-1.9 1-2.9t2.9-1h5.6q.4 0 .4.4v12q0 .3-.4.3h-1.6q-.4 0-.4-.4v-.9h-.1q-.6 1.3-2.6 1.3zm2.7-4.2v-6.1q0-.3-.3-.3h-3q-1.8 0-1.8 1.9v4.8q0 1.8 1.8 1.8h1.2q2 0 2-2.1zm7.5 4.2h-1.6q-.4 0-.4-.4v-11.9q0-.4.4-.4h1.6q.4 0 .4.4v1h.1q.3-.7 1-1 .7-.4 1.6-.4h1q.3 0 .3.4v1.3q0 .5-.4.4H546q-2 0-2 2.3v8q0 .3-.5.3z"), e(e0, "font-family", "Rajdhani"), e(e0, "font-size", "25"), e(e0, "font-weight", "600"), e(e0, "letter-spacing", "0"), E(e0, "text-align", "center"), e(K0, "text-anchor", "middle"), e(K0, "word-spacing", "0"), e(K0, "class", "cp-button-label"), E(K0, "line-height", "125%"), E(K0, "text-align", "center"), e(te, "fill", "#42caf7"), e(te, "d", "M473.6 656.2a1.5 1.5 0 0 0-1 2.6 6.5 6.5 0 1 1-9.2 0 1.5 1.5 0 1 0-2.1-2.2 9.5 9.5 0 1 0 13.4 0 1.5 1.5 0 0 0-1-.4z"), e(te, "color", "#000"), e(te, "font-family", "sans-serif"), e(te, "font-weight", "400"), e(te, "overflow", "visible"), e(te, "class", "cp-button-label"), E(te, "line-height", "normal"), E(te, "text-indent", "0px"), E(te, "text-align", "start"), E(te, "text-decoration-line", "none"), E(te, "text-decoration-style", "solid"), E(te, "text-decoration-color", "rgb(0, 0, 0)"), E(te, "text-transform", "none"), E(te, "white-space", "normal"), E(te, "isolation", "auto"), E(te, "mix-blend-mode", "normal"), e(ne, "fill", "#42caf7"), e(ne, "d", "M468 652.4c-.8 0-1.5.6-1.5 1.5v10c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-10c0-.9-.7-1.5-1.5-1.5z"), e(ne, "color", "#000"), e(ne, "font-family", "sans-serif"), e(ne, "font-weight", "400"), e(ne, "overflow", "visible"), e(ne, "class", "cp-button-label"), E(ne, "line-height", "normal"), E(ne, "text-indent", "0px"), E(ne, "text-align", "start"), E(ne, "text-decoration-line", "none"), E(ne, "text-decoration-style", "solid"), E(ne, "text-decoration-color", "rgb(0, 0, 0)"), E(ne, "text-transform", "none"), E(ne, "white-space", "normal"), E(ne, "isolation", "auto"), E(ne, "mix-blend-mode", "normal"), e(Zr, "fill", "#fff"), e(Zr, "fill-rule", "evenodd"), e(Zr, "d", "m500 607.4-12 6.9 12.2 7v-4H520v-6h-20z"), e(Zr, "class", "cp-button-label"), e(Yl, "fill", "#222"), e(Yl, "fill-rule", "evenodd"), e(Yl, "d", "m1210-959.6-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm30 0-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm30 0-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6z"), e(Wl, "fill", "#1c1c1c"), e(Wl, "fill-rule", "evenodd"), e(Wl, "d", "M1210-959.6v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm30 0v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm30 0v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6z"), e(gt, "width", "20"), e(gt, "height", "18"), e(gt, "x", "1200"), e(gt, "y", "-941.6"), e(gt, "fill", "#7e7e7e"), e(gt, "fill-opacity", ".2"), e(gt, "rx", "0"), e(gt, "ry", "0"), e(Zl, "fill", "#272727"), e(Zl, "fill-rule", "evenodd"), e(Zl, "d", "m1275-897.6-10 6 5 3 5-3 5 3 5-3zm-15 9-10 6 5 3 5-3 5 3 5-3zm30 0-10 6 5 3 5-3 5 3 5-3zm-15 9-10 6 5 3 5-3 5 3 5-3zm-15 9-10 6 5 3 5-3 5 3 5-3zm30 0-10 6 5 3 5-3 5 3 5-3zm-15 9-10 6 5 3 5-3 5 3 5-3z"), e(Xl, "fill", "#222"), e(Xl, "fill-rule", "evenodd"), e(Xl, "d", "m1275-909.6-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm30 0-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6zm30 0-5 3v6l-5 3v6l10-6zm-15 9-5 3v6l-5 3v6l10-6z"), e(Jl, "fill", "#1c1c1c"), e(Jl, "fill-rule", "evenodd"), e(Jl, "d", "M1275-909.6v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm30 0v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6zm30 0v12l10 6v-6l-5-3v-6zm-15 9v12l10 6v-6l-5-3v-6z"), e(vt, "width", "20"), e(vt, "height", "18"), e(vt, "x", "1265"), e(vt, "y", "-891.6"), e(vt, "fill", "#7e7e7e"), e(vt, "fill-opacity", ".2"), e(vt, "rx", "0"), e(vt, "ry", "0"), e(b, "transform", "translate(0 411.6)"), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "xmlns:xlink", "http://www.w3.org/1999/xlink"), e(t, "viewBox", "0 0 648 1464");
     },
-    m(L2, bi) {
-      S(L2, t, bi), n(t, r), n(r, a), n(a, o), n(a, s), n(a, d), n(a, c), n(r, f), n(f, p), n(f, b), n(f, g), n(f, w), n(f, x), n(r, z), n(z, q), n(z, m), n(z, y), n(z, H), n(r, C), n(C, P), n(C, D), n(C, $), n(C, M), n(C, h), n(r, j), n(j, T), n(j, Re), n(j, N), n(j, R), n(r, ne), n(ne, J), n(ne, le), n(r, Xe), n(Xe, Ve), n(Xe, ut), n(Xe, Kn), n(Xe, Te), n(r, We), n(We, ie), n(We, Ie), n(We, Be), n(We, Xr), n(r, Wr), n(Wr, O), n(Wr, I), n(r, gt), n(gt, Jr), n(gt, An), n(r, vt), n(vt, en), n(vt, W0), n(r, Xl), n(Xl, J0), n(Xl, Wl), n(r, dl), n(dl, Jl), n(dl, e0), n(dl, t0), n(r, fl), n(fl, r0), n(fl, n0), n(fl, l0), n(r, Yn), n(Yn, e2), n(Yn, t2), n(Yn, r2), n(Yn, n2), n(r, tn), n(tn, l2), n(tn, i2), n(tn, a2), n(tn, o2), n(tn, s2), n(r, i0), n(i0, c2), n(i0, a0), n(r, Vn), n(Vn, d2), n(Vn, f2), n(Vn, p2), n(Vn, o0), n(r, pl), n(pl, h2), n(pl, s0), n(pl, c0), n(r, hl), n(hl, u2), n(hl, d0), n(hl, f0), n(r, p0), n(p0, g2), n(p0, h0), n(r, u0), n(u0, v2), n(u0, g0), n(r, ul), n(ul, m2), n(ul, v0), n(ul, y2), n(r, Je), n(Je, x2), n(Je, b2), n(Je, w2), n(Je, k2), n(Je, q2), n(Je, _2), n(Je, G2), n(r, mt), n(r, yt), n(r, xt), n(r, bt), n(r, wt), n(r, kt), n(r, qt), n(r, _t), n(r, Gt), n(r, Ut), n(r, zt), n(r, St), n(r, $t), n(r, Mt), n(r, Ot), n(r, Ct), n(r, Et), n(r, jt), n(r, Ht), n(r, Dt), n(r, Rt), n(r, Bt), n(r, Qt), n(r, Pt), n(r, Lt), n(r, Ft), n(r, Kt), n(r, At), n(r, Yt), n(r, Vt), n(r, Tt), n(r, It), n(r, Nt), n(r, Zt), n(r, Xt), n(r, Wt), n(r, Jt), n(r, e1), n(r, t1), n(r, r1), n(r, n1), n(r, l1), n(r, i1), n(r, a1), n(r, o1), n(r, s1), n(r, c1), n(r, d1), n(r, f1), n(r, p1), n(r, h1), n(r, u1), n(r, g1), n(r, v1), n(r, m1), n(r, y1), n(r, x1), n(r, b1), n(r, w1), n(r, k1), n(r, q1), n(r, _1), n(r, G1), n(r, U1), n(r, et), n(r, tt), n(r, rt), n(r, z1), n(r, S1), n(r, $1), n(r, M1), n(r, O1), n(r, C1), n(r, E1), n(r, j1), n(r, H1), n(r, D1), n(r, R1), n(r, B1), n(r, Q1), n(r, P1), n(r, L1), n(r, F1), n(r, K1), n(r, A1), n(r, Y1), n(r, V1), n(r, T1), n(r, I1), n(r, N1), n(r, Z1), n(r, X1), n(r, W1), n(r, J1), n(r, er), n(r, tr), n(r, rr), n(r, nr), n(r, lr), n(r, ir), n(r, ar), n(r, Qe), n(Qe, Tn), n(Qe, m0), n(Qe, y0), n(r, or), n(t, re), n(re, gl), n(re, x0), n(re, vl), n(re, In), n(re, Pe), n(re, Le), n(re, Fe), n(re, Ke), n(re, nt), n(re, lt), n(re, it), n(re, rn), n(rn, ae), n(rn, sr), n(rn, b0), n(re, U2), n(U2, z2), n(t, S2), n(S2, nn), n(nn, $2), n(t, v), n(v, w0), n(v, k0), n(v, q0), n(v, ml), n(v, yl), n(v, Nn), n(Nn, oe), n(Nn, cr), n(Nn, _0), n(v, ln), n(ln, se), n(ln, dr), n(ln, G0), n(v, an), n(an, ce), n(an, fr), n(an, U0), n(v, on), n(on, de), n(on, pr), n(on, z0), n(v, sn), n(sn, fe), n(sn, hr), n(sn, S0), n(v, cn), n(cn, pe), n(cn, ur), n(cn, $0), n(v, dn), n(dn, he), n(dn, gr), n(dn, M0), n(v, fn), n(fn, ue), n(fn, vr), n(fn, O0), n(v, pn), n(pn, ge), n(pn, mr), n(pn, C0), n(v, hn), n(hn, ve), n(hn, yr), n(hn, E0), n(v, un), n(un, me), n(un, xr), n(un, j0), n(v, gn), n(gn, ye), n(gn, br), n(gn, H0), n(v, vn), n(vn, xe), n(vn, wr), n(vn, D0), n(v, mn), n(mn, be), n(mn, kr), n(mn, R0), n(v, yn), n(yn, we), n(yn, qr), n(yn, B0), n(v, xn), n(xn, ke), n(xn, _r), n(xn, Q0), n(v, bn), n(bn, qe), n(bn, Gr), n(bn, P0), n(v, M2), n(v, O2), n(v, C2), n(v, Ur), n(v, zr), n(v, Sr), n(v, $r), n(v, Ae), n(v, at), n(v, ot), n(v, st), n(v, L0), n(v, Zn), n(Zn, _e), n(Zn, Mr), n(v, Xn), n(Xn, Ge), n(Xn, Or), n(v, Wn), n(Wn, Ue), n(Wn, Cr), n(v, Jn), n(Jn, ze), n(Jn, Er), n(v, el), n(el, Se), n(el, jr), n(v, tl), n(tl, $e), n(tl, Hr), n(v, rl), n(rl, Me), n(rl, Dr), n(v, nl), n(nl, Oe), n(nl, Rr), n(v, ct), n(v, ll), n(ll, Ce), n(ll, Br), n(v, il), n(il, Ee), n(il, Qr), n(v, al), n(al, je), n(al, Pr), n(v, ol), n(ol, He), n(ol, Lr), n(v, xl), n(xl, wn), n(v, bl), n(bl, Fr), n(v, De), n(De, kn), n(kn, X2), n(De, W2), n(v, wl), n(wl, qn), n(v, kl), n(kl, _n), n(v, ql), n(ql, Gn), n(v, _l), n(_l, Un), n(v, Gl), n(Gl, zn), n(v, Ul), n(Ul, Sn), n(v, zl), n(zl, $n), n(v, Sl), n(Sl, Mn), n(v, $l), n($l, On), n(v, Ml), n(Ml, Kr), n(v, F0), n(v, Ne), n(v, Ol), n(Ol, Ar), n(v, Cl), n(Cl, Cn), n(v, El), n(El, En), n(v, jl), n(jl, jn), n(v, Hl), n(Hl, Yr), n(v, Dl), n(Dl, Vr), n(v, Rl), n(Rl, Tr), n(v, Bl), n(Bl, Hn), n(v, Ql), n(Ql, Dn), n(v, Pl), n(Pl, Rn), n(v, Ll), n(Ll, Bn), n(v, Fl), n(Fl, Qn), n(v, Kl), n(Kl, Pn), n(v, Ln), n(Ln, Ir), n(v, Fn), n(Fn, Nr), n(v, X), n(v, W), n(v, Al), n(v, K0), n(v, A0), n(v, dt), n(v, Y0), n(v, V0), n(v, T0), n(v, ft);
+    m(K2, $i) {
+      z(K2, t, $i), r(t, n), r(n, a), r(a, s), r(a, o), r(a, d), r(a, c), r(n, f), r(f, h), r(f, p), r(f, g), r(f, w), r(f, G), r(n, k), r(k, v), r(k, S), r(k, R), r(k, O), r(n, U), r(U, q), r(U, T), r(U, x), r(U, u), r(U, C), r(n, M), r(M, W), r(M, Q), r(M, Z), r(M, J), r(n, et), r(et, D), r(et, le), r(n, de), r(de, se), r(de, Le), r(de, N0), r(de, tt), r(n, Qe), r(Qe, Y0), r(Qe, nt), r(Qe, W0), r(Qe, ce), r(n, Ie), r(Ie, Ve), r(Ie, r0), r(n, l0), r(l0, H), r(l0, X), r(n, bt), r(bt, i0), r(bt, Z0), r(n, yt), r(yt, a0), r(yt, ll), r(n, vr), r(vr, il), r(vr, al), r(vr, sl), r(n, xr), r(xr, ol), r(xr, dl), r(xr, cl), r(n, X0), r(X0, s2), r(X0, o2), r(X0, d2), r(X0, c2), r(n, s0), r(s0, f2), r(s0, h2), r(s0, p2), r(s0, u2), r(s0, m2), r(n, fl), r(fl, g2), r(fl, hl), r(n, J0), r(J0, v2), r(J0, x2), r(J0, b2), r(J0, pl), r(n, br), r(br, y2), r(br, ul), r(br, ml), r(n, yr), r(yr, w2), r(yr, gl), r(yr, vl), r(n, xl), r(xl, R2), r(xl, bl), r(n, yl), r(yl, k2), r(yl, wl), r(n, wr), r(wr, _2), r(wr, Rl), r(wr, q2), r(n, it), r(it, S2), r(it, G2), r(it, C2), r(it, M2), r(it, U2), r(it, $2), r(it, z2), r(n, wt), r(n, Rt), r(n, kt), r(n, _t), r(n, qt), r(n, St), r(n, Gt), r(n, Ct), r(n, Mt), r(n, Ut), r(n, $t), r(n, zt), r(n, Ot), r(n, Et), r(n, Bt), r(n, Ht), r(n, Pt), r(n, jt), r(n, Tt), r(n, Dt), r(n, Ft), r(n, At), r(n, Lt), r(n, Qt), r(n, It), r(n, Vt), r(n, Kt), r(n, Nt), r(n, Yt), r(n, Wt), r(n, Zt), r(n, Xt), r(n, Jt), r(n, e1), r(n, t1), r(n, n1), r(n, r1), r(n, l1), r(n, i1), r(n, a1), r(n, s1), r(n, o1), r(n, d1), r(n, c1), r(n, f1), r(n, h1), r(n, p1), r(n, u1), r(n, m1), r(n, g1), r(n, v1), r(n, x1), r(n, b1), r(n, y1), r(n, w1), r(n, R1), r(n, k1), r(n, _1), r(n, q1), r(n, S1), r(n, G1), r(n, C1), r(n, M1), r(n, U1), r(n, at), r(n, st), r(n, ot), r(n, $1), r(n, z1), r(n, O1), r(n, E1), r(n, B1), r(n, H1), r(n, P1), r(n, j1), r(n, T1), r(n, D1), r(n, F1), r(n, A1), r(n, L1), r(n, Q1), r(n, I1), r(n, V1), r(n, K1), r(n, N1), r(n, Y1), r(n, W1), r(n, Z1), r(n, X1), r(n, J1), r(n, en), r(n, tn), r(n, nn), r(n, rn), r(n, ln), r(n, an), r(n, sn), r(n, on), r(n, dn), r(n, cn), r(n, fn), r(n, Ke), r(Ke, er), r(Ke, kl), r(Ke, _l), r(n, hn), r(t, oe), r(oe, Rr), r(oe, ql), r(oe, kr), r(oe, tr), r(oe, Ne), r(oe, Ye), r(oe, We), r(oe, Ze), r(oe, dt), r(oe, ct), r(oe, ft), r(oe, o0), r(o0, fe), r(o0, pn), r(o0, Sl), r(oe, O2), r(O2, E2), r(t, B2), r(B2, d0), r(d0, H2), r(t, b), r(b, Gl), r(b, Cl), r(b, Ml), r(b, _r), r(b, qr), r(b, nr), r(nr, he), r(nr, un), r(nr, Ul), r(b, c0), r(c0, pe), r(c0, mn), r(c0, $l), r(b, f0), r(f0, ue), r(f0, gn), r(f0, zl), r(b, h0), r(h0, me), r(h0, vn), r(h0, Ol), r(b, p0), r(p0, ge), r(p0, xn), r(p0, El), r(b, u0), r(u0, ve), r(u0, bn), r(u0, Bl), r(b, m0), r(m0, xe), r(m0, yn), r(m0, Hl), r(b, g0), r(g0, be), r(g0, wn), r(g0, Pl), r(b, v0), r(v0, ye), r(v0, Rn), r(v0, jl), r(b, x0), r(x0, we), r(x0, kn), r(x0, Tl), r(b, b0), r(b0, Re), r(b0, _n), r(b0, Dl), r(b, y0), r(y0, ke), r(y0, qn), r(y0, Fl), r(b, w0), r(w0, _e), r(w0, Sn), r(w0, Al), r(b, R0), r(R0, qe), r(R0, Gn), r(R0, Ll), r(b, k0), r(k0, Se), r(k0, Cn), r(k0, Ql), r(b, _0), r(_0, Ge), r(_0, Mn), r(_0, Il), r(b, q0), r(q0, Ce), r(q0, Un), r(q0, Vl), r(b, P2), r(b, j2), r(b, T2), r(b, $n), r(b, zn), r(b, On), r(b, En), r(b, Xe), r(b, ht), r(b, pt), r(b, ut), r(b, Kl), r(b, rr), r(rr, Me), r(rr, Bn), r(b, lr), r(lr, Ue), r(lr, Hn), r(b, ir), r(ir, $e), r(ir, Pn), r(b, ar), r(ar, ze), r(ar, jn), r(b, sr), r(sr, Oe), r(sr, Tn), r(b, or), r(or, Ee), r(or, Dn), r(b, dr), r(dr, Be), r(dr, Fn), r(b, cr), r(cr, He), r(cr, An), r(b, mt), r(b, fr), r(fr, Pe), r(fr, Ln), r(b, hr), r(hr, je), r(hr, Qn), r(b, pr), r(pr, Te), r(pr, In), r(b, ur), r(ur, De), r(ur, Vn), r(b, Sr), r(Sr, S0), r(b, Gr), r(Gr, Kn), r(b, Fe), r(Fe, G0), r(G0, ni), r(Fe, ri), r(b, Cr), r(Cr, C0), r(b, Mr), r(Mr, M0), r(b, Ur), r(Ur, U0), r(b, $r), r($r, $0), r(b, zr), r(zr, z0), r(b, Or), r(Or, O0), r(b, Er), r(Er, E0), r(b, Br), r(Br, B0), r(b, Hr), r(Hr, H0), r(b, Pr), r(Pr, Nn), r(b, Nl), r(b, rt), r(b, jr), r(jr, Yn), r(b, Tr), r(Tr, P0), r(b, Dr), r(Dr, j0), r(b, Fr), r(Fr, T0), r(b, Ar), r(Ar, Wn), r(b, Lr), r(Lr, Zn), r(b, Qr), r(Qr, Xn), r(b, Ir), r(Ir, D0), r(b, Vr), r(Vr, F0), r(b, Kr), r(Kr, A0), r(b, Nr), r(Nr, L0), r(b, Yr), r(Yr, Q0), r(b, Wr), r(Wr, I0), r(b, V0), r(V0, Jn), r(b, K0), r(K0, e0), r(b, te), r(b, ne), r(b, Zr), r(b, Yl), r(b, Wl), r(b, gt), r(b, Zl), r(b, Xl), r(b, Jl), r(b, vt);
     },
-    p: _,
-    i: _,
-    o: _,
-    d(L2) {
-      L2 && U(t);
+    p: y,
+    i: y,
+    o: y,
+    d(K2) {
+      K2 && $(t);
     }
   };
 }
-class Ya extends V {
+class ns extends K {
   constructor(t) {
-    super(), Y(this, t, null, Aa, A, {});
+    super(), V(this, t, null, ts, I, {});
   }
 }
-const Va = (i) => {
-  console.log("emu:main recv:", i.detail.state), mi.set(window.Module.cwrap("getPC", "number", [])), yi.set(window.Module.cwrap("readMemory2Quick", "number", ["number"]));
-}, Ta = (i) => {
-  console.error("cpu_crash recv:", i.detail), Ze.set("crashed");
-  let t = i.detail.name, r = (i.detail.address >>> 0).toString(16).padStart(8, "0"), a = (i.detail.pc >>> 0).toString(16).padStart(8, "0");
-  D2.set({
+const rs = (l) => {
+  console.log("emu:main recv:", l.detail.state), Ci.set(window.Module.cwrap("getPC", "number", [])), Mi.set(window.Module.cwrap("readMemory2Quick", "number", ["number"]));
+}, ls = (l) => {
+  console.error("cpu_crash recv:", l.detail), lt.set("crashed");
+  let t = l.detail.name, n = (l.detail.address >>> 0).toString(16).padStart(8, "0"), a = (l.detail.pc >>> 0).toString(16).padStart(8, "0");
+  L2.set({
     name: t,
-    message: `@ 0x${r} 	
+    message: `@ 0x${n} 	
  PC:${a}
 `,
     hint: `https://github.com/search?q=repo%3AClasspadDev%2Fhollyhock-3%20${a.substring(0, 6)}&type=code`
   });
-}, Ia = (i) => {
-  let t = i.detail.regs.map((o) => o >>> 0);
-  const r = i.detail.pc >>> 0, a = i.detail.instr >>> 0;
-  console.debug("cpu_dump recv:", i.detail), console.debug(`cpu:dump: INSTR ${a.toString(16).padStart(4, "0")} 	 - PC: 0x${r.toString(16).padStart(8, "0")}`), console.debug(t.map((o) => o.toString(16).toUpperCase())), B2.set({
+}, is = (l) => {
+  let t = l.detail.regs.map((s) => s >>> 0);
+  const n = l.detail.pc >>> 0, a = l.detail.instr >>> 0;
+  console.debug("cpu_dump recv:", l.detail), console.debug(`cpu:dump: INSTR ${a.toString(16).padStart(4, "0")} 	 - PC: 0x${n.toString(16).padStart(8, "0")}`), console.debug(t.map((s) => s.toString(16).toUpperCase())), I2.set({
     instr: a,
-    pc: r,
+    pc: n,
     registers: t
   });
 };
-function Na() {
-  document.addEventListener("emu:main", Va), document.addEventListener("cpu:dump", Ia), document.addEventListener("cpu:crash", Ta);
+function as() {
+  document.addEventListener("emu:main", rs), document.addEventListener("cpu:dump", is), document.addEventListener("cpu:crash", ls);
 }
-function Za(i) {
-  let t, r, a, o, s = [
+function ss(l) {
+  let t, n, a, s, o = [
     { xmlns: "http://www.w3.org/2000/svg" },
     { width: "1em" },
     { height: "1em" },
     { viewBox: "0 0 24 24" },
     /*$$props*/
-    i[0]
+    l[0]
   ], d = {};
-  for (let c = 0; c < s.length; c += 1)
-    d = pt(d, s[c]);
+  for (let c = 0; c < o.length; c += 1)
+    d = N(d, o[c]);
   return {
     c() {
-      t = l("svg"), r = l("g"), a = l("path"), o = l("path"), e(a, "stroke-linejoin", "round"), e(a, "d", "m14.5 7l5 5l-5 5"), e(o, "d", "M19.5 12h-10c-1.667 0-5 1-5 5"), e(o, "opacity", "0.5"), e(r, "fill", "none"), e(r, "stroke", "currentColor"), e(r, "stroke-linecap", "round"), e(r, "stroke-width", "1.5"), Zl(t, d);
+      t = i("svg"), n = i("g"), a = i("path"), s = i("path"), e(a, "stroke-linejoin", "round"), e(a, "d", "m14.5 7l5 5l-5 5"), e(s, "d", "M19.5 12h-10c-1.667 0-5 1-5 5"), e(s, "opacity", "0.5"), e(n, "fill", "none"), e(n, "stroke", "currentColor"), e(n, "stroke-linecap", "round"), e(n, "stroke-width", "1.5"), ae(t, d);
     },
     m(c, f) {
-      S(c, t, f), n(t, r), n(r, a), n(r, o);
+      z(c, t, f), r(t, n), r(n, a), r(n, s);
     },
     p(c, [f]) {
-      Zl(t, d = N2(s, [
+      ae(t, d = n0(o, [
         { xmlns: "http://www.w3.org/2000/svg" },
         { width: "1em" },
         { height: "1em" },
@@ -1775,43 +1833,43 @@ function Za(i) {
         c[0]
       ]));
     },
-    i: _,
-    o: _,
+    i: y,
+    o: y,
     d(c) {
-      c && U(t);
+      c && $(t);
     }
   };
 }
-function Xa(i, t, r) {
-  return i.$$set = (a) => {
-    r(0, t = pt(pt({}, t), Nl(a)));
-  }, t = Nl(t), [t];
+function os(l, t, n) {
+  return l.$$set = (a) => {
+    n(0, t = N(N({}, t), ie(a)));
+  }, t = ie(t), [t];
 }
-class Wa extends V {
+class ds extends K {
   constructor(t) {
-    super(), Y(this, t, Xa, Za, A, {});
+    super(), V(this, t, os, ss, I, {});
   }
 }
-function Ja(i) {
-  let t, r, a, o, s = [
+function cs(l) {
+  let t, n, a, s, o = [
     { xmlns: "http://www.w3.org/2000/svg" },
     { width: "1em" },
     { height: "1em" },
     { viewBox: "0 0 24 24" },
     /*$$props*/
-    i[0]
+    l[0]
   ], d = {};
-  for (let c = 0; c < s.length; c += 1)
-    d = pt(d, s[c]);
+  for (let c = 0; c < o.length; c += 1)
+    d = N(d, o[c]);
   return {
     c() {
-      t = l("svg"), r = l("g"), a = l("path"), o = l("path"), e(a, "stroke-linejoin", "round"), e(a, "d", "m17 14.5l-5 5l-5-5"), e(o, "d", "M12 19.5v-10c0-1.667-1-5-5-5"), e(o, "opacity", "0.5"), e(r, "fill", "none"), e(r, "stroke", "currentColor"), e(r, "stroke-linecap", "round"), e(r, "stroke-width", "1.5"), Zl(t, d);
+      t = i("svg"), n = i("g"), a = i("path"), s = i("path"), e(a, "stroke-linejoin", "round"), e(a, "d", "m17 14.5l-5 5l-5-5"), e(s, "d", "M12 19.5v-10c0-1.667-1-5-5-5"), e(s, "opacity", "0.5"), e(n, "fill", "none"), e(n, "stroke", "currentColor"), e(n, "stroke-linecap", "round"), e(n, "stroke-width", "1.5"), ae(t, d);
     },
     m(c, f) {
-      S(c, t, f), n(t, r), n(r, a), n(r, o);
+      z(c, t, f), r(t, n), r(n, a), r(n, s);
     },
     p(c, [f]) {
-      Zl(t, d = N2(s, [
+      ae(t, d = n0(o, [
         { xmlns: "http://www.w3.org/2000/svg" },
         { width: "1em" },
         { height: "1em" },
@@ -1821,108 +1879,108 @@ function Ja(i) {
         c[0]
       ]));
     },
-    i: _,
-    o: _,
+    i: y,
+    o: y,
     d(c) {
-      c && U(t);
+      c && $(t);
     }
   };
 }
-function eo(i, t, r) {
-  return i.$$set = (a) => {
-    r(0, t = pt(pt({}, t), Nl(a)));
-  }, t = Nl(t), [t];
+function fs(l, t, n) {
+  return l.$$set = (a) => {
+    n(0, t = N(N({}, t), ie(a)));
+  }, t = ie(t), [t];
 }
-class to extends V {
+class hs extends K {
   constructor(t) {
-    super(), Y(this, t, eo, Ja, A, {});
+    super(), V(this, t, fs, cs, I, {});
   }
 }
-function ro(i) {
-  let t, r, a;
+function ps(l) {
+  let t, n, a;
   return {
     c() {
-      t = l("g"), r = l("path"), a = l("path"), e(r, "d", "m11 8.768l-6.097-4.46C3.601 3.411 2 4.58 2 6.426v11.148c0 1.847 1.6 3.015 2.903 2.118L11 15.232"), e(r, "opacity", "0.5"), e(a, "d", "M21.079 10.147c1.228.807 1.228 2.899 0 3.706L13.66 18.73c-1.194.785-2.661-.237-2.661-1.853V7.123c0-1.616 1.467-2.638 2.661-1.853z"), e(t, "fill", "none"), e(t, "stroke", "currentColor"), e(t, "stroke-width", "1.5");
+      t = i("g"), n = i("path"), a = i("path"), e(n, "d", "m11 8.768l-6.097-4.46C3.601 3.411 2 4.58 2 6.426v11.148c0 1.847 1.6 3.015 2.903 2.118L11 15.232"), e(n, "opacity", "0.5"), e(a, "d", "M21.079 10.147c1.228.807 1.228 2.899 0 3.706L13.66 18.73c-1.194.785-2.661-.237-2.661-1.853V7.123c0-1.616 1.467-2.638 2.661-1.853z"), e(t, "fill", "none"), e(t, "stroke", "currentColor"), e(t, "stroke-width", "1.5");
     },
-    m(o, s) {
-      S(o, t, s), n(t, r), n(t, a);
+    m(s, o) {
+      z(s, t, o), r(t, n), r(t, a);
     },
-    d(o) {
-      o && U(t);
+    d(s) {
+      s && $(t);
     }
   };
 }
-function no(i) {
-  let t, r, a;
+function us(l) {
+  let t, n, a;
   return {
     c() {
-      t = l("path"), r = l("path"), a = Z(">"), e(t, "fill", "currentColor"), e(t, "fill-rule", "evenodd"), e(t, "d", "M2 6.426v11.148c0 1.847 1.6 3.015 2.903 2.118L11 15.232V8.768l-6.097-4.46C3.601 3.411 2 4.58 2 6.426"), e(t, "clip-rule", "evenodd"), e(t, "opacity", "0.5"), e(r, "fill", "currentColor"), e(r, "d", "M11 7.123v9.754c0 1.616 1.467 2.638 2.661 1.853l7.418-4.877c1.228-.807 1.228-2.899 0-3.706L13.66 5.27C12.467 4.485 11 5.507 11 7.123");
+      t = i("path"), n = i("path"), a = Y(">"), e(t, "fill", "currentColor"), e(t, "fill-rule", "evenodd"), e(t, "d", "M2 6.426v11.148c0 1.847 1.6 3.015 2.903 2.118L11 15.232V8.768l-6.097-4.46C3.601 3.411 2 4.58 2 6.426"), e(t, "clip-rule", "evenodd"), e(t, "opacity", "0.5"), e(n, "fill", "currentColor"), e(n, "d", "M11 7.123v9.754c0 1.616 1.467 2.638 2.661 1.853l7.418-4.877c1.228-.807 1.228-2.899 0-3.706L13.66 5.27C12.467 4.485 11 5.507 11 7.123");
     },
-    m(o, s) {
-      S(o, t, s), S(o, r, s), S(o, a, s);
+    m(s, o) {
+      z(s, t, o), z(s, n, o), z(s, a, o);
     },
-    d(o) {
-      o && (U(t), U(r), U(a));
+    d(s) {
+      s && ($(t), $(n), $(a));
     }
   };
 }
-function lo(i) {
+function ms(l) {
   let t;
-  function r(s, d) {
+  function n(o, d) {
     return (
       /*on*/
-      s[0] ? no : ro
+      o[0] ? us : ps
     );
   }
-  let a = r(i), o = a(i);
+  let a = n(l), s = a(l);
   return {
     c() {
-      t = l("svg"), o.c(), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
+      t = i("svg"), s.c(), e(t, "xmlns", "http://www.w3.org/2000/svg"), e(t, "width", "1em"), e(t, "height", "1em"), e(t, "viewBox", "0 0 24 24");
     },
-    m(s, d) {
-      S(s, t, d), o.m(t, null);
+    m(o, d) {
+      z(o, t, d), s.m(t, null);
     },
-    p(s, [d]) {
-      a !== (a = r(s)) && (o.d(1), o = a(s), o && (o.c(), o.m(t, null)));
+    p(o, [d]) {
+      a !== (a = n(o)) && (s.d(1), s = a(o), s && (s.c(), s.m(t, null)));
     },
-    i: _,
-    o: _,
-    d(s) {
-      s && U(t), o.d();
+    i: y,
+    o: y,
+    d(o) {
+      o && $(t), s.d();
     }
   };
 }
-function io(i, t, r) {
+function gs(l, t, n) {
   let { on: a = !1 } = t;
-  return i.$$set = (o) => {
-    "on" in o && r(0, a = o.on);
+  return l.$$set = (s) => {
+    "on" in s && n(0, a = s.on);
   }, [a];
 }
-class ao extends V {
+class vs extends K {
   constructor(t) {
-    super(), Y(this, t, io, lo, A, { on: 0 });
+    super(), V(this, t, gs, ms, I, { on: 0 });
   }
 }
-function oo(i) {
-  let t, r, a, o, s = [
+function xs(l) {
+  let t, n, a, s, o = [
     { xmlns: "http://www.w3.org/2000/svg" },
     { width: "1em" },
     { height: "1em" },
     { viewBox: "0 0 24 24" },
     /*$$props*/
-    i[0]
+    l[0]
   ], d = {};
-  for (let c = 0; c < s.length; c += 1)
-    d = pt(d, s[c]);
+  for (let c = 0; c < o.length; c += 1)
+    d = N(d, o[c]);
   return {
     c() {
-      t = l("svg"), r = l("g"), a = l("path"), o = l("path"), e(a, "stroke-linecap", "round"), e(a, "d", "m18.5 5.5l-13 13"), e(a, "opacity", "0.5"), e(o, "d", "M22 10.849v2.302c0 1.226 0 1.84-.228 2.39c-.229.552-.662.986-1.53 1.853l-2.848 2.849c-.867.867-1.3 1.3-1.852 1.529c-.551.228-1.165.228-2.39.228h-2.303c-1.226 0-1.84 0-2.39-.228c-.552-.229-.986-.662-1.853-1.53l-2.849-2.848c-.867-.867-1.3-1.3-1.529-1.852S2 14.377 2 13.152v-2.303c0-1.226 0-1.84.228-2.39c.229-.552.662-.986 1.53-1.853l2.848-2.849c.867-.867 1.3-1.3 1.852-1.529S9.623 2 10.848 2h2.303c1.226 0 1.84 0 2.39.228c.552.229.986.662 1.853 1.53l2.849 2.848c.867.867 1.3 1.3 1.529 1.852S22 9.623 22 10.848Z"), e(r, "fill", "none"), e(r, "stroke", "currentColor"), e(r, "stroke-width", "1.5"), Zl(t, d);
+      t = i("svg"), n = i("g"), a = i("path"), s = i("path"), e(a, "stroke-linecap", "round"), e(a, "d", "m18.5 5.5l-13 13"), e(a, "opacity", "0.5"), e(s, "d", "M22 10.849v2.302c0 1.226 0 1.84-.228 2.39c-.229.552-.662.986-1.53 1.853l-2.848 2.849c-.867.867-1.3 1.3-1.852 1.529c-.551.228-1.165.228-2.39.228h-2.303c-1.226 0-1.84 0-2.39-.228c-.552-.229-.986-.662-1.853-1.53l-2.849-2.848c-.867-.867-1.3-1.3-1.529-1.852S2 14.377 2 13.152v-2.303c0-1.226 0-1.84.228-2.39c.229-.552.662-.986 1.53-1.853l2.848-2.849c.867-.867 1.3-1.3 1.852-1.529S9.623 2 10.848 2h2.303c1.226 0 1.84 0 2.39.228c.552.229.986.662 1.853 1.53l2.849 2.848c.867.867 1.3 1.3 1.529 1.852S22 9.623 22 10.848Z"), e(n, "fill", "none"), e(n, "stroke", "currentColor"), e(n, "stroke-width", "1.5"), ae(t, d);
     },
     m(c, f) {
-      S(c, t, f), n(t, r), n(r, a), n(r, o);
+      z(c, t, f), r(t, n), r(n, a), r(n, s);
     },
     p(c, [f]) {
-      Zl(t, d = N2(s, [
+      ae(t, d = n0(o, [
         { xmlns: "http://www.w3.org/2000/svg" },
         { width: "1em" },
         { height: "1em" },
@@ -1932,24 +1990,2081 @@ function oo(i) {
         c[0]
       ]));
     },
-    i: _,
-    o: _,
+    i: y,
+    o: y,
     d(c) {
-      c && U(t);
+      c && $(t);
     }
   };
 }
-function so(i, t, r) {
-  return i.$$set = (a) => {
-    r(0, t = pt(pt({}, t), Nl(a)));
-  }, t = Nl(t), [t];
+function bs(l, t, n) {
+  return l.$$set = (a) => {
+    n(0, t = N(N({}, t), ie(a)));
+  }, t = ie(t), [t];
 }
-class co extends V {
+class ys extends K {
   constructor(t) {
-    super(), Y(this, t, so, oo, A, {});
+    super(), V(this, t, bs, xs, I, {});
   }
 }
-const fo = {
+function Ui(l, t) {
+  return `${l}`.replace(/\{(\w+):(\w+)\}/g, (n, a, s) => {
+    const o = t[a];
+    if (o === void 0)
+      throw new Error(`Key '${a}' not found in provided values.`);
+    switch (s) {
+      case "d":
+        return o.toString();
+      case "02x":
+        return o.toString(16).padStart(2, "0");
+      case "04x":
+        return o.toString(16).padStart(4, "0");
+      case "08x":
+        return o.toString(16).padStart(8, "0");
+      default:
+        throw new Error(`Unsupported format specifier '${s}'`);
+    }
+  });
+}
+const ws = [
+  // (id, name:str, mask:int, code:int, args: dict{name:str, mask:int}
+  [
+    0,
+    "mov r{m:d}, r{n:d}",
+    61455,
+    24579,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    1,
+    "mov 0x{i:04x}, r{n:d}",
+    61440,
+    57344,
+    {
+      n: 3840,
+      // n
+      i: 255
+      // i
+    }
+  ],
+  [
+    4,
+    "mova @(0x{d:02x}, PC), R0",
+    65280,
+    50944,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    5,
+    "mov.w @(0x{d:02x}, PC), r{n:d}",
+    61440,
+    36864,
+    {
+      n: 3840,
+      // n
+      d: 255
+      // d
+    }
+  ],
+  [
+    6,
+    "mov.l @(0x{d:02x}, PC), r{n:d}",
+    61440,
+    53248,
+    {
+      n: 3840,
+      // n
+      d: 255
+      // d
+    }
+  ],
+  [
+    7,
+    "mov.b @r{m:d}, r{n:d}",
+    61455,
+    24576,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    8,
+    "mov.w @r{m:d}, r{n:d}",
+    61455,
+    24577,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    9,
+    "mov.l @r{m:d}, r{n:d}",
+    61455,
+    24578,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    10,
+    "mov.b r{m:d}, @r{n:d}",
+    61455,
+    8192,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    11,
+    "mov.w r{m:d}, @r{n:d}",
+    61455,
+    8193,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    12,
+    "mov.l r{m:d}, @r{n:d}",
+    61455,
+    8194,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    13,
+    "mov.b @r{m:d}+, r{n:d}",
+    61455,
+    24580,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    14,
+    "mov.w @r{m:d}+, r{n:d}",
+    61455,
+    24581,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    15,
+    "mov.l @r{m:d}+, r{n:d}",
+    61455,
+    24582,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    16,
+    "mov.b r{m:d}, @-r{n:d}",
+    61455,
+    8196,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    17,
+    "mov.w r{m:d}, @-r{n:d}",
+    61455,
+    8197,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    18,
+    "mov.l r{m:d}, @-r{n:d}",
+    61455,
+    8198,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    25,
+    "mov.b @(0x{d:02x}, r{m:d}), R0",
+    65280,
+    33792,
+    {
+      m: 240,
+      // m
+      d: 15
+      // d
+    }
+  ],
+  [
+    28,
+    "mov.w @(0x{d:02x}, r{m:d}), R0",
+    65280,
+    34048,
+    {
+      m: 240,
+      // m
+      d: 15
+      // d
+    }
+  ],
+  [
+    31,
+    "mov.l @(0x{d:02x}, r{m:d}), r{n:d}",
+    61440,
+    20480,
+    {
+      n: 3840,
+      // n
+      m: 240,
+      // m
+      d: 15
+      // d
+    }
+  ],
+  [
+    33,
+    "mov.b R0, @(0x{d:02x}, r{n:d})",
+    65280,
+    32768,
+    {
+      n: 240,
+      // n
+      d: 15
+      // d
+    }
+  ],
+  [
+    35,
+    "mov.w R0, @(0x{d:02x}, r{n:d})",
+    65280,
+    33024,
+    {
+      n: 240,
+      // n
+      d: 15
+      // d
+    }
+  ],
+  [
+    37,
+    "mov.l r{m:d}, @(0x{d:02x}, r{n:d})",
+    61440,
+    4096,
+    {
+      n: 3840,
+      // n
+      m: 240,
+      // m
+      d: 15
+      // d
+    }
+  ],
+  [
+    39,
+    "mov.b @(R0, r{m:d}), r{n:d}",
+    61455,
+    12,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    40,
+    "mov.w @(R0, r{m:d}), r{n:d}",
+    61455,
+    13,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    41,
+    "mov.l @(R0, r{m:d}), r{n:d}",
+    61455,
+    14,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    42,
+    "mov.b r{m:d}, @(R0, r{n:d})",
+    61455,
+    4,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    43,
+    "mov.w r{m:d}, @(R0, r{n:d})",
+    61455,
+    5,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    44,
+    "mov.l r{m:d}, @(R0, r{n:d})",
+    61455,
+    6,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    45,
+    "mov.b @(0x{d:02x}, GBR), R0",
+    65280,
+    50176,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    46,
+    "mov.w @(0x{d:02x}, GBR), R0",
+    65280,
+    50432,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    47,
+    "mov.l @(0x{d:02x}, GBR), R0",
+    65280,
+    50688,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    48,
+    "mov.b R0, @(0x{d:02x}, GBR)",
+    65280,
+    49152,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    49,
+    "mov.w R0, @(0x{d:02x}, GBR)",
+    65280,
+    49408,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    50,
+    "mov.l R0, @(0x{d:02x}, GBR)",
+    65280,
+    49664,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    60,
+    "movt r{n:d}",
+    61695,
+    41,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    62,
+    "swap.b r{m:d}, r{n:d}",
+    61455,
+    24584,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    63,
+    "swap.w r{m:d}, r{n:d}",
+    61455,
+    24585,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    64,
+    "xtrct r{m:d}, r{n:d}",
+    61455,
+    8205,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    79,
+    "add r{m:d}, r{n:d}",
+    61455,
+    12300,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    80,
+    "add 0x{i:04x}, r{n:d}",
+    61440,
+    28672,
+    {
+      n: 3840,
+      // n
+      i: 255
+      // i
+    }
+  ],
+  [
+    81,
+    "addc r{m:d}, r{n:d}",
+    61455,
+    12302,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    82,
+    "addv r{m:d}, r{n:d}",
+    61455,
+    12303,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    83,
+    "cmp/eq 0x{i:04x}, R0",
+    65280,
+    34816,
+    {
+      i: 255
+      // i
+    }
+  ],
+  [
+    84,
+    "cmp/eq r{m:d}, r{n:d}",
+    61455,
+    12288,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    85,
+    "cmp/hs r{m:d}, r{n:d}",
+    61455,
+    12290,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    86,
+    "cmp/ge r{m:d}, r{n:d}",
+    61455,
+    12291,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    87,
+    "cmp/hi r{m:d}, r{n:d}",
+    61455,
+    12294,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    88,
+    "cmp/gt r{m:d}, r{n:d}",
+    61455,
+    12295,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    89,
+    "cmp/pl r{n:d}",
+    61695,
+    16405,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    90,
+    "cmp/pz r{n:d}",
+    61695,
+    16401,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    91,
+    "cmp/str r{m:d}, r{n:d}",
+    61455,
+    8204,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    96,
+    "div0s r{m:d}, r{n:d}",
+    61455,
+    8199,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    97,
+    "div0u",
+    65535,
+    25,
+    {}
+  ],
+  [
+    98,
+    "div1 r{m:d}, r{n:d}",
+    61455,
+    12292,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    101,
+    "dmuls.l r{m:d}, r{n:d}",
+    61455,
+    12301,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    102,
+    "dmulu.l r{m:d}, r{n:d}",
+    61455,
+    12293,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    103,
+    "dt r{n:d}",
+    61695,
+    16400,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    104,
+    "exts.b r{m:d}, r{n:d}",
+    61455,
+    24590,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    105,
+    "exts.w r{m:d}, r{n:d}",
+    61455,
+    24591,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    106,
+    "extu.b r{m:d}, r{n:d}",
+    61455,
+    24588,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    107,
+    "extu.w r{m:d}, r{n:d}",
+    61455,
+    24589,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    108,
+    "mac.l @r{m:d}+, @r{n:d}+",
+    61455,
+    15,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    109,
+    "mac.w @r{m:d}+, @r{n:d}+",
+    61455,
+    16399,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    110,
+    "mul.l r{m:d}, r{n:d}",
+    61455,
+    7,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    112,
+    "muls.w r{m:d}, r{n:d}",
+    61455,
+    8207,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    113,
+    "mulu.w r{m:d}, r{n:d}",
+    61455,
+    8206,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    114,
+    "neg r{m:d}, r{n:d}",
+    61455,
+    24587,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    115,
+    "negc r{m:d}, r{n:d}",
+    61455,
+    24586,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    116,
+    "sub r{m:d}, r{n:d}",
+    61455,
+    12296,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    117,
+    "subc r{m:d}, r{n:d}",
+    61455,
+    12298,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    118,
+    "subv r{m:d}, r{n:d}",
+    61455,
+    12299,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    119,
+    "and r{m:d}, r{n:d}",
+    61455,
+    8201,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    120,
+    "and 0x{i:04x}, R0",
+    65280,
+    51456,
+    {
+      i: 255
+      // i
+    }
+  ],
+  [
+    121,
+    "and.b 0x{i:04x}, @(R0, GBR)",
+    65280,
+    52480,
+    {
+      i: 255
+      // i
+    }
+  ],
+  [
+    122,
+    "not r{m:d}, r{n:d}",
+    61455,
+    24583,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    123,
+    "or r{m:d}, r{n:d}",
+    61455,
+    8203,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    124,
+    "or 0x{i:04x}, R0",
+    65280,
+    51968,
+    {
+      i: 255
+      // i
+    }
+  ],
+  [
+    125,
+    "or.b 0x{i:04x}, @(R0, GBR)",
+    65280,
+    52992,
+    {
+      i: 255
+      // i
+    }
+  ],
+  [
+    126,
+    "tas.b @r{n:d}",
+    61695,
+    16411,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    127,
+    "tst r{m:d}, r{n:d}",
+    61455,
+    8200,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    128,
+    "tst 0x{i:04x}, R0",
+    65280,
+    51200,
+    {
+      i: 255
+      // i
+    }
+  ],
+  [
+    129,
+    "tst.b 0x{i:04x}, @(R0, GBR)",
+    65280,
+    52224,
+    {
+      i: 255
+      // i
+    }
+  ],
+  [
+    130,
+    "xor r{m:d}, r{n:d}",
+    61455,
+    8202,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    131,
+    "xor 0x{i:04x}, R0",
+    65280,
+    51712,
+    {
+      i: 255
+      // i
+    }
+  ],
+  [
+    132,
+    "xor.b 0x{i:04x}, @(R0, GBR)",
+    65280,
+    52736,
+    {
+      i: 255
+      // i
+    }
+  ],
+  [
+    133,
+    "rotcl r{n:d}",
+    61695,
+    16420,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    134,
+    "rotcr r{n:d}",
+    61695,
+    16421,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    135,
+    "rotl r{n:d}",
+    61695,
+    16388,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    136,
+    "rotr r{n:d}",
+    61695,
+    16389,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    137,
+    "shad r{m:d}, r{n:d}",
+    61455,
+    16396,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    138,
+    "shal r{n:d}",
+    61695,
+    16416,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    139,
+    "shar r{n:d}",
+    61695,
+    16417,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    140,
+    "shld r{m:d}, r{n:d}",
+    61455,
+    16397,
+    {
+      n: 3840,
+      // n
+      m: 240
+      // m
+    }
+  ],
+  [
+    141,
+    "shll r{n:d}",
+    61695,
+    16384,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    142,
+    "shll2 r{n:d}",
+    61695,
+    16392,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    143,
+    "shll8 r{n:d}",
+    61695,
+    16408,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    144,
+    "shll16 r{n:d}",
+    61695,
+    16424,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    145,
+    "shlr r{n:d}",
+    61695,
+    16385,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    146,
+    "shlr2 r{n:d}",
+    61695,
+    16393,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    147,
+    "shlr8 r{n:d}",
+    61695,
+    16409,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    148,
+    "shlr16 r{n:d}",
+    61695,
+    16425,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    149,
+    "bf 0x{d:04x}",
+    65280,
+    35584,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    150,
+    "bf.s 0x{d:04x}",
+    65280,
+    36608,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    151,
+    "bt 0x{d:04x}",
+    65280,
+    35072,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    152,
+    "bt.s 0x{d:04x}",
+    65280,
+    36096,
+    {
+      d: 255
+      // d
+    }
+  ],
+  [
+    153,
+    "bra 0x{d:04x}",
+    61440,
+    40960,
+    {
+      d: 4095
+      // d
+    }
+  ],
+  [
+    154,
+    "braf r{m:d}",
+    61695,
+    35,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    155,
+    "bsr 0x{d:04x}",
+    61440,
+    45056,
+    {
+      d: 4095
+      // d
+    }
+  ],
+  [
+    156,
+    "bsrf r{m:d}",
+    61695,
+    3,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    157,
+    "jmp @r{m:d}",
+    61695,
+    16427,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    158,
+    "jsr @r{m:d}",
+    61695,
+    16395,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    161,
+    "rts",
+    65535,
+    11,
+    {}
+  ],
+  [
+    164,
+    "clrmac",
+    65535,
+    40,
+    {}
+  ],
+  [
+    165,
+    "clrs",
+    65535,
+    72,
+    {}
+  ],
+  [
+    166,
+    "clrt",
+    65535,
+    8,
+    {}
+  ],
+  [
+    169,
+    "ldc r{m:d}, SR",
+    61695,
+    16398,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    170,
+    "ldc.l @r{m:d}+, SR",
+    61695,
+    16391,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    172,
+    "ldc r{m:d}, GBR",
+    61695,
+    16414,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    173,
+    "ldc.l @r{m:d}+, GBR",
+    61695,
+    16407,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    174,
+    "ldc r{m:d}, VBR",
+    61695,
+    16430,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    175,
+    "ldc.l @r{m:d}+, VBR",
+    61695,
+    16423,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    184,
+    "ldc r{m:d}, SSR",
+    61695,
+    16446,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    185,
+    "ldc.l @r{m:d}+, SSR",
+    61695,
+    16439,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    186,
+    "ldc r{m:d}, SPC",
+    61695,
+    16462,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    187,
+    "ldc.l @r{m:d}+, SPC",
+    61695,
+    16455,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    188,
+    "ldc r{m:d}, DBR",
+    61695,
+    16634,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    189,
+    "ldc.l @r{m:d}+, DBR",
+    61695,
+    16630,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    190,
+    "ldc r{m:d}, r{n:d}_BANK",
+    61583,
+    16526,
+    {
+      n: 112,
+      // n
+      m: 3840
+      // m
+    }
+  ],
+  [
+    191,
+    "ldc.l @r{m:d}+, r{n:d}_BANK",
+    61583,
+    16519,
+    {
+      n: 112,
+      // n
+      m: 3840
+      // m
+    }
+  ],
+  [
+    194,
+    "lds r{m:d}, MACH",
+    61695,
+    16394,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    195,
+    "lds.l @r{m:d}+, MACH",
+    61695,
+    16390,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    196,
+    "lds r{m:d}, MACL",
+    61695,
+    16410,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    197,
+    "lds.l @r{m:d}+, MACL",
+    61695,
+    16406,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    198,
+    "lds r{m:d}, PR",
+    61695,
+    16426,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    199,
+    "lds.l @r{m:d}+, PR",
+    61695,
+    16422,
+    {
+      m: 3840
+      // m
+    }
+  ],
+  [
+    212,
+    "ldtlb",
+    65535,
+    56,
+    {}
+  ],
+  [
+    213,
+    "movca.l R0, @r{n:d}",
+    61695,
+    195,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    214,
+    "nop",
+    65535,
+    9,
+    {}
+  ],
+  [
+    215,
+    "ocbi @r{n:d}",
+    61695,
+    147,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    216,
+    "ocbp @r{n:d}",
+    61695,
+    163,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    217,
+    "ocbwb @r{n:d}",
+    61695,
+    179,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    218,
+    "pref @r{n:d}",
+    61695,
+    131,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    221,
+    "rte",
+    65535,
+    43,
+    {}
+  ],
+  [
+    224,
+    "sets",
+    65535,
+    88,
+    {}
+  ],
+  [
+    225,
+    "sett",
+    65535,
+    24,
+    {}
+  ],
+  [
+    226,
+    "sleep",
+    65535,
+    27,
+    {}
+  ],
+  [
+    228,
+    "stc SR, r{n:d}",
+    61695,
+    2,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    229,
+    "stc.l SR, @-r{n:d}",
+    61695,
+    16387,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    231,
+    "stc GBR, r{n:d}",
+    61695,
+    18,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    232,
+    "stc.l GBR, @-r{n:d}",
+    61695,
+    16403,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    233,
+    "stc VBR, r{n:d}",
+    61695,
+    34,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    234,
+    "stc.l VBR, @-r{n:d}",
+    61695,
+    16419,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    241,
+    "stc SGR, r{n:d}",
+    61695,
+    58,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    242,
+    "stc.l SGR, @-r{n:d}",
+    61695,
+    16434,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    243,
+    "stc SSR, r{n:d}",
+    61695,
+    50,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    244,
+    "stc.l SSR, @-r{n:d}",
+    61695,
+    16435,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    245,
+    "stc SPC, r{n:d}",
+    61695,
+    66,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    246,
+    "stc.l SPC, @-r{n:d}",
+    61695,
+    16451,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    247,
+    "stc DBR, r{n:d}",
+    61695,
+    250,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    248,
+    "stc.l DBR, @-r{n:d}",
+    61695,
+    16626,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    249,
+    "stc r{m:d}_BANK, r{n:d}",
+    61583,
+    130,
+    {
+      n: 3840,
+      // n
+      m: 112
+      // m
+    }
+  ],
+  [
+    250,
+    "stc.l r{m:d}_BANK, @-r{n:d}",
+    61583,
+    16515,
+    {
+      n: 3840,
+      // n
+      m: 112
+      // m
+    }
+  ],
+  [
+    251,
+    "sts MACH, r{n:d}",
+    61695,
+    10,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    252,
+    "sts.l MACH, @-r{n:d}",
+    61695,
+    16386,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    253,
+    "sts MACL, r{n:d}",
+    61695,
+    26,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    254,
+    "sts.l MACL, @-r{n:d}",
+    61695,
+    16402,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    255,
+    "sts PR, r{n:d}",
+    61695,
+    42,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    256,
+    "sts.l PR, @-r{n:d}",
+    61695,
+    16418,
+    {
+      n: 3840
+      // n
+    }
+  ],
+  [
+    270,
+    "trapa 0x{i:04x}",
+    65280,
+    49920,
+    {
+      i: 255
+      // i
+    }
+  ]
+], Rs = {
+  0: "R{m:d} -> R{n:d}",
+  1: "h'{i:04x} -> sign extension -> R{n:d}",
+  4: "(R{d:d}*4) + (PC & 0xFFFFFFFC) + 4 -> R0",
+  5: "(R{d:d}*2 + PC + 4) -> sign extension -> R{n:d}",
+  6: "(R{d:d}*4 + (PC & 0xFFFFFFFC) + 4) -> sign extension -> R{n:d}",
+  7: "(R{m:d}) -> sign extension -> R{n:d}",
+  8: "(R{m:d}) -> sign extension -> R{n:d}",
+  9: "(R{m:d}) -> R{n:d}",
+  10: "R{m:d} -> (R{n:d})",
+  11: "R{m:d} -> (R{n:d})",
+  12: "R{m:d} -> (R{n:d})",
+  13: "(R{m:d}) -> sign extension -> R{n:d}, R{m:d}+1 -> R{m:d}",
+  14: "(R{m:d}) -> sign extension -> R{n:d}, R{m:d}+2 -> R{m:d}",
+  15: "(R{m:d}) -> R{n:d}, R{m:d}+4 -> R{m:d}",
+  16: "R{n:d}-1 -> R{n:d}, R{m:d} -> (R{n:d})",
+  17: "R{n:d}-2 -> R{n:d}, R{m:d} -> (R{n:d})",
+  18: "R{n:d}-4 -> R{n:d}, R{m:d} -> (R{n:d})",
+  25: "(R{d:d} + R{m:d}) -> sign extension -> R0",
+  28: "(R{d:d}*2 + R{m:d}) -> sign extension -> R0",
+  31: "(R{d:d}*4 + R{m:d}) -> R{n:d}",
+  33: "R0 -> (R{d:d} + R{n:d})",
+  35: "R0 -> (R{d:d}*2 + R{n:d})",
+  37: "R{m:d} -> (R{d:d}*4 + R{n:d})",
+  39: "(R0 + R{m:d}) -> sign extension -> R{n:d}",
+  40: "(R0 + R{m:d}) -> sign extension -> R{n:d}",
+  41: "(R0 + R{m:d}) -> R{n:d}",
+  42: "R{m:d} -> (R0 + R{n:d})",
+  43: "R{m:d} -> (R0 + R{n:d})",
+  44: "R{m:d} -> (R0 + R{n:d})",
+  45: "(R{d:d} + GBR) -> sign extension -> R0",
+  46: "(R{d:d}*2 + GBR) -> sign extension -> R0",
+  47: "(R{d:d}*4 + GBR) -> R0",
+  48: "R0 -> (R{d:d} + GBR)",
+  49: "R0 -> (R{d:d}*2 + GBR)",
+  50: "R0 -> (R{d:d}*4 + GBR)",
+  60: "T -> R{n:d}",
+  62: "R{m:d} -> swap lower 2 bytes -> R{n:d}",
+  63: "R{m:d} -> swap upper/lower words -> R{n:d}",
+  64: "R{m:d}:R{n:d} middle 32 bits -> R{n:d}",
+  79: "R{n:d} + R{m:d} -> R{n:d}",
+  80: "R{n:d} + (sign extension)h'{i:04x}",
+  81: "R{n:d} + R{m:d} + T -> R{n:d}, carry -> T",
+  82: "R{n:d} + R{m:d} -> R{n:d}, overflow -> T",
+  83: "If R0 = (sign extension)h'{i:04x}: 1 -> T Else: 0 -> T",
+  84: "If R{n:d} = R{m:d}: 1 -> T Else: 0 -> T",
+  85: "If R{n:d} >= R{m:d} (unsigned): 1 -> T Else: 0 -> T",
+  86: "If R{n:d} >= R{m:d} (signed): 1 -> T Else: 0 -> T",
+  87: "If R{n:d} > R{m:d} (unsigned): 1 -> T Else: 0 -> T",
+  88: "If R{n:d} > R{m:d} (signed): 1 -> T Else: 0 -> T",
+  89: "If R{n:d} > 0 (signed): 1 -> T Else: 0 -> T",
+  90: "If R{n:d} >= 0 (signed): 1 -> T Else: 0 -> T",
+  91: "If R{n:d} and R{m:d} have an equal byte: 1 -> T Else: 0 -> T",
+  96: "MSB of R{n:d} -> Q, MSB of R{m:d} -> M, M ^ Q -> T",
+  97: "0 -> M, 0 -> Q, 0 -> T",
+  98: "1-step division (R{n:d} / R{m:d})",
+  101: "Signed, R{n:d} * R{m:d} -> MACH:MACL 32 * 32 -> 64 bits",
+  102: "Unsigned, R{n:d} * R{m:d} -> MACH:MACL 32 * 32 -> 64 bits",
+  103: "R{n:d}-1 -> R{n:d} If R{n:d} = 0: 1 -> T Else: 0 -> T",
+  104: "R{m:d} sign-extended from byte -> R{n:d}",
+  105: "R{m:d} sign-extended from word -> R{n:d}",
+  106: "R{m:d} zero-extended from byte -> R{n:d}",
+  107: "R{m:d} zero-extended from word -> R{n:d}",
+  108: "Signed, (R{n:d}) * (R{m:d}) + MAC -> MAC 32 * 32 + 64 -> 64 bits",
+  109: "Signed, (R{n:d}) * (R{m:d}) + MAC -> MAC SH1: 16 * 16 + 42 -> 42 bits Other: 16 * 16 + 64 -> 64 bits",
+  110: "R{n:d} * R{m:d} -> MACL 32 * 32 -> 32 bits",
+  112: "Signed, R{n:d} * R{m:d} -> MACL 16 * 16 -> 32 bits",
+  113: "Unsigned, R{n:d} * R{m:d} -> MACL 16 * 16 -> 32 bits",
+  114: "0 - R{m:d} -> R{n:d}",
+  115: "0 - R{m:d} - T -> R{n:d}, borrow -> T",
+  116: "R{n:d} - R{m:d} -> R{n:d}",
+  117: "R{n:d} - R{m:d} - T -> R{n:d}, borrow -> T",
+  118: "R{n:d} - R{m:d} -> R{n:d}, underflow -> T",
+  119: "R{n:d} & R{m:d} -> R{n:d}",
+  120: "R0 & (zero extend)h'{i:04x} -> R0",
+  121: "(R0 + GBR) & (zero extend)h'{i:04x} -> (R0 + GBR)",
+  122: "~R{m:d} -> R{n:d}",
+  123: "R{n:d} | R{m:d} -> R{n:d}",
+  124: "R0 | (zero extend)h'{i:04x} -> R0",
+  125: "(R0 + GBR) | (zero extend)h'{i:04x} -> (R0 + GBR)",
+  126: "If (R{n:d}) = 0: 1 -> T Else: 0 -> T 1 -> MSB of (R{n:d})",
+  127: "If R{n:d} & R{m:d} = 0: 1 -> T Else: 0 -> T",
+  128: "If R0 & (zero extend)h'{i:04x} = 0: 1 -> T Else: 0 -> T",
+  129: "If (R0 + GBR) & (zero extend)h'{i:04x} = 0: 1 -> T Else 0: -> T",
+  130: "R{n:d} ^ R{m:d} -> R{n:d}",
+  131: "R0 ^ (zero extend)h'{i:04x} -> R0",
+  132: "(R0 + GBR) ^ (zero extend)h'{i:04x} -> (R0 + GBR)",
+  133: "T << R{n:d} << T",
+  134: "T >> R{n:d} >> T",
+  135: "T << R{n:d} << MSB",
+  136: "LSB >> R{n:d} >> T",
+  137: "If R{m:d} >= 0: R{n:d} << R{m:d} -> R{n:d} If R{m:d} < 0: R{n:d} >> |R{m:d}| -> [MSB -> R{n:d}]",
+  138: "T << R{n:d} << 0",
+  139: "MSB >> R{n:d} >> T",
+  140: "If R{m:d} >= 0: R{n:d} << R{m:d} -> R{n:d} If R{m:d} < 0: R{n:d} >> |R{m:d}| -> [0 -> R{n:d}]",
+  141: "T << R{n:d} << 0",
+  142: "R{n:d} << 2 -> R{n:d}",
+  143: "R{n:d} << 8 -> R{n:d}",
+  144: "R{n:d} << 16 -> R{n:d}",
+  145: "0 >> R{n:d} >> T",
+  146: "R{n:d} >> 2 -> [0 -> R{n:d}]",
+  147: "R{n:d} >> 8 -> [0 -> R{n:d}]",
+  148: "R{n:d} >> 16 -> [0 -> R{n:d}]",
+  149: "If T = 0: R{d:d}*2 + PC + 4 -> PC Else: nop",
+  150: "If T = 0: R{d:d}*2 + PC + 4 -> PC Else: nop (Delayed branch)",
+  151: "If T = 1: R{d:d}*2 + PC + 4 -> PC Else: nop",
+  152: "If T = 1: R{d:d}*2 + PC + 4 -> PC Else: nop (Delayed branch)",
+  153: "R{d:d}*2 + PC + 4 -> PC (Delayed branch)",
+  154: "R{m:d} + PC + 4 -> PC (Delayed branch)",
+  155: "PC + 4 -> PR, R{d:d}*2 + PC + 4 -> PC (Delayed branch)",
+  156: "PC + 4 -> PR, R{m:d} + PC + 4 -> PC (Delayed branch)",
+  157: "R{m:d} -> PC (Delayed branch)",
+  158: "PC + 4 -> PR, R{m:d} -> PC (Delayed branch)",
+  161: "PR -> PC Delayed branch",
+  164: "0 -> MACH, 0 -> MACL",
+  165: "0 -> S",
+  166: "0 -> T",
+  169: "R{m:d} -> SR",
+  170: "(R{m:d}) -> SR, R{m:d}+4 -> R{m:d}",
+  172: "R{m:d} -> GBR",
+  173: "(R{m:d}) -> GBR, R{m:d}+4 -> R{m:d}",
+  174: "R{m:d} -> VBR",
+  175: "(R{m:d}) -> VBR, R{m:d}+4 -> R{m:d}",
+  184: "R{m:d} -> SSR",
+  185: "(R{m:d}) -> SSR, R{m:d}+4 -> R{m:d}",
+  186: "R{m:d} -> SPC",
+  187: "(R{m:d}) -> SPC, R{m:d}+4 -> R{m:d}",
+  188: "R{m:d} -> DBR",
+  189: "(R{m:d}) -> DBR, R{m:d}+4 -> R{m:d}",
+  190: "R{m:d} -> R{n:d}_BANK (n = 0-7)",
+  191: "(R{m:d}) -> R{n:d}_BANK, R{m:d}+4 -> R{m:d}",
+  194: "R{m:d} -> MACH",
+  195: "(R{m:d}) -> MACH, R{m:d}+4 -> R{m:d}",
+  196: "R{m:d} -> MACL",
+  197: "(R{m:d}) -> MACL, R{m:d}+4 -> R{m:d}",
+  198: "R{m:d} -> PR",
+  199: "(R{m:d}) -> PR, R{m:d}+4 -> R{m:d}",
+  212: "PTEH/PTEL -> TLB",
+  213: "R0 -> (R{n:d}) (without fetching cache block)",
+  214: "No operation",
+  215: "Invalidate operand cache block",
+  216: "Write back and invalidate operand cache block",
+  217: "Write back operand cache block",
+  218: "(R{n:d}) -> operand cache",
+  221: "Delayed branch SH1*,SH2*: stack area -> PC/SR SH3*,SH4*: SSR/SPC -> SR/PC",
+  224: "1 -> S",
+  225: "1 -> T",
+  226: "Sleep or standby",
+  228: "SR -> R{n:d}",
+  229: "R{n:d}-4 -> R{n:d}, SR -> (R{n:d})",
+  231: "GBR -> R{n:d}",
+  232: "R{n:d}-4 -> R{n:d}, GBR -> (R{n:d})",
+  233: "VBR -> R{n:d}",
+  234: "R{n:d}-4 -> R{n:d}, VBR -> (R{n:d})",
+  241: "SGR -> R{n:d}",
+  242: "R{n:d}-4 -> R{n:d}, SGR -> (R{n:d})",
+  243: "SSR -> R{n:d}",
+  244: "R{n:d}-4 -> R{n:d}, SSR -> (R{n:d})",
+  245: "SPC -> R{n:d}",
+  246: "R{n:d}-4 -> R{n:d}, SPC -> (R{n:d})",
+  247: "DBR -> R{n:d}",
+  248: "R{n:d}-4 -> R{n:d}, DBR -> (R{n:d})",
+  249: "R{m:d}_BANK -> R{n:d} (m = 0-7)",
+  250: "R{n:d}-4 -> R{n:d}, R{m:d}_BANK -> (R{n:d}) (m = 0-7)",
+  251: "MACH -> R{n:d}",
+  252: "R{n:d}-4 -> R{n:d}, MACH -> (R{n:d})",
+  253: "MACL -> R{n:d}",
+  254: "R{n:d}-4 -> R{n:d}, MACL -> (R{n:d})",
+  255: "PR -> R{n:d}",
+  256: "R{n:d}-4 -> R{n:d}, PR -> (R{n:d})",
+  270: "SH1*,SH2*: PC/SR -> stack area, (h'{i:04x}*4 + VBR) -> PC SH3*,SH4*: PC/SR -> SPC/SSR, h'{i:04x}*4 -> TRA, 0x160 -> EXPEVT, VBR + 0x0100 -> PC"
+}, ks = ws, _s = Rs;
+class qs {
+  constructor(t = !1) {
+    D2(this, "debug");
+    this.debug = t;
+  }
+  disasm(t, n = !1) {
+    for (const a of ks) {
+      const [s, o, d, c, f] = a, h = {};
+      if ((t & d) === c) {
+        for (const g in f) {
+          const w = f[g];
+          if (!(w & 255)) {
+            h[g] = (t & w) >> 8;
+            continue;
+          }
+          if (!(w & 3855)) {
+            h[g] = (t & w) >> 4;
+            continue;
+          }
+          if (!(w & 3840)) {
+            h[g] = t & w;
+            continue;
+          }
+          if (!(w & 61440)) {
+            h[g] = t & w;
+            continue;
+          }
+          if (!(w & 4080)) {
+            h[g] = t & w;
+            continue;
+          }
+          if (!(w & 3983)) {
+            h[g] = t & w;
+            continue;
+          }
+        }
+        if (n)
+          return [o, h];
+        const p = { ...h };
+        if ("d" in p && (p.d *= 4), console.log(o.replace(/{(\w+)}/g, (g, w) => p[w].toString())), this.debug) {
+          const g = _s[s];
+          g && console.log(Ui(g, p));
+        }
+        return [s, h];
+      }
+    }
+    if (n)
+      return [".word 0x{w:08x}", {
+        w: (t & 61440) << 12 | (t & 3840) << 8 | (t & 240) << 4 | t & 15
+      }];
+    throw new Error(`Unknown OPCode : ${t.toString(16).toUpperCase()}`);
+  }
+}
+const Ss = {
   // Ayu
   "#~gui.background": "#202020",
   // default is #25282b but I like darker
@@ -1978,467 +4093,1102 @@ const fo = {
   "#~lineHighlight": "#2B2B2B"
   // '#1B1B1B', if you want darker
 };
-function ci(i, t, r) {
-  const a = i.slice();
-  return a[21] = t[r], a[23] = r, a;
+function mi(l) {
+  return l.startsWith("mov") ? "mov" : l === "nop" ? "nop" : ["bf", "bra", "bt", "bf.s", "bt.s", "jmp"].includes(l) ? "jmp" : l === "rts" ? "ret" : l.startsWith("cmp") ? "cmp" : l.startsWith("bsr") ? "call" : l.startsWith("add") || l.startsWith("mul") || l.startsWith("mac") || l.startsWith("neg") || l.startsWith("sub") || l.startsWith("not") ? "math" : l.startsWith(".") ? "trap" : "";
 }
-function po(i) {
-  let t;
-  return {
-    c() {
-      t = k("p"), t.textContent = "Debugger state KO", e(t, "class", "skeleton svelte-hcz1no");
-    },
-    m(r, a) {
-      S(r, t, a);
-    },
-    p: _,
-    d(r) {
-      r && U(t);
-    }
-  };
+function gi(l) {
+  return l.replace(/(0x[0-9a-fA-F]+)/g, '<span class="num">$1</span>').replace(/[(),+]/g, (t) => `<span class="math">${t}</span>`);
 }
-function ho(i) {
-  let t, r, a = (
-    /*local_pc*/
-    (i[0] >>> 0).toString(16).padStart(8, "0") + ""
-  ), o, s, d, c = [], f = /* @__PURE__ */ new Map(), p = H2(
-    /*instructions*/
-    i[9]
-  );
-  const b = (g) => (
+function vi(l, t, n) {
+  const a = l.slice();
+  a[4] = t[n], a[9] = n;
+  const s = Ui(.../*disassembler*/
+  a[3].disasm(
     /*instr*/
-    g[21].pc
+    a[4].value,
+    !0
+  ));
+  a[5] = s;
+  const o = (
+    /*opcode_string*/
+    a[5].split(" ")[0]
   );
-  for (let g = 0; g < p.length; g += 1) {
-    let w = ci(i, p, g), x = b(w);
-    f.set(x, c[g] = di(x, w));
-  }
-  return {
-    c() {
-      t = k("div"), r = Z("Current PC: "), o = Z(a), s = E(), d = k("div");
-      for (let g = 0; g < c.length; g += 1)
-        c[g].c();
-      e(d, "class", "disassembly svelte-hcz1no"), e(
-        d,
-        "style",
-        /*styles*/
-        i[10]
-      );
-    },
-    m(g, w) {
-      S(g, t, w), n(t, r), n(t, o), S(g, s, w), S(g, d, w);
-      for (let x = 0; x < c.length; x += 1)
-        c[x] && c[x].m(d, null);
-    },
-    p(g, w) {
-      w & /*local_pc*/
-      1 && a !== (a = /*local_pc*/
-      (g[0] >>> 0).toString(16).padStart(8, "0") + "") && N0(o, a), w & /*local_pc, instructions*/
-      513 && (p = H2(
-        /*instructions*/
-        g[9]
-      ), c = Fi(c, w, b, 1, g, p, f, d, Li, di, null, ci));
-    },
-    d(g) {
-      g && (U(t), U(s), U(d));
-      for (let w = 0; w < c.length; w += 1)
-        c[w].d();
-    }
-  };
+  a[6] = o;
+  const d = (
+    /*opcode_string*/
+    a[5].split(" ").slice(1).join(" ")
+  );
+  return a[7] = d, a;
 }
-function uo(i) {
-  let t;
+function xi(l, t) {
+  let n, a, s, o, d = (
+    /*instr*/
+    t[4].pc.toString(16).padStart(8, "0") + ""
+  ), c, f, h, p = (
+    /*opcode_op*/
+    t[6] + ""
+  ), g, w, G, k, v = gi(
+    /*opcode_args*/
+    t[7]
+  ) + "", S, R, O, U = (
+    /*instr*/
+    t[4].value.toString(16).padStart(4, "0") + ""
+  ), q, T;
   return {
-    c() {
-      t = k("p"), t.textContent = "Fetching data ...", e(t, "class", "skeleton svelte-hcz1no");
-    },
-    m(r, a) {
-      S(r, t, a);
-    },
-    p: _,
-    d(r) {
-      r && U(t);
-    }
-  };
-}
-function go(i) {
-  let t;
-  return {
-    c() {
-      t = k("p"), t.textContent = "Loading ...", e(t, "class", "skeleton svelte-hcz1no");
-    },
-    m(r, a) {
-      S(r, t, a);
-    },
-    p: _,
-    d(r) {
-      r && U(t);
-    }
-  };
-}
-function di(i, t) {
-  let r, a, o, s, d, c, f, p, b, g, w;
-  return {
-    key: i,
+    key: l,
     first: null,
     c() {
-      r = k("div"), a = k("div"), a.textContent = "-", o = E(), s = k("div"), s.textContent = `${/*instr*/
-      t[21].pc.toString(16).padStart(8, "0")}`, d = E(), c = k("div"), c.textContent = `${"OP_" + /*instr*/
-      t[21].value}`, f = E(), p = k("div"), p.textContent = "-", b = E(), g = k("div"), g.textContent = `; ${/*instr*/
-      t[21].value.toString(16).padStart(4, "0")}`, w = E(), e(a, "class", "svelte-hcz1no"), e(s, "class", "svelte-hcz1no"), e(c, "class", "svelte-hcz1no"), e(p, "class", "svelte-hcz1no"), e(g, "class", "svelte-hcz1no"), e(r, "class", "line svelte-hcz1no"), ht(
-        r,
+      n = _("div"), a = _("div"), a.textContent = "-", s = B(), o = _("div"), c = Y(d), f = B(), h = _("div"), g = Y(p), G = B(), k = _("div"), S = B(), R = _("div"), O = Y("; "), q = Y(U), T = B(), e(a, "class", "svelte-eqympm"), e(o, "class", "svelte-eqympm"), e(h, "class", w = ii(mi(
+        /*opcode_op*/
+        t[6]
+      )) + " svelte-eqympm"), e(k, "class", "svelte-eqympm"), e(R, "class", "svelte-eqympm"), e(n, "class", "line svelte-eqympm"), Je(
+        n,
         "current",
         /*local_pc*/
         t[0] >>> 0 == /*instr*/
-        t[21].pc >>> 0
-      ), this.first = r;
+        t[4].pc >>> 0
+      ), this.first = n;
     },
-    m(x, z) {
-      S(x, r, z), n(r, a), n(r, o), n(r, s), n(r, d), n(r, c), n(r, f), n(r, p), n(r, b), n(r, g), n(r, w);
+    m(x, u) {
+      z(x, n, u), r(n, a), r(n, s), r(n, o), r(o, c), r(n, f), r(n, h), r(h, g), r(n, G), r(n, k), k.innerHTML = v, r(n, S), r(n, R), r(R, O), r(R, q), r(n, T);
     },
-    p(x, z) {
-      t = x, z & /*local_pc, instructions*/
-      513 && ht(
-        r,
+    p(x, u) {
+      t = x, u & /*instructions*/
+      2 && d !== (d = /*instr*/
+      t[4].pc.toString(16).padStart(8, "0") + "") && t0(c, d), u & /*instructions*/
+      2 && p !== (p = /*opcode_op*/
+      t[6] + "") && t0(g, p), u & /*instructions*/
+      2 && w !== (w = ii(mi(
+        /*opcode_op*/
+        t[6]
+      )) + " svelte-eqympm") && e(h, "class", w), u & /*instructions*/
+      2 && v !== (v = gi(
+        /*opcode_args*/
+        t[7]
+      ) + "") && (k.innerHTML = v), u & /*instructions*/
+      2 && U !== (U = /*instr*/
+      t[4].value.toString(16).padStart(4, "0") + "") && t0(q, U), u & /*local_pc, instructions*/
+      3 && Je(
+        n,
         "current",
         /*local_pc*/
         t[0] >>> 0 == /*instr*/
-        t[21].pc >>> 0
+        t[4].pc >>> 0
       );
     },
     d(x) {
-      x && U(r);
+      x && $(n);
     }
   };
 }
-function vo(i) {
-  let t, r, a, o, s, d, c, f, p, b, g, w, x, z, q, m, y, H, C, P, D, $, M, h, j;
-  f = new ao({}), g = new Wa({}), z = new to({}), y = new co({}), P = new xi({});
-  function T(R, ne) {
+function Gs(l) {
+  let t, n = [], a = /* @__PURE__ */ new Map(), s = nl(
+    /*instructions*/
+    l[1]
+  );
+  const o = (d) => (
+    /*instr*/
+    d[4].pc
+  );
+  for (let d = 0; d < s.length; d += 1) {
+    let c = vi(l, s, d), f = o(c);
+    a.set(f, n[d] = xi(f, c));
+  }
+  return {
+    c() {
+      t = _("div");
+      for (let d = 0; d < n.length; d += 1)
+        n[d].c();
+      e(t, "class", "disassembly svelte-eqympm"), e(
+        t,
+        "style",
+        /*styles*/
+        l[2]
+      );
+    },
+    m(d, c) {
+      z(d, t, c);
+      for (let f = 0; f < n.length; f += 1)
+        n[f] && n[f].m(t, null);
+    },
+    p(d, [c]) {
+      c & /*local_pc, instructions, disassembler*/
+      11 && (s = nl(
+        /*instructions*/
+        d[1]
+      ), n = Wi(n, c, o, 1, d, s, a, t, Yi, xi, null, vi));
+    },
+    i: y,
+    o: y,
+    d(d) {
+      d && $(t);
+      for (let c = 0; c < n.length; c += 1)
+        n[c].d();
+    }
+  };
+}
+function Cs(l, t, n) {
+  let { local_pc: a } = t, { instructions: s = [] } = t;
+  const o = Object.entries(Ss).map((c) => `--${c[0].replaceAll(" ", "-").replaceAll(/[^a-zA-Z-]/g, "")}: ${c[1]}`).join("; ");
+  let d = new qs(!0);
+  return rl(() => {
+  }), l.$$set = (c) => {
+    "local_pc" in c && n(0, a = c.local_pc), "instructions" in c && n(1, s = c.instructions);
+  }, [a, s, o, d];
+}
+class Ms extends K {
+  constructor(t) {
+    super(), V(this, t, Cs, Gs, I, { local_pc: 0, instructions: 1 });
+  }
+}
+function Us(l) {
+  let t;
+  return {
+    c() {
+      t = _("p"), t.textContent = "Debugger state KO", e(t, "class", "skeleton svelte-hcbstf");
+    },
+    m(n, a) {
+      z(n, t, a);
+    },
+    p: y,
+    i: y,
+    o: y,
+    d(n) {
+      n && $(t);
+    }
+  };
+}
+function $s(l) {
+  let t, n, a = (
+    /*local_pc*/
+    (l[0] >>> 0).toString(16).padStart(8, "0") + ""
+  ), s, o, d, c;
+  return d = new Ms({
+    props: {
+      instructions: (
+        /*instructions*/
+        l[9]
+      ),
+      local_pc: (
+        /*local_pc*/
+        l[0]
+      )
+    }
+  }), {
+    c() {
+      t = _("div"), n = Y("Current PC: "), s = Y(a), o = B(), L(d.$$.fragment);
+    },
+    m(f, h) {
+      z(f, t, h), r(t, n), r(t, s), z(f, o, h), F(d, f, h), c = !0;
+    },
+    p(f, h) {
+      (!c || h & /*local_pc*/
+      1) && a !== (a = /*local_pc*/
+      (f[0] >>> 0).toString(16).padStart(8, "0") + "") && t0(s, a);
+      const p = {};
+      h & /*local_pc*/
+      1 && (p.local_pc = /*local_pc*/
+      f[0]), d.$set(p);
+    },
+    i(f) {
+      c || (P(d.$$.fragment, f), c = !0);
+    },
+    o(f) {
+      j(d.$$.fragment, f), c = !1;
+    },
+    d(f) {
+      f && ($(t), $(o)), A(d, f);
+    }
+  };
+}
+function zs(l) {
+  let t;
+  return {
+    c() {
+      t = _("p"), t.textContent = "Fetching data ...", e(t, "class", "skeleton svelte-hcbstf");
+    },
+    m(n, a) {
+      z(n, t, a);
+    },
+    p: y,
+    i: y,
+    o: y,
+    d(n) {
+      n && $(t);
+    }
+  };
+}
+function Os(l) {
+  let t;
+  return {
+    c() {
+      t = _("p"), t.textContent = "Loading ...", e(t, "class", "skeleton svelte-hcbstf");
+    },
+    m(n, a) {
+      z(n, t, a);
+    },
+    p: y,
+    i: y,
+    o: y,
+    d(n) {
+      n && $(t);
+    }
+  };
+}
+function Es(l) {
+  let t, n, a, s, o, d, c, f, h, p, g, w, G, k, v, S, R, O, U, q, T, x, u, C, M, W, Q;
+  f = new vs({}), g = new ds({}), k = new hs({}), R = new ys({}), q = new ti({});
+  const Z = [Os, zs, $s, Us], J = [];
+  function et(D, le) {
     return (
       /*debugger_state*/
-      R[2] === 0 ? go : (
+      D[2] === 0 ? 0 : (
         /*debugger_state*/
-        R[2] === 1 ? uo : (
+        D[2] === 1 ? 1 : (
           /*debugger_state*/
-          R[2] === 10 ? ho : po
+          D[2] === 10 ? 2 : 3
         )
       )
     );
   }
-  let Re = T(i), N = Re(i);
-  return {
+  return u = et(l), C = J[u] = Z[u](l), {
     c() {
-      t = k("div"), r = k("div"), a = k("h4"), o = Z("Debugger - "), s = Z(
+      t = _("div"), n = _("div"), a = _("h4"), s = Y("Debugger - "), o = Y(
         /*$state*/
-        i[1]
-      ), d = E(), c = k("button"), K(f.$$.fragment), p = E(), b = k("button"), K(g.$$.fragment), w = E(), x = k("button"), K(z.$$.fragment), q = E(), m = k("button"), K(y.$$.fragment), H = E(), C = k("button"), K(P.$$.fragment), D = E(), $ = k("div"), N.c(), e(a, "class", "header"), e(c, "class", "toolbar-action"), e(c, "type", "button"), e(c, "title", "Run until"), e(c, "tabindex", "0"), e(c, "id", "btn_forwards_debug"), e(b, "class", "toolbar-action"), e(b, "type", "button"), e(b, "title", "step over"), e(b, "tabindex", "0"), e(b, "id", "btn_step_over_debug"), e(x, "class", "toolbar-action"), e(x, "type", "button"), e(x, "title", "step in"), e(x, "tabindex", "0"), e(x, "id", "btn_step_in_debug"), e(m, "class", "toolbar-action"), e(m, "type", "button"), e(m, "title", "halt"), e(m, "tabindex", "0"), e(m, "id", "btn_close_debug"), e(C, "class", "toolbar-action"), e(C, "type", "button"), e(C, "title", "close"), e(C, "tabindex", "0"), e(C, "id", "btn_close_debug"), e(r, "class", "titlebar"), e($, "class", "contents"), e(t, "class", "debugging-panel view-panel svelte-hcz1no"), ht(
+        l[1]
+      ), d = B(), c = _("button"), L(f.$$.fragment), h = B(), p = _("button"), L(g.$$.fragment), w = B(), G = _("button"), L(k.$$.fragment), v = B(), S = _("button"), L(R.$$.fragment), O = B(), U = _("button"), L(q.$$.fragment), T = B(), x = _("div"), C.c(), e(a, "class", "header"), e(c, "class", "toolbar-action"), e(c, "type", "button"), e(c, "title", "Run until"), e(c, "tabindex", "0"), e(c, "id", "btn_forwards_debug"), e(p, "class", "toolbar-action"), e(p, "type", "button"), e(p, "title", "step over"), e(p, "tabindex", "0"), e(p, "id", "btn_step_over_debug"), e(G, "class", "toolbar-action"), e(G, "type", "button"), e(G, "title", "step in"), e(G, "tabindex", "0"), e(G, "id", "btn_step_in_debug"), e(S, "class", "toolbar-action"), e(S, "type", "button"), e(S, "title", "halt"), e(S, "tabindex", "0"), e(S, "id", "btn_close_debug"), e(U, "class", "toolbar-action"), e(U, "type", "button"), e(U, "title", "close"), e(U, "tabindex", "0"), e(U, "id", "btn_close_debug"), e(n, "class", "titlebar"), e(x, "class", "contents"), e(t, "class", "debugging-panel view-panel svelte-hcbstf"), Je(
         t,
         "visible",
         /*$debugPane*/
-        i[3]
+        l[3]
       );
     },
-    m(R, ne) {
-      S(R, t, ne), n(t, r), n(r, a), n(a, o), n(a, s), n(r, d), n(r, c), L(f, c, null), n(r, p), n(r, b), L(g, b, null), n(r, w), n(r, x), L(z, x, null), n(r, q), n(r, m), L(y, m, null), n(r, H), n(r, C), L(P, C, null), n(t, D), n(t, $), N.m($, null), M = !0, h || (j = [
+    m(D, le) {
+      z(D, t, le), r(t, n), r(n, a), r(a, s), r(a, o), r(n, d), r(n, c), F(f, c, null), r(n, h), r(n, p), F(g, p, null), r(n, w), r(n, G), F(k, G, null), r(n, v), r(n, S), F(R, S, null), r(n, O), r(n, U), F(q, U, null), r(t, T), r(t, x), J[u].m(x, null), M = !0, W || (Q = [
         ee(
           c,
           "click",
           /*doFastForwards*/
-          i[7]
+          l[7]
         ),
         ee(
-          b,
+          p,
           "click",
           /*doStepOver*/
-          i[5]
+          l[5]
         ),
         ee(
-          x,
+          G,
           "click",
           /*doStepIn*/
-          i[6]
+          l[6]
         ),
         ee(
-          m,
+          S,
           "click",
           /*doHalt*/
-          i[8]
+          l[8]
         ),
         ee(
-          C,
+          U,
           "click",
           /*doClose*/
-          i[4]
+          l[4]
         )
-      ], h = !0);
+      ], W = !0);
     },
-    p(R, [ne]) {
-      (!M || ne & /*$state*/
-      2) && N0(
-        s,
+    p(D, [le]) {
+      (!M || le & /*$state*/
+      2) && t0(
+        o,
         /*$state*/
-        R[1]
-      ), Re === (Re = T(R)) && N ? N.p(R, ne) : (N.d(1), N = Re(R), N && (N.c(), N.m($, null))), (!M || ne & /*$debugPane*/
-      8) && ht(
+        D[1]
+      );
+      let de = u;
+      u = et(D), u === de ? J[u].p(D, le) : (i2(), j(J[de], 1, 1, () => {
+        J[de] = null;
+      }), a2(), C = J[u], C ? C.p(D, le) : (C = J[u] = Z[u](D), C.c()), P(C, 1), C.m(x, null)), (!M || le & /*$debugPane*/
+      8) && Je(
         t,
         "visible",
         /*$debugPane*/
-        R[3]
+        D[3]
       );
     },
-    i(R) {
-      M || (B(f.$$.fragment, R), B(g.$$.fragment, R), B(z.$$.fragment, R), B(y.$$.fragment, R), B(P.$$.fragment, R), M = !0);
+    i(D) {
+      M || (P(f.$$.fragment, D), P(g.$$.fragment, D), P(k.$$.fragment, D), P(R.$$.fragment, D), P(q.$$.fragment, D), P(C), M = !0);
     },
-    o(R) {
-      Q(f.$$.fragment, R), Q(g.$$.fragment, R), Q(z.$$.fragment, R), Q(y.$$.fragment, R), Q(P.$$.fragment, R), M = !1;
+    o(D) {
+      j(f.$$.fragment, D), j(g.$$.fragment, D), j(k.$$.fragment, D), j(R.$$.fragment, D), j(q.$$.fragment, D), j(C), M = !1;
     },
-    d(R) {
-      R && U(t), F(f), F(g), F(z), F(y), F(P), N.d(), h = !1, Zr(j);
+    d(D) {
+      D && $(t), A(f), A(g), A(k), A(R), A(q), J[u].d(), W = !1, xt(Q);
     }
   };
 }
-function mo(i, t, r) {
-  let a, o, s, d, c, f;
-  te(i, Ze, (h) => r(1, a = h)), te(i, Z2, (h) => r(13, o = h)), te(i, yi, (h) => r(14, s = h)), te(i, mi, (h) => r(15, d = h)), te(i, cl, (h) => r(16, c = h)), te(i, R2, (h) => r(3, f = h));
-  const p = I2(), b = (h) => {
-    p("doClose", h), R2.set(!1);
-  }, g = (h) => {
-    const j = $();
+function Bs(l, t, n) {
+  let a, s, o, d, c, f;
+  re(l, lt, (u) => n(1, a = u)), re(l, ei, (u) => n(12, s = u)), re(l, Mi, (u) => n(13, o = u)), re(l, Ci, (u) => n(14, d = u)), re(l, gr, (u) => n(15, c = u)), re(l, Q2, (u) => n(3, f = u));
+  const h = V2(), p = (u) => {
+    h("doClose", u), Q2.set(!1);
+  }, g = (u) => {
+    const C = x();
     try {
-      c && window.Module.ccall("dumpOneFrame", null, [], []), window.Module.ccall("runOneFrame", null, ["number"], [1]), console.debug("runOneFrame OK - ", j);
-    } catch (T) {
-      return console.error(T), !1;
+      c && window.Module.ccall("dumpOneFrame", null, [], []), window.Module.ccall("runOneFrame", null, ["number"], [1]), console.debug("runOneFrame OK - ", C), n(0, R += 2);
+    } catch (M) {
+      return console.error(M), !1;
     }
-    p("doStepOver", h);
-  }, w = (h) => {
-    const j = $();
+    h("doStepOver", u);
+  }, w = (u) => {
+    const C = x();
     try {
-      c && window.Module.ccall("dumpOneFrame", null, [], []), window.Module.ccall("runOneFrame", null, ["number"], [1]), console.debug("runOneFrame OK - ", j);
-    } catch (T) {
-      return console.error(T), !1;
+      c && window.Module.ccall("dumpOneFrame", null, [], []), window.Module.ccall("runOneFrame", null, ["number"], [1]), console.debug("runOneFrame OK - ", C), n(0, R += 2);
+    } catch (M) {
+      return console.error(M), !1;
     }
-    p("doStepIn", h);
-  }, x = (h) => {
-    window.Module.ccall("runFrame", null, [], []), p("doFastForwards", h);
-  }, z = (h) => {
-    p("doHalt", h);
+    h("doStepIn", u);
+  }, G = (u) => {
+    window.Module.ccall("runFrame", null, [], []), h("doFastForwards", u);
+  }, k = (u) => {
+    h("doHalt", u);
   };
-  let q = null, m = null, y, H = 0, C = [];
-  const P = () => {
-    if (m && q) {
-      r(0, y = q());
-      for (let h = 0; h < 30; h++) {
-        let j = m(y + h * 2);
-        C.push({
-          pc: (y >>> 0) + h * 2,
-          value: j
+  let v = null, S = null, R, O = 0, U = [];
+  const q = () => {
+    if (S && v) {
+      n(0, R = v());
+      for (let u = 0; u < 30; u++) {
+        let C = S(R + u * 2);
+        U.push({
+          pc: (R >>> 0) + u * 2,
+          value: C
         });
       }
       return !0;
     }
     return !1;
-  }, D = () => {
-    P() ? (console.log(C), r(2, H = 10)) : (console.error("Can't load instructions ..."), r(2, H = -1));
-  }, $ = () => m && q ? (r(0, y = q()), ri.set(y), m(y)) : null, M = Object.entries(fo).map((h) => `--${h[0].replaceAll(" ", "-").replaceAll(/[^a-zA-Z-]/g, "")}: ${h[1]}`).join("; ");
-  return P2(() => {
-  }), i.$$.update = () => {
-    if (i.$$.dirty & /*$getPC, localGetPC, local_pc*/
-    34817 && d !== void 0 && (r(11, q = d), r(0, y = q() >>> 0), ri.set(y)), i.$$.dirty & /*$readMemory2Quick*/
-    16384 && s !== void 0 && r(12, m = s), i.$$.dirty & /*localReadMem, localGetPC, $debugging, $state, local_pc*/
-    14339 && m && q && o && a === "running") {
+  }, T = () => {
+    q() ? (console.log(U), n(2, O = 10)) : (console.error("Can't load instructions ..."), n(2, O = -1));
+  }, x = () => S && v ? (n(0, R = v()), oi.set(R), S(R)) : null;
+  return rl(() => {
+  }), l.$$.update = () => {
+    if (l.$$.dirty & /*$getPC, localGetPC, local_pc*/
+    17409 && d !== void 0 && (n(10, v = d), n(0, R = v() >>> 0), oi.set(R)), l.$$.dirty & /*$readMemory2Quick*/
+    8192 && o !== void 0 && n(11, S = o), l.$$.dirty & /*localReadMem, localGetPC, $debugging, $state, local_pc*/
+    7171 && S && v && s && a === "running") {
       console.log("Ready to ready memory !");
       try {
-        r(0, y = q());
-        let h = m(y);
-        r(2, H = 1), D();
+        n(0, R = v());
+        let u = S(R);
+        n(2, O = 1), T();
       } catch {
       }
     }
   }, [
-    y,
+    R,
     a,
-    H,
+    O,
     f,
-    b,
+    p,
     g,
     w,
-    x,
-    z,
-    C,
-    M,
-    q,
-    m,
-    o,
+    G,
+    k,
+    U,
+    v,
+    S,
     s,
+    o,
     d
   ];
 }
-class yo extends V {
+class Hs extends K {
   constructor(t) {
-    super(), Y(this, t, mo, vo, A, {});
+    super(), V(this, t, Bs, Es, I, {});
   }
 }
-function xo(i) {
-  let t, r, a, o, s, d, c, f, p, b, g, w, x, z, q, m, y, H, C, P, D, $, M;
-  return r = new Ti({}), p = new Ya({}), g = new ra({}), x = new Zi({}), q = new Sa({}), q.$on(
-    "romChanged",
-    /*doRomLoad*/
-    i[8]
-  ), q.$on(
-    "doRun",
-    /*doRun*/
-    i[7]
-  ), q.$on(
-    "doDump",
-    /*doDump*/
-    i[4]
-  ), q.$on(
-    "doDebug",
-    /*doDebug*/
-    i[6]
-  ), q.$on(
-    "doFullscreen",
-    /*doFullscreen*/
-    i[1]
-  ), q.$on(
-    "doCopyScreen",
-    /*doCopyScreen*/
-    i[2]
-  ), q.$on(
-    "doSaveScreen",
-    /*doSaveScreen*/
-    i[3]
-  ), y = new yo({}), C = new La({}), C.$on(
-    "doRefresh",
-    /*doRefresh*/
-    i[5]
-  ), $ = new la({}), {
+function Ps(l) {
+  let t, n, a, s, o, d = [
+    { xmlns: "http://www.w3.org/2000/svg" },
+    { width: "1em" },
+    { height: "1em" },
+    { viewBox: "0 0 24 24" },
+    /*$$props*/
+    l[0]
+  ], c = {};
+  for (let f = 0; f < d.length; f += 1)
+    c = N(c, d[f]);
+  return {
     c() {
-      t = k("main"), K(r.$$.fragment), a = E(), o = k("div"), s = k("div"), s.innerHTML = `<img src="${Yi}" alt="RuK Logo" class="svelte-15gznnu"/> <span class="svelte-15gznnu">RuK UI</span>`, d = E(), c = k("div"), f = k("div"), K(p.$$.fragment), b = E(), K(g.$$.fragment), w = E(), K(x.$$.fragment), z = E(), K(q.$$.fragment), m = E(), K(y.$$.fragment), H = E(), K(C.$$.fragment), P = E(), D = k("div"), K($.$$.fragment), e(s, "class", "logo svelte-15gznnu"), ht(
-        s,
-        "compact",
-        /*$debugPane*/
-        i[0]
-      ), e(f, "id", "classpad"), G(f, "--zoomFactor", "1.5"), e(f, "class", "svelte-15gznnu"), e(c, "class", "calc-container svelte-15gznnu"), G(D, "display", "none"), e(o, "class", "container svelte-15gznnu");
+      t = i("svg"), n = i("g"), a = i("path"), s = i("path"), o = i("path"), e(a, "stroke-linecap", "round"), e(a, "stroke-linejoin", "round"), e(a, "d", "M12 21v-9m0 0l3 3.333M12 12l-3 3.333"), e(s, "stroke-linecap", "round"), e(s, "d", "M20.5 7v6c0 3.771 0 5.657-1.172 6.828S16.271 21 12.5 21h-1c-3.771 0-5.657 0-6.828-1.172S3.5 16.771 3.5 13V7"), e(s, "opacity", "0.5"), e(o, "d", "M2 5c0-.943 0-1.414.293-1.707S3.057 3 4 3h16c.943 0 1.414 0 1.707.293S22 4.057 22 5s0 1.414-.293 1.707S20.943 7 20 7H4c-.943 0-1.414 0-1.707-.293S2 5.943 2 5Z"), e(n, "fill", "none"), e(n, "stroke", "currentColor"), e(n, "stroke-width", "1.5"), ae(t, c);
     },
-    m(h, j) {
-      S(h, t, j), L(r, t, null), n(t, a), n(t, o), n(o, s), n(o, d), n(o, c), n(c, f), L(p, f, null), n(c, b), L(g, c, null), n(c, w), L(x, c, null), n(o, z), L(q, o, null), n(o, m), L(y, o, null), n(o, H), L(C, o, null), n(o, P), n(o, D), L($, D, null), M = !0;
+    m(f, h) {
+      z(f, t, h), r(t, n), r(n, a), r(n, s), r(n, o);
     },
-    p(h, [j]) {
-      (!M || j & /*$debugPane*/
-      1) && ht(
-        s,
-        "compact",
-        /*$debugPane*/
-        h[0]
-      );
+    p(f, [h]) {
+      ae(t, c = n0(d, [
+        { xmlns: "http://www.w3.org/2000/svg" },
+        { width: "1em" },
+        { height: "1em" },
+        { viewBox: "0 0 24 24" },
+        h & /*$$props*/
+        1 && /*$$props*/
+        f[0]
+      ]));
     },
-    i(h) {
-      M || (B(r.$$.fragment, h), B(p.$$.fragment, h), B(g.$$.fragment, h), B(x.$$.fragment, h), B(q.$$.fragment, h), B(y.$$.fragment, h), B(C.$$.fragment, h), B($.$$.fragment, h), M = !0);
-    },
-    o(h) {
-      Q(r.$$.fragment, h), Q(p.$$.fragment, h), Q(g.$$.fragment, h), Q(x.$$.fragment, h), Q(q.$$.fragment, h), Q(y.$$.fragment, h), Q(C.$$.fragment, h), Q($.$$.fragment, h), M = !1;
-    },
-    d(h) {
-      h && U(t), F(r), F(p), F(g), F(x), F(q), F(y), F(C), F($);
+    i: y,
+    o: y,
+    d(f) {
+      f && $(t);
     }
   };
 }
-function bo(i, t, r) {
-  let a, o, s, d;
-  te(i, Xi, (m) => r(10, a = m)), te(i, R2, (m) => r(0, o = m)), te(i, Ze, (m) => r(11, s = m)), te(i, cl, (m) => r(12, d = m)), P2(async () => {
-    Na(), Ze.subscribe((m) => {
-      console.log(m);
-    }), Ii();
+function js(l, t, n) {
+  return l.$$set = (a) => {
+    n(0, t = N(N({}, t), ie(a)));
+  }, t = ie(t), [t];
+}
+class Ts extends K {
+  constructor(t) {
+    super(), V(this, t, js, Ps, I, {});
+  }
+}
+function Ds(l) {
+  let t, n, a, s = [
+    { xmlns: "http://www.w3.org/2000/svg" },
+    { width: "1em" },
+    { height: "1em" },
+    { viewBox: "0 0 24 24" },
+    /*$$props*/
+    l[0]
+  ], o = {};
+  for (let d = 0; d < s.length; d += 1)
+    o = N(o, s[d]);
+  return {
+    c() {
+      t = i("svg"), n = i("path"), a = i("path"), e(n, "fill", "currentColor"), e(n, "d", "M22 13.75v-2.202c0-2.632 0-3.949-.77-4.804a3 3 0 0 0-.224-.225c-.855-.769-2.172-.769-4.804-.769h-.374c-1.153 0-1.73 0-2.268-.153a4 4 0 0 1-.848-.352c-.488-.271-.896-.68-1.712-1.495l-.55-.55c-.274-.274-.41-.41-.554-.53a4 4 0 0 0-2.18-.903c-.186-.017-.38-.017-.766-.017c-.883 0-1.324 0-1.692.07A4 4 0 0 0 2.07 5.007C2 5.376 2 5.818 2 6.7v7.05c0 3.771 0 5.657 1.172 6.828S6.229 21.75 10 21.75h4c3.771 0 5.657 0 6.828-1.172S22 17.521 22 13.75"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M12 11a.75.75 0 0 1 .75.75V13H14a.75.75 0 0 1 0 1.5h-1.25v1.25a.75.75 0 0 1-1.5 0V14.5H10a.75.75 0 0 1 0-1.5h1.25v-1.25A.75.75 0 0 1 12 11"), ae(t, o);
+    },
+    m(d, c) {
+      z(d, t, c), r(t, n), r(t, a);
+    },
+    p(d, [c]) {
+      ae(t, o = n0(s, [
+        { xmlns: "http://www.w3.org/2000/svg" },
+        { width: "1em" },
+        { height: "1em" },
+        { viewBox: "0 0 24 24" },
+        c & /*$$props*/
+        1 && /*$$props*/
+        d[0]
+      ]));
+    },
+    i: y,
+    o: y,
+    d(d) {
+      d && $(t);
+    }
+  };
+}
+function Fs(l, t, n) {
+  return l.$$set = (a) => {
+    n(0, t = N(N({}, t), ie(a)));
+  }, t = ie(t), [t];
+}
+class As extends K {
+  constructor(t) {
+    super(), V(this, t, Fs, Ds, I, {});
+  }
+}
+function Ls(l) {
+  let t, n, a, s = [
+    { xmlns: "http://www.w3.org/2000/svg" },
+    { width: "1em" },
+    { height: "1em" },
+    { viewBox: "0 0 24 24" },
+    /*$$props*/
+    l[0]
+  ], o = {};
+  for (let d = 0; d < s.length; d += 1)
+    o = N(o, s[d]);
+  return {
+    c() {
+      t = i("svg"), n = i("path"), a = i("path"), e(n, "fill", "currentColor"), e(n, "d", "M22 14v-2.202c0-2.632 0-3.949-.77-4.804a3 3 0 0 0-.224-.225C20.151 6 18.834 6 16.202 6h-.374c-1.153 0-1.73 0-2.268-.153a4 4 0 0 1-.848-.352C12.224 5.224 11.816 4.815 11 4l-.55-.55c-.274-.274-.41-.41-.554-.53a4 4 0 0 0-2.18-.903C7.53 2 7.336 2 6.95 2c-.883 0-1.324 0-1.692.07A4 4 0 0 0 2.07 5.257C2 5.626 2 6.068 2 6.95V14c0 3.771 0 5.657 1.172 6.828S6.229 22 10 22h4c3.771 0 5.657 0 6.828-1.172S22 17.771 22 14"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M12.25 10a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5h-5a.75.75 0 0 1-.75-.75"), ae(t, o);
+    },
+    m(d, c) {
+      z(d, t, c), r(t, n), r(t, a);
+    },
+    p(d, [c]) {
+      ae(t, o = n0(s, [
+        { xmlns: "http://www.w3.org/2000/svg" },
+        { width: "1em" },
+        { height: "1em" },
+        { viewBox: "0 0 24 24" },
+        c & /*$$props*/
+        1 && /*$$props*/
+        d[0]
+      ]));
+    },
+    i: y,
+    o: y,
+    d(d) {
+      d && $(t);
+    }
+  };
+}
+function Qs(l, t, n) {
+  return l.$$set = (a) => {
+    n(0, t = N(N({}, t), ie(a)));
+  }, t = ie(t), [t];
+}
+class Is extends K {
+  constructor(t) {
+    super(), V(this, t, Qs, Ls, I, {});
+  }
+}
+function Vs(l) {
+  let t, n, a, s = [
+    { xmlns: "http://www.w3.org/2000/svg" },
+    { width: "1em" },
+    { height: "1em" },
+    { viewBox: "0 0 24 24" },
+    /*$$props*/
+    l[0]
+  ], o = {};
+  for (let d = 0; d < s.length; d += 1)
+    o = N(o, s[d]);
+  return {
+    c() {
+      t = i("svg"), n = i("path"), a = i("path"), e(n, "fill", "currentColor"), e(n, "d", "M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "M6.424 9.52a.75.75 0 0 1 1.056-.096l.277.23c.605.504 1.12.933 1.476 1.328c.379.42.674.901.674 1.518s-.295 1.099-.674 1.518c-.356.395-.871.824-1.476 1.328l-.277.23a.75.75 0 1 1-.96-1.152l.234-.195c.659-.55 1.09-.91 1.366-1.216c.262-.29.287-.427.287-.513s-.025-.222-.287-.513c-.277-.306-.707-.667-1.366-1.216l-.234-.195a.75.75 0 0 1-.096-1.056M17.75 15a.75.75 0 0 1-.75.75h-5a.75.75 0 0 1 0-1.5h5a.75.75 0 0 1 .75.75"), ae(t, o);
+    },
+    m(d, c) {
+      z(d, t, c), r(t, n), r(t, a);
+    },
+    p(d, [c]) {
+      ae(t, o = n0(s, [
+        { xmlns: "http://www.w3.org/2000/svg" },
+        { width: "1em" },
+        { height: "1em" },
+        { viewBox: "0 0 24 24" },
+        c & /*$$props*/
+        1 && /*$$props*/
+        d[0]
+      ]));
+    },
+    i: y,
+    o: y,
+    d(d) {
+      d && $(t);
+    }
+  };
+}
+function Ks(l, t, n) {
+  return l.$$set = (a) => {
+    n(0, t = N(N({}, t), ie(a)));
+  }, t = ie(t), [t];
+}
+class Ns extends K {
+  constructor(t) {
+    super(), V(this, t, Ks, Vs, I, {});
+  }
+}
+function Ys(l) {
+  let t, n, a, s = [
+    { xmlns: "http://www.w3.org/2000/svg" },
+    { width: "1em" },
+    { height: "1em" },
+    { viewBox: "0 0 24 24" },
+    /*$$props*/
+    l[0]
+  ], o = {};
+  for (let d = 0; d < s.length; d += 1)
+    o = N(o, s[d]);
+  return {
+    c() {
+      t = i("svg"), n = i("path"), a = i("path"), e(n, "fill", "currentColor"), e(n, "fill-rule", "evenodd"), e(n, "d", "M14 22h-4c-3.771 0-5.657 0-6.828-1.172S2 17.771 2 14v-4c0-3.771 0-5.657 1.172-6.828S6.239 2 10.03 2c.606 0 1.091 0 1.5.017q-.02.12-.02.244l-.01 2.834c0 1.097 0 2.067.105 2.848c.114.847.375 1.694 1.067 2.386c.69.69 1.538.952 2.385 1.066c.781.105 1.751.105 2.848.105h4.052c.043.534.043 1.19.043 2.063V14c0 3.771 0 5.657-1.172 6.828S17.771 22 14 22"), e(n, "clip-rule", "evenodd"), e(n, "opacity", "0.5"), e(a, "fill", "currentColor"), e(a, "d", "m11.51 2.26l-.01 2.835c0 1.097 0 2.066.105 2.848c.114.847.375 1.694 1.067 2.385c.69.691 1.538.953 2.385 1.067c.781.105 1.751.105 2.848.105h4.052q.02.232.028.5H22c0-.268 0-.402-.01-.56a5.3 5.3 0 0 0-.958-2.641c-.094-.128-.158-.204-.285-.357C19.954 7.494 18.91 6.312 18 5.5c-.81-.724-1.921-1.515-2.89-2.161c-.832-.556-1.248-.834-1.819-1.04a6 6 0 0 0-.506-.154c-.384-.095-.758-.128-1.285-.14z"), ae(t, o);
+    },
+    m(d, c) {
+      z(d, t, c), r(t, n), r(t, a);
+    },
+    p(d, [c]) {
+      ae(t, o = n0(s, [
+        { xmlns: "http://www.w3.org/2000/svg" },
+        { width: "1em" },
+        { height: "1em" },
+        { viewBox: "0 0 24 24" },
+        c & /*$$props*/
+        1 && /*$$props*/
+        d[0]
+      ]));
+    },
+    i: y,
+    o: y,
+    d(d) {
+      d && $(t);
+    }
+  };
+}
+function Ws(l, t, n) {
+  return l.$$set = (a) => {
+    n(0, t = N(N({}, t), ie(a)));
+  }, t = ie(t), [t];
+}
+class Zs extends K {
+  constructor(t) {
+    super(), V(this, t, Ws, Ys, I, {});
+  }
+}
+function bi(l, t, n) {
+  const a = l.slice();
+  return a[7] = t[n], a;
+}
+function Xs(l) {
+  let t, n, a, s, o;
+  const d = [to, eo], c = [];
+  function f(h, p) {
+    return p & /*files_view*/
+    1 && (t = null), t == null && (t = !!/*file*/
+    h[7].name.endsWith(".bin")), t ? 0 : 1;
+  }
+  return n = f(l, -1), a = c[n] = d[n](l), {
+    c() {
+      a.c(), s = l2();
+    },
+    m(h, p) {
+      c[n].m(h, p), z(h, s, p), o = !0;
+    },
+    p(h, p) {
+      let g = n;
+      n = f(h, p), n !== g && (i2(), j(c[g], 1, 1, () => {
+        c[g] = null;
+      }), a2(), a = c[n], a || (a = c[n] = d[n](h), a.c()), P(a, 1), a.m(s.parentNode, s));
+    },
+    i(h) {
+      o || (P(a), o = !0);
+    },
+    o(h) {
+      j(a), o = !1;
+    },
+    d(h) {
+      h && $(s), c[n].d(h);
+    }
+  };
+}
+function Js(l) {
+  let t, n;
+  return t = new Is({}), {
+    c() {
+      L(t.$$.fragment);
+    },
+    m(a, s) {
+      F(t, a, s), n = !0;
+    },
+    p: y,
+    i(a) {
+      n || (P(t.$$.fragment, a), n = !0);
+    },
+    o(a) {
+      j(t.$$.fragment, a), n = !1;
+    },
+    d(a) {
+      A(t, a);
+    }
+  };
+}
+function eo(l) {
+  let t, n;
+  return t = new Zs({}), {
+    c() {
+      L(t.$$.fragment);
+    },
+    m(a, s) {
+      F(t, a, s), n = !0;
+    },
+    i(a) {
+      n || (P(t.$$.fragment, a), n = !0);
+    },
+    o(a) {
+      j(t.$$.fragment, a), n = !1;
+    },
+    d(a) {
+      A(t, a);
+    }
+  };
+}
+function to(l) {
+  let t, n;
+  return t = new Ns({}), {
+    c() {
+      L(t.$$.fragment);
+    },
+    m(a, s) {
+      F(t, a, s), n = !0;
+    },
+    i(a) {
+      n || (P(t.$$.fragment, a), n = !0);
+    },
+    o(a) {
+      j(t.$$.fragment, a), n = !1;
+    },
+    d(a) {
+      A(t, a);
+    }
+  };
+}
+function yi(l) {
+  let t, n, a, s, o, d, c = (
+    /*file*/
+    l[7].name + ""
+  ), f, h, p, g;
+  const w = [Js, Xs], G = [];
+  function k(v, S) {
+    return (
+      /*file*/
+      v[7].type === "dir" ? 0 : (
+        /*file*/
+        v[7].type === "file" ? 1 : -1
+      )
+    );
+  }
+  return ~(a = k(l)) && (s = G[a] = w[a](l)), {
+    c() {
+      t = _("div"), n = _("div"), s && s.c(), o = B(), d = _("p"), f = Y(c), h = B(), e(n, "class", "icon svelte-1kbt5v3"), e(d, "class", "name svelte-1kbt5v3"), e(t, "class", "file svelte-1kbt5v3"), e(t, "title", p = /*file*/
+      l[7].name);
+    },
+    m(v, S) {
+      z(v, t, S), r(t, n), ~a && G[a].m(n, null), r(t, o), r(t, d), r(d, f), r(t, h), g = !0;
+    },
+    p(v, S) {
+      let R = a;
+      a = k(v), a === R ? ~a && G[a].p(v, S) : (s && (i2(), j(G[R], 1, 1, () => {
+        G[R] = null;
+      }), a2()), ~a ? (s = G[a], s ? s.p(v, S) : (s = G[a] = w[a](v), s.c()), P(s, 1), s.m(n, null)) : s = null), (!g || S & /*files_view*/
+      1) && c !== (c = /*file*/
+      v[7].name + "") && t0(f, c), (!g || S & /*files_view*/
+      1 && p !== (p = /*file*/
+      v[7].name)) && e(t, "title", p);
+    },
+    i(v) {
+      g || (P(s), g = !0);
+    },
+    o(v) {
+      j(s), g = !1;
+    },
+    d(v) {
+      v && $(t), ~a && G[a].d();
+    }
+  };
+}
+function no(l) {
+  let t, n, a, s, o, d, c, f, h, p, g, w, G, k, v, S, R, O;
+  d = new Ts({}), h = new As({}), w = new ti({});
+  let U = nl(
+    /*files_view*/
+    l[0]
+  ), q = [];
+  for (let x = 0; x < U.length; x += 1)
+    q[x] = yi(bi(l, U, x));
+  const T = (x) => j(q[x], 1, 1, () => {
+    q[x] = null;
   });
-  const c = (m) => {
+  return {
+    c() {
+      t = _("div"), n = _("div"), a = _("h4"), a.textContent = `${X2}`, s = B(), o = _("button"), L(d.$$.fragment), c = B(), f = _("button"), L(h.$$.fragment), p = B(), g = _("button"), L(w.$$.fragment), G = B(), k = _("div"), v = _("div");
+      for (let x = 0; x < q.length; x += 1)
+        q[x].c();
+      e(a, "class", "header"), e(o, "class", "toolbar-action"), e(o, "type", "button"), e(o, "title", "Send file from computer"), e(o, "tabindex", "0"), e(o, "id", "btn_send_files"), e(f, "class", "toolbar-action"), e(f, "type", "button"), e(f, "title", "New folder"), e(f, "tabindex", "0"), e(f, "id", "btn_new_folder_files"), e(g, "class", "toolbar-action"), e(g, "type", "button"), e(g, "title", "close"), e(g, "tabindex", "0"), e(g, "id", "btn_close_trace"), e(n, "class", "titlebar"), e(v, "class", "files svelte-1kbt5v3"), e(k, "class", "contents svelte-1kbt5v3"), e(t, "class", "files-panel view-panel svelte-1kbt5v3"), Je(
+        t,
+        "visible",
+        /*$filesPane*/
+        l[1]
+      );
+    },
+    m(x, u) {
+      z(x, t, u), r(t, n), r(n, a), r(n, s), r(n, o), F(d, o, null), r(n, c), r(n, f), F(h, f, null), r(n, p), r(n, g), F(w, g, null), r(t, G), r(t, k), r(k, v);
+      for (let C = 0; C < q.length; C += 1)
+        q[C] && q[C].m(v, null);
+      S = !0, R || (O = [
+        ee(
+          o,
+          "click",
+          /*doSendFile*/
+          l[2]
+        ),
+        ee(
+          f,
+          "click",
+          /*doNewFolder*/
+          l[3]
+        ),
+        ee(
+          g,
+          "click",
+          /*doClose*/
+          l[4]
+        )
+      ], R = !0);
+    },
+    p(x, [u]) {
+      if (u & /*files_view*/
+      1) {
+        U = nl(
+          /*files_view*/
+          x[0]
+        );
+        let C;
+        for (C = 0; C < U.length; C += 1) {
+          const M = bi(x, U, C);
+          q[C] ? (q[C].p(M, u), P(q[C], 1)) : (q[C] = yi(M), q[C].c(), P(q[C], 1), q[C].m(v, null));
+        }
+        for (i2(), C = U.length; C < q.length; C += 1)
+          T(C);
+        a2();
+      }
+      (!S || u & /*$filesPane*/
+      2) && Je(
+        t,
+        "visible",
+        /*$filesPane*/
+        x[1]
+      );
+    },
+    i(x) {
+      if (!S) {
+        P(d.$$.fragment, x), P(h.$$.fragment, x), P(w.$$.fragment, x);
+        for (let u = 0; u < U.length; u += 1)
+          P(q[u]);
+        S = !0;
+      }
+    },
+    o(x) {
+      j(d.$$.fragment, x), j(h.$$.fragment, x), j(w.$$.fragment, x), q = q.filter(Boolean);
+      for (let u = 0; u < q.length; u += 1)
+        j(q[u]);
+      S = !1;
+    },
+    d(x) {
+      x && $(t), A(d), A(h), A(w), Si(q, x), R = !1, xt(O);
+    }
+  };
+}
+let X2 = "/fls0";
+function ro(l, t, n) {
+  let a;
+  re(l, t2, (p) => n(1, a = p));
+  const s = V2();
+  let o = [];
+  function d() {
+    let p = [];
+    try {
+      const g = window.Module.FS.readdir(X2);
+      for (const w of g) {
+        const G = `${X2}/${w}`, k = window.Module.FS.stat(G);
+        window.Module.FS.isFile(k.mode) ? p.push({
+          type: "file",
+          name: w,
+          size: k.size,
+          stats: k
+        }) : window.Module.FS.isDir(k.mode) && p.push({
+          type: "dir",
+          name: w,
+          size: k.size,
+          stats: k
+        });
+      }
+    } catch (g) {
+      console.error("Error reading directory:", g);
+    }
+    n(0, o = p);
+  }
+  const c = (p) => {
+    s("doSendFile", p);
+  }, f = (p) => {
+    s("doNewFolder", p);
+  }, h = (p) => {
+    s("doClose", p), t2.set(!1);
+  };
+  return t2.subscribe((p) => {
+    window.Module && window.Module.FS && d();
+  }), rl(async () => {
+    window.Module && window.Module.FS && d();
+  }), [o, a, c, f, h];
+}
+class lo extends K {
+  constructor(t) {
+    super(), V(this, t, ro, no, I, {});
+  }
+}
+function io(l) {
+  let t, n, a, s, o, d, c, f, h, p, g, w, G, k, v, S, R, O, U, q, T, x, u, C, M, W;
+  return n = new ta({}), h = new ns({}), g = new ca({}), G = new la({}), v = new Ta({}), v.$on(
+    "romChanged",
+    /*doRomLoad*/
+    l[9]
+  ), v.$on(
+    "doBrowseFiles",
+    /*doBrowseFiles*/
+    l[1]
+  ), v.$on(
+    "doRun",
+    /*doRun*/
+    l[8]
+  ), v.$on(
+    "doDump",
+    /*doDump*/
+    l[5]
+  ), v.$on(
+    "doDebug",
+    /*doDebug*/
+    l[7]
+  ), v.$on(
+    "doFullscreen",
+    /*doFullscreen*/
+    l[2]
+  ), v.$on(
+    "doCopyScreen",
+    /*doCopyScreen*/
+    l[3]
+  ), v.$on(
+    "doSaveScreen",
+    /*doSaveScreen*/
+    l[4]
+  ), R = new Hs({}), q = new Xa({}), q.$on(
+    "doRefresh",
+    /*doRefresh*/
+    l[6]
+  ), x = new lo({}), x.$on("doSendFile", ao), x.$on("doNewFolder", so), M = new ha({}), {
+    c() {
+      t = _("main"), L(n.$$.fragment), a = B(), s = _("div"), o = _("div"), o.innerHTML = `<img src="${Ji}" alt="RuK Logo" class="svelte-mpypct"/> <span class="svelte-mpypct">RuK UI</span>`, d = B(), c = _("div"), f = _("div"), L(h.$$.fragment), p = B(), L(g.$$.fragment), w = B(), L(G.$$.fragment), k = B(), L(v.$$.fragment), S = B(), L(R.$$.fragment), O = B(), U = _("div"), L(q.$$.fragment), T = B(), L(x.$$.fragment), u = B(), C = _("div"), L(M.$$.fragment), e(o, "class", "logo svelte-mpypct"), Je(
+        o,
+        "compact",
+        /*$debugPane*/
+        l[0]
+      ), e(f, "id", "classpad"), E(f, "--zoomFactor", "1.5"), e(f, "class", "svelte-mpypct"), e(c, "class", "calc-container svelte-mpypct"), e(U, "class", "small-widgets svelte-mpypct"), E(C, "display", "none"), e(s, "class", "container svelte-mpypct");
+    },
+    m(Q, Z) {
+      z(Q, t, Z), F(n, t, null), r(t, a), r(t, s), r(s, o), r(s, d), r(s, c), r(c, f), F(h, f, null), r(c, p), F(g, c, null), r(c, w), F(G, c, null), r(s, k), F(v, s, null), r(s, S), F(R, s, null), r(s, O), r(s, U), F(q, U, null), r(U, T), F(x, U, null), r(s, u), r(s, C), F(M, C, null), W = !0;
+    },
+    p(Q, [Z]) {
+      (!W || Z & /*$debugPane*/
+      1) && Je(
+        o,
+        "compact",
+        /*$debugPane*/
+        Q[0]
+      );
+    },
+    i(Q) {
+      W || (P(n.$$.fragment, Q), P(h.$$.fragment, Q), P(g.$$.fragment, Q), P(G.$$.fragment, Q), P(v.$$.fragment, Q), P(R.$$.fragment, Q), P(q.$$.fragment, Q), P(x.$$.fragment, Q), P(M.$$.fragment, Q), W = !0);
+    },
+    o(Q) {
+      j(n.$$.fragment, Q), j(h.$$.fragment, Q), j(g.$$.fragment, Q), j(G.$$.fragment, Q), j(v.$$.fragment, Q), j(R.$$.fragment, Q), j(q.$$.fragment, Q), j(x.$$.fragment, Q), j(M.$$.fragment, Q), W = !1;
+    },
+    d(Q) {
+      Q && $(t), A(n), A(h), A(g), A(G), A(v), A(R), A(q), A(x), A(M);
+    }
+  };
+}
+const ao = () => {
+}, so = () => {
+};
+function oo(l, t, n) {
+  let a, s, o, d, c;
+  re(l, ia, (O) => n(11, a = O)), re(l, Q2, (O) => n(0, s = O)), re(l, lt, (O) => n(12, o = O)), re(l, gr, (O) => n(13, d = O)), re(l, t2, (O) => n(14, c = O)), rl(async () => {
+    as(), lt.subscribe((O) => {
+      console.log(O);
+    }), na();
+  });
+  const f = (O) => {
+    t2.set(!c);
+  }, h = (O) => {
     window.Module.requestFullscreen(!0, !1);
-  }, f = (m) => {
-    const y = document.getElementById("canvas");
-    y && y.toBlob(function(H) {
-      const C = new ClipboardItem({ "image/png": H });
-      navigator.clipboard.write([C]).then(() => {
-        V2.set("Copied to clipboard !"), setTimeout(
+  }, p = (O) => {
+    const U = document.getElementById("canvas");
+    U && U.toBlob(function(q) {
+      const T = new ClipboardItem({ "image/png": q });
+      navigator.clipboard.write([T]).then(() => {
+        Z2.set("Copied to clipboard !"), setTimeout(
           () => {
-            V2.set(null);
+            Z2.set(null);
           },
           4e3
         );
       }).catch(() => {
       });
     });
-  }, p = (m) => {
-    const y = document.getElementById("canvas");
-    if (y) {
-      const H = document.createElement("a");
-      H.href = y.toDataURL("image/png"), H.download = "ClassPad_Screen.png", H.click();
+  }, g = (O) => {
+    const U = document.getElementById("canvas");
+    if (U) {
+      const q = document.createElement("a");
+      q.href = U.toDataURL("image/png"), q.download = "ClassPad_Screen.png", q.click();
     }
-  }, b = (m) => {
-    d || (cl.set(!0), B2.set(null), window.Module.ccall("dumpOneFrame", null, [], []));
-  }, g = (m) => {
-    console.log("doRefresh !!"), d || cl.set(!0), B2.set(null), window.Module.ccall("dumpOneFrame", null, [], []);
-  }, w = (m) => {
-    (s === "loaded" || s === "ready") && (Z2.set(!0), window.Module.ccall("setTrace", null, ["number"], [1]), x()), o || R2.set(!0);
-  }, x = async (m) => {
-    let y = _i(ti);
-    if (y) {
-      Ze.set("running");
+  }, w = (O) => {
+    d || (gr.set(!0), I2.set(null), window.Module.ccall("dumpOneFrame", null, [], []));
+  }, G = (O) => {
+    console.log("doRefresh !!"), d || gr.set(!0), I2.set(null), window.Module.ccall("dumpOneFrame", null, [], []);
+  }, k = (O) => {
+    (o === "loaded" || o === "ready") && (ei.set(!0), window.Module.ccall("setTrace", null, ["number"], [1]), v()), s || Q2.set(!0);
+  }, v = async (O) => {
+    let U = Bi(si);
+    if (U) {
+      lt.set("running");
       try {
-        window.Module.ccall("startInterpreter", null, ["string"], [y]);
-      } catch (H) {
-        D2.set(H), Ze.set("crashed");
+        window.Module.ccall("startInterpreter", null, ["string"], [U]);
+      } catch (q) {
+        L2.set(q), lt.set("crashed");
       }
     } else
-      Ze.set("crashed"), D2.set({
+      lt.set("crashed"), L2.set({
         name: "INVALID_FILE_NAME",
         message: "fileName is empty"
       });
-  }, z = async (m) => {
-    console.log(m.detail), Ze.set("loading");
-    var y = m.detail.target.files[0];
-    y && Ka(y, y.name).then(() => {
-      console.log(y.name), ti.set(y.name), a ? x() : Ze.set("loaded");
-    }).catch((H) => {
-      console.error("Error loading file:", H);
-    });
+  }, S = async (O) => {
+    console.log(O.detail), lt.set("loading");
+    var U = O.detail.target.files[0];
+    if (U) {
+      let q = `/fls0/${U.name}`;
+      es(U, q).then(() => {
+        console.log(q), si.set(q), a ? v() : lt.set("loaded");
+      }).catch((T) => {
+        console.error("Error loading file:", T);
+      });
+    }
   };
-  let { ide: q = !0 } = t;
-  return i.$$set = (m) => {
-    "ide" in m && r(9, q = m.ide);
+  let { ide: R = !0 } = t;
+  return l.$$set = (O) => {
+    "ide" in O && n(10, R = O.ide);
   }, [
-    o,
-    c,
+    s,
     f,
+    h,
     p,
-    b,
     g,
     w,
-    x,
-    z,
-    q
+    G,
+    k,
+    v,
+    S,
+    R
   ];
 }
-class wo extends V {
+class co extends K {
   constructor(t) {
-    super(), Y(this, t, bo, xo, A, { ide: 9 });
+    super(), V(this, t, oo, io, I, { ide: 10 });
   }
 }
-window.sdk_call = (i, t) => {
-  let r = (i >>> 0).toString(16).padStart(8, "0");
-  console.log(`[SDK.JS] - (slow SysCall emulator) - GOT PC: ${r}. Check it here: https://github.com/search?q=repo%3AClasspadDev%2Fhollyhock-3+${r}&type=code`), console.debug("-- Registers : "), console.debug(t.map((o) => (o >>> 0).toString(16).toUpperCase()));
-  let a = i >>> 0;
+window.sdk_call = (l, t, n) => {
+  let a = (l >>> 0).toString(16).padStart(8, "0"), s = (t >>> 0).toString(16).padStart(8, "0");
+  console.log(`[SDK.JS] - (slow SysCall emulator) - GOT PC: ${a} - To PR ${s}. Check it here: https://github.com/search?q=repo%3AClasspadDev%2Fhollyhock-3+${a}&type=code`), console.debug("-- Registers : "), console.debug(n.map((d) => (d >>> 0).toString(16).toUpperCase()));
+  let o = l >>> 0;
   debugger;
-  if (fi[a] != null)
-    return fi[a](i, t);
+  if (wi[o] != null)
+    return wi[o](l, n);
   debugger;
-  return i >>> 0;
+  return t >>> 0;
 };
-const ko = (i, t) => t[4], fi = {
-  80057854: ko
+const fo = (l, t) => t[4], wi = {
+  80057854: fo
 };
 window.Module = window.Module || {};
-new wo({
+new co({
   target: document.getElementById("app"),
   props: {
     ide: !1

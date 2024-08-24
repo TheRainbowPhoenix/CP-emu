@@ -36,15 +36,35 @@
     
 <div
     bind:this={popover}
-    class="popover {visible ? 'visible' : ''}"
+    class="popover-root"
     style="--x: {position.x}px; --y: {position.y}px;"
 >
-    <div class="tip"></div>
-    <slot></slot>
+    <div 
+        class="popover {visible ? 'visible' : ''}"
+    >
+        <div class="tip"></div>
+        <slot></slot>
+    </div>
 </div>
 
   
   <style>
+    .popover-root {
+        overflow: auto;
+        pointer-events: none;
+        position: absolute;
+        float: left;
+        text-align: left;
+        list-style: none;
+
+        right: auto;
+        left: 100%;
+        top: auto;
+        bottom: 50%;
+        display: flex;
+        align-items: center;
+    }
+
     .popover {
         position: absolute;
         background: #2f2f2f;
@@ -54,7 +74,7 @@
         border-radius: 0.25rem;
 
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        transform: translate(var(--x), var(--y));
+        /* transform: translate(var(--x), var(--y)); */
 
         box-sizing: border-box;
         max-width: calc(100vw - 16px);
@@ -62,7 +82,6 @@
         max-height: calc(100dvh - 16px);
         display: flex;
         position: fixed;
-        inset: 0 auto auto 0;
         overflow: visible;
         opacity: 1 !important;
         display: none;

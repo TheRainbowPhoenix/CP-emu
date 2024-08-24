@@ -1,0 +1,27 @@
+.disassembly .line .mov {
+    color: var(--ec-mov);
+  }
+  .disassembly .line .nop {
+    color: var(--ec-nop);
+  }
+  .disassembly .line .jmp {
+    color: var(--ec-jmp);
+  }
+  .disassembly .line .ret {
+    color: var(--ec-ret);
+  }
+  .disassembly .line .cmp {
+    color: var(--ec-cmp);
+  }
+  .disassembly .line .call {
+    color: var(--ec-call);
+  }
+  .disassembly .line .math {
+    color: var(--ec-math);
+  }
+  .disassembly .line .trap {
+    color: var(--ec-trap);
+  }
+  .disassembly .line .num {
+    color: var(--ec-num);
+  }
